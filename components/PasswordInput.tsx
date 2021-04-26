@@ -5,7 +5,7 @@ type Props = {
   placeholder?: string
   name: string
   value: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (e?: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const PasswordInput = ({
