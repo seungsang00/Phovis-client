@@ -61,44 +61,46 @@ const Login = () => {
   }
 
   return (
-    <section>
-      <article>
-        <h2>Log in</h2>
-        <LableTextInput
-          name='email'
-          label='Email'
-          onChange={inputChangeHandler}
-          value={input.email}
-        />
-        <PasswordInput
-          name='password'
-          label='Password'
-          onChange={inputChangeHandler}
-          value={input.password}
-        />
-        <div>
-          <Checkbox
-            name='checkKeepLoggedIn'
-            text='Keep me logged in'
-            onChange={checkChangeHandler}
+    <div>
+      <section>
+        <article>
+          <h2>Log in</h2>
+          <LableTextInput
+            name='email'
+            label='Email'
+            onChange={inputChangeHandler}
+            value={input.email}
           />
-          <Link href='/auth/forgotpassword'>Forgot your password ?</Link>
-        </div>
-        <SubmitButton text='Sign in' onSubmit={requestLogin} />
-        <Link href='/auth/signup'>Go to sign up new account !</Link>
-        <hr />
-        <p>Or login with SNS account</p>
-        <div>
-          <OauthButton type={SNS.Google} onSubmit={requestGoogleLogin} />
-          <OauthButton type={SNS.Kakao} onSubmit={requestkaKaoLogin} />
-        </div>
-      </article>
-      <article>
-        <h2>Title text and Logo</h2>
-        <img />
-        <p>Main comment</p>
-      </article>
-    </section>
+          <PasswordInput
+            name='password'
+            label='Password'
+            onChange={inputChangeHandler}
+            value={input.password}
+          />
+          <div>
+            <Checkbox
+              name='checkKeepLoggedIn'
+              text='Keep me logged in'
+              onChange={checkChangeHandler}
+            />
+            <Link href='/auth/forgotpassword'>Forgot your password ?</Link>
+          </div>
+          <SubmitButton text='Sign in' onSubmit={requestLogin} />
+          <Link href='/auth/signup'>Go to sign up new account !</Link>
+          <hr />
+          <p>Or login with SNS account</p>
+          <div>
+            <OauthButton type={SNS.Google} onSubmit={requestGoogleLogin} />
+            <OauthButton type={SNS.Kakao} onSubmit={requestkaKaoLogin} />
+          </div>
+        </article>
+        <article>
+          <h2>Title text and Logo</h2>
+          <img />
+          <p>Main comment</p>
+        </article>
+      </section>
+    </div>
   )
 }
 
