@@ -3,10 +3,10 @@ import Layout from '../components/Layout'
 import TabMenu from '../components/TabMenu'
 import LocationInfo from '../components/LocationInfo'
 import Like from '../components/Like'
+import PhotoCardInput from '../components/PhotoCardInput'
 import UserHor from '../components/UserInfo-hor'
 import UserVer from '../components/UserInfo-ver'
 import PhotocardPreview from '../components/PhotocardPreview'
-
 import UserCard from '../components/UserCard'
 import { sampleUserData } from '../utils/sample-data'
 import { sampleHandler } from '../utils/sample-function'
@@ -30,6 +30,7 @@ const ComponentSamplePage = () => (
     <TabMenu isOwner={true} />
     <LocationInfo location={'서울시 강서구 서울식물원'} />
     <Like like={23} />
+    <PhotoCardInput location={''} />
     <UserHor userName={'jeong'} />
     <UserVer userName={'jeong'} />
     <PhotocardPreview
@@ -39,7 +40,6 @@ const ComponentSamplePage = () => (
       profileImage={''}
       like={24}
     />
-
     <hr />
     <p>
       <Link href='/'>
