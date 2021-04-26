@@ -7,4 +7,10 @@
 export type User = {
   id: number
   name: string
+  imgUrl: string
+  contentCount: number
+}
+
+export type HandlerFn = {
+  handleUnfollow: () => void
 }
