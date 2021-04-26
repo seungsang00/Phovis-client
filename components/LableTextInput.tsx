@@ -17,14 +17,16 @@ const LableTextInput = ({
 }: Props) => (
   <div>
     <label htmlFor={name}>{label}</label>
-    <input
-      type='text'
-      id={name}
-      name={name}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-    />
+    <div>
+      <input
+        type='text'
+        id={name}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+      />
+    </div>
   </div>
 )
 

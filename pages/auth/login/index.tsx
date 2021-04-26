@@ -41,6 +41,8 @@ const Login = () => {
       password,
     })
 
+    console.log(data)
+
     if (status === 201) {
       // TODO : redirect main page & laod user data.
     } else {
