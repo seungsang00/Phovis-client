@@ -5,6 +5,7 @@ import LocationInfo from '../components/LocationInfo'
 import Like from '../components/Like'
 import UserHor from '../components/UserInfo-hor'
 import UserVer from '../components/UserInfo-ver'
+import PhotocardPreview from '../components/PhotocardPreview'
 
 const ComponentSamplePage = () => (
   <Layout title='Component Sample | Next.js + TypeScript Example'>
@@ -17,6 +18,13 @@ const ComponentSamplePage = () => (
     <Like like={23} />
     <UserHor userName={'jeong'} />
     <UserVer userName={'jeong'} />
+    <PhotocardPreview
+      description={'장소에 대한 정보'}
+      imageurl={''}
+      userName={'jeong'}
+      profileImage={''}
+      like={24}
+    />
     <hr />
     <p>
       <Link href='/'>
