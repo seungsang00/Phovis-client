@@ -3,7 +3,7 @@ import { Button } from '../styles/common'
 
 type Props = {
   text?: string
-  onSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void
+  onSubmit: () => void
 }
 
 // TODO : 버튼에 아이콘 추가 해야 됨
