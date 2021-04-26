@@ -8,3 +8,11 @@ export type User = {
   id: number
   name: string
 }
+
+export type PhotoCard = {
+  imageurl: string
+  description?: string
+  userName: string
+  profileImage?: string
+  like?: number
+}
