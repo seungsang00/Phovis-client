@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  PhotoCardPreview,
+  PhotoCardPreviewContainer,
   DscriptionContainer,
 } from '../styles/photocard-preview'
 import Like from './Like'
@@ -23,7 +23,7 @@ const PhotoCardPreview = ({
 }: Props) => {
   return (
     <>
-      <PhotoCardPreview>
+      <PhotoCardPreviewContainer>
         <img
           src={
             imageurl || 'https://t1.daumcdn.net/cfile/blog/253BAE4B57E3CFC022'
@@ -36,7 +36,7 @@ const PhotoCardPreview = ({
           />
           <Like like={like} />
         </div>
-      </PhotoCardPreview>
+      </PhotoCardPreviewContainer>
       <DscriptionContainer>
         <h3>{description}</h3>
       </DscriptionContainer>
