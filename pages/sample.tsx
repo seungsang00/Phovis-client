@@ -1,3 +1,5 @@
+import Layout from '../components/Layout'
+import TabMenu from '../components/TabMenu'
 import Link from 'next/link'
 import Layout from '../components/Layout'
 
@@ -7,6 +9,7 @@ const ComponentSamplePage = () => (
     <p>This is the Component Sample page</p>
     <hr />
     {/* 여기에 새로 생성한 컴포넌트들을 배치해주세요 */}
+    <TabMenu isOwner={true} />
     <hr />
     <p>
       <Link href='/'>
