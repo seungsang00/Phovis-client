@@ -4,15 +4,6 @@
 //
 // import { User } from 'path/to/interfaces';
 
-export type User = {
-  id: number
-  name: string
-}
-
-export type PhotoCard = {
-  imageurl: string
-  description?: string
-  userName: string
-  profileImage?: string
-  like?: number
-}
+export * from './user'
+export * from './handler'
+export * from './photocard'

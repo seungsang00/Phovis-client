@@ -10,8 +10,6 @@ interface IBg {
 export const DivWithBgImg = withProps<IBg, HTMLDivElement>(styled.div)`
   width: 100%;
   height: 100%;
-  width: 400px;
-  min-height: 400px;
   background-image: url(${(props) => props.bgUrl});
   background-size: cover;
   background-position: center;
@@ -45,20 +43,20 @@ interface ISize {
 }
 
 export const Button = withProps<ISize, HTMLButtonElement>(styled.button)`
-  width: ${(props) => props.w && props.w + 'px'};
-  height: ${(props) => props.h}px;
+  width: ${(props) => props.w || 100}px;
+  height: ${(props) => props.h || 50}px;
   border-radius: 10px;
   text-align: center;
   line-height: ${(props) => props.h - 5}px;
   color: ${({ theme }) => theme.color.green};
   border: 3px solid ${({ theme }) => theme.color.green};
   background-color: transparent;
-  font-size: 1.2em;
+  font-size: ${(props) => props.fsize || 1}rem;
   padding: 0 12px;
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme.color.green};
+    background-color: ${({ theme }) => theme.color.inActive};
     color: #fff;
   }
 `
