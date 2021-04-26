@@ -1,5 +1,6 @@
 import Layout from '../components/Layout'
 import TabMenu from '../components/TabMenu'
+import LocationInfo from '../components/LocationInfo'
 import Link from 'next/link'
 import Layout from '../components/Layout'
 
@@ -10,6 +11,7 @@ const ComponentSamplePage = () => (
     <hr />
     {/* 여기에 새로 생성한 컴포넌트들을 배치해주세요 */}
     <TabMenu isOwner={true} />
+    <LocationInfo location={'서울시 강서구 서울식물원'} />
     <hr />
     <p>
       <Link href='/'>
