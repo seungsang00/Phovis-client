@@ -23,7 +23,8 @@
       "@utils/*": ["utils/*"],
       "@hooks/*": ["hooks/*"],
       "@actions/*": ["modules/*"],
-      "@interfaces": ["interfaces/index"]
+      "@interfaces": ["interfaces/index"],
+      "@styles": ["styles/*"]
     }
   },
   "exclude": ["node_modules"],
