@@ -2,7 +2,8 @@ import Link from 'next/link'
 import Layout from '../components/Layout'
 import TabMenu from '../components/TabMenu'
 import LocationInfo from '../components/LocationInfo'
-import Like from '../components/Like'
+import Link from 'next/link'
+import Layout from '../components/Layout'
 
 const ComponentSamplePage = () => (
   <Layout title='Component Sample | Next.js + TypeScript Example'>
