@@ -2,8 +2,9 @@ import Link from 'next/link'
 import Layout from '../components/Layout'
 import TabMenu from '../components/TabMenu'
 import LocationInfo from '../components/LocationInfo'
-import Link from 'next/link'
-import Layout from '../components/Layout'
+import Like from '../components/Like'
+import UserHor from '../components/UserInfo-hor'
+import UserVer from '../components/UserInfo-ver'
 
 const ComponentSamplePage = () => (
   <Layout title='Component Sample | Next.js + TypeScript Example'>
@@ -14,6 +15,8 @@ const ComponentSamplePage = () => (
     <TabMenu isOwner={true} />
     <LocationInfo location={'서울시 강서구 서울식물원'} />
     <Like like={23} />
+    <UserHor userName={'jeong'} />
+    <UserVer userName={'jeong'} />
     <hr />
     <p>
       <Link href='/'>
