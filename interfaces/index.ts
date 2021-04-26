@@ -6,3 +6,4 @@
 
 export * from './user'
 export * from './handler'
+export * from './photo'
