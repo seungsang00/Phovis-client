@@ -1,6 +1,6 @@
 ---
-name: Task register
-about: new Task Card
+name: Issue Card
+about: new Issue Card
 title: CHANGE
 labels: HOT, new task
 assignees: ''
