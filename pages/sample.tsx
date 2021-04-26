@@ -3,6 +3,7 @@ import Layout from '../components/Layout'
 import TabMenu from '../components/TabMenu'
 import LocationInfo from '../components/LocationInfo'
 import Like from '../components/Like'
+import PhotoCardInput from '../components/PhotoCardInput'
 
 const ComponentSamplePage = () => (
   <Layout title='Component Sample | Next.js + TypeScript Example'>
@@ -13,6 +14,7 @@ const ComponentSamplePage = () => (
     <TabMenu isOwner={true} />
     <LocationInfo location={'서울시 강서구 서울식물원'} />
     <Like like={23} />
+    <PhotoCardInput location={''} />
     <hr />
     <p>
       <Link href='/'>
