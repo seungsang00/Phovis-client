@@ -1,9 +1,11 @@
 import Link from 'next/link'
 import Layout from '../components/Layout'
 import UserCard from '../components/UserCard'
-import { sampleUserData, sampleHandler } from '../utils/sample-data'
+import { sampleUserData } from '../utils/sample-data'
+import { sampleHandler } from '../utils/sample-function'
 
-const sampleUser = sampleUserData[0]
+const { name, imgUrl, contentCount } = sampleUserData[0]
+const { handleUnfollow } = sampleHandler
 
 const ComponentSamplePage = () => (
   <Layout title='Component Sample | Next.js + TypeScript Example'>
@@ -11,10 +13,10 @@ const ComponentSamplePage = () => (
     <p>This is the Component Sample page</p>
     <hr />
     <UserCard
-      username={sampleUser.name}
-      profileImage={sampleUser.imgUrl}
-      contentCount={sampleUser.contentCount}
-      onClick={sampleHandler.handleUnfollow}
+      username={name}
+      profileImage={imgUrl}
+      contentCount={contentCount}
+      onClick={handleUnfollow}
     />
     <hr />
     {/* 여기에 새로 생성한 컴포넌트들을 배치해주세요 */}

@@ -4,13 +4,5 @@
 //
 // import { User } from 'path/to/interfaces';
 
-export type User = {
-  id: number
-  name: string
-  imgUrl: string
-  contentCount: number
-}
-
-export type HandlerFn = {
-  handleUnfollow: () => void
-}
+export * from './user'
+export * from './handler'

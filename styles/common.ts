@@ -10,8 +10,6 @@ interface IBg {
 export const DivWithBgImg = withProps<IBg, HTMLDivElement>(styled.div)`
   width: 100%;
   height: 100%;
-  width: 400px;
-  min-height: 400px;
   background-image: url(${(props) => props.bgUrl});
   background-size: cover;
   background-position: center;

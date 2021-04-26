@@ -8,17 +8,22 @@ interface IProps {
   onClick: () => void
 }
 
-const UserCard = (props: IProps) => (
+const UserCard = ({
+  username,
+  profileImage,
+  contentCount,
+  onClick,
+}: IProps) => (
   <Card>
     <div>
-      <AvatarWithProps size={48} url={props.profileImage} alt='user profile' />
+      <AvatarWithProps size={48} url={profileImage} alt='user profile' />
       <div className='info'>
-        <span className='username'>{props.username}</span>
+        <span className='username'>{username}</span>
         <span className='count-info'>
-          <span className='count'>{props.contentCount}</span>개의 출장 추천중
+          <span className='count'>{contentCount}</span>개의 출장 추천중
         </span>
       </div>
-      <Button onClick={props.onClick}>UnFollow</Button>
+      <Button onClick={onClick}>UnFollow</Button>
     </div>
   </Card>
 )
