@@ -5,7 +5,7 @@ import { Theme } from './theme'
 import withSizes from './withSizes'
 export type DeviceSize = 'phone' | 'tablet' | 'desktop' | 'ssr'
 
-type StyledFunction<T> = styledComponents.ThemedStyledFunction<any, Theme>
+type StyledFunction<_T> = styledComponents.ThemedStyledFunction<any, Theme>
 
 function withProps<T, U extends HTMLElement = HTMLElement>(
   styledFunction: StyledFunction<React.HTMLProps<U>>
