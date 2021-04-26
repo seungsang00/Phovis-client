@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-
-export const PhotoCardPreviewContainer = styled.div`
+export const PhotoCardPreviewContainer = styled.div``
+export const PhotoContainer = styled.div`
+  break-inside: avoid;
   width: 100%;
   height: 100%;
-  margin-bottom: 20px;
   overflow: hidden;
   position: relative;
   min-width: 320px;

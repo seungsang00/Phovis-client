@@ -6,10 +6,12 @@ import Like from '../components/Like'
 import PhotoCardInput from '../components/PhotoCardInput'
 import UserHor from '../components/UserInfo-hor'
 import UserVer from '../components/UserInfo-ver'
-import PhotocardPreview from '../components/PhotocardPreview'
+import PhotoCardPreview from '../components/PhotoCardPreview'
 import UserCard from '../components/UserCard'
 import { sampleUserData } from '../utils/sample-data'
 import { sampleHandler } from '../utils/sample-function'
+import { samplePhotoCardData } from '../utils/sample-data'
+import PhotoCardGallery from '../components/PhotoCardGallery'
 
 const { name, imgUrl, contentCount } = sampleUserData[0]
 const { handleUnfollow } = sampleHandler
@@ -33,13 +35,14 @@ const ComponentSamplePage = () => (
     <PhotoCardInput location={''} />
     <UserHor userName={'jeong'} />
     <UserVer userName={'jeong'} />
-    <PhotocardPreview
+    <PhotoCardPreview
       description={'장소에 대한 정보'}
       imageurl={''}
       userName={'jeong'}
       profileImage={''}
       like={24}
     />
+    <PhotoCardGallery photocards={samplePhotoCardData} />
     <hr />
     <p>
       <Link href='/'>
