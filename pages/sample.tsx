@@ -25,6 +25,7 @@ const ComponentSamplePage = () => (
       profileImage={''}
       like={24}
     />
+
     <hr />
     <p>
       <Link href='/'>
