@@ -18,6 +18,7 @@
     "strict": true,
     "target": "esnext",
     // ! paths 설정해주기
+    "baseUrl": "./",
     "paths": {
       "@coponents/*": ["components/*"],
       "@utils/*": ["utils/*"],
