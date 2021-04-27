@@ -11,16 +11,31 @@ import UserCard from '../components/UserCard'
 import { sampleUserData, samplePhotoData } from '../utils/sample-data'
 import { sampleHandler } from '../utils/sample-function'
 import UserBanner from '../components/UserBanner'
-import ToggleBtn from '@coponents/ToggleBtn'
+import ToggleBtn from '@components/ToggleBtn'
+import { ThumbnailRect, ThumbnailSquare } from '@components/Thumbnail'
+import BookmarkBtn from '@components/BookmarkBtn'
 
 const { name, imgUrl, contentCount } = sampleUserData[0]
-const { photoUrl_v } = samplePhotoData
+const { photoUrl_v, photoUrl_s } = samplePhotoData
 const { handleUnfollow, handleToggle } = sampleHandler
 
 const ComponentSamplePage = () => (
   <Layout title='Component Sample | Next.js + TypeScript Example'>
     <h1>Component Sample</h1>
     <p>This is the Component Sample page</p>
+    <hr />
+    <ThumbnailSquare
+      profileImage={imgUrl}
+      username={name}
+      bgImage={photoUrl_s}
+    />
+    <hr />
+    <ThumbnailRect
+      profileImage={imgUrl}
+      username={name}
+      bgImage={photoUrl_v}
+      likeCount={30}
+    />
     <hr />
     <UserCard
       username={name}
@@ -30,6 +45,8 @@ const ComponentSamplePage = () => (
     />
     <hr />
     <UserBanner username={name} profileImage={imgUrl} bgImage={photoUrl_v} />
+    <hr />
+    <BookmarkBtn />
     <hr />
     <ToggleBtn sectionName={'Bookmark'} onClick={handleToggle} />
     <hr />
