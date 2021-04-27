@@ -7,7 +7,7 @@ import SubmitButton from '../../../components/SubmitButton'
 import OauthButton, { SNS } from '../../../components/OauthButton'
 import axios from 'axios'
 
-type LableTextInput = {}
+
 const Login = () => {
   const [input, setInput] = useState({
     email: '',
@@ -16,6 +16,7 @@ const Login = () => {
   })
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+
     const {
       target: { name, value },
     } = e
@@ -26,6 +27,7 @@ const Login = () => {
   }
 
   const checkChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+
     const {
       target: { checked: checkKeepLoggedIn },
     } = e

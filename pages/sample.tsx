@@ -7,14 +7,16 @@ import PhotoCardInput from '../components/PhotoCardInput'
 import UserHor from '../components/UserInfo-hor'
 import UserVer from '../components/UserInfo-ver'
 import PhotoCardPreview from '../components/PhotoCardPreview'
-import UserCard from '../components/UserCard'
-import { sampleUserData } from '../utils/sample-data'
-import { sampleHandler } from '../utils/sample-function'
-import { samplePhotoCardData } from '../utils/sample-data'
 import PhotoCardGallery from '../components/PhotoCardGallery'
+import UserCard from '../components/UserCard'
+import UserBanner from '../components/UserBanner'
 
-const { name, imgUrl, contentCount } = sampleUserData[0]
+import { sampleUserData, samplePhotoData, samplePhotoCardData } from '../utils/sample-data'
+import { sampleHandler } from '../utils/sample-function'
+
+const { photoUrl_v } = samplePhotoData
 const { handleUnfollow } = sampleHandler
+const { name, imgUrl, contentCount } = sampleUserData[0]
 
 const ComponentSamplePage = () => (
   <Layout title='Component Sample | Next.js + TypeScript Example'>
@@ -28,9 +30,14 @@ const ComponentSamplePage = () => (
       onClick={handleUnfollow}
     />
     <hr />
+    <UserBanner username={name} profileImage={imgUrl} bgImage={photoUrl_v} />
+    <hr />
     {/* 여기에 새로 생성한 컴포넌트들을 배치해주세요 */}
+    <hr />
     <TabMenu isOwner={true} />
+    <hr />
     <LocationInfo location={'서울시 강서구 서울식물원'} />
+    <hr />
     <Like like={23} />
     <PhotoCardInput location={''} />
     <UserHor userName={'jeong'} />
@@ -43,6 +50,20 @@ const ComponentSamplePage = () => (
       like={24}
     />
     <PhotoCardGallery photocards={samplePhotoCardData} />
+    <hr />
+    <PhotoCardInput location={''} />
+    <hr />
+    <UserHor userName={'jeong'} />
+    <hr />
+    <UserVer userName={'jeong'} />
+    <hr />
+    <PhotocardPreview
+      description={'장소에 대한 정보'}
+      imageurl={''}
+      userName={'jeong'}
+      profileImage={''}
+      like={24}
+    />
     <hr />
     <p>
       <Link href='/'>

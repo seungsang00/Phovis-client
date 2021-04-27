@@ -1,5 +1,7 @@
+
 import { IUser } from '../interfaces'
 import { PhotoCard } from '../interfaces'
+import { IUser, IPhoto } from '../interfaces'
 
 /** Dummy user data. */
 export const sampleUserData: IUser[] = [
@@ -12,6 +14,7 @@ export const sampleUserData: IUser[] = [
     contentCount: 15,
   },
   { id: 104, name: 'Dave', imgUrl: 'https://bit.ly/3euIgJj', contentCount: 8 },
+
 ]
 
 export const samplePhotoCardData: PhotoCard[] = [
@@ -61,3 +64,10 @@ export const samplePhotoCardData: PhotoCard[] = [
     like: 30,
   },
 ]
+
+/** Dummy photo image data. */
+export const samplePhotoData: IPhoto = {
+  photoUrl_v: 'https://bit.ly/3xtuSOy',
+  photoUrl_s: 'https://bit.ly/3xtteMS',
+  photoUrl_h: 'https://bit.ly/32RvRK2',
+}
