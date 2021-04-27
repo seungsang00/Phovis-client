@@ -9,7 +9,7 @@ interface IProps {
 const ToggleBtn = ({ sectionName, onClick }: IProps) => (
   <ToggleContainer>
     <span>{sectionName}</span>
-    <Toggle type='checkbox' onClick={(e) => onClick(e)} />
+    <Toggle type='checkbox' onClick={onClick} />
   </ToggleContainer>
 )
 export default ToggleBtn
