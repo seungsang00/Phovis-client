@@ -15,6 +15,7 @@ import ToggleBtn from '@components/ToggleBtn'
 import { ThumbnailRect, ThumbnailSquare } from '@components/Thumbnail'
 import BookmarkBtn from '@components/BookmarkBtn'
 import { TagBig, TagSmall } from '@components/Tag'
+import LinkBanner from '@components/LinkBanner'
 
 const { name, imgUrl, contentCount } = sampleUserData[0]
 const { photoUrl_v, photoUrl_s } = samplePhotoData
@@ -24,6 +25,8 @@ const ComponentSamplePage = () => (
   <Layout title='Component Sample | Next.js + TypeScript Example'>
     <h1>Component Sample</h1>
     <p>This is the Component Sample page</p>
+    <hr />
+    <LinkBanner />
     <hr />
     <TagBig tagname={'야경'} onClick={handler} />
     <hr />
