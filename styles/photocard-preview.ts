@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
+<<<<<<< HEAD
 export const PhotoCardPreviewContainer = styled.div`
+=======
+export const PhotoCardPreview = styled.div`
+>>>>>>> 54da0d08930b679016daefc1eea9fc90f75e243e
   width: 100%;
   height: 100%;
   margin-bottom: 20px;
