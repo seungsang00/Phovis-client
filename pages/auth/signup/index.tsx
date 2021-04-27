@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import LableTextInput from '../../../components/LableTextInput'
 import PasswordInput from '../../../components/PasswordInput'
 import SubmitButton from '../../../components/SubmitButton'
@@ -11,6 +12,8 @@ const Signup = () => {
     email: '',
     password: '',
   })
+
+  const router = useRouter()
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -24,18 +27,25 @@ const Signup = () => {
 
   const requestSignUp = async () => {
     const { userName, email, password } = input
-    const { status, data } = await axios.post('/signup', {
-      userName,
-      email,
-      password,
-    })
+
+    const { status, data } = await axios.post(
+      'https://localhost:4000/auth/signup',
+      {
+        userName,
+        email,
+        password,
+      }
+    )
 
     console.log(data)
 
     if (status === 201) {
-      // TODO : redirect main page & laod user data.
+      // TODO : show signup success UI & redirect login page
+      alert('signup success')
+      router.push('/auth/login')
     } else {
       // TODO : show error UI
+      alert('signup fail')
     }
   }
 
