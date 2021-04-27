@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { BookmarkContainer } from '../styles/button-bookmark'
 
 const BookmarkBtn = () => {
-  const [isBookmarked, setBookmark] = useState(false)
+  const [isBookmarked, setBookmark] = useState<boolean>(false)
 
   const handleClick = () => {
     setBookmark(!isBookmarked)

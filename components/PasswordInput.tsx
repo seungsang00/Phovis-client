@@ -15,7 +15,7 @@ const PasswordInput = ({
   value,
   onChange,
 }: Props) => {
-  const [viewPassword, setViewPassword] = useState(false)
+  const [viewPassword, setViewPassword] = useState<boolean>(false)
   const passwordVisibleHandler = () => {
     setViewPassword(!viewPassword)
   }
