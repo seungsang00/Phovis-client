@@ -16,6 +16,7 @@ import { ThumbnailRect, ThumbnailSquare } from '@components/Thumbnail'
 import BookmarkBtn from '@components/BookmarkBtn'
 import { TagBig, TagSmall } from '@components/Tag'
 import LinkBanner from '@components/LinkBanner'
+import { SearchBar, SearchBarBig } from '@components/SearchBar'
 
 const { name, imgUrl, contentCount } = sampleUserData[0]
 const { photoUrl_v, photoUrl_s } = samplePhotoData
@@ -25,6 +26,10 @@ const ComponentSamplePage = () => (
   <Layout title='Component Sample | Next.js + TypeScript Example'>
     <h1>Component Sample</h1>
     <p>This is the Component Sample page</p>
+    <hr />
+    <SearchBar />
+    <hr />
+    <SearchBarBig query='직전에검색한키워드가들어갑니다' />
     <hr />
     <LinkBanner />
     <hr />
