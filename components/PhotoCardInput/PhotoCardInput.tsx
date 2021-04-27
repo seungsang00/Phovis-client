@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
-import {
-  PhotoCardInputContainer,
-  ImageInputbtn,
-} from '../styles/photocard-input'
+import { PhotoCardInputContainer, ImageInputbtn } from '.photocard-input'
 import LocationInfo from './LocationInfo'
-import { Button } from '../styles/common'
+import { Button } from '@styles/common'
 
 interface props {
   location?: string

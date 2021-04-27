@@ -4,9 +4,9 @@ import TabMenu from '../components/TabMenu'
 import LocationInfo from '../components/LocationInfo'
 import Like from '../components/Like'
 import PhotoCardInput from '../components/PhotoCardInput'
-import UserHor from '../components/UserInfo-hor'
+import UserHor from '../components/UserInfo/UserInfo-hor'
 import UserVer from '../components/UserInfo-ver'
-import PhotoCardPreview from '../components/PhotoCardPreview'
+import PhotoCardPreview from '../components/PhotoCardPreview/PhotoCardPreview'
 import UserCard from '../components/UserCard'
 import { sampleUserData, samplePhotoData } from '../utils/sample-data'
 import { sampleHandler } from '../utils/sample-function'
@@ -54,7 +54,7 @@ const ComponentSamplePage = () => (
     <hr />
     <UserVer userName={'jeong'} />
     <hr />
-    <PhotocardPreview
+    <PhotoCardPreview
       description={'장소에 대한 정보'}
       imageurl={''}
       userName={'jeong'}
