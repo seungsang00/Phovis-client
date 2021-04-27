@@ -8,7 +8,13 @@ import UserHor from '../components/UserInfo/UserInfo-hor'
 import UserVer from '../components/UserInfo/UserInfo-ver'
 import PhotoCardPreview from '../components/PhotoCardPreview/PhotoCardPreview'
 import UserCard from '../components/UserCard'
-import { sampleUserData, samplePhotoData } from '../utils/sample-data'
+import MainBanner from '../components/MainBanner/MainBanner'
+
+import {
+  sampleUserData,
+  samplePhotoData,
+  sampleContents,
+} from '../utils/sample-data'
 import { sampleHandler } from '../utils/sample-function'
 import UserBanner from '../components/UserBanner'
 
@@ -21,6 +27,7 @@ const ComponentSamplePage = () => (
     <h1>Component Sample</h1>
     <p>This is the Component Sample page</p>
     <hr />
+    <MainBanner contents={sampleContents} />
     <UserCard
       username={name}
       profileImage={imgUrl}
