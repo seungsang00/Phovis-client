@@ -24,7 +24,7 @@ const Login = () => {
 
   const router = useRouter()
 
-  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const {
       target: { name, value },
     } = e
@@ -34,7 +34,7 @@ const Login = () => {
     })
   }
 
-  const checkChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const checkChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const {
       target: { checked: checkKeepLoggedIn },
     } = e
