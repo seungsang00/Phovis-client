@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
 import Link from 'next/link'
+import { RootReducer } from '../../../modules/reducer'
+import { login } from '../../../modules/users'
 import LableTextInput from '../../../components/LableTextInput'
 import PasswordInput from '../../../components/PasswordInput'
 import Checkbox from '../../../components/Checkbox'
 import SubmitButton from '../../../components/SubmitButton'
 import OauthButton, { SNS } from '../../../components/OauthButton'
-import axios from 'axios'
+// import useAction from '../../../hooks/useAction';
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -13,6 +17,12 @@ const Login = () => {
     password: '',
     checkKeepLoggedIn: false,
   })
+
+  const user = useSelector((state: RootReducer) => state.user)
+  const dispatch = useDispatch()
+  // const _Login = useAction(login);
+
+  const router = useRouter()
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -35,18 +45,18 @@ const Login = () => {
   }
 
   const requestLogin = async () => {
-    const { email, password } = input
-    const { status, data } = await axios.post('/login', {
-      email,
-      password,
-    })
-
-    console.log(data)
-
-    if (status === 201) {
-      // TODO : redirect main page & laod user data.
+    dispatch(login(input))
+    // _Login(input);
+    if (user.isLogin && user.accessToken) {
+      // redirect main page & laod user data.
+      // dispatch(getUserInfo(user.accessToken))
+      // _Login(input);
+      console.log(user)
+      alert('Login success')
+      router.push('/')
     } else {
       // TODO : show error UI
+      alert('Login fail')
     }
   }
 
