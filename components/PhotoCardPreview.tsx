@@ -2,6 +2,7 @@ import React from 'react'
 import {
   PhotoCardPreviewContainer,
   DscriptionContainer,
+  PhotoContainer,
 } from '../styles/photocard-preview'
 import Like from './Like'
 import UserInfoHor from './UserInfo-hor'
@@ -22,8 +23,13 @@ const PhotoCardPreview = ({
   like = 24,
 }: Props) => {
   return (
+<<<<<<< HEAD
     <>
       <PhotoCardPreviewContainer>
+=======
+    <PhotoCardPreviewContainer>
+      <PhotoContainer>
+>>>>>>> 8a770c116d0ff26b7a57433319a2bbdaab206925
         <img
           src={
             imageurl || 'https://t1.daumcdn.net/cfile/blog/253BAE4B57E3CFC022'
@@ -36,11 +42,15 @@ const PhotoCardPreview = ({
           />
           <Like like={like} />
         </div>
+<<<<<<< HEAD
       </PhotoCardPreviewContainer>
+=======
+      </PhotoContainer>
+>>>>>>> 8a770c116d0ff26b7a57433319a2bbdaab206925
       <DscriptionContainer>
-        <h3>{description}</h3>
+        <span>{description}</span>
       </DscriptionContainer>
-    </>
+    </PhotoCardPreviewContainer>
   )
 }
 

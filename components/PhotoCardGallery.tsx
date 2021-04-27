@@ -10,7 +10,7 @@ const PhotoCardGallery = ({ photocards }: props) => {
   return (
     <PhotocardGalleryContainer>
       {photocards.map((card: PhotoCard) => (
-        <PhotoCardPreview {...card} />
+        <PhotoCardPreview key={card.id} {...card} />
       ))}
     </PhotocardGalleryContainer>
   )

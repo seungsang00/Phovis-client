@@ -6,15 +6,7 @@ import Like from '../components/Like'
 import PhotoCardInput from '../components/PhotoCardInput'
 import UserHor from '../components/UserInfo-hor'
 import UserVer from '../components/UserInfo-ver'
-<<<<<<< HEAD
 import PhotoCardPreview from '../components/PhotoCardPreview'
-import UserCard from '../components/UserCard'
-import { sampleUserData } from '../utils/sample-data'
-import { sampleHandler } from '../utils/sample-function'
-
-const { name, imgUrl, contentCount } = sampleUserData[0]
-=======
-import PhotocardPreview from '../components/PhotocardPreview'
 import UserCard from '../components/UserCard'
 import { sampleUserData, samplePhotoData } from '../utils/sample-data'
 import { sampleHandler } from '../utils/sample-function'
@@ -22,7 +14,6 @@ import UserBanner from '../components/UserBanner'
 
 const { name, imgUrl, contentCount } = sampleUserData[0]
 const { photoUrl_v } = samplePhotoData
->>>>>>> 54da0d08930b679016daefc1eea9fc90f75e243e
 const { handleUnfollow } = sampleHandler
 
 const ComponentSamplePage = () => (
@@ -37,11 +28,8 @@ const ComponentSamplePage = () => (
       onClick={handleUnfollow}
     />
     <hr />
-<<<<<<< HEAD
-=======
     <UserBanner username={name} profileImage={imgUrl} bgImage={photoUrl_v} />
     <hr />
->>>>>>> 54da0d08930b679016daefc1eea9fc90f75e243e
     {/* 여기에 새로 생성한 컴포넌트들을 배치해주세요 */}
     <hr />
     <TabMenu isOwner={true} />
