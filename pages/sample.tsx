@@ -6,16 +6,20 @@ import Like from '../components/Like'
 import PhotoCardInput from '../components/PhotoCardInput'
 import UserHor from '../components/UserInfo-hor'
 import UserVer from '../components/UserInfo-ver'
-import PhotocardPreview from '../components/PhotocardPreview'
+import PhotoCardPreview from '../components/PhotoCardPreview'
+import PhotoCardGallery from '../components/PhotoCardGallery'
 import UserCard from '../components/UserCard'
-import { sampleUserData, samplePhotoData } from '../utils/sample-data'
-import { sampleHandler } from '../utils/sample-function'
 import UserBanner from '../components/UserBanner'
 import ToggleBtn from '@coponents/ToggleBtn'
 
-const { name, imgUrl, contentCount } = sampleUserData[0]
+import { sampleUserData, samplePhotoData, samplePhotoCardData } from '../utils/sample-data'
+import { sampleHandler } from '../utils/sample-function'
+
 const { photoUrl_v } = samplePhotoData
+
 const { handleUnfollow, handleToggle } = sampleHandler
+const { name, imgUrl, contentCount } = sampleUserData[0]
+
 
 const ComponentSamplePage = () => (
   <Layout title='Component Sample | Next.js + TypeScript Example'>
@@ -40,6 +44,17 @@ const ComponentSamplePage = () => (
     <LocationInfo location={'서울시 강서구 서울식물원'} />
     <hr />
     <Like like={23} />
+    <PhotoCardInput location={''} />
+    <UserHor userName={'jeong'} />
+    <UserVer userName={'jeong'} />
+    <PhotoCardPreview
+      description={'장소에 대한 정보'}
+      imageurl={''}
+      userName={'jeong'}
+      profileImage={''}
+      like={24}
+    />
+    <PhotoCardGallery photocards={samplePhotoCardData} />
     <hr />
     <PhotoCardInput location={''} />
     <hr />
