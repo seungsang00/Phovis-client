@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+export const PhotoCardPreviewContainer = styled.div``
 export const PhotoContainer = styled.div`
   break-inside: avoid;
   width: 100%;
