@@ -6,10 +6,10 @@ interface IProps {
   onClick: (e: FormEvent) => void // 이벤트를 인자로 받아와야 한다. event의 타입
 }
 
-const ToggleBtn = (props: IProps) => (
+const ToggleBtn = ({ sectionName, onClick }: IProps) => (
   <ToggleContainer>
-    <span>{props.sectionName}</span>
-    <Toggle type='checkbox' onClick={(e) => props.onClick(e)} />
+    <span>{sectionName}</span>
+    <Toggle type='checkbox' onClick={onClick} />
   </ToggleContainer>
 )
 export default ToggleBtn

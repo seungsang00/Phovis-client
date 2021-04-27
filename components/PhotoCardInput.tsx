@@ -11,7 +11,7 @@ interface props {
 }
 
 const PhotoCardInput = ({ location = '서울식물원' }: props) => {
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState<string>('')
   const [fileSelected, setFileSelected] = useState<File>()
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setMessage(e.target.value)
