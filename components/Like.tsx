@@ -6,7 +6,7 @@ type props = {
 }
 
 const Like = ({ like }: props) => {
-  const [isActive, setActive] = useState(false)
+  const [isActive, setActive] = useState<boolean>(false)
 
   const handleClick = (e: FormEvent) => {
     e.preventDefault()

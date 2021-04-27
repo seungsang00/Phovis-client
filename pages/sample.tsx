@@ -10,12 +10,13 @@ import PhotoCardPreview from '../components/PhotoCardPreview'
 import PhotoCardGallery from '../components/PhotoCardGallery'
 import UserCard from '../components/UserCard'
 import UserBanner from '../components/UserBanner'
-import ToggleBtn from '@coponents/ToggleBtn'
+import ToggleBtn from '@components/ToggleBtn'
+import { ThumbnailRect, ThumbnailSquare } from '@components/Thumbnail'
+import BookmarkBtn from '@components/BookmarkBtn'
 
+const { photoUrl_v, photoUrl_s } = samplePhotoData
 import { sampleUserData, samplePhotoData, samplePhotoCardData } from '../utils/sample-data'
 import { sampleHandler } from '../utils/sample-function'
-
-const { photoUrl_v } = samplePhotoData
 
 const { handleUnfollow, handleToggle } = sampleHandler
 const { name, imgUrl, contentCount } = sampleUserData[0]
@@ -26,6 +27,19 @@ const ComponentSamplePage = () => (
     <h1>Component Sample</h1>
     <p>This is the Component Sample page</p>
     <hr />
+    <ThumbnailSquare
+      profileImage={imgUrl}
+      username={name}
+      bgImage={photoUrl_s}
+    />
+    <hr />
+    <ThumbnailRect
+      profileImage={imgUrl}
+      username={name}
+      bgImage={photoUrl_v}
+      likeCount={30}
+    />
+    <hr />
     <UserCard
       username={name}
       profileImage={imgUrl}
@@ -34,6 +48,8 @@ const ComponentSamplePage = () => (
     />
     <hr />
     <UserBanner username={name} profileImage={imgUrl} bgImage={photoUrl_v} />
+    <hr />
+    <BookmarkBtn />
     <hr />
     <ToggleBtn sectionName={'Bookmark'} onClick={handleToggle} />
     <hr />
