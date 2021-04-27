@@ -10,13 +10,16 @@ import PhotoCardPreview from '../components/PhotoCardPreview'
 import PhotoCardGallery from '../components/PhotoCardGallery'
 import UserCard from '../components/UserCard'
 import UserBanner from '../components/UserBanner'
+import ToggleBtn from '@coponents/ToggleBtn'
 
 import { sampleUserData, samplePhotoData, samplePhotoCardData } from '../utils/sample-data'
 import { sampleHandler } from '../utils/sample-function'
 
 const { photoUrl_v } = samplePhotoData
-const { handleUnfollow } = sampleHandler
+
+const { handleUnfollow, handleToggle } = sampleHandler
 const { name, imgUrl, contentCount } = sampleUserData[0]
+
 
 const ComponentSamplePage = () => (
   <Layout title='Component Sample | Next.js + TypeScript Example'>
@@ -31,6 +34,8 @@ const ComponentSamplePage = () => (
     />
     <hr />
     <UserBanner username={name} profileImage={imgUrl} bgImage={photoUrl_v} />
+    <hr />
+    <ToggleBtn sectionName={'Bookmark'} onClick={handleToggle} />
     <hr />
     {/* 여기에 새로 생성한 컴포넌트들을 배치해주세요 */}
     <hr />
