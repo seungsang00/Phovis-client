@@ -21,7 +21,10 @@ interface IProps {
 }
 
 export const SearchBarBig = ({ query }: IProps) => {
-  const [newQuery, setnewQuery] = useState(query)
+  const [newQuery, setnewQuery] = useState('')
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setnewQuery(e.target.value)
+  }
 
   return (
     <SearchFormBig action='' className='search-bar'>
@@ -30,7 +33,7 @@ export const SearchBarBig = ({ query }: IProps) => {
         name='search'
         value={newQuery}
         placeholder={query}
-        onChange={() => setnewQuery(newQuery)}
+        onChange={onChange}
       />
     </SearchFormBig>
   )
