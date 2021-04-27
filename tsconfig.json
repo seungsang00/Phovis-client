@@ -20,7 +20,7 @@
     // ! paths 설정해주기
     "baseUrl": "./",
     "paths": {
-      "@coponents/*": ["components/*"],
+      "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
       "@hooks/*": ["hooks/*"],
       "@actions/*": ["modules/*"],
