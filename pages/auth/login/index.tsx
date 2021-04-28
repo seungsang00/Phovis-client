@@ -3,14 +3,19 @@ import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import Link from 'next/link'
 import { RootReducer } from '../../../modules/reducer'
-import { login } from '../../../modules/users'
+import { login, loginWithGoogle } from '../../../modules/users'
 import LableTextInput from '../../../components/LableTextInput'
 import PasswordInput from '../../../components/PasswordInput'
 import Checkbox from '../../../components/Checkbox'
 import SubmitButton from '../../../components/SubmitButton'
-import OauthButton, { SNS } from '../../../components/OauthButton'
-// import useAction from '../../../hooks/useAction';
+import GoogleLoginButton from '../../../components/GoogleLoginButton'
+import KakaoLoginButton from '../../../components/KaKaoLoginButton'
+import {
+  GoogleLoginResponse,
+  GoogleLoginResponseOffline,
+} from 'react-google-login'
 
+// import useAction from '../../../hooks/useAction';
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -36,7 +41,6 @@ const Login = () => {
   }
 
   const checkChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
-
     const {
       target: { checked: checkKeepLoggedIn },
     } = e
@@ -53,23 +57,39 @@ const Login = () => {
       // redirect main page & laod user data.
       // dispatch(getUserInfo(user.accessToken))
       // _Login(input);
-      console.log(user)
       alert('Login success')
       router.push('/')
     } else {
       // TODO : show error UI
       alert('Login fail')
+
+      console.log(user)
     }
   }
 
-  const requestGoogleLogin = async () => {
+  const requestGoogleLogin = async (
+    result: GoogleLoginResponse | GoogleLoginResponseOffline
+  ) => {
     // TODO : make function
-    console.log('requestGoogleLogin')
+    // console.log(result)
+    // console.log('requestGoogleLogin')
+    if ('error' in result) {
+      alert('Google Login fail')
+    } else {
+      dispatch(loginWithGoogle((result as GoogleLoginResponse).tokenId))
+      alert('Google Login success!')
+      // router.push('/')
+    }
+
+    console.log(user)
   }
 
   const requestkaKaoLogin = async () => {
     // TODO : make function
     console.log('requestkaKaoLogin')
+
+    // client KEY, redirect URL, response Type
+    // axios req -> Kakao login URL
   }
 
   return (
@@ -102,8 +122,8 @@ const Login = () => {
           <hr />
           <p>Or login with SNS account</p>
           <div>
-            <OauthButton type={SNS.Google} onSubmit={requestGoogleLogin} />
-            <OauthButton type={SNS.Kakao} onSubmit={requestkaKaoLogin} />
+            <GoogleLoginButton onSubmit={requestGoogleLogin} />
+            <KakaoLoginButton onSubmit={requestkaKaoLogin} />
           </div>
         </article>
         <article>

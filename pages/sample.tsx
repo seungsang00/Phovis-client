@@ -35,7 +35,6 @@ const ComponentSamplePage = () => (
     <h1>Component Sample</h1>
     <p>This is the Component Sample page</p>
     <hr />
-
     <MainBanner contents={sampleContents} />
     <LinkTitle to='/sample' />
     <hr />
@@ -62,7 +61,6 @@ const ComponentSamplePage = () => (
       likeCount={30}
     />
     <hr />
-
     <UserCard
       username={name}
       profileImage={imgUrl}
