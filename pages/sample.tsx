@@ -8,6 +8,7 @@ import UserHor from '../components/UserInfo/UserInfo-hor'
 import UserVer from '../components/UserInfo/UserInfo-ver'
 import PhotoCardPreview from '../components/PhotoCardPreview/PhotoCardPreview'
 import UserCard from '../components/UserCard'
+import MainBanner from '../components/MainBanner/MainBanner'
 import UserBanner from '../components/UserBanner'
 import ToggleBtn from '@components/ToggleBtn'
 import { ThumbnailRect, ThumbnailSquare } from '@components/Thumbnail'
@@ -16,16 +17,17 @@ import { TagBig, TagSmall } from '@components/Tag'
 import LinkBanner from '@components/LinkBanner'
 import { SearchBar, SearchBarBig } from '@components/SearchBar'
 
-const { photoUrl_v, photoUrl_s } = samplePhotoData
+import LinkTitle from '@components/LinkTitle'
 
+const { photoUrl_v, photoUrl_s } = samplePhotoData
 const { handleUnfollow, handleToggle, handler } = sampleHandler
 import {
   sampleUserData,
   samplePhotoData,
   samplePhotoCardData,
 } from '../utils/sample-data'
+
 import { sampleHandler } from '../utils/sample-function'
-import UserBanner from '../components/UserBanner'
 
 const { name, imgUrl, contentCount } = sampleUserData[0]
 
@@ -33,6 +35,9 @@ const ComponentSamplePage = () => (
   <Layout title='Component Sample | Next.js + TypeScript Example'>
     <h1>Component Sample</h1>
     <p>This is the Component Sample page</p>
+    <hr />
+    <MainBanner contents={sampleContents} />
+    <LinkTitle to='/sample' />
     <hr />
     <SearchBar />
     <hr />
