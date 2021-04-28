@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import Link from 'next/link'
-import axios from 'axios'
+// import axios from 'axios'
 import { RootReducer } from '../../../modules/reducer'
 import { login, loginWithGoogle } from '../../../modules/users'
 import LableTextInput from '../../../components/LableTextInput'
@@ -10,7 +10,7 @@ import PasswordInput from '../../../components/PasswordInput'
 import Checkbox from '../../../components/Checkbox'
 import SubmitButton from '../../../components/SubmitButton'
 import GoogleLoginButton from '../../../components/GoogleLoginButton'
-import KakaoLoginButton from '../../../components/KaKaoLoginButton'
+// import KakaoLoginButton from '../../../components/KaKaoLoginButton'
 
 import {
   GoogleLoginResponse,
@@ -85,19 +85,12 @@ const Login = () => {
     console.log(user)
   }
 
-  const requestkaKaoLogin = async (result: any) => {
+  const requestkaKaoLogin: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     console.log('requestkaKaoLogin')
-    console.log(result)
-    // client KEY, redirect URL, response Type
-    // axios req -> Kakao login URL
-    // axios.get('https://kauth.kakao.com/oauth/authorize', {
-    //   params: {
-    //     state: 'body',
-    //     client_id: process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID,
-    //     redirect_uri: 'http://localhost:3000/auth/kakao',
-    //     response_type: 'code',
-    //   },
-    // })
+    window.open(
+      `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=http://localhost:3000/auth/kakao`,
+      '_blank'
+    )
   }
 
   return (
@@ -130,14 +123,12 @@ const Login = () => {
           <hr />
           <p>Or login with SNS account</p>
           <div>
+            {console.log(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID)}
             <GoogleLoginButton
               clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string}
               onSubmit={requestGoogleLogin}
             />
-            <KakaoLoginButton
-              clientId={process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID as string}
-              onSubmit={requestkaKaoLogin}
-            />
+            <button onClick={requestkaKaoLogin}>kakao</button>
           </div>
         </article>
         <article>
