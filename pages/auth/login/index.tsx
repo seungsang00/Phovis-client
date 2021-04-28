@@ -11,6 +11,7 @@ import Checkbox from '../../../components/Checkbox'
 import SubmitButton from '../../../components/SubmitButton'
 import GoogleLoginButton from '../../../components/GoogleLoginButton'
 import KakaoLoginButton from '../../../components/KaKaoLoginButton'
+
 import {
   GoogleLoginResponse,
   GoogleLoginResponseOffline,

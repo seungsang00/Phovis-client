@@ -3,8 +3,8 @@ import {
   PhotoCardPreviewContainer,
   DscriptionContainer,
   PhotoContainer,
-} from './photocard-preview'
-import Like from '../Like/Like'
+} from './photocard-preview.style'
+import { LikeBtn } from '@components/Buttons'
 import UserInfoHor from '../UserInfo/UserInfo-hor'
 
 type Props = {
@@ -35,7 +35,7 @@ const PhotoCardPreview = ({
             userName={userName}
             profileImage={profileImage || '/src/tmpProfileImg.webp'}
           />
-          <Like like={like} />
+          <LikeBtn like={like} />
         </div>
       </PhotoContainer>
       <DscriptionContainer>

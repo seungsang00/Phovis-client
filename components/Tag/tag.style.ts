@@ -1,4 +1,4 @@
-import styled from './themed-components'
+import styled from '../../styles/themed-components'
 
 export const TagS = styled.button`
   width: fit-content;

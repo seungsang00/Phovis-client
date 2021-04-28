@@ -1,4 +1,4 @@
-import { IUser, IPhoto, IPhotoCard, IContent } from '../interfaces'
+import { IUser, IPhoto, IPhotoCard, IContent } from '@interfaces'
 
 /** Dummy user data. */
 export const sampleUserData: IUser[] = [

@@ -1,4 +1,4 @@
-import { LinkTitleContainer } from './link-title'
+import { LinkTitleContainer } from './link-title.style'
 import Link from 'next/link'
 
 interface IProps {

@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { IUser } from '../interfaces'
+import { IUser } from '@interfaces'
 
 type Props = {
   data: IUser

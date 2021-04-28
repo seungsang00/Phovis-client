@@ -1,14 +1,14 @@
-import { DivWithBgImg } from '../styles/common'
+import { DivWithBgImg } from '../../styles/common'
 import {
   ThumbnailContainer_square,
   ThumbnailContainer_rect,
-} from '../styles/thumbnail'
-import BookmarkBtn from './Buttons/BookmarkBtn'
-import Like from './Like'
-import UserInfoHor from './UserInfo-hor'
+} from './thumbnail.style'
+import BookmarkBtn from '../Buttons/BookmarkBtn'
+import { LikeBtn } from '@components/Buttons'
+import UserInfoHor from '@components/UserInfo/UserInfo-hor'
 
 interface IRect {
-  profileImage: string
+  profileImage?: string
   username: string
   bgImage: string
   likeCount: number
@@ -27,14 +27,14 @@ export const ThumbnailRect = ({
       </span>
       <UserInfoHor userName={username} profileImage={profileImage} />
       <span className='like'>
-        <Like like={likeCount} />
+        <LikeBtn like={likeCount} />
       </span>
     </DivWithBgImg>
   </ThumbnailContainer_rect>
 )
 
 interface ISquare {
-  profileImage: string
+  profileImage?: string
   username: string
   bgImage: string
 }
