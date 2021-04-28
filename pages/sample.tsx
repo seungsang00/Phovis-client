@@ -16,6 +16,7 @@ import BookmarkBtn from '@components/BookmarkBtn'
 import { TagBig, TagSmall } from '@components/Tag'
 import LinkBanner from '@components/LinkBanner'
 import { SearchBar, SearchBarBig } from '@components/SearchBar'
+import LinkTitle from '@components/LinkTitle'
 
 const { photoUrl_v, photoUrl_s } = samplePhotoData
 const { handleUnfollow, handleToggle, handler } = sampleHandler
@@ -36,7 +37,8 @@ const ComponentSamplePage = () => (
     <hr />
 
     <MainBanner contents={sampleContents} />
-
+    <LinkTitle to='/sample' />
+    <hr />
     <SearchBar />
     <hr />
     <SearchBarBig query='직전에검색한키워드가들어갑니다' />
