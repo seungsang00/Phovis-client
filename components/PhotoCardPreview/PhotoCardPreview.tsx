@@ -1,10 +1,11 @@
 import React from 'react'
 import {
-  PhotoCardPreview,
+  PhotoCardPreviewContainer,
   DscriptionContainer,
-} from '../styles/photocard-preview'
-import Like from './Like'
-import UserInfoHor from './UserInfo-hor'
+  PhotoContainer,
+} from './photocard-preview'
+import Like from '../Like/Like'
+import UserInfoHor from '../UserInfo/UserInfo-hor'
 
 type Props = {
   imageurl: string
@@ -14,7 +15,7 @@ type Props = {
   like?: number
 }
 
-const PhotocardPreview = ({
+const PhotoCardPreview = ({
   description = '장소에 대한 정보',
   imageurl,
   userName = 'jeong',
@@ -22,8 +23,8 @@ const PhotocardPreview = ({
   like = 24,
 }: Props) => {
   return (
-    <>
-      <PhotoCardPreview>
+    <PhotoCardPreviewContainer>
+      <PhotoContainer>
         <img
           src={
             imageurl || 'https://t1.daumcdn.net/cfile/blog/253BAE4B57E3CFC022'
@@ -36,12 +37,12 @@ const PhotocardPreview = ({
           />
           <Like like={like} />
         </div>
-      </PhotoCardPreview>
+      </PhotoContainer>
       <DscriptionContainer>
-        <h3>{description}</h3>
+        <span>{description}</span>
       </DscriptionContainer>
-    </>
+    </PhotoCardPreviewContainer>
   )
 }
 
-export default PhotocardPreview
+export default PhotoCardPreview
