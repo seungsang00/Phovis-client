@@ -3,8 +3,8 @@ import { AvatarWithProps } from '../styles/common'
 
 interface IProps {
   username: string
-  profileImage: string
-  contentCount: number
+  profileImage?: string
+  contentCount?: number
   onClick: () => void
 }
 
