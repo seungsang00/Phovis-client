@@ -1,4 +1,4 @@
-import { SliderContainer, Slideshowdots } from './main-banner'
+import { SliderContainer, Slideshowdots } from './main-banner.style'
 import { IContent } from '../../interfaces/index'
 import { useEffect, useState } from 'react'
 

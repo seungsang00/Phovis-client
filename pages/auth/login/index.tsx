@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import Link from 'next/link'
-import { RootReducer } from '../../../modules/reducer'
-import { login, loginWithGoogle } from '../../../modules/users'
+import { RootReducer } from '@actions/reducer'
+import { login, loginWithGoogle } from '@actions/users'
 import LableTextInput from '../../../components/LableTextInput'
 import PasswordInput from '../../../components/PasswordInput'
 import Checkbox from '../../../components/Checkbox'
 import SubmitButton from '../../../components/SubmitButton'
 import GoogleLoginButton from '../../../components/GoogleLoginButton'
 import KakaoLoginButton from '../../../components/KaKaoLoginButton'
+
 import {
   GoogleLoginResponse,
   GoogleLoginResponseOffline,

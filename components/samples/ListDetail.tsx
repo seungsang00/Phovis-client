@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { IUser } from '../interfaces'
+import { IUser } from '@interfaces'
 
 type ListDetailProps = {
   item: IUser

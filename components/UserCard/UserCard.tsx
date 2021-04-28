@@ -1,5 +1,5 @@
-import { Card, Button } from '../styles/user-card'
-import { AvatarWithProps } from '../styles/common'
+import { Card, Button } from './user-card.style'
+import { AvatarWithProps } from '../../styles/common'
 
 interface IProps {
   username: string

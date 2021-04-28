@@ -1,4 +1,4 @@
-import { LocContainer } from './location-info'
+import { LocContainer } from './location-info.style'
 import Image from 'next/image'
 
 type props = {

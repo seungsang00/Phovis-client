@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Li, A } from './tab-menu'
+import { Li, A } from './tab-menu.style'
 
 type Props = {
   isOwner: boolean

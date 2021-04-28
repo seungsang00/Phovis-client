@@ -1,6 +1,6 @@
 import { PhotocardGalleryContainer } from './photocard-gallery'
 import { IPhotoCard } from '../../interfaces/index'
-import PhotoCardPreview from '../PhotoCardPreview/PhotoCardPreview'
+import PhotoCardPreview from '../../components/PhotoCardPreview/PhotoCardPreview'
 
 type props = {
   photocards: IPhotoCard[]

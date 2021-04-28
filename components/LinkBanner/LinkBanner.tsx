@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { LinkBannerDiv } from './link-banner'
+import { LinkBannerDiv } from './link-banner.style'
 
 // TODO: Link의 href 주소는 컨텐츠 작성 페이지로 변경해야 합니다 && 로그인 여부에 따른 분기처리가 필요합니다 (로그인 페이지로 이동 or 작성 페이지로 이동)
 const LinkBanner = () => (
