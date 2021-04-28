@@ -1,4 +1,4 @@
-import { LikeContainer, ImgContainer } from './like'
+import { LikeContainer, ImgContainer } from './like.style'
 import { FormEvent, useState } from 'react'
 
 type props = {

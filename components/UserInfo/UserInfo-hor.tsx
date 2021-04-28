@@ -1,4 +1,4 @@
-import { UserContainer, Avatar } from './user-info'
+import { UserContainer, Avatar } from './user-info.style'
 
 type props = {
   userName: string

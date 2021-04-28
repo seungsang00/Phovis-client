@@ -3,7 +3,7 @@ import {
   PhotoCardPreviewContainer,
   DscriptionContainer,
   PhotoContainer,
-} from './photocard-preview'
+} from './photocard-preview.style'
 import { LikeBtn } from '@components/Buttons'
 import UserInfoHor from '../UserInfo/UserInfo-hor'
 

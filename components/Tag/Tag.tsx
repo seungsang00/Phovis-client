@@ -1,4 +1,4 @@
-import { TagB, TagS } from '../styles/tag'
+import { TagB, TagS } from './tag.style'
 
 interface IProps {
   tagname: string

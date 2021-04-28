@@ -1,6 +1,6 @@
 import * as React from 'react'
 import ListItem from './ListItem'
-import { IUser } from '../interfaces'
+import { IUser } from '../../interfaces'
 
 type Props = {
   items: IUser[]

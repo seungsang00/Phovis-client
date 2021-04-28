@@ -1,33 +1,36 @@
 import Link from 'next/link'
-import Layout from '../components/Layout'
-import TabMenu from '../components/TabMenu/TabMenu'
-import LocationInfo from '../components/LocationInfo/LocationInfo'
-import { LikeBtn } from '@components/Buttons'
-import PhotoCardInput from '../components/PhotoCardInput/PhotoCardInput'
-import UserHor from '../components/UserInfo/UserInfo-hor'
-import UserVer from '../components/UserInfo/UserInfo-ver'
-import PhotoCardPreview from '../components/PhotoCardPreview/PhotoCardPreview'
-import UserCard from '../components/UserCard'
-import MainBanner from '../components/MainBanner/MainBanner'
-import UserBanner from '../components/UserBanner'
-import ToggleBtn from '@components/Buttons/ToggleBtn'
-import { ThumbnailRect, ThumbnailSquare } from '@components/Thumbnail'
-import BookmarkBtn from '@components/Buttons/BookmarkBtn'
-import { TagBig, TagSmall } from '@components/Tag'
-import LinkBanner from '@components/LinkBanner/LinkBanner'
-import { SearchBar, SearchBarBig } from '@components/Searchbars/SearchBar'
-import LinkTitle from '@components/LinkTitle'
-
-const { photoUrl_v, photoUrl_s } = samplePhotoData
-const { handleUnfollow, handleToggle, handler } = sampleHandler
+import {
+  Layout,
+  LinkTitle,
+  LinkBanner,
+  SearchBar,
+  SearchBarBig,
+  TagBig,
+  TagSmall,
+  ThumbnailRect,
+  ThumbnailSquare,
+  LikeBtn,
+  ToggleBtn,
+  BookmarkBtn,
+  MainBanner,
+  UserBanner,
+  UserCard,
+  PhotoCardPreview,
+  UserInfoVer,
+  UserInfoHor,
+  TabMenu,
+  LocationInfo,
+} from '@components/index'
+import { PhotoCardInput } from '../containers'
 import {
   sampleUserData,
   samplePhotoData,
   sampleContents,
-} from '../utils/sample-data'
+  sampleHandler,
+} from '@utils/index'
 
-import { sampleHandler } from '../utils/sample-function'
-
+const { handleUnfollow, handleToggle, handler } = sampleHandler
+const { photoUrl_v, photoUrl_s } = samplePhotoData
 const { name, imgUrl, contentCount } = sampleUserData[0]
 
 const ComponentSamplePage = () => (
@@ -82,8 +85,8 @@ const ComponentSamplePage = () => (
     <hr />
     <LikeBtn like={23} />
     <PhotoCardInput location={''} />
-    <UserHor userName={'jeong'} />
-    <UserVer userName={'jeong'} />
+    <UserInfoHor userName={'jeong'} />
+    <UserInfoVer userName={'jeong'} />
     <PhotoCardPreview
       description={'장소에 대한 정보'}
       imageurl={''}
@@ -94,9 +97,9 @@ const ComponentSamplePage = () => (
     <hr />
     <PhotoCardInput location={''} />
     <hr />
-    <UserHor userName={'jeong'} />
+    <UserInfoHor userName={'jeong'} />
     <hr />
-    <UserVer userName={'jeong'} />
+    <UserInfoVer userName={'jeong'} />
     <hr />
     <PhotoCardPreview
       description={'장소에 대한 정보'}

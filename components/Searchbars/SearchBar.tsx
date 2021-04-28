@@ -5,7 +5,7 @@ import {
   SearchButton,
   SearchFormBig,
   SearchBig,
-} from './searchbar'
+} from './searchbar.style'
 
 export const SearchBar = () => (
   <SearchForm action='' className='search-bar'>

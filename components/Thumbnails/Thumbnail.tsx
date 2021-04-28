@@ -1,9 +1,9 @@
-import { DivWithBgImg } from '../styles/common'
+import { DivWithBgImg } from '../../styles/common'
 import {
   ThumbnailContainer_square,
   ThumbnailContainer_rect,
-} from '../styles/thumbnail'
-import BookmarkBtn from './Buttons/BookmarkBtn'
+} from './thumbnail.style'
+import BookmarkBtn from '../Buttons/BookmarkBtn'
 import { LikeBtn } from '@components/Buttons'
 import UserInfoHor from '@components/UserInfo/UserInfo-hor'
 

@@ -1,5 +1,5 @@
 import { FormEvent } from 'react'
-import { ToggleContainer, Toggle } from './button-toggle'
+import { ToggleContainer, Toggle } from './button-toggle.style'
 
 interface IProps {
   sectionName: string
