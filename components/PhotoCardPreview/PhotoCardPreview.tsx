@@ -3,9 +3,9 @@ import {
   PhotoCardPreviewContainer,
   DscriptionContainer,
   PhotoContainer,
-} from '../styles/photocard-preview'
-import Like from './Like'
-import UserInfoHor from './UserInfo-hor'
+} from './photocard-preview'
+import Like from '../Like/Like'
+import UserInfoHor from '../UserInfo/UserInfo-hor'
 
 type Props = {
   imageurl: string

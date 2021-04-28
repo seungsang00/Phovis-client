@@ -1,13 +1,12 @@
 import Link from 'next/link'
 import Layout from '../components/Layout'
-import TabMenu from '../components/TabMenu'
-import LocationInfo from '../components/LocationInfo'
-import Like from '../components/Like'
-import PhotoCardInput from '../components/PhotoCardInput'
-import UserHor from '../components/UserInfo-hor'
-import UserVer from '../components/UserInfo-ver'
-import PhotoCardPreview from '../components/PhotoCardPreview'
-import PhotoCardGallery from '../components/PhotoCardGallery'
+import TabMenu from '../components/TabMenu/TabMenu'
+import LocationInfo from '../components/LocationInfo/LocationInfo'
+import Like from '../components/Like/Like'
+import PhotoCardInput from '../components/PhotoCardInput/PhotoCardInput'
+import UserHor from '../components/UserInfo/UserInfo-hor'
+import UserVer from '../components/UserInfo/UserInfo-ver'
+import PhotoCardPreview from '../components/PhotoCardPreview/PhotoCardPreview'
 import UserCard from '../components/UserCard'
 import UserBanner from '../components/UserBanner'
 import ToggleBtn from '@components/ToggleBtn'
@@ -19,11 +18,15 @@ import LinkBanner from '@components/LinkBanner'
 const { photoUrl_v, photoUrl_s } = samplePhotoData
 
 const { handleUnfollow, handleToggle, handler } = sampleHandler
-import { sampleUserData, samplePhotoData, samplePhotoCardData } from '../utils/sample-data'
+import {
+  sampleUserData,
+  samplePhotoData,
+  samplePhotoCardData,
+} from '../utils/sample-data'
 import { sampleHandler } from '../utils/sample-function'
+import UserBanner from '../components/UserBanner'
 
 const { name, imgUrl, contentCount } = sampleUserData[0]
-
 
 const ComponentSamplePage = () => (
   <Layout title='Component Sample | Next.js + TypeScript Example'>
@@ -79,7 +82,6 @@ const ComponentSamplePage = () => (
       profileImage={''}
       like={24}
     />
-    <PhotoCardGallery photocards={samplePhotoCardData} />
     <hr />
     <PhotoCardInput location={''} />
     <hr />
@@ -87,7 +89,7 @@ const ComponentSamplePage = () => (
     <hr />
     <UserVer userName={'jeong'} />
     <hr />
-    <PhotocardPreview
+    <PhotoCardPreview
       description={'장소에 대한 정보'}
       imageurl={''}
       userName={'jeong'}
