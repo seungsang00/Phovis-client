@@ -1,4 +1,4 @@
-export type PhotoCard = {
+export type IPhotoCard = {
   id: string
   imageurl: string
   description?: string
