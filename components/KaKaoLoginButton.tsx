@@ -3,7 +3,7 @@ import KakaoLogin from 'react-kakao-login'
 
 type Props = {
   clientId: string
-  onSubmit: (rsult: any) => void
+  onSubmit: (result: any) => void
 }
 
 // TODO : 카카오로고 추가
