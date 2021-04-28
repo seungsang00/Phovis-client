@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import Link from 'next/link'
+import axios from 'axios'
 import { RootReducer } from '../../../modules/reducer'
 import { login, loginWithGoogle } from '../../../modules/users'
 import LableTextInput from '../../../components/LableTextInput'
@@ -70,7 +71,6 @@ const Login = () => {
   const requestGoogleLogin = async (
     result: GoogleLoginResponse | GoogleLoginResponseOffline
   ) => {
-    // TODO : make function
     // console.log(result)
     // console.log('requestGoogleLogin')
     if ('error' in result) {
@@ -84,12 +84,19 @@ const Login = () => {
     console.log(user)
   }
 
-  const requestkaKaoLogin = async () => {
-    // TODO : make function
+  const requestkaKaoLogin = async (result: any) => {
     console.log('requestkaKaoLogin')
-
+    console.log(result)
     // client KEY, redirect URL, response Type
     // axios req -> Kakao login URL
+    // axios.get('https://kauth.kakao.com/oauth/authorize', {
+    //   params: {
+    //     state: 'body',
+    //     client_id: process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID,
+    //     redirect_uri: 'http://localhost:3000/auth/kakao',
+    //     response_type: 'code',
+    //   },
+    // })
   }
 
   return (
@@ -122,8 +129,14 @@ const Login = () => {
           <hr />
           <p>Or login with SNS account</p>
           <div>
-            <GoogleLoginButton onSubmit={requestGoogleLogin} />
-            <KakaoLoginButton onSubmit={requestkaKaoLogin} />
+            <GoogleLoginButton
+              clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string}
+              onSubmit={requestGoogleLogin}
+            />
+            <KakaoLoginButton
+              clientId={process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID as string}
+              onSubmit={requestkaKaoLogin}
+            />
           </div>
         </article>
         <article>
