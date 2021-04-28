@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '../styles/common'
+import { Button } from '@styles/index'
 
 type Props = {
   text?: string
