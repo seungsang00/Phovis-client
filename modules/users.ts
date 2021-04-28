@@ -64,6 +64,16 @@ const errorGetUserInfo = (data:AxiosResponse | string) => ({
   payload: data,
 })
 
+const successLoginWithGoogle = (data:AxiosResponse) =>({
+  type: AuthAction.LOGIN_GOOGLE_SUCCESS,
+  payload: data
+})
+
+const errorLoginWithGoogle = (data:AxiosResponse | string) =>({
+  type: AuthAction.LOGIN_GOOGLE_ERROR,
+  payload: data
+})
+
 // TODO : make disfetch factory pattern
 
 
@@ -131,6 +141,27 @@ export const getUserInfo = (accessToken?:string) =>{
   }
 }
 
+export const loginWithGoogle = (token:string) =>{
+  return async (dispatch:Function) =>{
+    try{
+      const result = await axios.post(`https://localhost:4000/auth/google`,
+        { token },
+        // { withCredentials: true }
+      )
+
+      if(result.status === 201){
+        dispatch(successLoginWithGoogle(result));
+      }
+      else{
+        dispatch(errorLoginWithGoogle(result));
+      }
+    }
+    catch(err){
+      dispatch(errorLoginWithGoogle('Login fail'));
+    }
+  }
+}
+
 // 모든 액션 겍체들에 대한 타입을 준비해줍니다.
 // ReturnType<typeof _____> 는 특정 함수의 반환값을 추론해줍니다
 // 상단부에서 액션타입을 선언 할 떄 as const 를 하지 않으면 이 부분이 제대로 작동하지 않습니다.
@@ -149,20 +180,22 @@ function user(state: userState = initialState, action: userAction): userState {
     case USER_SIGNIN_ERROR:
       return { ...state, test: action.payload }
 
+    case AuthAction.LOGIN_GOOGLE_SUCCESS:
     case AuthAction.LOGIN_SUCCESS:
       const { data:{ accessToken } } = action.payload as AxiosResponse;
       // set Access Token & Refresh Token
       // console.log('accessToken : ', accessToken);
       localStorage.setItem(LOCAL_KEY_ACCESS_TOKEN, accessToken);
-      return { ...state, isLogin: true}
-  
+      return { ...state, isLogin: true, accessToken}
+    
+    case AuthAction.LOGIN_GOOGLE_ERROR:
     case AuthAction.LOGIN_ERROR:
       return {...state, isLogin: false}
 
     case AuthAction.GET_INFO_SUCCESS:
       const { data }  = action.payload as AxiosResponse;
       const userData = {...data};
-      console.log('user data : ',data);
+      // console.log('user data : ',data);
       delete userData.message;
       return {...state, user:userData}
 
