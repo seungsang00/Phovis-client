@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Layout from '../components/Layout'
 import TabMenu from '../components/TabMenu/TabMenu'
 import LocationInfo from '../components/LocationInfo/LocationInfo'
-import Like from '../components/Like/Like'
+import { LikeBtn } from '@components/Buttons'
 import PhotoCardInput from '../components/PhotoCardInput/PhotoCardInput'
 import UserHor from '../components/UserInfo/UserInfo-hor'
 import UserVer from '../components/UserInfo/UserInfo-ver'
@@ -10,12 +10,12 @@ import PhotoCardPreview from '../components/PhotoCardPreview/PhotoCardPreview'
 import UserCard from '../components/UserCard'
 import MainBanner from '../components/MainBanner/MainBanner'
 import UserBanner from '../components/UserBanner'
-import ToggleBtn from '@components/ToggleBtn'
+import ToggleBtn from '@components/Buttons/ToggleBtn'
 import { ThumbnailRect, ThumbnailSquare } from '@components/Thumbnail'
-import BookmarkBtn from '@components/BookmarkBtn'
+import BookmarkBtn from '@components/Buttons/BookmarkBtn'
 import { TagBig, TagSmall } from '@components/Tag'
-import LinkBanner from '@components/LinkBanner'
-import { SearchBar, SearchBarBig } from '@components/SearchBar'
+import LinkBanner from '@components/LinkBanner/LinkBanner'
+import { SearchBar, SearchBarBig } from '@components/Searchbars/SearchBar'
 import LinkTitle from '@components/LinkTitle'
 
 const { photoUrl_v, photoUrl_s } = samplePhotoData
@@ -23,7 +23,7 @@ const { handleUnfollow, handleToggle, handler } = sampleHandler
 import {
   sampleUserData,
   samplePhotoData,
-  samplePhotoCardData,
+  sampleContents,
 } from '../utils/sample-data'
 
 import { sampleHandler } from '../utils/sample-function'
@@ -82,7 +82,7 @@ const ComponentSamplePage = () => (
     <hr />
     <LocationInfo location={'서울시 강서구 서울식물원'} />
     <hr />
-    <Like like={23} />
+    <LikeBtn like={23} />
     <PhotoCardInput location={''} />
     <UserHor userName={'jeong'} />
     <UserVer userName={'jeong'} />
