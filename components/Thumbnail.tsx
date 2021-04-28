@@ -3,7 +3,7 @@ import {
   ThumbnailContainer_square,
   ThumbnailContainer_rect,
 } from '../styles/thumbnail'
-import BookmarkBtn from './BookmarkBtn'
+import BookmarkBtn from './Buttons/BookmarkBtn'
 import Like from './Like'
 import UserInfoHor from './UserInfo-hor'
 

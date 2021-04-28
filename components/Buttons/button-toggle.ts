@@ -1,4 +1,4 @@
-import styled from '../styles/themed-components'
+import styled from '../../styles/themed-components'
 
 export const ToggleContainer = styled.div`
   display: grid;
