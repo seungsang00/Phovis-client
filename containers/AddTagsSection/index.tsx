@@ -1,10 +1,18 @@
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import { TagSmall } from '@components/index'
 import { TagSection, TagTooltip } from './addtags.style'
 
-export const AddTagsSection = () => {
+interface ITag {
+  id: string
+  name: string
+}
+interface IProps {
+  tagList: (null | ITag)[]
+  setTagList: Dispatch<SetStateAction<(ITag | null)[]>>
+}
+
+export const AddTagsSection = ({ tagList, setTagList }: IProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [tagList, setTagList] = useState<(null | object)[]>([])
   const [value, setValue] = useState<string>('')
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
