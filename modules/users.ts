@@ -146,7 +146,7 @@ export const loginWithGoogle = (token:string) =>{
     try{
       const result = await axios.post(`https://localhost:4000/auth/google`,
         { token },
-        // { withCredentials: true }
+        { withCredentials: true }
       )
 
       if(result.status === 201){
