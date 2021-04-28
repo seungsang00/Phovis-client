@@ -21,7 +21,7 @@ import {
   TabMenu,
   LocationInfo,
 } from '@components/index'
-import { PhotoCardInput } from '../containers'
+import { PhotoCardInput } from '@containers/index'
 import {
   sampleUserData,
   samplePhotoData,
