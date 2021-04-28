@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BookmarkContainer } from '../styles/button-bookmark'
+import { BookmarkContainer } from './button-bookmark'
 
 const BookmarkBtn = () => {
   const [isBookmarked, setIsBookmark] = useState<boolean>(false)
