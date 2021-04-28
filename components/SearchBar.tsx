@@ -21,6 +21,7 @@ interface IProps {
 }
 
 export const SearchBarBig = ({ query }: IProps) => {
+
   const [newQuery, setnewQuery] = useState('')
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setnewQuery(e.target.value)

@@ -16,6 +16,7 @@ import BookmarkBtn from '@components/BookmarkBtn'
 import { TagBig, TagSmall } from '@components/Tag'
 import LinkBanner from '@components/LinkBanner'
 import { SearchBar, SearchBarBig } from '@components/SearchBar'
+
 import LinkTitle from '@components/LinkTitle'
 
 const { photoUrl_v, photoUrl_s } = samplePhotoData
@@ -35,7 +36,6 @@ const ComponentSamplePage = () => (
     <h1>Component Sample</h1>
     <p>This is the Component Sample page</p>
     <hr />
-
     <MainBanner contents={sampleContents} />
     <LinkTitle to='/sample' />
     <hr />
@@ -62,7 +62,6 @@ const ComponentSamplePage = () => (
       likeCount={30}
     />
     <hr />
-
     <UserCard
       username={name}
       profileImage={imgUrl}
