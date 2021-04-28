@@ -17,9 +17,15 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
+    // ! paths 설정해주기
     "baseUrl": ".",
     "paths": {
-      "styles/*": ["styles/*"]
+      "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"],
+      "@hooks/*": ["hooks/*"],
+      "@actions/*": ["modules/*"],
+      "@interfaces": ["interfaces/index"],
+      "@styles/*": ["styles/*"]
     }
   },
   "exclude": ["node_modules"],

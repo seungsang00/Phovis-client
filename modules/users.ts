@@ -1,7 +1,8 @@
 import axios, { AxiosResponse } from 'axios'
 import * as actionTypes from './actionTypes'
 
-const { USER_SIGNIN_SUCCESS, USER_SIGNIN_ERROR } = actionTypes
+const { AuthAction, USER_SIGNIN_SUCCESS, USER_SIGNIN_ERROR } = actionTypes
+const LOCAL_KEY_ACCESS_TOKEN = 'LOCAL_ACCESS_TOKEN';
 
 type User = {
   id: number
@@ -14,10 +15,16 @@ interface Signin {
   password: string
 }
 
+interface Login{
+  email: string
+  password: string
+}
+
 type userState = {
   isLogin: boolean
+  accessToken?: string
   user?: User | null
-  test?: any
+  test?: any,
 }
 
 // 초기상태를 선언합니다.
@@ -25,14 +32,40 @@ const initialState: userState = {
   isLogin: false,
   user: null,
 }
+
+// disfetch function
 const successSignin = (data: AxiosResponse) => ({
   type: USER_SIGNIN_SUCCESS,
   payload: data,
 })
+
 const errorSignin = (data: AxiosResponse | string) => ({
   type: USER_SIGNIN_ERROR,
   payload: data,
 })
+
+const successLogin = (data: AxiosResponse) => ({
+  type: AuthAction.LOGIN_SUCCESS,
+  payload: data,
+})
+
+const errorLogin = (data: AxiosResponse | string) => ({
+  type: AuthAction.LOGIN_ERROR,
+  payload: data,
+})
+
+const successGetUserInfo = (data:AxiosResponse) => ({
+  type: AuthAction.GET_INFO_SUCCESS,
+  payload: data,
+});
+
+const errorGetUserInfo = (data:AxiosResponse | string) => ({
+  type: AuthAction.GET_INFO_ERROR,
+  payload: data,
+})
+
+// TODO : make disfetch factory pattern
+
 
 export const signin = ({ email, password }: Signin) => {
   return async (dispatch: Function) => {
@@ -50,12 +83,62 @@ export const signin = ({ email, password }: Signin) => {
   }
 }
 
+export const login = ({email, password}: Login) =>{
+  return async (dispatch:Function) =>{
+    try{
+      const result = await axios.post('https://localhost:4000/auth/login',
+        { email, password },
+        { withCredentials: true }
+      )
+      if(result.status === 201){
+        dispatch(successLogin(result));
+      }
+      else{
+        dispatch(errorLogin('Login fail'))
+      }
+    }
+    catch(err){
+      dispatch(errorLogin('Login fail'))
+      console.log(err);
+      throw err
+    }
+  }
+}
+
+export const getUserInfo = (accessToken?:string) =>{
+  return async (dispatch:Function) =>{
+    try{
+      const result = await axios.get(`https://localhost:4000/user`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+          withCredentials: true
+        }
+      )
+
+      if(result.status === 201){
+        dispatch(successGetUserInfo(result));
+      }
+      else{
+        dispatch(errorGetUserInfo('fail get user info'))
+      }
+    }
+    catch(err){
+      dispatch(errorGetUserInfo('fail get user info'));
+      throw err
+    }
+  }
+}
+
 // 모든 액션 겍체들에 대한 타입을 준비해줍니다.
 // ReturnType<typeof _____> 는 특정 함수의 반환값을 추론해줍니다
 // 상단부에서 액션타입을 선언 할 떄 as const 를 하지 않으면 이 부분이 제대로 작동하지 않습니다.
 type userAction =
   | ReturnType<typeof successSignin>
   | ReturnType<typeof errorSignin>
+  | ReturnType<typeof successLogin>
+  | ReturnType<typeof errorLogin>
 
 // 이 리덕스 모듈에서 관리 할 상태의 타입을 선언합니다
 
@@ -65,6 +148,27 @@ function user(state: userState = initialState, action: userAction): userState {
       return { ...state, test: action.payload }
     case USER_SIGNIN_ERROR:
       return { ...state, test: action.payload }
+
+    case AuthAction.LOGIN_SUCCESS:
+      const { data:{ accessToken } } = action.payload as AxiosResponse;
+      // set Access Token & Refresh Token
+      // console.log('accessToken : ', accessToken);
+      localStorage.setItem(LOCAL_KEY_ACCESS_TOKEN, accessToken);
+      return { ...state, isLogin: true}
+  
+    case AuthAction.LOGIN_ERROR:
+      return {...state, isLogin: false}
+
+    case AuthAction.GET_INFO_SUCCESS:
+      const { data }  = action.payload as AxiosResponse;
+      const userData = {...data};
+      console.log('user data : ',data);
+      delete userData.message;
+      return {...state, user:userData}
+
+    case AuthAction.GET_INFO_ERROR:
+      return {...state, user: null, isLogin: false}
+
     default:
       return state
   }

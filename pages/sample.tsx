@@ -9,25 +9,58 @@ import UserVer from '../components/UserInfo/UserInfo-ver'
 import PhotoCardPreview from '../components/PhotoCardPreview/PhotoCardPreview'
 import UserCard from '../components/UserCard'
 import MainBanner from '../components/MainBanner/MainBanner'
+import UserBanner from '../components/UserBanner'
+import ToggleBtn from '@components/ToggleBtn'
+import { ThumbnailRect, ThumbnailSquare } from '@components/Thumbnail'
+import BookmarkBtn from '@components/BookmarkBtn'
+import { TagBig, TagSmall } from '@components/Tag'
+import LinkBanner from '@components/LinkBanner'
+import { SearchBar, SearchBarBig } from '@components/SearchBar'
 
+const { photoUrl_v, photoUrl_s } = samplePhotoData
+const { handleUnfollow, handleToggle, handler } = sampleHandler
 import {
   sampleUserData,
   samplePhotoData,
-  sampleContents,
+  samplePhotoCardData,
 } from '../utils/sample-data'
+
 import { sampleHandler } from '../utils/sample-function'
-import UserBanner from '../components/UserBanner'
 
 const { name, imgUrl, contentCount } = sampleUserData[0]
-const { photoUrl_v } = samplePhotoData
-const { handleUnfollow } = sampleHandler
 
 const ComponentSamplePage = () => (
   <Layout title='Component Sample | Next.js + TypeScript Example'>
     <h1>Component Sample</h1>
     <p>This is the Component Sample page</p>
     <hr />
+
     <MainBanner contents={sampleContents} />
+
+    <SearchBar />
+    <hr />
+    <SearchBarBig query='직전에검색한키워드가들어갑니다' />
+    <hr />
+    <LinkBanner />
+    <hr />
+    <TagBig tagname={'야경'} onClick={handler} />
+    <hr />
+    <TagSmall tagname={'야경'} onClick={handler} />
+    <hr />
+    <ThumbnailSquare
+      profileImage={imgUrl}
+      username={name}
+      bgImage={photoUrl_s}
+    />
+    <hr />
+    <ThumbnailRect
+      profileImage={imgUrl}
+      username={name}
+      bgImage={photoUrl_v}
+      likeCount={30}
+    />
+    <hr />
+
     <UserCard
       username={name}
       profileImage={imgUrl}
@@ -36,6 +69,10 @@ const ComponentSamplePage = () => (
     />
     <hr />
     <UserBanner username={name} profileImage={imgUrl} bgImage={photoUrl_v} />
+    <hr />
+    <BookmarkBtn />
+    <hr />
+    <ToggleBtn sectionName={'Bookmark'} onClick={handleToggle} />
     <hr />
     {/* 여기에 새로 생성한 컴포넌트들을 배치해주세요 */}
     <hr />
