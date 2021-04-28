@@ -5,15 +5,16 @@ import GoogleLogin, {
 } from 'react-google-login'
 
 type Props = {
+  clientId: string
   onSubmit: (result: GoogleLoginResponse | GoogleLoginResponseOffline) => void
 }
 
 // TODO : 구글로고 추가
 
-const GoogleLoginButton = ({ onSubmit }: Props) => (
+const GoogleLoginButton = ({ clientId, onSubmit }: Props) => (
   <div>
     <GoogleLogin
-      clientId={process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID as string}
+      clientId={clientId}
       render={(renderProps) => (
         <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
           Google
