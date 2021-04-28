@@ -2,14 +2,15 @@ import styled from '../../styles/themed-components'
 
 export const TagS = styled.button`
   width: fit-content;
-  height: fit-content;
-  font-size: 14px;
+  height: 2rem;
+  font-size: 1rem;
   line-height: 18px;
   text-align: center;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 5px 1rem;
+  margin: 0 0.75rem 0 0;
+  border-radius: 999px;
   color: #fff;
-  background-color: ${({ theme }) => theme.color.black};
+  background-color: ${({ theme }) => theme.color.blue};
   cursor: pointer;
 `
 
