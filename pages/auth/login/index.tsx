@@ -85,19 +85,19 @@ const Login = () => {
     console.log(user)
   }
 
-  const requestkaKaoLogin = async (result: any) => {
-    console.log('requestkaKaoLogin')
-    console.log(result)
-    // client KEY, redirect URL, response Type
-    // axios req -> Kakao login URL
-    // axios.get('https://kauth.kakao.com/oauth/authorize', {
-    //   params: {
-    //     state: 'body',
-    //     client_id: process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID,
-    //     redirect_uri: 'http://localhost:3000/auth/kakao',
-    //     response_type: 'code',
-    //   },
-    // })
+  const requestkaKaoLogin: React.MouseEventHandler<HTMLDivElement> = () => {
+    // console.log('requestkaKaoLogin')
+    // 카카오 로그인 버튼클릭시 redirect 주소창이 열린다.
+    // redirect 한 장소에서 카카오 계정 정보를 받아온 뒤 새 윈도우가 닫힌다.
+
+    // TODO : Redirect URL 을 개발환경에 따라 다르게 줄 수 있도록 설정
+    const baseUrl = 'https://kauth.kakao.com/oauth/authorize'
+    const clientId = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID
+    const redirectUrl = 'http://localhost:3000/auth/kakao'
+    window.open(
+      `${baseUrl}?response_type=code&client_id=${clientId}&redirect_uri=${redirectUrl}`,
+      '_blank'
+    )
   }
 
   return (
@@ -130,14 +130,12 @@ const Login = () => {
           <hr />
           <p>Or login with SNS account</p>
           <div>
+            {console.log(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID)}
             <GoogleLoginButton
               clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string}
               onSubmit={requestGoogleLogin}
             />
-            <KakaoLoginButton
-              clientId={process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID as string}
-              onSubmit={requestkaKaoLogin}
-            />
+            <KakaoLoginButton onSubmit={requestkaKaoLogin} />
           </div>
         </article>
         <article>

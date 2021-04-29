@@ -1,5 +1,5 @@
 import { BannerContainer } from './user-banner.style'
-import { DivWithBgImg, AvatarWithProps } from '../../styles/common'
+import { DivWithBgImg, AvatarWithProps } from '@styles/index'
 
 interface IProps {
   profileImage?: string

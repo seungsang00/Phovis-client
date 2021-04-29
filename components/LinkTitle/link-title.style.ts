@@ -1,4 +1,4 @@
-import styled from '../../styles/themed-components'
+import styled from '@styles/themed-components'
 
 export const LinkTitleContainer = styled.div`
   font-size: 2rem;

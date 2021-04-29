@@ -1,20 +1,29 @@
 import React, { useEffect } from 'react'
-// import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux'
+import useAction from 'hooks/useAction'
+import { loginWithKakao } from 'modules/users'
+import { RootReducer } from 'modules/reducer'
 
-type Props = {
-  location?: string
-  match?: string
-}
+// TODO: token 못 받았을 경우 분기처리
 
-const KakaoLoginPage = ({ location, match }: Props) => {
-  // parse query string params
-  console.log(location)
-  console.log(match)
+const KakaoLoginPage = () => {
+  const router = useRouter()
+  const { isLogin } = useSelector((state: RootReducer) => state.user)
+  const { code } = router.query
+
+  const _loginWithKakao = useAction(loginWithKakao)
 
   useEffect(() => {
-    // API req to server : https://localhost:4000/auth/kakao
-    // body -> kakao code
-  }, [])
+    if (isLogin) {
+      window.close()
+    }
+  }, [isLogin])
+  useEffect(() => {
+    if (code) {
+      _loginWithKakao(code as string)
+    }
+  }, [code])
 
   return <div>Kakao loading</div>
 }

@@ -1,4 +1,4 @@
-import styled from '../../styles/themed-components'
+import styled from '@styles/themed-components'
 
 export const BookmarkContainer = styled.div`
   ${({ theme }) => theme.display.flexCenterRow};
