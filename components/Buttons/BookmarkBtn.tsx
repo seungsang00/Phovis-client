@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import { BookmarkContainer } from './button-bookmark.style'
 
-const BookmarkBtn = () => {
+type Props = {
+  id: String
+}
+
+const BookmarkBtn = ({ id }: Props) => {
   const [isBookmarked, setIsBookmark] = useState<boolean>(false)
 
   const handleClick = () => {
@@ -12,10 +16,10 @@ const BookmarkBtn = () => {
 
   return (
     <BookmarkContainer>
-      <input type='checkbox' id='star' className='hide-checkbox' />
+      <input type='checkbox' id={`star_${id}`} className='hide-checkbox' />
       <label
         onClick={handleClick}
-        htmlFor='star'
+        htmlFor={`star_${id}`}
         className='star-checkbox'></label>
     </BookmarkContainer>
   )

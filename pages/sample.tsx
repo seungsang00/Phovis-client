@@ -91,6 +91,7 @@ const ComponentSamplePage = () => {
       />
       <hr />
       <ThumbnailRect
+        id='sampleId'
         profileImage={imgUrl}
         username={name}
         bgImage={photoUrl_v}
