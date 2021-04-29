@@ -57,7 +57,6 @@ const ComponentSamplePage = () => {
   const onClickMainBannerItem = (contentId: String) => {
     console.log(contentId)
   }
-
   return (
     <Layout title='Component Sample | Next.js + TypeScript Example'>
       <h1>Component Sample</h1>
