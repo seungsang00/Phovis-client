@@ -1,21 +1,24 @@
 import { SliderContainer, Slideshowdots } from './main-banner.style'
 import { IContent } from '../../interfaces/index'
-import { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 interface props {
   contents: IContent[]
+  onClickItem: (contentId: String) => void
 }
-const MainBanner = ({ contents }: props) => {
+const MainBanner = ({ contents, onClickItem }: props) => {
   const [index, setIndex] = useState(0)
-
-  useEffect(() => {})
   return (
     <SliderContainer index={index}>
       <div className='slider'>
         {contents.map((contentCard, index) => {
-          const { imageurl, title, description } = contentCard
+          const { contentid, imageurl, title, description } = contentCard
           return (
-            <div className='slide' key={index}>
+            <div
+              id={contentid}
+              className='slide'
+              key={index}
+              onClick={() => onClickItem(contentid)}>
               <img className='slideimg' src={imageurl} />
               <div className='infocontainer'>
                 <h1 className='title'>{title}</h1>

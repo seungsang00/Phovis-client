@@ -54,12 +54,19 @@ const ComponentSamplePage = () => {
     console.log('load submit !')
   }
 
+  const onClickMainBannerItem = (contentId: String) => {
+    console.log(contentId)
+  }
+
   return (
     <Layout title='Component Sample | Next.js + TypeScript Example'>
       <h1>Component Sample</h1>
       <p>This is the Component Sample page</p>
       <hr />
-      <MainBanner contents={sampleContents} />
+      <MainBanner
+        contents={sampleContents}
+        onClickItem={onClickMainBannerItem}
+      />
       <LinkTitle to='/sample' />
       <hr />
       <SearchBar
@@ -71,7 +78,7 @@ const ComponentSamplePage = () => {
       <hr />
       <SearchBarBig query='직전에검색한키워드가들어갑니다' />
       <hr />
-      <LinkBanner />
+      <LinkBanner link='/' />
       <hr />
       <TagBig tagname={'야경'} onClick={handler} />
       <hr />
