@@ -10,7 +10,7 @@ import PasswordInput from '../../../components/PasswordInput'
 import Checkbox from '../../../components/Checkbox'
 import SubmitButton from '../../../components/SubmitButton'
 import GoogleLoginButton from '../../../components/GoogleLoginButton'
-// import KakaoLoginButton from '../../../components/KaKaoLoginButton'
+import KakaoLoginButton from '../../../components/KaKaoLoginButton'
 
 import {
   GoogleLoginResponse,
@@ -85,10 +85,17 @@ const Login = () => {
     console.log(user)
   }
 
-  const requestkaKaoLogin: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    console.log('requestkaKaoLogin')
+  const requestkaKaoLogin: React.MouseEventHandler<HTMLDivElement> = () => {
+    // console.log('requestkaKaoLogin')
+    // 카카오 로그인 버튼클릭시 redirect 주소창이 열린다.
+    // redirect 한 장소에서 카카오 계정 정보를 받아온 뒤 새 윈도우가 닫힌다.
+
+    // TODO : Redirect URL 을 개발환경에 따라 다르게 줄 수 있도록 설정
+    const baseUrl = 'https://kauth.kakao.com/oauth/authorize'
+    const clientId = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID
+    const redirectUrl = 'http://localhost:3000/auth/kakao'
     window.open(
-      `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=http://localhost:3000/auth/kakao`,
+      `${baseUrl}?response_type=code&client_id=${clientId}&redirect_uri=${redirectUrl}`,
       '_blank'
     )
   }
@@ -128,7 +135,7 @@ const Login = () => {
               clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string}
               onSubmit={requestGoogleLogin}
             />
-            <button onClick={requestkaKaoLogin}>kakao</button>
+            <KakaoLoginButton onSubmit={requestkaKaoLogin} />
           </div>
         </article>
         <article>
