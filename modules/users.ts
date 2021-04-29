@@ -2,8 +2,7 @@ import axios, { AxiosResponse } from 'axios'
 import * as actionTypes from './actionTypes'
 
 const { AuthAction, USER_SIGNIN_SUCCESS, USER_SIGNIN_ERROR } = actionTypes
-const LOCAL_KEY_ACCESS_TOKEN = 'LOCAL_ACCESS_TOKEN';
-
+const LOCAL_KEY_ACCESS_TOKEN = 'LOCAL_ACCESS_TOKEN'
 type User = {
   id: number
   userName: string
@@ -15,7 +14,7 @@ interface Signin {
   password: string
 }
 
-interface Login{
+interface Login {
   email: string
   password: string
 }
@@ -23,13 +22,15 @@ interface Login{
 type userState = {
   isLogin: boolean
   accessToken?: string
+  error: null | string | AxiosResponse<any>
   user?: User | null
-  test?: any,
+  test?: any
 }
 
 // 초기상태를 선언합니다.
 const initialState: userState = {
   isLogin: false,
+  error: null,
   user: null,
 }
 
@@ -54,28 +55,37 @@ const errorLogin = (data: AxiosResponse | string) => ({
   payload: data,
 })
 
-const successGetUserInfo = (data:AxiosResponse) => ({
+const successGetUserInfo = (data: AxiosResponse) => ({
   type: AuthAction.GET_INFO_SUCCESS,
   payload: data,
-});
+})
 
-const errorGetUserInfo = (data:AxiosResponse | string) => ({
+const errorGetUserInfo = (data: AxiosResponse | string) => ({
   type: AuthAction.GET_INFO_ERROR,
   payload: data,
 })
 
-const successLoginWithGoogle = (data:AxiosResponse) =>({
+const successLoginWithGoogle = (data: AxiosResponse) => ({
   type: AuthAction.LOGIN_GOOGLE_SUCCESS,
-  payload: data
+  payload: data,
 })
 
-const errorLoginWithGoogle = (data:AxiosResponse | string) =>({
+const errorLoginWithGoogle = (data: AxiosResponse | string) => ({
   type: AuthAction.LOGIN_GOOGLE_ERROR,
-  payload: data
+  payload: data,
+})
+
+const successLoginWithKakao = (data: AxiosResponse) => ({
+  type: AuthAction.LOGIN_KAKAO_SUCCESS,
+  payload: data,
+})
+
+const errorLoginWithKakao = (data: AxiosResponse | string) => ({
+  type: AuthAction.LOGIN_KAKAO_ERROR,
+  payload: data,
 })
 
 // TODO : make disfetch factory pattern
-
 
 export const signin = ({ email, password }: Signin) => {
   return async (dispatch: Function) => {
@@ -93,71 +103,84 @@ export const signin = ({ email, password }: Signin) => {
   }
 }
 
-export const login = ({email, password}: Login) =>{
-  return async (dispatch:Function) =>{
-    try{
-      const result = await axios.post('https://localhost:4000/auth/login',
+export const login = ({ email, password }: Login) => {
+  return async (dispatch: Function) => {
+    try {
+      const result = await axios.post(
+        'https://localhost:4000/auth/login',
         { email, password },
         { withCredentials: true }
       )
-      if(result.status === 201){
-        dispatch(successLogin(result));
-      }
-      else{
+      if (result.status === 201) {
+        dispatch(successLogin(result))
+      } else {
         dispatch(errorLogin('Login fail'))
       }
-    }
-    catch(err){
+    } catch (err) {
       dispatch(errorLogin('Login fail'))
-      console.log(err);
+      console.log(err)
       throw err
     }
   }
 }
 
-export const getUserInfo = (accessToken?:string) =>{
-  return async (dispatch:Function) =>{
-    try{
-      const result = await axios.get(`https://localhost:4000/user`,
-        {
-          headers: {
-            Authorization: accessToken,
-          },
-          withCredentials: true
-        }
-      )
+export const getUserInfo = (accessToken?: string) => {
+  return async (dispatch: Function) => {
+    try {
+      const result = await axios.get(`https://localhost:4000/user`, {
+        headers: {
+          Authorization: accessToken,
+        },
+        withCredentials: true,
+      })
 
-      if(result.status === 201){
-        dispatch(successGetUserInfo(result));
-      }
-      else{
+      if (result.status === 201) {
+        dispatch(successGetUserInfo(result))
+      } else {
         dispatch(errorGetUserInfo('fail get user info'))
       }
-    }
-    catch(err){
-      dispatch(errorGetUserInfo('fail get user info'));
+    } catch (err) {
+      dispatch(errorGetUserInfo('fail get user info'))
       throw err
     }
   }
 }
 
-export const loginWithGoogle = (token:string) =>{
-  return async (dispatch:Function) =>{
-    try{
-      const result = await axios.post(`https://localhost:4000/auth/google`,
+export const loginWithGoogle = (token: string) => {
+  return async (dispatch: Function) => {
+    try {
+      const result = await axios.post(
+        `https://localhost:4000/auth/google`,
         { token },
         { withCredentials: true }
       )
 
-      if(result.status === 201){
-        dispatch(successLoginWithGoogle(result));
+      if (result.status === 201) {
+        dispatch(successLoginWithGoogle(result))
+      } else {
+        dispatch(errorLoginWithGoogle(result))
       }
-      else{
-        dispatch(errorLoginWithGoogle(result));
-      }
+    } catch (err) {
+      dispatch(errorLoginWithGoogle('Login fail'))
     }
-    catch(err){
-      dispatch(errorLoginWithGoogle('Login fail'));
+  }
+}
+
+export const loginWithKakao = (code: string) => {
+  return async (dispatch: Function) => {
+    try {
+      console.log(code)
+      const result = await axios.post(`https://localhost:4000/auth/kakao`, {
+        kakaoCode: code,
+      })
+
+      if (result.status === 201) {
+        dispatch(successLoginWithKakao(result))
+      } else {
+        dispatch(errorLoginWithKakao(result))
+      }
+    } catch (err) {
+      dispatch(errorLoginWithKakao('Login fail'))
     }
   }
 }
@@ -170,6 +193,10 @@ type userAction =
   | ReturnType<typeof errorSignin>
   | ReturnType<typeof successLogin>
   | ReturnType<typeof errorLogin>
+  | ReturnType<typeof successLoginWithGoogle>
+  | ReturnType<typeof errorLoginWithGoogle>
+  | ReturnType<typeof successLoginWithKakao>
+  | ReturnType<typeof errorLoginWithKakao>
 
 // 이 리덕스 모듈에서 관리 할 상태의 타입을 선언합니다
 
@@ -177,30 +204,35 @@ function user(state: userState = initialState, action: userAction): userState {
   switch (action.type) {
     case USER_SIGNIN_SUCCESS:
       return { ...state, test: action.payload }
+
     case USER_SIGNIN_ERROR:
       return { ...state, test: action.payload }
 
-    case AuthAction.LOGIN_GOOGLE_SUCCESS:
     case AuthAction.LOGIN_SUCCESS:
-      const { data:{ accessToken } } = action.payload as AxiosResponse;
+    case AuthAction.LOGIN_GOOGLE_SUCCESS:
+    case AuthAction.LOGIN_KAKAO_SUCCESS:
+      const {
+        data: { accessToken },
+      } = action.payload as AxiosResponse
       // set Access Token & Refresh Token
       // console.log('accessToken : ', accessToken);
-      localStorage.setItem(LOCAL_KEY_ACCESS_TOKEN, accessToken);
-      return { ...state, isLogin: true, accessToken}
-    
+      localStorage.setItem(LOCAL_KEY_ACCESS_TOKEN, accessToken)
+      return { ...state, error: null, isLogin: true, accessToken }
+
     case AuthAction.LOGIN_GOOGLE_ERROR:
+    case AuthAction.LOGIN_KAKAO_ERROR:
     case AuthAction.LOGIN_ERROR:
-      return {...state, isLogin: false}
+      return { ...state, error: action.payload }
 
     case AuthAction.GET_INFO_SUCCESS:
-      const { data }  = action.payload as AxiosResponse;
-      const userData = {...data};
+      const { data } = action.payload as AxiosResponse
+      const userData = { ...data }
       // console.log('user data : ',data);
-      delete userData.message;
-      return {...state, user:userData}
+      delete userData.message
+      return { ...state, user: userData }
 
     case AuthAction.GET_INFO_ERROR:
-      return {...state, user: null, isLogin: false}
+      return { ...state, user: null, isLogin: false }
 
     default:
       return state

@@ -56,8 +56,8 @@ export const Slideshowdots = styled.div`
     margin: 15px 7px 0px;
 
     background-color: #c4c4c4;
-    & .active {
-      background-color: #6a0dad;
-    }
+  }
+  & .active {
+    background-color: #6a0dad;
   }
 `

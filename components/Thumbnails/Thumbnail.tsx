@@ -1,4 +1,4 @@
-import { DivWithBgImg } from '../../styles/common'
+import { DivWithBgImg } from '@styles/index'
 import {
   ThumbnailContainer_square,
   ThumbnailContainer_rect,

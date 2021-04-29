@@ -1,5 +1,5 @@
 // 여러 상위 컴포넌트에 사용되는 컴포넌트들
-import styled, { withProps } from '../styles/themed-components'
+import styled, { withProps } from '@styles/themed-components'
 
 // 배경 이미지를 갖는 div 엘리먼트
 interface IBg {

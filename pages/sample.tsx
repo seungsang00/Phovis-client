@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import Link from 'next/link'
 import {
   Layout,
@@ -21,7 +22,7 @@ import {
   TabMenu,
   LocationInfo,
 } from '@components/index'
-import { PhotoCardInput } from '../containers'
+import { PhotoCardInput } from '@containers/index'
 import {
   sampleUserData,
   samplePhotoData,
@@ -34,19 +35,49 @@ const { photoUrl_v, photoUrl_s } = samplePhotoData
 const { name, imgUrl, contentCount } = sampleUserData[0]
 
 const ComponentSamplePage = () => {
+  const [input, setInput] = useState({
+    search: '',
+  })
+
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const {
+      target: { name, value },
+    } = e
+    setInput({
+      ...input,
+      [name]: value,
+    })
+  }
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+    console.log('load submit !')
+  }
+
+  const onClickMainBannerItem = (contentId: String) => {
+    console.log(contentId)
+  }
   return (
     <Layout title='Component Sample | Next.js + TypeScript Example'>
       <h1>Component Sample</h1>
       <p>This is the Component Sample page</p>
       <hr />
-      <MainBanner contents={sampleContents} />
+      <MainBanner
+        contents={sampleContents}
+        onClickItem={onClickMainBannerItem}
+      />
       <LinkTitle to='/sample' />
       <hr />
-      <SearchBar />
+      <SearchBar
+        name='search'
+        value={input.search}
+        onChange={onChangeInput}
+        onSubmit={onSubmit}
+      />
       <hr />
       <SearchBarBig query='직전에검색한키워드가들어갑니다' />
       <hr />
-      <LinkBanner />
+      <LinkBanner link='/' />
       <hr />
       <TagBig tagname={'야경'} onClick={handler} />
       <hr />
