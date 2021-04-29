@@ -78,7 +78,7 @@ const ComponentSamplePage = () => {
       <hr />
       <SearchBarBig query='직전에검색한키워드가들어갑니다' />
       <hr />
-      <LinkBanner />
+      <LinkBanner link='/' />
       <hr />
       <TagBig tagname={'야경'} onClick={handler} />
       <hr />
