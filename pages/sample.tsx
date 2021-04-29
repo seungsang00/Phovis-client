@@ -107,7 +107,7 @@ const ComponentSamplePage = () => {
       <hr />
       <UserBanner username={name} profileImage={imgUrl} bgImage={photoUrl_v} />
       <hr />
-      <BookmarkBtn />
+      <BookmarkBtn id='bookMarkTest' />
       <hr />
       <ToggleBtn sectionName={'Bookmark'} onClick={handleToggle} />
       <hr />
