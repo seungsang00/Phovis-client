@@ -26,7 +26,8 @@
       "@hooks/*": ["hooks/*"],
       "@actions/*": ["modules/*"],
       "@interfaces": ["interfaces/index"],
-      "@styles/*": ["styles/*"]
+      "@styles/*": ["styles/*"],
+      "@modules/*": ["modules/*"]
     }
   },
   "exclude": ["node_modules"],
