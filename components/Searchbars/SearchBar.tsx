@@ -7,9 +7,28 @@ import {
   SearchBig,
 } from './searchbar.style'
 
-export const SearchBar = () => (
-  <SearchForm action='' className='search-bar'>
-    <SearchInput type='search' name='search' required />
+type SearchBarProps = {
+  placeholder?: string
+  name: string
+  value: string
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+export const SearchBar = ({
+  name,
+  value,
+  onChange,
+  onSubmit,
+}: SearchBarProps) => (
+  <SearchForm action='' className='search-bar' onSubmit={onSubmit}>
+    <SearchInput
+      type='search'
+      name={name}
+      value={value}
+      onChange={onChange}
+      required
+    />
     <SearchButton className='search-btn' type='submit'>
       <span>Search</span>
     </SearchButton>
