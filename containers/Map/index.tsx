@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { KakaoMapContainer, SearchInput } from '@components/index'
-import SubmitButton from '@components/SubmitButton'
+import { KakaoMapContainer, SearchInput, SubmitButton } from '@components/index'
 
 interface IProps {
   location?: string

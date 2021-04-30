@@ -15,6 +15,8 @@ interface IRect {
   likeCount: number
 }
 
+// NOTE : ThumbnailRect, ThumbnailSquare 컴포넌트 하단에 태그를 노출 시키면 좋을것 같아요
+
 export const ThumbnailRect = ({
   id,
   profileImage,
