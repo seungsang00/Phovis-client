@@ -8,6 +8,7 @@ import { LikeBtn } from '@components/Buttons'
 import UserInfoHor from '@components/UserInfo/UserInfo-hor'
 
 interface IRect {
+  id: string
   profileImage?: string
   username: string
   bgImage: string
@@ -15,6 +16,7 @@ interface IRect {
 }
 
 export const ThumbnailRect = ({
+  id,
   profileImage,
   username,
   bgImage,
@@ -23,7 +25,7 @@ export const ThumbnailRect = ({
   <ThumbnailContainer_rect>
     <DivWithBgImg bgUrl={bgImage} p={'24px'}>
       <span className='bookmark'>
-        <BookmarkBtn />
+        <BookmarkBtn id={id} />
       </span>
       <UserInfoHor userName={username} profileImage={profileImage} />
       <span className='like'>

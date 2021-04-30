@@ -1,17 +1,28 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import { ServerStyleSheet } from '../styles/themed-components'
 
-class MyDocument extends Document {
+interface IProps {
+  styleTags: Array<React.ReactElement<{}>>
+}
+
+class MyDocument extends Document<IProps> {
   static async getInitialProps(ctx: any) {
+    const sheet = new ServerStyleSheet()
+    const page = ctx.renderPage((App: any) => (props: any) =>
+      sheet.collectStyles(<App {...props} />)
+    )
+
+    const styleTags = sheet.getStyleElement()
     const initialProps = await Document.getInitialProps(ctx)
-    return { ...initialProps }
+    return { ...initialProps, ...page, styleTags }
   }
 
   render() {
-    // const KAKAO_LOCATION_KEY = '940df9e0509d65bb946cb0218102d8d4'
-
     return (
       <Html>
         <Head>
+          <title>Phovis</title>
+          {this.props.styleTags}
           <script
             type='text/javascript'
             src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_JS_KEY}&libraries=services`}
