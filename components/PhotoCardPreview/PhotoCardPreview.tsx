@@ -8,7 +8,7 @@ import { LikeBtn } from '@components/Buttons'
 import UserInfoHor from '../UserInfo/UserInfo-hor'
 
 type Props = {
-  imageurl: string
+  imageurl: string | null
   description?: string
   userName: string
   profileImage?: string

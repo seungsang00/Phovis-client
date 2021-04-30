@@ -4,10 +4,10 @@ import LocationInfo from '../../components/LocationInfo/LocationInfo'
 import { Button } from '@styles/index'
 
 interface props {
-  location?: string
+  location: string
 }
 
-const PhotoCardInput = ({ location = '서울식물원' }: props) => {
+const PhotoCardInput = ({ location }: props) => {
   const [message, setMessage] = useState<string>('')
   const [fileSelected, setFileSelected] = useState<File>()
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
@@ -18,7 +18,7 @@ const PhotoCardInput = ({ location = '서울식물원' }: props) => {
     const fileList = e.target.files
 
     if (!fileList) return
-
+    console.log(`블롭??>>>>`, fileList[0])
     setFileSelected(fileList[0])
   }
 
@@ -28,6 +28,9 @@ const PhotoCardInput = ({ location = '서울식물원' }: props) => {
     if (fileSelected) {
       const formData = new FormData()
       formData.set('image', fileSelected, fileSelected.name)
+      // for (let value of formData.values()) {
+      //   console.log(`formData>>`, value)
+      // }
 
       //to-do 여기에 서버 통신을 보내면 됨 formData에 Blob이 담겨있음
     }
