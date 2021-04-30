@@ -3,6 +3,7 @@ import * as actionTypes from './actionTypes'
 
 const { AuthAction, USER_SIGNIN_SUCCESS, USER_SIGNIN_ERROR } = actionTypes
 const LOCAL_KEY_ACCESS_TOKEN = 'LOCAL_ACCESS_TOKEN'
+
 type User = {
   id: number
   userName: string
@@ -124,17 +125,24 @@ export const login = ({ email, password }: Login) => {
   }
 }
 
-export const getUserInfo = (accessToken?: string) => {
+export const getUserInfo = (stateAccessToken?: String) => {
   return async (dispatch: Function) => {
     try {
-      const result = await axios.get(`https://localhost:4000/user`, {
+
+      // 만약 입력받은 토큰이 없다면 localStorage 에서 토큰이 있는지 확인한다.
+      let accessToken = stateAccessToken || localStorage.getItem(LOCAL_KEY_ACCESS_TOKEN);
+      if(!accessToken){
+        return dispatch(errorGetUserInfo('fail get user info'))
+      }
+
+      const result = await axios.get(`https://localhost:4000/user/info`, {
         headers: {
-          Authorization: accessToken,
+          Authorization: `Bearer ${accessToken}`,
         },
         withCredentials: true,
       })
 
-      if (result.status === 201) {
+      if (result.status === 200) {
         dispatch(successGetUserInfo(result))
       } else {
         dispatch(errorGetUserInfo('fail get user info'))
@@ -169,7 +177,7 @@ export const loginWithGoogle = (token: string) => {
 export const loginWithKakao = (code: string) => {
   return async (dispatch: Function) => {
     try {
-      console.log(code)
+      // console.log('kakao Code : ',code)
       const result = await axios.post(`https://localhost:4000/auth/kakao`, {
         kakaoCode: code,
       })
@@ -229,7 +237,7 @@ function user(state: userState = initialState, action: userAction): userState {
       const userData = { ...data }
       // console.log('user data : ',data);
       delete userData.message
-      return { ...state, user: userData }
+      return { ...state, user: userData, isLogin: true}
 
     case AuthAction.GET_INFO_ERROR:
       return { ...state, user: null, isLogin: false }
