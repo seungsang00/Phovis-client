@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import Link from 'next/link'
 // import axios from 'axios'
-import { RootReducer } from '../../../modules/reducer'
-import { login, loginWithGoogle } from '../../../modules/users'
+import { RootReducer } from '@actions/reducer'
+import { login, loginWithGoogle } from '@actions/users'
 import LableTextInput from '../../../components/LableTextInput'
 import PasswordInput from '../../../components/PasswordInput'
 import Checkbox from '../../../components/Checkbox'
@@ -26,11 +26,26 @@ const Login = () => {
     checkKeepLoggedIn: false,
   })
 
-  const user = useSelector((state: RootReducer) => state.user)
+  const { isLogin, error } = useSelector((state: RootReducer) => state.user)
   const dispatch = useDispatch()
   // const _Login = useAction(login);
 
   const router = useRouter()
+
+  useEffect(() => {
+    if (isLogin) {
+      alert('Login success')
+      // redirect main page & laod user data.
+
+      // NOTE : load user data on main page.
+      // dispatch(getUserInfo(user.accessToken))
+      router.push('/main')
+    }
+    if (error) {
+      // TODO : show error UI
+      alert(`Login fail : ${error}`)
+    }
+  }, [isLogin, error])
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const {
@@ -54,19 +69,6 @@ const Login = () => {
 
   const requestLogin = async () => {
     dispatch(login(input))
-    // _Login(input);
-    if (user.isLogin && user.accessToken) {
-      // redirect main page & laod user data.
-      // dispatch(getUserInfo(user.accessToken))
-      // _Login(input);
-      alert('Login success')
-      router.push('/')
-    } else {
-      // TODO : show error UI
-      alert('Login fail')
-
-      console.log(user)
-    }
   }
 
   const requestGoogleLogin = async (
@@ -78,11 +80,9 @@ const Login = () => {
       alert('Google Login fail')
     } else {
       dispatch(loginWithGoogle((result as GoogleLoginResponse).tokenId))
-      alert('Google Login success!')
+      //alert('Google Login success!')
       // router.push('/')
     }
-
-    console.log(user)
   }
 
   const requestkaKaoLogin: React.MouseEventHandler<HTMLDivElement> = () => {
@@ -130,7 +130,6 @@ const Login = () => {
           <hr />
           <p>Or login with SNS account</p>
           <div>
-            {console.log(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID)}
             <GoogleLoginButton
               clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string}
               onSubmit={requestGoogleLogin}
