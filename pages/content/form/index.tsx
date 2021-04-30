@@ -43,37 +43,13 @@ const ContentForm = () => {
     }
     console.log(content)
   }
-  /** POST /content:userid
-  {
-    "title": "제목",
-    "mainimageUrl" : "chang.png",
-    "tags" : ["창덕궁", "야경"],
-    "description" : "창덕궁은 오래된 전통...",
-    "location" : {
-        "location" : "서울시 ...",
-        "lat": "28.1234",
-        "lng": "124.12345"
-    },
-    "images" : [
-        {
-            "url": "",
-            "description" : "여름에 다녀옴",
-            "type":"content"
-        },{
-            "url": "",
-            "description" : "야경 맛집",
-            "type":"content" 
-        }
-    ]
-  }
-   */
   const onChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>,
-    callback: any
+    changeValue: any
   ) => {
-    callback(e.target.value)
+    changeValue(e.target.value)
   }
 
   // Modal control
@@ -89,7 +65,7 @@ const ContentForm = () => {
   }
 
   // Upload & submit image and image_description
-  const handleImgSubmit = (description: string, cb: any) => {
+  const handleImgSubmit = (description: string, initDescription: any) => {
     const imageData = {
       file: currentFile,
       url: file_url.current,
@@ -97,9 +73,8 @@ const ContentForm = () => {
       type: 'content',
     }
     setImages([...images, imageData])
-    console.log(`imageData>>`, imageData)
     setCurrentFile(undefined)
-    cb('')
+    initDescription('')
   }
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,11 +82,9 @@ const ContentForm = () => {
     const target = e.target as HTMLInputElement
     if (target.files) {
       const file = target.files[0]
-      console.log(`file>>`, file)
       setCurrentFile(file)
 
       const fileURL = URL.createObjectURL(file)
-      console.log(`URL>>>`, fileURL)
       setForm({ url: fileURL })
       file_url.current = fileURL
     }
@@ -174,9 +147,6 @@ const ContentForm = () => {
         </section>
 
         <section className='buttons'>
-          {/* <DefaultBtn onClick={() => console.log(`임시저장`)}>
-            임시저장
-          </DefaultBtn> */}
           <DefaultBtn onClick={handleSubmit}>등록하기</DefaultBtn>
         </section>
       </main>
