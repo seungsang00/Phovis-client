@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux'
 import Link from 'next/link'
 import Head from 'next/head'
 import { RootReducer } from '@actions/reducer'
-// import useAction from '../hooks/useAction'
+import { getUserInfo } from '@actions/users'
+import useAction from '../hooks/useAction'
 
 import {
   SearchBar,
@@ -30,13 +31,17 @@ const mainPage = () => {
     search: '',
   })
 
-  const { isLogin } = useSelector((state: RootReducer) => state.user)
-  console.log('isLogin : ', isLogin)
+  const _getUserInfo = useAction(getUserInfo)
+  const { isLogin, accessToken } = useSelector(
+    (state: RootReducer) => state.user
+  )
+
   // TODO : get main contents from Redux store
   // const mainContents = useSelector((state: RootReducer) => state.mainContents);
 
   useEffect(() => {
     // TODO : load main data
+    _getUserInfo(accessToken)
   }, [])
 
   // TODO : make infinite scrol interection
