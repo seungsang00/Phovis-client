@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import LableTextInput from '../../../components/LableTextInput'
-import PasswordInput from '../../../components/PasswordInput'
-import SubmitButton from '../../../components/SubmitButton'
+import { LableTextInput, PasswordInput, SubmitButton } from '@components/index'
+
 import axios from 'axios'
 
 const Signup = () => {
