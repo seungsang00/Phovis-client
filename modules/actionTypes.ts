@@ -12,3 +12,9 @@ enum AuthAction {
 export { AuthAction }
 export const USER_SIGNIN_SUCCESS = 'USER/SIGNIN/SUCCESS' as const
 export const USER_SIGNIN_ERROR = 'USER/SIGNIN/ERROR' as const
+
+enum ContentAction {
+  CONTENT_UPLOAD_SUCCESS = 'CONTENT/UPLOAD/SUCCESS',
+  CONTENT_UPLOAD_ERROR = 'CONTENT/UPLOAD/ERROR',
+}
+export { ContentAction }

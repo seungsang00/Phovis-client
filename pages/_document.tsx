@@ -21,7 +21,6 @@ class MyDocument extends Document<IProps> {
     return (
       <Html>
         <Head>
-          <title>Phovis</title>
           {this.props.styleTags}
           <script
             type='text/javascript'
