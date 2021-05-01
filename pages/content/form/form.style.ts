@@ -4,21 +4,31 @@ export const FormLayout = styled.div`
   width: 100%;
   overflow-x: hidden;
 
-  & section {
+  section {
     display: flex;
     border: 1px solid coral;
   }
 
-  & section.banner {
+  section.banner {
     ${({ theme }) => theme.display.flexStartCol};
     justify-content: flex-end;
 
-    & input {
+    input {
       font-size: 2.5rem;
     }
   }
 
-  & section.buttons {
+  section.form {
+    ${({ theme }) => theme.display.flexCenterRow};
+    flex-wrap: wrap;
+
+    & > div {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  section.buttons {
     display: flex;
     justify-content: flex-end;
   }
