@@ -6,9 +6,7 @@ import {
 } from '@containers/index'
 import React, { ChangeEvent, useRef, useState } from 'react'
 import { FormLayout } from './form.style'
-import { useRouter } from 'next/router'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '@actions/reducer'
+import { useDispatch } from 'react-redux'
 import { uploadContent } from '@actions/content'
 
 interface ITag {
@@ -29,11 +27,7 @@ const ContentForm = () => {
     preview: [],
   })
   const file_url = useRef<string | ArrayBuffer | null>(null)
-
-  const { data } = useSelector((state: RootReducer) => state.content)
   const dispatch = useDispatch()
-
-  const router = useRouter()
 
   // 서버에 파일 전송
   const handleSubmit = async () => {
