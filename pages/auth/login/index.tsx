@@ -41,6 +41,7 @@ const Login = () => {
       // NOTE : load user data on main page.
       // dispatch(getUserInfo(user.accessToken))
       router.push('/main')
+      // router.push('/content/form')
     }
     if (error) {
       // TODO : show error UI

@@ -4,14 +4,31 @@ import {
   AddLocationSection,
   MapContainer,
 } from '@containers/index'
-import React, { ChangeEvent, useRef, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { FormLayout } from './form.style'
-// import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { RootReducer } from '@actions/reducer'
+import { useDispatch } from 'react-redux'
+// const LOCAL_KEY_ACCESS_TOKEN = 'LOCAL_ACCESS_TOKEN'
+
 // import { uploadContent } from '@actions/contentForm'
 import { IContentForm, Tag } from '@interfaces'
 import axios from 'axios'
+import useAction from '@hooks/useAction'
+import { getUserInfo } from '@actions/users'
 
 const ContentForm = () => {
+  // const _getUserInfo = useAction(getUserInfo)
+  // const { isLogin, accessToken } = useSelector(
+  //   (state: RootReducer) => state.user
+  // )
+
+  // useEffect(() => {
+  //   // TODO : load main data
+  //   _getUserInfo(accessToken)
+  //   console.log(`토큰 있니>>`, accessToken)
+  // }, [])
+
   const initialState: IContentForm = {
     title: '',
     mainimageData: null,
@@ -30,8 +47,9 @@ const ContentForm = () => {
   const [content, setContent] = useState<IContentForm>(initialState)
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
   const file_url = useRef<string | ArrayBuffer | null>(null)
-
-  // const dispatch = useDispatch()
+  // const { accessToken } = useSelector((state: RootReducer) => state.user)
+  const userInfo = useSelector((state: RootReducer) => state.user)
+  const dispatch = useDispatch()
 
   const handleTags = (tags: Tag[]) => {
     setContent({
@@ -63,7 +81,7 @@ const ContentForm = () => {
   }
 
   // ! 서버에 파일 전송
-  const handleSubmit = async () => {
+  const handleSubmit = async (stateAccessToken?: String) => {
     // 보낼 데이터를 만듭니다
     const { title, form, description, tags, location } = content
     const data = {
@@ -84,7 +102,18 @@ const ContentForm = () => {
     // dispatch(uploadContent(jsonData))
 
     try {
+      console.log(`user info>>`, userInfo)
+      // const LOCAL_KEY_ACCESS_TOKEN = 'LOCAL_ACCESS_TOKEN'
+      // 만약 입력받은 토큰이 없다면 localStorage 에서 토큰이 있는지 확인한다.
+      // let accessToken =
+      //   stateAccessToken || localStorage.getItem(LOCAL_KEY_ACCESS_TOKEN)
+      // if (!accessToken) {
+      //   return dispatch(errorGetUserInfo('fail get user info'))
+      // }
       const res = await axios.post(`https://localhost:4000/content`, jsonData, {
+        headers: {
+          authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVkOGRkYWQwLTY0MWQtNDgxYS05YzYyLTYyNTM4ZTFlZGEzNSIsImlhdCI6MTYxOTg4MDU3MiwiZXhwIjoxNjE5ODg0MTcyfQ.RRVQeVDDh7Y2P3l9F5LQQy2ah-k4XSSbpJewVNmdlJ8`,
+        },
         // withCredentials: true,
       })
       console.log(`응답>>`, res)
