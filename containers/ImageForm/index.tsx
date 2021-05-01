@@ -3,15 +3,15 @@ import { useState } from 'react'
 import { FormContainer, ImageForm, PreviewContainer } from './imageform.style'
 
 interface IForm {
-  handleUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleFile: (e: React.ChangeEvent<HTMLInputElement>) => void
   onChange: (e: React.ChangeEvent<HTMLInputElement>, callback: any) => void
-  onClick: (description: string, cb: any) => void
-  file_url: string | undefined
+  onClick: (...args: any) => void
+  file_url: string | ArrayBuffer | null
   currentFile: object | undefined
 }
 
 export const MultiForm = ({
-  handleUpload,
+  handleFile,
   onChange,
   onClick,
   file_url,
@@ -21,12 +21,12 @@ export const MultiForm = ({
 
   return (
     <FormContainer>
-      <ImageForm name='image' encType='multipart/form-data'>
+      <ImageForm name='image' method='post' encType='multipart/form-data'>
         <input
           id='input-file'
           type='file'
           accept='image/*'
-          onChange={handleUpload}
+          onChange={handleFile}
         />
         <label className='input-file-area' htmlFor='input-file'>
           {currentFile ? (
@@ -38,6 +38,7 @@ export const MultiForm = ({
           )}
         </label>
         <input
+          id='imageDescript'
           type='text'
           value={description}
           placeholder='사진 설명을 작성해주세요'
