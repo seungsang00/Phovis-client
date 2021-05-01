@@ -1,15 +1,16 @@
 import { LocationInput } from '@components/index'
 import { Input, LocationDiv } from './inputlocation.style'
+import { Location } from '@interfaces'
 
 interface IInput {
-  location: string
+  location: Location
 }
 
 const InputLocation = ({ location }: IInput) => {
   return (
     <Input
       type='text'
-      value={location}
+      value={location.location}
       placeholder='추천하는 장소가 어디인가요?'
       disabled
     />
@@ -17,7 +18,7 @@ const InputLocation = ({ location }: IInput) => {
 }
 
 interface IProps {
-  location: string
+  location: Location
   onClick: () => void
 }
 

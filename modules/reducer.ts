@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import user from './users'
-import content from './content'
+import content from './contentForm'
 
 const rootReducer = combineReducers({ user, content })
 

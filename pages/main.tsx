@@ -87,7 +87,7 @@ const mainPage = () => {
 
         <MainSidebar tags={sampleTag} onTagClickHandler={onTagClickHandler} />
 
-        <LinkBanner link={isLogin ? '/main' : '/auth/login'} />
+        <LinkBanner link={isLogin ? '/content/form' : '/auth/login'} />
 
         <MainGallery photoCards={samplePhotoCardData} />
       </main>

@@ -1,4 +1,4 @@
-import { DefaultBtn, Modal } from '@components/index'
+import { DefaultBtn, Modal, MultiForm, ImagePreview } from '@components/index'
 import {
   AddTagsSection,
   AddLocationSection,
@@ -6,39 +6,73 @@ import {
 } from '@containers/index'
 import React, { ChangeEvent, useRef, useState } from 'react'
 import { FormLayout } from './form.style'
-import { useDispatch } from 'react-redux'
-import { uploadContent } from '@actions/content'
+// import { useDispatch } from 'react-redux'
+// import { uploadContent } from '@actions/contentForm'
+import { IContentForm, Tag } from '@interfaces'
+import axios from 'axios'
 
-interface ITag {
-  id: string
-  name: string
-}
-
-// TODO: store에서 user정보(userId)를 받아와야 합니다.
 const ContentForm = () => {
-  const [title, setTitle] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
-  const [location, setLocation] = useState<string>('')
+  const initialState: IContentForm = {
+    title: '',
+    mainimageData: null,
+    tags: [],
+    description: '',
+    location: {
+      location: undefined,
+      lat: undefined,
+      lng: undefined,
+    },
+    form: {
+      images: [],
+      preview: [],
+    },
+  }
+  const [content, setContent] = useState<IContentForm>(initialState)
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
-  const [tags, setTags] = useState<(null | ITag)[]>([])
-  const [state, setState] = useState<any>({
-    fileName: [],
-    images: [],
-    preview: [],
-  })
   const file_url = useRef<string | ArrayBuffer | null>(null)
-  const dispatch = useDispatch()
 
-  // 서버에 파일 전송
+  // const dispatch = useDispatch()
+
+  const handleTags = (tags: Tag[]) => {
+    setContent({
+      ...content,
+      tags: [...content.tags, ...tags],
+    })
+  }
+
+  const setLocationInfo = (name: string, value: string | number) => {
+    setContent({
+      ...content,
+      location: {
+        ...content.location,
+        [name]: value,
+      },
+    })
+  }
+
+  const inputChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const {
+      target: { name, value },
+    } = e
+    setContent({
+      ...content,
+      [name]: value,
+    })
+  }
+
+  // ! 서버에 파일 전송
   const handleSubmit = async () => {
     // 보낼 데이터를 만듭니다
+    const { title, form, description, tags, location } = content
     const data = {
-      images: state.images,
-      title,
-      mainImageData: state.images[0].data,
-      description,
+      images: form.images,
+      title: title,
+      mainImageData: form.images[0].data,
+      description: description,
       tags: tags.map((obj) => obj && obj.name),
-      location,
+      location: location,
     }
     // json 형태로 전송합니다
     const jsonData = JSON.stringify(data)
@@ -47,7 +81,18 @@ const ContentForm = () => {
     // jsonData를 `data`라는 키의 값으로 formData에 append 합니다
     formData.append('data', jsonData)
 
-    dispatch(uploadContent(jsonData))
+    // dispatch(uploadContent(jsonData))
+
+    try {
+      const res = await axios.post(`https://localhost:4000/content`, jsonData, {
+        // withCredentials: true,
+      })
+      console.log(`응답>>`, res)
+    } catch (e) {
+      throw e
+    }
+
+    // TODO: 요청이 정상적으로 이루어지면 작성한 콘텐츠 페이지로 redirect
   }
 
   // ! input, textarea handler
@@ -101,13 +146,16 @@ const ContentForm = () => {
               description: '',
             },
           ]
-          setState({
-            fileName: [...state.fileName, ...concatName],
-            images: [...state.images, ...concatFile],
-            preview: [...state.preview, ...concatPreview],
+
+          setContent({
+            ...content,
+            form: {
+              ...content.form,
+              images: [...content.form.images, ...concatFile],
+              preview: [...content.form.preview, ...concatPreview],
+            },
           })
           file_url.current = reader.result
-          console.log(`state>>`, state)
         }
       }
     }
@@ -115,12 +163,19 @@ const ContentForm = () => {
 
   // ! 이미지를 클릭해 설명글을 추가합니다
   const addDescription = (value: string, target_idx: string) => {
-    const { images, preview } = state
+    const { images, preview } = content.form
     const editedImages = [...images]
     const editedPreview = [...preview]
     editedImages[Number(target_idx)].description = value
     editedPreview[Number(target_idx)].description = value
-    setState({ ...state, images: editedImages })
+    setContent({
+      ...content,
+      form: {
+        ...content.form,
+        images: editedImages,
+        preview: editedPreview,
+      },
+    })
   }
 
   return (
@@ -128,55 +183,48 @@ const ContentForm = () => {
       <main>
         <section className='banner'>
           <input
+            name='title'
             type='text'
             placeholder='Content Title Here'
-            value={title}
-            onChange={(e) => onChange(e, setTitle)}
+            value={content.title}
+            onChange={inputChangeHandler}
             autoFocus
           />
         </section>
 
         <section>
           <textarea
-            value={description}
-            onChange={(e) => onChange(e, setDescription)}
+            name='description'
+            value={content.description}
+            onChange={inputChangeHandler}
             placeholder='추천글을 작성해주세요'></textarea>
         </section>
 
         <section>
-          <AddTagsSection tagList={tags} setTagList={setTags} />
+          <AddTagsSection tagList={content.tags} setTagList={handleTags} />
         </section>
 
         <section>
-          <AddLocationSection location={location} onClick={handleModalOpen} />
+          <AddLocationSection
+            location={content.location}
+            onClick={handleModalOpen}
+          />
           {modalIsOpen && (
             <Modal handleModalClose={handleModalClose}>
               <MapContainer
-                setLocation={setLocation}
+                setLocation={setLocationInfo}
                 handleModalClose={() => setModalIsOpen(false)}
               />
             </Modal>
           )}
         </section>
 
-        <section>
-          <form method='post' encType='multipart/form-data'>
-            <input type='file' accept='image/*' onChange={handleFile} />
-          </form>
-          <div className='preview'>
-            {state.preview.map(
+        <section className='form'>
+          <div>
+            {content.form.preview.map(
               ({ url, name, description }: any, idx: number) => (
-                <div>
-                  <img
-                    src={url}
-                    key={name}
-                    alt='preview'
-                    style={{
-                      width: '100px',
-                      height: '100px',
-                      objectFit: 'contain',
-                    }}
-                  />
+                <ImagePreview>
+                  <img src={url} key={name} alt='preview' />
                   <input
                     id={'' + idx}
                     key={idx}
@@ -185,9 +233,14 @@ const ContentForm = () => {
                     onChange={(e) => onChange(e, addDescription)}
                     placeholder={description || '설명을 추가해주세요'}
                   />
-                </div>
+                </ImagePreview>
               )
             )}
+            <MultiForm
+              method='post'
+              encType='multipart/form-data'
+              handleFile={handleFile}
+            />
           </div>
         </section>
 

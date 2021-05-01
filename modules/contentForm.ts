@@ -3,7 +3,7 @@ import * as actionTypes from './actionTypes'
 
 const { ContentAction } = actionTypes
 
-interface ITag {
+type Tag = {
   id: string
   name: string
 }
@@ -12,9 +12,9 @@ type ContentData = {
   title: string
   description: string
   location: string
-  tags: (null | ITag)[]
+  tags: (null | Tag)[]
   images: any[]
-  mainImageData: any | null
+  mainImageUrl: any | null
 }
 
 type contentState = {
@@ -28,7 +28,7 @@ const initialContent = {
   location: '',
   tags: [],
   images: [],
-  mainImageData: null,
+  mainImageUrl: null,
 }
 const initialState: contentState = { data: initialContent }
 
@@ -49,7 +49,7 @@ export const uploadContent = (content: any) => {
   return async (dispatch: Function) => {
     try {
       const data = await axios.post('https://localhost:4000/content', content, {
-        withCredentials: true,
+        // withCredentials: true,
       })
       return dispatch(successContentUpload(data))
     } catch (e) {
