@@ -143,6 +143,9 @@ export const getUserInfo = (stateAccessToken?: String) => {
       })
 
       if (result.status === 200) {
+        if(!stateAccessToken){
+          result.data.accessToken = accessToken; 
+        }
         dispatch(successGetUserInfo(result))
       } else {
         dispatch(errorGetUserInfo('fail get user info'))
@@ -190,6 +193,13 @@ export const loginWithKakao = (code: string) => {
     } catch (err) {
       dispatch(errorLoginWithKakao('Login fail'))
     }
+  }
+}
+
+export const resetErrorMessage = () =>{
+  return {
+    type : AuthAction.RESET_ERROR_MESSAGE,
+    payload: null
   }
 }
 
@@ -241,6 +251,9 @@ function user(state: userState = initialState, action: userAction): userState {
 
     case AuthAction.GET_INFO_ERROR:
       return { ...state, user: null, isLogin: false }
+
+    case AuthAction.RESET_ERROR_MESSAGE:
+      return {...state, error: null}
 
     default:
       return state
