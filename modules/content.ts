@@ -1,9 +1,12 @@
 import axios from 'axios'
-
 // ! Action Types
+import * as actionTypes from './actionTypes'
 
 // ! interface
-import { IContent } from '@actions/index'
+import { IContent } from '@interfaces'
+
+// ! 초기 상태 선언
+const initialState: IContent = {}
 
 // ! make dispatch factory pattern
 export const getContentData = (content_id: string) => {
