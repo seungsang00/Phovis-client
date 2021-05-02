@@ -76,7 +76,7 @@ const ContentForm = () => {
     formData.append('title', title)
     formData.append('description', description)
     formData.append('location', JSON.stringify(location))
-    formData.append('tags', JSON.stringify(tags))
+    formData.append('tags', JSON.stringify(tags.map((obj) => obj && obj.name)))
     formData.append('mainImageData', mainImage.data || images[0].data)
     formData.append('type', 'content')
     images.forEach((el) => {
