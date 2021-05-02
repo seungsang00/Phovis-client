@@ -9,23 +9,13 @@ import { FormLayout } from './form.style'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '@actions/reducer'
 import { IContentForm, Tag } from '@interfaces'
-import axios from 'axios'
-import useAction from '@hooks/useAction'
-import { getUserInfo } from '@actions/users'
 import { DivWithBgImg } from '@styles/common'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 const ContentForm = () => {
   // ! 유저 정보 받아오기
-  const _getUserInfo = useAction(getUserInfo)
-  const { isLogin, accessToken } = useSelector(
-    (state: RootReducer) => state.user
-  )
-  // 로컬 스토리지에 저장된 accessToken을 가져와서 다시 세팅해줌
-  // useEffect(() => {
-  //   // TODO : load main data
-  //   _getUserInfo(accessToken)
-  // }, [])
+  const { accessToken } = useSelector((state: RootReducer) => state.user)
 
   // ! 초기 상태
   const initialState: IContentForm = {
@@ -110,6 +100,7 @@ const ContentForm = () => {
         // TODO: 요청이 정상적으로 이루어지면 작성한 콘텐츠 view 페이지로 이동
         // ! 응답으로 콘텐츠 id를 받아옵니다.
         // router.push(`/content/view/${content_id}`)
+        router.push(`/main`) // 임시로 main 페이지로 이동
       }
     } catch (e) {
       throw e
