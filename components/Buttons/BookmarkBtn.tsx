@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { BookmarkContainer } from './button-bookmark.style'
 
 type Props = {
-  id: String
+  id?: String
 }
 
 const BookmarkBtn = ({ id }: Props) => {
