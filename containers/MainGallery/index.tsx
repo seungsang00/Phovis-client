@@ -5,9 +5,10 @@ import { useInfinteScroll } from '@hooks/useInfinteScroll'
 
 interface IProps {
   photoCards: IPhotoCard[]
+  onScrollEnd: () => void
 }
 
-const MainGallery = ({ photoCards }: IProps) => {
+const MainGallery = ({ photoCards, onScrollEnd }: IProps) => {
   const [target, setTarget] = useState<Element | null>(null)
   useInfinteScroll({
     root: null,
@@ -18,6 +19,7 @@ const MainGallery = ({ photoCards }: IProps) => {
       if (isIntersecting) {
         // Load Data
         console.log('This is End of Page, Load more data from server')
+        onScrollEnd()
       }
     },
     threshold: 1.0,

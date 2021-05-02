@@ -4,6 +4,12 @@ import { useSelector } from 'react-redux'
 import Head from 'next/head'
 import { RootReducer } from '@actions/reducer'
 import { getUserInfo } from '@actions/users'
+import {
+  getBannderContentList,
+  getRecommendContentList,
+  getTrendTagList,
+  getPhotoCardList,
+} from '@actions/main'
 import useAction from '../hooks/useAction'
 
 import { MainBanner, LinkBanner } from '@components/index'
@@ -26,18 +32,46 @@ const mainPage = () => {
   })
 
   const _getUserInfo = useAction(getUserInfo)
+  const _getBannderContentList = useAction(getBannderContentList)
+  const _getRecommendContentList = useAction(getRecommendContentList)
+  const _getTrendTagList = useAction(getTrendTagList)
+  const _getPhotoCardList = useAction(getPhotoCardList)
+
   const { isLogin, accessToken } = useSelector(
     (state: RootReducer) => state.user
   )
-  // const mainContents = useSelector((state: RootReducer) => state.mainContents);
+  const {
+    error,
+    bannerContentList,
+    recommendContentList,
+    trendTagList,
+    photocardList,
+  } = useSelector((state: RootReducer) => state.main)
 
   useEffect(() => {
     // TODO : get main contents from Redux store
     // TODO : load main data
     _getUserInfo(accessToken)
+    _getBannderContentList()
+    _getRecommendContentList()
+    _getTrendTagList()
+    _getPhotoCardList()
   }, [])
 
   // TODO : make infinite scrol interection
+  useEffect(() => {
+    console.log('error : ', error)
+    console.log('bannerContentList : ', bannerContentList)
+    console.log('recommendContentList : ', recommendContentList)
+    console.log('trendTagList : ', trendTagList)
+    console.log('photocardList : ', photocardList)
+  }, [
+    error,
+    bannerContentList,
+    recommendContentList,
+    trendTagList,
+    photocardList,
+  ])
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const {
@@ -60,6 +94,10 @@ const mainPage = () => {
 
   const onClickMainBannerItem = (contentId: String) => {
     console.log(contentId)
+  }
+
+  const onScrollEnd = () => {
+    _getPhotoCardList()
   }
 
   return (
@@ -88,7 +126,10 @@ const mainPage = () => {
 
         <LinkBanner link={isLogin ? '/main' : '/auth/login'} />
 
-        <MainGallery photoCards={samplePhotoCardData} />
+        <MainGallery
+          photoCards={samplePhotoCardData}
+          onScrollEnd={onScrollEnd}
+        />
       </main>
     </div>
   )
