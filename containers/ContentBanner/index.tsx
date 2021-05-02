@@ -1,6 +1,5 @@
 import { BookmarkBtn, LikeBtn, UserInfoHor } from '@components/index'
 import { DivWithBgImg } from '@styles/index'
-import { ContentBannerContainer } from './contentbanner.style'
 
 /**
 title
