@@ -24,8 +24,9 @@ export const UserContainer = styled.div`
   }
 
   & span.userName {
-    font-weight: 600;
-    font-size: 18px;
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-left: 0.25rem;
   }
 `
 

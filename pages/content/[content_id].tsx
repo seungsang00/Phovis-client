@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 import { sampleContents } from '@utils/index'
 import ContentBanner from '@containers/ContentBanner'
 const [{ contentid, title, likecount, user, imageurl }] = sampleContents
-const { id, name } = user
+const { id, name, imgUrl } = user
 
 // TODO: content_id로 서버에 데이터를 요청합니다
 const ContentPage = () => {
@@ -31,6 +31,7 @@ const ContentPage = () => {
             title={title}
             mainImgUrl={imageurl}
             username={name}
+            userProfileUrl={imgUrl}
             likesCount={likecount}
           />
         }>

@@ -13,10 +13,17 @@ interface IProps {
   title: string
   mainImgUrl: string
   username: string
+  userProfileUrl: string
   likesCount: number
 }
 
-const ContentBanner = ({ title, mainImgUrl, username, likesCount }: IProps) => {
+const ContentBanner = ({
+  title,
+  mainImgUrl,
+  username,
+  userProfileUrl,
+  likesCount,
+}: IProps) => {
   return (
     <DivWithBgImg bgUrl={mainImgUrl}>
       <div className='top-right'>
@@ -24,7 +31,7 @@ const ContentBanner = ({ title, mainImgUrl, username, likesCount }: IProps) => {
       </div>
       <div className='main-title'>{title}</div>
       <div className='bottom-left'>
-        <UserInfoHor userName={username} />
+        <UserInfoHor userName={username} profileImage={userProfileUrl} />
       </div>
       <div className='bottom-right'>
         <LikeBtn like={likesCount} />
