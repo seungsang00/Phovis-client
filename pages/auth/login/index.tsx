@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import Link from 'next/link'
 import { RootReducer } from '@actions/reducer'
-import { login, loginWithGoogle } from '@actions/users'
+import { login, loginWithGoogle, resetErrorMessage } from '@actions/users'
 import {
   LableTextInput,
   PasswordInput,
@@ -45,6 +45,7 @@ const Login = () => {
     if (error) {
       // TODO : show error UI
       alert(`Login fail : ${error}`)
+      resetErrorMessage()
     }
   }, [isLogin, error])
 
