@@ -10,7 +10,7 @@ const InputLocation = ({ location }: IInput) => {
   return (
     <Input
       type='text'
-      value={location.location}
+      value={location.location || ''}
       placeholder='추천하는 장소가 어디인가요?'
       disabled
     />

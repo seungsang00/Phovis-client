@@ -8,7 +8,7 @@ import React, { ChangeEvent, useRef, useState } from 'react'
 import { FormLayout } from './form.style'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '@actions/reducer'
-import { IContentForm, Tag } from '@interfaces'
+import { IContentForm, Location, Tag } from '@interfaces'
 import { DivWithBgImg } from '@styles/common'
 import { useRouter } from 'next/router'
 import axios from 'axios'
@@ -27,6 +27,7 @@ const ContentForm = () => {
     tags: [],
     description: '',
     location: {
+      keyword: undefined,
       location: undefined,
       lat: undefined,
       lng: undefined,
@@ -38,37 +39,9 @@ const ContentForm = () => {
   const file_url = useRef<string | ArrayBuffer | null>(null)
   const router = useRouter()
 
-  const handleTags = (tags: Tag[]) => {
-    setContent({
-      ...content,
-      tags: [...content.tags, ...tags],
-    })
-  }
-
-  const setLocationInfo = (name: string, value: string | number) => {
-    setContent({
-      ...content,
-      location: {
-        ...content.location,
-        [name]: value,
-      },
-    })
-  }
-
-  const inputChangeHandler = (
-    e: React.ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const {
-      target: { name, value },
-    } = e
-    setContent({
-      ...content,
-      [name]: value,
-    })
-  }
-
   // ! 서버에 파일 전송
   const handleSubmit = async () => {
+    console.log(`상태 확인>>`, content)
     // 전송할 폼데이터를 생성합니다
     const formData = new FormData()
     const { title, description, tags, location, images, mainImage } = content
@@ -106,7 +79,36 @@ const ContentForm = () => {
     }
   }
 
-  // ! input, textarea handler
+  // ! 태그 목록
+  const handleTags = (tags: Tag[]) => {
+    setContent({
+      ...content,
+      tags: [...content.tags, ...tags],
+    })
+  }
+
+  // ! 위치 정보
+  const setLocation = (value: Location) => {
+    setContent({
+      ...content,
+      location: value,
+    })
+  }
+
+  // ! input 또는 textarea 입력 및 수정
+  const inputChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const {
+      target: { name, value },
+    } = e
+    setContent({
+      ...content,
+      [name]: value,
+    })
+  }
+
+  // ! 이미지 설명글 입력 및 수정
   const onChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
     changeValue: any
@@ -218,7 +220,11 @@ const ContentForm = () => {
         </section>
 
         <section>
-          <AddTagsSection tagList={content.tags} setTagList={handleTags} />
+          <AddTagsSection
+            locationTag={content.location.keyword}
+            tagList={content.tags}
+            setTagList={handleTags}
+          />
         </section>
 
         <section>
@@ -229,7 +235,10 @@ const ContentForm = () => {
           {modalIsOpen && (
             <Modal handleModalClose={handleModalClose}>
               <MapContainer
-                setLocation={setLocationInfo}
+                locationInfo={content.location}
+                tags={content.tags}
+                handleLocation={setLocation}
+                setLocationTag={handleTags}
                 handleModalClose={() => setModalIsOpen(false)}
               />
             </Modal>
