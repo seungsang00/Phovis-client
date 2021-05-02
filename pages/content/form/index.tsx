@@ -16,19 +16,9 @@ import { IContentForm, Tag } from '@interfaces'
 import axios from 'axios'
 import useAction from '@hooks/useAction'
 import { getUserInfo } from '@actions/users'
+import { DivWithBgImg } from '@styles/common'
 
 const ContentForm = () => {
-  // const _getUserInfo = useAction(getUserInfo)
-  // const { isLogin, accessToken } = useSelector(
-  //   (state: RootReducer) => state.user
-  // )
-
-  // useEffect(() => {
-  //   // TODO : load main data
-  //   _getUserInfo(accessToken)
-  //   console.log(`토큰 있니>>`, accessToken)
-  // }, [])
-
   const initialState: IContentForm = {
     title: '',
     mainimageData: null,
@@ -211,14 +201,18 @@ const ContentForm = () => {
     <FormLayout>
       <main>
         <section className='banner'>
-          <input
-            name='title'
-            type='text'
-            placeholder='Content Title Here'
-            value={content.title}
-            onChange={inputChangeHandler}
-            autoFocus
-          />
+          <DivWithBgImg
+            bgUrl={content.form.preview[0] && content.form.preview[0].url}
+            p={'24px'}>
+            <input
+              name='title'
+              type='text'
+              placeholder='Content Title Here'
+              value={content.title}
+              onChange={inputChangeHandler}
+              autoFocus
+            />
+          </DivWithBgImg>
         </section>
 
         <section>
