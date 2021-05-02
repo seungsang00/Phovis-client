@@ -139,7 +139,7 @@ export const getUserInfo = (stateAccessToken?: String) => {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-        withCredentials: true,
+        // withCredentials: true,
       })
 
       if (result.status === 200) {

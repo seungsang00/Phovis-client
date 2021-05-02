@@ -7,6 +7,11 @@ export const FormLayout = styled.div`
   section {
     display: flex;
     border: 1px solid coral;
+
+    textarea {
+      font-size: 1.5rem;
+      padding: 24px;
+    }
   }
 
   section.banner {
@@ -15,6 +20,8 @@ export const FormLayout = styled.div`
 
     input {
       font-size: 2.5rem;
+      min-height: 4rem;
+      width: 90%;
     }
   }
 

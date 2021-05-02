@@ -4,24 +4,36 @@ import {
   AddLocationSection,
   MapContainer,
 } from '@containers/index'
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, useRef, useState } from 'react'
 import { FormLayout } from './form.style'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '@actions/reducer'
-import { useDispatch } from 'react-redux'
-// const LOCAL_KEY_ACCESS_TOKEN = 'LOCAL_ACCESS_TOKEN'
-
-// import { uploadContent } from '@actions/contentForm'
 import { IContentForm, Tag } from '@interfaces'
 import axios from 'axios'
 import useAction from '@hooks/useAction'
 import { getUserInfo } from '@actions/users'
 import { DivWithBgImg } from '@styles/common'
+import { useRouter } from 'next/router'
 
 const ContentForm = () => {
+  // ! 유저 정보 받아오기
+  const _getUserInfo = useAction(getUserInfo)
+  const { isLogin, accessToken } = useSelector(
+    (state: RootReducer) => state.user
+  )
+  // 로컬 스토리지에 저장된 accessToken을 가져와서 다시 세팅해줌
+  // useEffect(() => {
+  //   // TODO : load main data
+  //   _getUserInfo(accessToken)
+  // }, [])
+
+  // ! 초기 상태
   const initialState: IContentForm = {
     title: '',
-    mainimageData: null,
+    mainImage: {
+      data: null,
+      url: undefined,
+    },
     tags: [],
     description: '',
     location: {
@@ -29,17 +41,12 @@ const ContentForm = () => {
       lat: undefined,
       lng: undefined,
     },
-    form: {
-      images: [],
-      preview: [],
-    },
+    images: [],
   }
   const [content, setContent] = useState<IContentForm>(initialState)
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
   const file_url = useRef<string | ArrayBuffer | null>(null)
-  // const { accessToken } = useSelector((state: RootReducer) => state.user)
-  const userInfo = useSelector((state: RootReducer) => state.user)
-  const dispatch = useDispatch()
+  const router = useRouter()
 
   const handleTags = (tags: Tag[]) => {
     setContent({
@@ -71,47 +78,42 @@ const ContentForm = () => {
   }
 
   // ! 서버에 파일 전송
-  const handleSubmit = async (stateAccessToken?: String) => {
-    // 보낼 데이터를 만듭니다
-    const { title, form, description, tags, location } = content
-    const data = {
-      images: form.images,
-      title: title,
-      mainImageData: form.images[0].data,
-      description: description,
-      tags: tags.map((obj) => obj && obj.name),
-      location: location,
-    }
-    // json 형태로 전송합니다
-    const jsonData = JSON.stringify(data)
-    // 폼데이터를 생성합니다
+  const handleSubmit = async () => {
+    // 전송할 폼데이터를 생성합니다
     const formData = new FormData()
-    // jsonData를 `data`라는 키의 값으로 formData에 append 합니다
-    formData.append('data', jsonData)
+    const { title, description, tags, location, images, mainImage } = content
 
-    // dispatch(uploadContent(jsonData))
+    formData.append('title', title)
+    formData.append('description', description)
+    formData.append('location', JSON.stringify(location))
+    formData.append('tags', JSON.stringify(tags))
+    formData.append('mainImageData', mainImage.data || images[0].data)
+    formData.append('type', 'content')
+    images.forEach((el) => {
+      formData.append('images', el.data, el.name)
+      const image_desc = {
+        name: el.name,
+        description: el.description,
+      }
+      formData.append('images', JSON.stringify(image_desc))
+    })
 
     try {
-      console.log(`user info>>`, userInfo)
-      // const LOCAL_KEY_ACCESS_TOKEN = 'LOCAL_ACCESS_TOKEN'
-      // 만약 입력받은 토큰이 없다면 localStorage 에서 토큰이 있는지 확인한다.
-      // let accessToken =
-      //   stateAccessToken || localStorage.getItem(LOCAL_KEY_ACCESS_TOKEN)
-      // if (!accessToken) {
-      //   return dispatch(errorGetUserInfo('fail get user info'))
-      // }
-      const res = await axios.post(`https://localhost:4000/content`, jsonData, {
+      const res = await axios.post(`https://localhost:4000/content`, formData, {
         headers: {
-          authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVkOGRkYWQwLTY0MWQtNDgxYS05YzYyLTYyNTM4ZTFlZGEzNSIsImlhdCI6MTYxOTg4MDU3MiwiZXhwIjoxNjE5ODg0MTcyfQ.RRVQeVDDh7Y2P3l9F5LQQy2ah-k4XSSbpJewVNmdlJ8`,
+          authorization: `Bearer ${accessToken}`,
         },
-        // withCredentials: true,
+        // withCredentials: true, // 현재 client가 http라면 주석처리
       })
       console.log(`응답>>`, res)
+      if (res.status === 201) {
+        // TODO: 요청이 정상적으로 이루어지면 작성한 콘텐츠 view 페이지로 이동
+        // ! 응답으로 콘텐츠 id를 받아옵니다.
+        // router.push(`/content/view/${content_id}`)
+      }
     } catch (e) {
       throw e
     }
-
-    // TODO: 요청이 정상적으로 이루어지면 작성한 콘텐츠 페이지로 redirect
   }
 
   // ! input, textarea handler
@@ -153,6 +155,8 @@ const ContentForm = () => {
             ...concatFile,
             {
               data: files[i],
+              name: files[i].name,
+              url: reader.result, // 이미지파일의 임시 url은 reader의 result 속성에 담겨있습니다
               description: '',
               type: 'content',
             },
@@ -168,11 +172,7 @@ const ContentForm = () => {
 
           setContent({
             ...content,
-            form: {
-              ...content.form,
-              images: [...content.form.images, ...concatFile],
-              preview: [...content.form.preview, ...concatPreview],
-            },
+            images: [...content.images, ...concatFile],
           })
           file_url.current = reader.result
         }
@@ -180,20 +180,21 @@ const ContentForm = () => {
     }
   }
 
-  // ! 이미지를 클릭해 설명글을 추가합니다
+  // ! 이미지 하단의 input에 입력해 설명글을 추가합니다
   const addDescription = (value: string, target_idx: string) => {
-    const { images, preview } = content.form
-    const editedImages = [...images]
-    const editedPreview = [...preview]
+    const editedImages = [...content.images]
     editedImages[Number(target_idx)].description = value
-    editedPreview[Number(target_idx)].description = value
     setContent({
       ...content,
-      form: {
-        ...content.form,
-        images: editedImages,
-        preview: editedPreview,
-      },
+      images: editedImages,
+    })
+  }
+
+  // ! 이미지 미리보기를 클릭해 배너 이미지 교체
+  const selectBannerImg = (url: string, data: Blob) => {
+    setContent({
+      ...content,
+      mainImage: { data, url },
     })
   }
 
@@ -202,7 +203,10 @@ const ContentForm = () => {
       <main>
         <section className='banner'>
           <DivWithBgImg
-            bgUrl={content.form.preview[0] && content.form.preview[0].url}
+            bgUrl={
+              content.mainImage.url ||
+              (content.images[0] && content.images[0].url)
+            }
             p={'24px'}>
             <input
               name='title'
@@ -244,10 +248,16 @@ const ContentForm = () => {
 
         <section className='form'>
           <div>
-            {content.form.preview.map(
-              ({ url, name, description }: any, idx: number) => (
+            {content.images.map(
+              ({ url, data, name, description }: any, idx: number) => (
                 <ImagePreview>
-                  <img src={url} key={name} alt='preview' />
+                  <img
+                    src={url}
+                    key={name}
+                    alt='preview'
+                    title='클릭해서 배너이미지로 지정할 수 있습니다'
+                    onClick={() => selectBannerImg(url, data)}
+                  />
                   <input
                     id={'' + idx}
                     key={idx}

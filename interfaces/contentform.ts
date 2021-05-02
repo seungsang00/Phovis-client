@@ -1,25 +1,21 @@
 export interface IContentForm {
   title: string
-  mainimageData: Blob | null
+  mainImage: MainImage
   tags: Tag[]
   description: string
   location: Location
-  form: IForm
-}
-
-interface IForm {
   images: Image[]
-  preview: Preview[]
 }
 
-type Preview = {
-  name: string
-  url: string
-  description: string
+type MainImage = {
+  data: Blob | null
+  url: string | undefined
 }
 
 type Image = {
   data: Blob
+  name: string
+  url: string
   description: string
   type: string
 }
