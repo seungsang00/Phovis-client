@@ -3,7 +3,7 @@ import { KakaoMapContainer, SearchInput, SubmitButton } from '@components/index'
 
 interface IProps {
   location?: string
-  setLocation: (location: string) => void
+  setLocation: (name: string, value: string | number) => void
   handleModalClose: () => void
 }
 
@@ -132,7 +132,7 @@ const MapContainer = ({ location, setLocation, handleModalClose }: IProps) => {
     const myLocation = document.querySelector('#my_location')?.textContent
     if (myLocation) {
       console.log(myLocation)
-      setLocation(myLocation)
+      setLocation('location', myLocation)
       handleModalClose()
     }
   }

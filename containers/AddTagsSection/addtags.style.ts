@@ -4,6 +4,7 @@ export const TagSection = styled.section`
   height: 3rem;
   display: flex;
   align-items: center;
+  padding: 0 24px;
 
   & > input {
     font-size: 1.2rem;

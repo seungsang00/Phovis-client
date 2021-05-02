@@ -1,4 +1,4 @@
-import { DefaultBtn, Modal } from '@components/index'
+import { DefaultBtn, Modal, MultiForm, ImagePreview } from '@components/index'
 import {
   AddTagsSection,
   AddLocationSection,
@@ -6,48 +6,104 @@ import {
 } from '@containers/index'
 import React, { ChangeEvent, useRef, useState } from 'react'
 import { FormLayout } from './form.style'
-import { useDispatch } from 'react-redux'
-import { uploadContent } from '@actions/content'
+import { useSelector } from 'react-redux'
+import { RootReducer } from '@actions/reducer'
+import { IContentForm, Tag } from '@interfaces'
+import { DivWithBgImg } from '@styles/common'
+import { useRouter } from 'next/router'
+import axios from 'axios'
 
-interface ITag {
-  id: string
-  name: string
-}
-
-// TODO: store에서 user정보(userId)를 받아와야 합니다.
 const ContentForm = () => {
-  const [title, setTitle] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
-  const [location, setLocation] = useState<string>('')
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
-  const [tags, setTags] = useState<(null | ITag)[]>([])
-  const [state, setState] = useState<any>({
-    fileName: [],
+  // ! 유저 정보 받아오기
+  const { accessToken } = useSelector((state: RootReducer) => state.user)
+
+  // ! 초기 상태
+  const initialState: IContentForm = {
+    title: '',
+    mainImage: {
+      data: null,
+      url: undefined,
+    },
+    tags: [],
+    description: '',
+    location: {
+      location: undefined,
+      lat: undefined,
+      lng: undefined,
+    },
     images: [],
-    preview: [],
-  })
+  }
+  const [content, setContent] = useState<IContentForm>(initialState)
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
   const file_url = useRef<string | ArrayBuffer | null>(null)
-  const dispatch = useDispatch()
+  const router = useRouter()
 
-  // 서버에 파일 전송
+  const handleTags = (tags: Tag[]) => {
+    setContent({
+      ...content,
+      tags: [...content.tags, ...tags],
+    })
+  }
+
+  const setLocationInfo = (name: string, value: string | number) => {
+    setContent({
+      ...content,
+      location: {
+        ...content.location,
+        [name]: value,
+      },
+    })
+  }
+
+  const inputChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const {
+      target: { name, value },
+    } = e
+    setContent({
+      ...content,
+      [name]: value,
+    })
+  }
+
+  // ! 서버에 파일 전송
   const handleSubmit = async () => {
-    // 보낼 데이터를 만듭니다
-    const data = {
-      images: state.images,
-      title,
-      mainImageData: state.images[0].data,
-      description,
-      tags: tags.map((obj) => obj && obj.name),
-      location,
-    }
-    // json 형태로 전송합니다
-    const jsonData = JSON.stringify(data)
-    // 폼데이터를 생성합니다
+    // 전송할 폼데이터를 생성합니다
     const formData = new FormData()
-    // jsonData를 `data`라는 키의 값으로 formData에 append 합니다
-    formData.append('data', jsonData)
+    const { title, description, tags, location, images, mainImage } = content
 
-    dispatch(uploadContent(jsonData))
+    formData.append('title', title)
+    formData.append('description', description)
+    formData.append('location', JSON.stringify(location))
+    formData.append('tags', JSON.stringify(tags.map((obj) => obj && obj.name)))
+    formData.append('mainImageData', mainImage.data || images[0].data)
+    images.forEach((el) => {
+      formData.append('images', el.data, el.name)
+      const image_desc = {
+        name: el.name,
+        description: el.description,
+      }
+      formData.append('images', JSON.stringify(image_desc))
+    })
+
+    try {
+      const res = await axios.post(`https://localhost:4000/content`, formData, {
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+        },
+        // withCredentials: true, // 현재 client가 http라면 주석처리
+      })
+      console.log(`응답>>`, res)
+      if (res.status === 201) {
+        // TODO: 요청이 정상적으로 이루어지면 작성한 콘텐츠 view 페이지로 이동
+        // ! 응답으로 콘텐츠 id를 받아옵니다.
+        // router.push(`/content/view/${content_id}`)
+        router.push(`/main`) // 임시로 main 페이지로 이동
+      }
+    } catch (e) {
+      throw e
+    }
   }
 
   // ! input, textarea handler
@@ -89,6 +145,8 @@ const ContentForm = () => {
             ...concatFile,
             {
               data: files[i],
+              name: files[i].name,
+              url: reader.result, // 이미지파일의 임시 url은 reader의 result 속성에 담겨있습니다
               description: '',
               type: 'content',
             },
@@ -101,81 +159,94 @@ const ContentForm = () => {
               description: '',
             },
           ]
-          setState({
-            fileName: [...state.fileName, ...concatName],
-            images: [...state.images, ...concatFile],
-            preview: [...state.preview, ...concatPreview],
+
+          setContent({
+            ...content,
+            images: [...content.images, ...concatFile],
           })
           file_url.current = reader.result
-          console.log(`state>>`, state)
         }
       }
     }
   }
 
-  // ! 이미지를 클릭해 설명글을 추가합니다
+  // ! 이미지 하단의 input에 입력해 설명글을 추가합니다
   const addDescription = (value: string, target_idx: string) => {
-    const { images, preview } = state
-    const editedImages = [...images]
-    const editedPreview = [...preview]
+    const editedImages = [...content.images]
     editedImages[Number(target_idx)].description = value
-    editedPreview[Number(target_idx)].description = value
-    setState({ ...state, images: editedImages })
+    setContent({
+      ...content,
+      images: editedImages,
+    })
+  }
+
+  // ! 이미지 미리보기를 클릭해 배너 이미지 교체
+  const selectBannerImg = (url: string, data: Blob) => {
+    setContent({
+      ...content,
+      mainImage: { data, url },
+    })
   }
 
   return (
     <FormLayout>
       <main>
         <section className='banner'>
-          <input
-            type='text'
-            placeholder='Content Title Here'
-            value={title}
-            onChange={(e) => onChange(e, setTitle)}
-            autoFocus
-          />
+          <DivWithBgImg
+            bgUrl={
+              content.mainImage.url ||
+              (content.images[0] && content.images[0].url)
+            }
+            p={'24px'}>
+            <input
+              name='title'
+              type='text'
+              placeholder='Content Title Here'
+              value={content.title}
+              onChange={inputChangeHandler}
+              autoFocus
+            />
+          </DivWithBgImg>
         </section>
 
         <section>
           <textarea
-            value={description}
-            onChange={(e) => onChange(e, setDescription)}
+            name='description'
+            value={content.description}
+            onChange={inputChangeHandler}
             placeholder='추천글을 작성해주세요'></textarea>
         </section>
 
         <section>
-          <AddTagsSection tagList={tags} setTagList={setTags} />
+          <AddTagsSection tagList={content.tags} setTagList={handleTags} />
         </section>
 
         <section>
-          <AddLocationSection location={location} onClick={handleModalOpen} />
+          <AddLocationSection
+            location={content.location}
+            onClick={handleModalOpen}
+          />
           {modalIsOpen && (
             <Modal handleModalClose={handleModalClose}>
               <MapContainer
-                setLocation={setLocation}
+                setLocation={setLocationInfo}
                 handleModalClose={() => setModalIsOpen(false)}
               />
             </Modal>
           )}
         </section>
 
-        <section>
-          <form method='post' encType='multipart/form-data'>
-            <input type='file' accept='image/*' onChange={handleFile} />
-          </form>
-          <div className='preview'>
-            {state.preview.map(
-              ({ url, name, description }: any, idx: number) => (
-                <div>
+        <section className='form'>
+          <div>
+            {content.images.map(
+              ({ url, data, name, description }: any, idx: number) => (
+                <ImagePreview>
                   <img
                     src={url}
                     key={name}
                     alt='preview'
-                    style={{
-                      width: '100px',
-                      height: '100px',
-                      objectFit: 'contain',
-                    }}
+                    title='클릭해서 배너이미지로 지정할 수 있습니다'
+                    onClick={() => selectBannerImg(url, data)}
                   />
                   <input
                     id={'' + idx}
@@ -185,9 +256,14 @@ const ContentForm = () => {
                     onChange={(e) => onChange(e, addDescription)}
                     placeholder={description || '설명을 추가해주세요'}
                   />
-                </div>
+                </ImagePreview>
               )
             )}
+            <MultiForm
+              method='post'
+              encType='multipart/form-data'
+              handleFile={handleFile}
+            />
           </div>
         </section>
 
