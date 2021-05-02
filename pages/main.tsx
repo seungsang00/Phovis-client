@@ -29,11 +29,10 @@ const mainPage = () => {
   const { isLogin, accessToken } = useSelector(
     (state: RootReducer) => state.user
   )
-
-  // TODO : get main contents from Redux store
   // const mainContents = useSelector((state: RootReducer) => state.mainContents);
 
   useEffect(() => {
+    // TODO : get main contents from Redux store
     // TODO : load main data
     _getUserInfo(accessToken)
   }, [])
