@@ -1,4 +1,5 @@
 import { IUser, IImage, LocationType } from './index'
+import { IPhotoCard } from './photocard'
 
 export interface IContent {
   contentid: string
@@ -27,4 +28,5 @@ export interface IContentMain {
   images: IImage[]
   tags?: string[]
   related: IContent[]
+  photocards: IPhotoCard[]
 }

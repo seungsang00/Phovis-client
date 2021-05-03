@@ -6,6 +6,10 @@ export const MainContainer = styled.div`
   align-items: center;
   padding: 36px 0;
 
+  .section-title {
+    margin-bottom: 1rem;
+  }
+
   section {
     width: 100%;
     margin: 1rem 0;

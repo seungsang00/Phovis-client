@@ -5,7 +5,11 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
 // ! sample data
-import { sampleContent, sampleContents } from '@utils/index'
+import {
+  sampleContent,
+  sampleContents,
+  samplePhotoCardData,
+} from '@utils/index'
 
 const {
   contentid,
@@ -52,6 +56,7 @@ const ContentPage = () => {
           images={images}
           tags={tag}
           related={sampleContents}
+          photocards={samplePhotoCardData}
         />
       </CommonLayout>
     </>

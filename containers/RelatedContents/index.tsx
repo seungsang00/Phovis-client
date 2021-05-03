@@ -1,4 +1,4 @@
-import { ContentThumbnail, LinkTitle } from '@components/index'
+import { ContentThumbnail } from '@components/index'
 import { IContent } from '@interfaces'
 import { Wrapper } from './relatedcontents.style'
 
@@ -8,7 +8,7 @@ interface IProps {
 const RelatedContents = ({ related }: IProps) => {
   return (
     <Wrapper>
-      <h1>Related Contents</h1>
+      <h2 className='section-title'>여기는 어때요?</h2>
       <div className='thumbnails'>
         {related.map(({ contentid, imageurl, title, user }) => (
           <ContentThumbnail

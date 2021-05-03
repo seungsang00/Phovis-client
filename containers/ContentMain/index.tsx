@@ -1,4 +1,6 @@
-import { LocationInfo, Photo, TagSmall } from '@components/index'
+import { LocationInfo, Photo, Polaroid, TagSmall } from '@components/index'
+import PhotoCardGallery from '@containers/PhotoCardGallery/PhotoCardGallery'
+import Polaroids from '@containers/Polaroids'
 import RelatedContents from '@containers/RelatedContents'
 import { IContentMain } from '@interfaces'
 import { MainContainer } from './contentmain.style'
@@ -15,6 +17,7 @@ const ContentMain = ({
   images,
   tags,
   related,
+  photocards,
 }: IContentMain) => {
   const handleTagClick = () => {
     console.log(`태그 검색 결과로 이동`)
@@ -43,7 +46,12 @@ const ContentMain = ({
       <section className='related-contents'>
         <RelatedContents related={related} />
       </section>
-      <section className='photocards'>photocard</section>
+      <section className='photocards'>
+        <div>
+          <Polaroids photocards={photocards} />
+        </div>
+        {/* <PhotoCardGallery photocards={photocards} /> */}
+      </section>
     </MainContainer>
   )
 }
