@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { PhotoCardInputContainer, ImageInputbtn } from './photocard-input'
 import LocationInfo from '../../components/LocationInfo/LocationInfo'
 import { Button } from '@styles/index'
+import { LocationType } from '@interfaces'
 
 interface props {
-  location: string
+  location: LocationType
 }
 
 const PhotoCardInput = ({ location }: props) => {
@@ -49,7 +50,7 @@ const PhotoCardInput = ({ location }: props) => {
       </label>
       <div className='titlecontainer'>
         <label htmlFor='messagebox'>사진 이야기</label>
-        <LocationInfo location={location} />
+        <LocationInfo locationInfo={location} />
       </div>
       <textarea
         onChange={handleChange}

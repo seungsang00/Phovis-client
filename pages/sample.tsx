@@ -32,12 +32,19 @@ import {
 
 const { handleUnfollow, handleToggle, handler } = sampleHandler
 const { photoUrl_v, photoUrl_s } = samplePhotoData
-const { name, imgUrl, contentCount } = sampleUserData[0]
+const { userName, profileImg, contentCount } = sampleUserData[0]
 
 const ComponentSamplePage = () => {
   const [input, setInput] = useState({
     search: '',
   })
+
+  const locationData = {
+    keyword: '서울',
+    location: '서울시 강서구 서울식물원',
+    lat: 1,
+    lng: 1,
+  }
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const {
@@ -57,6 +64,7 @@ const ComponentSamplePage = () => {
   const onClickMainBannerItem = (contentId: String) => {
     console.log(contentId)
   }
+
   return (
     <Layout title='Component Sample | Next.js + TypeScript Example'>
       <h1>Component Sample</h1>
@@ -75,7 +83,12 @@ const ComponentSamplePage = () => {
         onSubmit={onSubmit}
       />
       <hr />
-      <SearchBarBig query='직전에검색한키워드가들어갑니다' />
+      <SearchBarBig
+        name='search'
+        value='직전에검색한키워드가들어갑니다'
+        onChange={onChangeInput}
+        onSubmit={onSubmit}
+      />
       <hr />
       <LinkBanner link='/' />
       <hr />
@@ -84,27 +97,31 @@ const ComponentSamplePage = () => {
       <TagSmall tagname={'야경'} onClick={handler} />
       <hr />
       <ThumbnailSquare
-        profileImage={imgUrl}
-        username={name}
+        profileImage={profileImg}
+        username={userName as string}
         bgImage={photoUrl_s}
       />
       <hr />
       <ThumbnailRect
         id='sampleId'
-        profileImage={imgUrl}
-        username={name}
+        profileImage={profileImg}
+        username={userName as string}
         bgImage={photoUrl_v}
         likeCount={30}
       />
       <hr />
       <UserCard
-        username={name}
-        profileImage={imgUrl}
+        username={userName as string}
+        profileImage={profileImg}
         contentCount={contentCount}
         onClick={handleUnfollow}
       />
       <hr />
-      <UserBanner username={name} profileImage={imgUrl} bgImage={photoUrl_v} />
+      <UserBanner
+        username={userName as string}
+        profileImage={profileImg}
+        bgImage={photoUrl_v}
+      />
       <hr />
       <BookmarkBtn id='bookMarkTest' />
       <hr />
@@ -114,10 +131,10 @@ const ComponentSamplePage = () => {
       <hr />
       <TabMenu isOwner={true} />
       <hr />
-      <LocationInfo location={'서울시 강서구 서울식물원'} />
+      <LocationInfo locationInfo={locationData} />
       <hr />
       <LikeBtn like={23} />
-      <PhotoCardInput location={''} />
+      <PhotoCardInput location={locationData} />
       <UserInfoHor userName={'jeong'} />
       <UserInfoVer userName={'jeong'} />
       <PhotoCardPreview
@@ -128,7 +145,7 @@ const ComponentSamplePage = () => {
         like={24}
       />
       <hr />
-      <PhotoCardInput location={''} />
+      <PhotoCardInput location={locationData} />
       <hr />
       <UserInfoHor userName={'jeong'} />
       <hr />
