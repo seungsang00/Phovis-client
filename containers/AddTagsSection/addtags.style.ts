@@ -1,8 +1,10 @@
 import styled from '@styles/themed-components'
 
 export const TagSection = styled.section`
-  height: 3rem;
+  min-height: 3rem;
+  width: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   padding: 0 24px;
 

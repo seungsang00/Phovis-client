@@ -21,12 +21,13 @@ type Image = {
 }
 
 export type LocationType = {
-  location: string | undefined
+  keyword: string | undefined
+  location: string | null | undefined
   lat: number | undefined
   lng: number | undefined
 }
 
 export type Tag = {
-  id: string
-  name: string
+  id: string | undefined
+  name: string | undefined
 }
