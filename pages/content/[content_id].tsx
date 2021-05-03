@@ -16,6 +16,7 @@ const {
   description,
   location,
   images,
+  tag,
 } = sampleContent
 const { id, name, imgUrl } = user
 
@@ -26,6 +27,7 @@ const ContentPage = () => {
 
   useEffect(() => {
     console.log(router.query)
+    console.log(sampleContent)
   })
   return (
     <>
@@ -48,6 +50,7 @@ const ContentPage = () => {
           description={description}
           location={location}
           images={images}
+          tags={tag}
           related={sampleContents}
         />
       </CommonLayout>

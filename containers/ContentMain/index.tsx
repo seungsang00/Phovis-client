@@ -1,4 +1,4 @@
-import { LocationInfo, Photo } from '@components/index'
+import { LocationInfo, Photo, TagSmall } from '@components/index'
 import { IContentMain } from '@interfaces'
 import { MainContainer } from './contentmain.style'
 
@@ -15,6 +15,9 @@ const ContentMain = ({
   tags,
   related,
 }: IContentMain) => {
+  const handleTagClick = () => {
+    console.log(`태그 검색 결과로 이동`)
+  }
   return (
     <MainContainer>
       <section className='description'>{description}</section>
@@ -31,7 +34,11 @@ const ContentMain = ({
       <section className='location'>
         <LocationInfo locationInfo={location} />
       </section>
-      <section className='tags'>tags</section>
+      <section className='tags'>
+        {tags?.map((el) => (
+          <TagSmall tagname={el} onClick={handleTagClick} />
+        ))}
+      </section>
       <section className='related-contents'>related content</section>
       <section className='photocards'>photocard</section>
     </MainContainer>

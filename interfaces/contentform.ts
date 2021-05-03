@@ -21,7 +21,7 @@ type Image = {
 }
 
 export type LocationType = {
-  keyword: string | undefined
+  keyword?: string | undefined
   location: string | null | undefined
   lat: number | undefined
   lng: number | undefined
