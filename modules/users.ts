@@ -93,8 +93,8 @@ export const signin = ({ email, password }: Signin) => {
     try {
       const data = await axios.post(
         'https://localhost:4000/user',
-        { email, password },
-        { withCredentials: true }
+        { email, password }
+        // { withCredentials: true }
       )
       return dispatch(successSignin(data))
     } catch (e) {
@@ -109,8 +109,8 @@ export const login = ({ email, password }: Login) => {
     try {
       const result = await axios.post(
         'https://localhost:4000/auth/login',
-        { email, password },
-        { withCredentials: true }
+        { email, password }
+        // { withCredentials: true }
       )
       if (result.status === 201) {
         dispatch(successLogin(result))
@@ -128,10 +128,10 @@ export const login = ({ email, password }: Login) => {
 export const getUserInfo = (stateAccessToken?: String) => {
   return async (dispatch: Function) => {
     try {
-
       // 만약 입력받은 토큰이 없다면 localStorage 에서 토큰이 있는지 확인한다.
-      let accessToken = stateAccessToken || localStorage.getItem(LOCAL_KEY_ACCESS_TOKEN);
-      if(!accessToken){
+      let accessToken =
+        stateAccessToken || localStorage.getItem(LOCAL_KEY_ACCESS_TOKEN)
+      if (!accessToken) {
         return dispatch(errorGetUserInfo('fail get user info'))
       }
 
@@ -139,7 +139,7 @@ export const getUserInfo = (stateAccessToken?: String) => {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-        withCredentials: true,
+        // withCredentials: true,
       })
 
       if (result.status === 200) {
@@ -247,7 +247,7 @@ function user(state: userState = initialState, action: userAction): userState {
       const userData = { ...data }
       // console.log('user data : ',data);
       delete userData.message
-      return { ...state, user: userData, isLogin: true}
+      return { ...state, user: userData, isLogin: true }
 
     case AuthAction.GET_INFO_ERROR:
       return { ...state, user: null, isLogin: false }

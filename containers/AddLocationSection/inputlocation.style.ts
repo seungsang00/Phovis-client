@@ -14,6 +14,7 @@ export const Input = styled.input`
 
 export const LocationDiv = styled.div`
   width: 100%;
+  padding: 0 16px;
 `
 
 export const MapContainer = styled.div`

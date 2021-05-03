@@ -1,14 +1,11 @@
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { useState } from 'react'
 import { TagSmall } from '@components/index'
 import { TagSection, TagTooltip } from './addtags.style'
+import { Tag } from '@interfaces'
 
-interface ITag {
-  id: string
-  name: string
-}
 interface IProps {
-  tagList: (null | ITag)[]
-  setTagList: Dispatch<SetStateAction<(ITag | null)[]>>
+  tagList: Tag[]
+  setTagList: (tags: Tag[]) => void
 }
 
 export const AddTagsSection = ({ tagList, setTagList }: IProps) => {
@@ -28,7 +25,7 @@ export const AddTagsSection = ({ tagList, setTagList }: IProps) => {
       }
 
       if (!tagList.find((tag: any) => tag.id === value)) {
-        setTagList([...tagList, newTag])
+        setTagList([newTag])
       }
       setValue('')
     }
