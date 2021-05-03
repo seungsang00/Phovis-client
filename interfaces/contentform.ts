@@ -3,7 +3,7 @@ export interface IContentForm {
   mainImage: MainImage
   tags: Tag[]
   description: string
-  location: Location
+  location: LocationType
   images: Image[]
 }
 
@@ -20,7 +20,7 @@ type Image = {
   type: string
 }
 
-export type Location = {
+export type LocationType = {
   location: string | undefined
   lat: number | undefined
   lng: number | undefined

@@ -1,14 +1,30 @@
-import { IUser, IImage } from './index'
+import { IUser, IImage, LocationType } from './index'
 
 export interface IContent {
   contentid: string
-  imageid: number
-  imageurl: string
-  tag?: string
+  imageid?: number
+  imageurl: string // mainImgUrl
+  tag?: string[]
   description: string
-  location: string
+  location: LocationType
   user: IUser
   likecount: number
   images: IImage[]
   title: string
+}
+
+export interface IContentBanner {
+  title: string
+  mainImgUrl: string
+  username: string
+  userProfileUrl?: string
+  likesCount: number
+}
+
+export interface IContentMain {
+  description: string
+  location: LocationType
+  images: IImage[]
+  tags?: string[]
+  related: IContent[]
 }
