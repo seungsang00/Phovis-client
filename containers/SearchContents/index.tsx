@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useInfinteScroll } from '@hooks/useInfinteScroll'
-import { ThumbnailSquare } from '@components/index'
+import { ContentThumbnail } from '@components/index'
 import { IContent } from '@interfaces'
 
 interface IProps {
@@ -49,16 +49,19 @@ const SearchContents = ({
         <article>
           {searchResult.map((result) => {
             const {
-              contentid,
-              imageurl,
-              user: { name },
+              id,
+              mainimageUrl,
+              user: { userName },
+              title,
             } = result
             return (
-              <ThumbnailSquare
-                key={contentid}
-                profileImage='https://bit.ly/3euIgJj'
-                username={name}
-                bgImage={imageurl}
+              <ContentThumbnail
+                key={id}
+                title={title as string}
+                contentid={id as string}
+                // profileImage='https://bit.ly/3euIgJj'
+                username={userName as string}
+                imageurl={mainimageUrl as string}
               />
             )
           })}
