@@ -16,6 +16,7 @@ type SearchBarProps = {
 }
 
 export const SearchBar = ({
+  placeholder,
   name,
   value,
   onChange,
@@ -27,6 +28,7 @@ export const SearchBar = ({
       name={name}
       value={value}
       onChange={onChange}
+      placeholder={placeholder}
       required
     />
     <SearchButton className='search-btn' type='submit'>
@@ -35,25 +37,20 @@ export const SearchBar = ({
   </SearchForm>
 )
 
-interface IProps {
-  query: string
-}
-
-export const SearchBarBig = ({ query }: IProps) => {
-  const [newQuery, setnewQuery] = useState('')
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setnewQuery(e.target.value)
-  }
-
-  return (
-    <SearchFormBig action='' className='search-bar'>
-      <SearchBig
-        type='search'
-        name='search'
-        value={newQuery}
-        placeholder={query}
-        onChange={onChange}
-      />
-    </SearchFormBig>
-  )
-}
+export const SearchBarBig = ({
+  placeholder,
+  name,
+  value,
+  onChange,
+  onSubmit,
+}: SearchBarProps) => (
+  <SearchFormBig action='' className='search-bar' onSubmit={onSubmit}>
+    <SearchBig
+      type='search'
+      name={name}
+      value={value}
+      placeholder={placeholder}
+      onChange={onChange}
+    />
+  </SearchFormBig>
+)
