@@ -7,7 +7,7 @@ import { MainContainer } from './contentmain.style'
 /**
  * description
  * location {name, lat, lng}
- * images [{id, imageurl, description}]
+ * images [{id, uri, description}]
  */
 
 const ContentMain = ({
