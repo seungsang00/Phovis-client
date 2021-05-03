@@ -25,7 +25,7 @@ export const SearchInput = ({ value, onSubmit }: IProps) => {
       value={newQuery}
       onChange={onChange}
       onKeyDown={handleKeydown}
-      placeholder=' 🔍 키워드를 검색해서 장소를 더 빨리 찾을 수 있어요!'
+      placeholder=' 🔍 추천할 장소의 키워드를 검색해주세요!'
       autoFocus
     />
   )

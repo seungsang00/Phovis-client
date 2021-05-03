@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { KakaoMapContainer, SearchInput, SubmitButton } from '@components/index'
+import { Location, Tag } from '@interfaces'
 
 interface IProps {
-  location?: string
-  setLocation: (name: string, value: string | number) => void
+  locationInfo: Location
+  tags: Tag[]
+  handleLocation: (value: Location) => void
+  setLocationTag: (tag: Tag[]) => void
   handleModalClose: () => void
 }
 
-const MapContainer = ({ location, setLocation, handleModalClose }: IProps) => {
+const MapContainer = ({
+  locationInfo,
+  handleLocation,
+  handleModalClose,
+}: IProps) => {
+  const { location } = locationInfo
   const [keyword, setKeyword] = useState<string>(location || '')
+  const [coord, setCoord] = useState({ lat: undefined, lng: undefined })
 
   useEffect(() => {
     // script 심어주기
@@ -24,12 +33,13 @@ const MapContainer = ({ location, setLocation, handleModalClose }: IProps) => {
       // 지도를 표시할 div
       const container = document.getElementById('map')
       const options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3, // 지도의 확대 레벨
+        center: new kakao.maps.LatLng(37.24093737215525, 131.86746141852916), // 지도의 중심좌표
+        level: 4, // 지도의 확대 레벨
       }
 
       // 지도를 생성
       const map = new kakao.maps.Map(container, options)
+      map.setDraggable(false) // 지도 이동 막기
 
       // 장소 검색 객체 생성
       const ps = new kakao.maps.services.Places()
@@ -38,7 +48,8 @@ const MapContainer = ({ location, setLocation, handleModalClose }: IProps) => {
       const placesSearchCB = (data: any, status: any, _pagination: any) => {
         if (status === kakao.maps.services.Status.OK) {
           const bounds = new kakao.maps.LatLngBounds()
-
+          const position = map.getCenter()
+          console.log(`키워드 검색>>`, position)
           for (let i = 0; i < data.length; i++) {
             bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x))
           }
@@ -110,6 +121,9 @@ const MapContainer = ({ location, setLocation, handleModalClose }: IProps) => {
               marker.setPosition(mouseEvent.latLng)
               marker.setMap(map)
 
+              // 마커를 클릭한 위치의 위도, 경도 정보를 state에 저장합니다
+              setCoord({ lat: mouseEvent.latLng.Ma, lng: mouseEvent.latLng.La })
+
               // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
               infowindow.setContent(content)
               infowindow.open(map, marker)
@@ -130,9 +144,22 @@ const MapContainer = ({ location, setLocation, handleModalClose }: IProps) => {
 
   const handleSubmit = () => {
     const myLocation = document.querySelector('#my_location')?.textContent
+    // console.log(location_tag)
+    // setTagList([location_tag])
+
     if (myLocation) {
-      console.log(myLocation)
-      setLocation('location', myLocation)
+      console.log(`키워드>>`, keyword)
+      // const location_tag = {
+      //   id: keyword,
+      //   name: keyword,
+      // }
+      // setLocationTag([location_tag])
+      handleLocation({
+        keyword: keyword,
+        location: myLocation,
+        lat: coord.lat,
+        lng: coord.lng,
+      })
       handleModalClose()
     }
   }
