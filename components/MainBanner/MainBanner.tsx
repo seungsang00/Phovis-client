@@ -12,14 +12,14 @@ const MainBanner = ({ contents, onClickItem }: props) => {
     <SliderContainer index={index}>
       <div className='slider'>
         {contents.map((contentCard, index) => {
-          const { contentid, imageurl, title, description } = contentCard
+          const { id, mainimageUrl, title, description } = contentCard
           return (
             <div
-              id={contentid}
+              id={id}
               className='slide'
               key={index}
-              onClick={() => onClickItem(contentid)}>
-              <img className='slideimg' src={imageurl} />
+              onClick={() => onClickItem(id as string)}>
+              <img className='slideimg' src={mainimageUrl} />
               <div className='infocontainer'>
                 <h1 className='title'>{title}</h1>
                 <span className='description'>{description}</span>

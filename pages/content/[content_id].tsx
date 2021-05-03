@@ -1,23 +1,48 @@
-// "/content/:content_id"
-import { CommonLayout } from 'containers'
+import { CommonLayout, ContentBanner, ContentMain } from 'containers'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { RootReducer } from '@actions/reducer'
 
 // ! sample data
-import { sampleContents } from '@utils/index'
-import ContentBanner from '@containers/ContentBanner'
-const [{ contentid, title, likecount, user, imageurl }] = sampleContents
-const { id, name, imgUrl } = user
+import {
+  sampleContent,
+  sampleContents,
+  samplePhotoCardData,
+} from '@utils/index'
+import useAction from '@hooks/useAction'
+import { getContentData } from '@actions/content'
 
 // TODO: content_id로 서버에 데이터를 요청합니다
 const ContentPage = () => {
   const router = useRouter()
   const { content_id } = router.query
 
+  const _getContentData = useAction(getContentData)
+
   useEffect(() => {
-    console.log(router.query)
-  })
+    // TODO: get content data from redux store
+    if (content_id) {
+      _getContentData(content_id as string)
+    }
+  }, [content_id])
+
+  const { contentData, relatedContentList, photocardList } = useSelector(
+    (state: RootReducer) => state.content
+  )
+
+  const {
+    title,
+    mainimageUrl,
+    user,
+    likecount,
+    description,
+    location,
+    images,
+    tag,
+  } = contentData
+
   return (
     <>
       <Head>
@@ -28,16 +53,21 @@ const ContentPage = () => {
       <CommonLayout
         banner={
           <ContentBanner
-            title={title}
-            mainImgUrl={imageurl}
-            username={name}
-            userProfileUrl={imgUrl}
-            likesCount={likecount}
+            title={title || sampleContent.title}
+            mainImgUrl={mainimageUrl || sampleContent.mainimageUrl}
+            username={user.userName || sampleContent.user.userName}
+            userProfileUrl={user.profileImg || sampleContent.user.profileImg}
+            likesCount={likecount || sampleContent.likecount}
           />
         }>
-        <main>content main</main>
-        <section>연관 출장글</section>
-        <section>photocards</section>
+        <ContentMain
+          description={description || sampleContent.description}
+          location={location || sampleContent.location}
+          images={images || sampleContent.images}
+          tags={tag || sampleContent.tag}
+          related={relatedContentList || sampleContents}
+          photocards={photocardList || samplePhotoCardData}
+        />
       </CommonLayout>
     </>
   )

@@ -2,6 +2,7 @@ import { DivWithBgImg } from '@styles/index'
 import {
   ThumbnailContainer_square,
   ThumbnailContainer_rect,
+  ThumbnailWrap,
 } from './thumbnail.style'
 import BookmarkBtn from '../Buttons/BookmarkBtn'
 import { LikeBtn } from '@components/Buttons'
@@ -54,3 +55,34 @@ export const ThumbnailSquare = ({
     </DivWithBgImg>
   </ThumbnailContainer_square>
 )
+
+interface IProps {
+  contentid: string
+  imageurl: string
+  title: string
+  username: string
+}
+
+export const ContentThumbnail = ({
+  contentid,
+  imageurl,
+  title,
+  username,
+}: IProps) => {
+  const handleThumbnailClick = () => {
+    console.log(`content/${contentid} 로 이동`)
+  }
+  return (
+    <ThumbnailWrap className='thumbnail-wrap' onClick={handleThumbnailClick}>
+      <div className='thumbnail'>
+        <div className='thumbnail-bg'>
+          <DivWithBgImg bgUrl={imageurl} />
+        </div>
+        <div className='thumbnail-info'>
+          <h1>{title}</h1>
+          <p>{username}</p>
+        </div>
+      </div>
+    </ThumbnailWrap>
+  )
+}

@@ -77,7 +77,7 @@ const Login = () => {
   const requestGoogleLogin = async (
     result: GoogleLoginResponse | GoogleLoginResponseOffline
   ) => {
-    // console.log(result)
+    console.log(result)
     // console.log('requestGoogleLogin')
     if ('error' in result) {
       alert('Google Login fail')
