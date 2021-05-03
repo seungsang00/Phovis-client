@@ -1,21 +1,42 @@
-import { CommonLayout } from '@containers/Layout'
-import { Tab } from '@components/index'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import React, { useState, useEffect } from 'react'
+import { Tab } from '@components/index'
+import { CommonLayout } from '@containers/Layout'
+
+import { RootReducer } from '@actions/reducer'
+import { getUserInfo } from '@actions/users'
+import { useSelector } from 'react-redux'
+import useAction from '@hooks/useAction'
 
 const UserPage = () => {
   const tabList = ['Content', 'Likes', 'Bookmark']
   const router = useRouter()
-  const user_id = router.query.id
+  const user_id = Number(router.query.id)
 
   const [selctTab, setSelectTab] = useState('Content')
+
+  const { accessToken, user } = useSelector((state: RootReducer) => state.user)
+
+  const _getUserInfo = useAction(getUserInfo)
+
+  useEffect(() => {
+    _getUserInfo(accessToken)
+  }, [])
 
   useEffect(() => {
     if (user_id) {
       console.log(`user id >>`, user_id)
     }
-  }, [user_id])
+    if (user && user.id === user_id) {
+      console.log('login user id : ', user.id)
+      console.log('Set my page')
+    } else {
+      console.log(`user id >>`, user_id)
+      console.log('user :', user)
+      console.log('Set user page')
+    }
+  }, [user])
 
   const onClickTabHandler = (tab: string) => {
     setSelectTab(tab)
