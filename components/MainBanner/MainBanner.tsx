@@ -19,7 +19,7 @@ const MainBanner = ({ contents, onClickItem }: props) => {
               className='slide'
               key={index}
               onClick={() => onClickItem(id as string)}>
-              <img className='slideimg' src={mainimageUrl} />
+              <img className='slideimg' src={mainimageUrl as string} />
               <div className='infocontainer'>
                 <h1 className='title'>{title}</h1>
                 <span className='description'>{description}</span>
