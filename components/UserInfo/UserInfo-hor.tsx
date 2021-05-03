@@ -7,7 +7,7 @@ type props = {
 
 const UserInfoHor = ({
   profileImage = '/src/tmpProfileImg.webp',
-  userName = 'jeong',
+  userName,
 }: props) => {
   return (
     <UserContainer>

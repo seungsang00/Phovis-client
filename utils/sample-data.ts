@@ -81,6 +81,7 @@ export const sampleContents: IContent[] = [
     user: {
       id: 5,
       name: 'sim',
+      imgUrl: 'https://bit.ly/3gV8yqZ',
     },
     likecount: 42,
     images: [
