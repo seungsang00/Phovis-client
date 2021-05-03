@@ -120,7 +120,7 @@ export const login = ({ email, password }: Login) => {
     } catch (err) {
       dispatch(errorLogin('Login fail'))
       console.log(err)
-      throw err
+      // throw err
     }
   }
 }
@@ -152,7 +152,7 @@ export const getUserInfo = (stateAccessToken?: String) => {
       }
     } catch (err) {
       dispatch(errorGetUserInfo('fail get user info'))
-      throw err
+      // throw err
     }
   }
 }

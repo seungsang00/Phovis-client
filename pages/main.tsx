@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-// import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
 import Head from 'next/head'
 import { RootReducer } from '@actions/reducer'
@@ -26,10 +26,12 @@ import { sampleContents, samplePhotoCardData } from '@utils/index'
 const sampleTag = ['야경', '서울', '밤바다', '등산', '여름']
 //
 
-const mainPage = () => {
+const MainPage = () => {
   const [input, setInput] = useState({
     search: '',
   })
+
+  const router = useRouter()
 
   const _getUserInfo = useAction(getUserInfo)
   const _getBannderContentList = useAction(getBannderContentList)
@@ -49,8 +51,6 @@ const mainPage = () => {
   } = useSelector((state: RootReducer) => state.main)
 
   useEffect(() => {
-    // TODO : get main contents from Redux store
-    // TODO : load main data
     _getUserInfo(accessToken)
     _getBannderContentList()
     _getRecommendContentList()
@@ -58,7 +58,6 @@ const mainPage = () => {
     _getPhotoCardList()
   }, [])
 
-  // TODO : make infinite scrol interection
   useEffect(() => {
     console.log('error : ', error)
     console.log('bannerContentList : ', bannerContentList)
@@ -85,7 +84,7 @@ const mainPage = () => {
 
   const onSearchKeywordSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
-    console.log('submit search keyword :', input.search)
+    router.push(`/search?keyword=${input.search}`, `/search`)
   }
 
   const onTagClickHandler = (tag: String) => {
@@ -139,4 +138,4 @@ const mainPage = () => {
 
 // TODO : make static page source
 
-export default mainPage
+export default MainPage
