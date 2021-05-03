@@ -1,13 +1,22 @@
 // "/content/:content_id"
-import { CommonLayout } from 'containers'
+import { CommonLayout, ContentBanner, ContentMain } from 'containers'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
 // ! sample data
-import { sampleContents } from '@utils/index'
-import ContentBanner from '@containers/ContentBanner'
-const [{ contentid, title, likecount, user, imageurl }] = sampleContents
+import { sampleContent, sampleContents } from '@utils/index'
+
+const {
+  contentid,
+  title,
+  likecount,
+  user,
+  imageurl,
+  description,
+  location,
+  images,
+} = sampleContent
 const { id, name, imgUrl } = user
 
 // TODO: content_id로 서버에 데이터를 요청합니다
@@ -35,9 +44,12 @@ const ContentPage = () => {
             likesCount={likecount}
           />
         }>
-        <main>content main</main>
-        <section>연관 출장글</section>
-        <section>photocards</section>
+        <ContentMain
+          description={description}
+          location={location}
+          images={images}
+          related={sampleContents}
+        />
       </CommonLayout>
     </>
   )
