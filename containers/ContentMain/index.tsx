@@ -1,4 +1,5 @@
 import { LocationInfo, Photo, TagSmall } from '@components/index'
+import RelatedContents from '@containers/RelatedContents'
 import { IContentMain } from '@interfaces'
 import { MainContainer } from './contentmain.style'
 
@@ -39,7 +40,9 @@ const ContentMain = ({
           <TagSmall tagname={el} onClick={handleTagClick} />
         ))}
       </section>
-      <section className='related-contents'>related content</section>
+      <section className='related-contents'>
+        <RelatedContents related={related} />
+      </section>
       <section className='photocards'>photocard</section>
     </MainContainer>
   )

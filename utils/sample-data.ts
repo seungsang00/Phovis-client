@@ -138,7 +138,7 @@ export const sampleContents: IContent[] = [
     title: '구로구의 오래된 기찻길',
     location: { location: '구로구 향동', lat: 545.551555, lng: 54.5512 },
     user: {
-      id: 5,
+      id: 32901,
       name: 'sim',
       imgUrl: 'https://bit.ly/3gV8yqZ',
     },
@@ -177,12 +177,12 @@ export const sampleContents: IContent[] = [
       'https://file.mk.co.kr/meet/neds/2013/05/image__2013_394957_1369187781924826.jpg',
     description:
       '외국인뿐 아니라 내국인들도 한 번쯤은 꼭 가보는 명소, 북촌한옥마을. 많은 관광객이 다녀가도 조용한 풍경을 자랑하는 이 곳은 우리나라의 옛 것을 이어나가는 과거의 흔적과 현재의 아름다움이 함께 공존하고 있다. 작은 골목길 사이사이에 숨어있는 북촌 8경은 한옥마을에서 만날 수 있는 가장 기억에 남는 풍경을 담은 지점. 네모난 포토존을 찾아보는 것도 좋지만, 그 사이 아무 곳에서나 볼 수 없는 한옥의 아름다움을 못보고 지나치는 과오는 범하지 말자.',
-    title: '과거와 현재가 공존하는 장소 북촌한옥마을',
+    title: '야경이 아름다운 이 곳',
     location: { location: '북촌 한옥마을', lat: 545.551555, lng: 54.5512 },
     tag: ['서울', '한옥마을', '전통'],
     user: {
-      id: 5,
-      name: 'jeong',
+      id: 5700,
+      name: 'one',
     },
     likecount: 42,
     images: [
