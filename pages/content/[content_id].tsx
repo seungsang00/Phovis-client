@@ -1,8 +1,7 @@
-// "/content/:content_id"
 import { CommonLayout, ContentBanner, ContentMain } from 'containers'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '@actions/reducer'
 
@@ -27,45 +26,11 @@ const ContentPage = () => {
     if (content_id) {
       _getContentData(content_id as string)
     }
-    // console.log(sampleContent)
   }, [content_id])
 
   const { contentData, relatedContentList, photocardList } = useSelector(
     (state: RootReducer) => state.content
   )
-
-  // const initialState: any = {
-  //   error: null,
-  //   contentData: {
-  //     contentid: null,
-  //     imageurl: null,
-  //     description: null,
-  //     location: {
-  //       location: null,
-  //       lat: undefined,
-  //       lng: undefined,
-  //     },
-  //     user: {
-  //       id: null,
-  //       name: null,
-  //     },
-  //     likecount: 0,
-  //     images: [],
-  //     title: null,
-  //   },
-  //   relatedContentList: [],
-  //   photocardList: [],
-  // }
-  // const [content_data, setContent_data] = useState(initialState)
-
-  // useEffect(() => {
-  //   if (contentData) {
-  //     setContent_data(contentData)
-  //     console.log(`>>>>`, content_data)
-  //   }
-  // }, [contentData])
-
-  console.log(contentData)
 
   const {
     title,

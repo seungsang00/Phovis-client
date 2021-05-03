@@ -14,7 +14,7 @@ export interface ContentState {
 const initialState: ContentState = {
   error: null,
   contentData: {
-    id: null,
+    id: undefined,
     mainimageUrl: null,
     description: null,
     location: {
@@ -77,6 +77,7 @@ export const getContentData = (contentid: string) => {
 export const getRelatedContentList = () => {
   return async (dispatch: Function) => {
     try {
+      // todo: 연관 컨텐츠 요청
     } catch (e) {
       throw e
     }
@@ -86,6 +87,7 @@ export const getRelatedContentList = () => {
 export const getRelatedPhotocardList = () => {
   return async (dispatch: Function) => {
     try {
+      // TODO: 연관 포토카드 요청
       const result = await axios.get(`https://localhost:4000/photocard`)
     } catch (e) {
       throw e

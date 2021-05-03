@@ -8,7 +8,7 @@ interface IProps {
 }
 
 const LocationInfo = ({ locationInfo }: IProps) => {
-  const { location, lat, lng } = locationInfo
+  const { location } = locationInfo
   return (
     <div>
       <LocContainer>

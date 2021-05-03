@@ -2,7 +2,7 @@ import { IUser, IImage, LocationType } from './index'
 import { IPhotoCard } from './photocard'
 
 export interface IContent {
-  id: string | null
+  id?: string
   imageid?: number
   mainimageUrl: string | null // mainImgUrl
   tag?: string[]
