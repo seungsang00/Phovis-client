@@ -16,11 +16,13 @@ export const ImgContainer = styled.div<WrapperProps>`
   flex-direction: row;
   align-items: center;
   .heart {
-    fill: ${(props) => (props.isActive ? 'red' : 'black')};
+    fill: ${(props) => (props.isActive ? 'red' : '#ccc')};
     position: relative;
   }
   & > span {
-    padding-left: 5px;
-    font-size: 1rem;
+    padding-left: 8px;
+    line-height: 1.5rem;
+    font-size: 1.25rem;
+    color: #fff;
   }
 `
