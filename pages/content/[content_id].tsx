@@ -2,7 +2,9 @@
 import { CommonLayout, ContentBanner, ContentMain } from 'containers'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { RootReducer } from '@actions/reducer'
 
 // ! sample data
 import {
@@ -10,29 +12,72 @@ import {
   sampleContents,
   samplePhotoCardData,
 } from '@utils/index'
-
-const {
-  contentid,
-  title,
-  likecount,
-  user,
-  imageurl,
-  description,
-  location,
-  images,
-  tag,
-} = sampleContent
-const { id, name, imgUrl } = user
+import useAction from '@hooks/useAction'
+import { getContentData } from '@actions/content'
 
 // TODO: content_id로 서버에 데이터를 요청합니다
 const ContentPage = () => {
   const router = useRouter()
   const { content_id } = router.query
 
+  const _getContentData = useAction(getContentData)
+
   useEffect(() => {
-    console.log(router.query)
-    console.log(sampleContent)
-  })
+    // TODO: get content data from redux store
+    if (content_id) {
+      _getContentData(content_id as string)
+    }
+    // console.log(sampleContent)
+  }, [content_id])
+
+  const { contentData, relatedContentList, photocardList } = useSelector(
+    (state: RootReducer) => state.content
+  )
+
+  // const initialState: any = {
+  //   error: null,
+  //   contentData: {
+  //     contentid: null,
+  //     imageurl: null,
+  //     description: null,
+  //     location: {
+  //       location: null,
+  //       lat: undefined,
+  //       lng: undefined,
+  //     },
+  //     user: {
+  //       id: null,
+  //       name: null,
+  //     },
+  //     likecount: 0,
+  //     images: [],
+  //     title: null,
+  //   },
+  //   relatedContentList: [],
+  //   photocardList: [],
+  // }
+  // const [content_data, setContent_data] = useState(initialState)
+
+  // useEffect(() => {
+  //   if (contentData) {
+  //     setContent_data(contentData)
+  //     console.log(`>>>>`, content_data)
+  //   }
+  // }, [contentData])
+
+  console.log(contentData)
+
+  const {
+    title,
+    mainimageUrl,
+    user,
+    likecount,
+    description,
+    location,
+    images,
+    tag,
+  } = contentData
+
   return (
     <>
       <Head>
@@ -43,20 +88,20 @@ const ContentPage = () => {
       <CommonLayout
         banner={
           <ContentBanner
-            title={title}
-            mainImgUrl={imageurl}
-            username={name}
-            userProfileUrl={imgUrl}
-            likesCount={likecount}
+            title={title || sampleContent.title}
+            mainImgUrl={mainimageUrl || sampleContent.mainimageUrl}
+            username={user.userName || sampleContent.user.userName}
+            userProfileUrl={user.profileImg || sampleContent.user.profileImg}
+            likesCount={likecount || sampleContent.likecount}
           />
         }>
         <ContentMain
-          description={description}
-          location={location}
-          images={images}
-          tags={tag}
-          related={sampleContents}
-          photocards={samplePhotoCardData}
+          description={description || sampleContent.description}
+          location={location || sampleContent.location}
+          images={images || sampleContent.images}
+          tags={tag || sampleContent.tag}
+          related={relatedContentList || sampleContents}
+          photocards={photocardList || samplePhotoCardData}
         />
       </CommonLayout>
     </>

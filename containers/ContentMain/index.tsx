@@ -1,5 +1,4 @@
-import { LocationInfo, Photo, Polaroid, TagSmall } from '@components/index'
-import PhotoCardGallery from '@containers/PhotoCardGallery/PhotoCardGallery'
+import { LocationInfo, Photo, TagSmall } from '@components/index'
 import Polaroids from '@containers/Polaroids'
 import RelatedContents from '@containers/RelatedContents'
 import { IContentMain } from '@interfaces'
@@ -47,10 +46,7 @@ const ContentMain = ({
         <RelatedContents related={related} />
       </section>
       <section className='photocards'>
-        <div>
-          <Polaroids photocards={photocards} />
-        </div>
-        {/* <PhotoCardGallery photocards={photocards} /> */}
+        <Polaroids photocards={photocards} />
       </section>
     </MainContainer>
   )

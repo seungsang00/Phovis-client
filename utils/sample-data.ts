@@ -68,7 +68,7 @@ export const samplePhotoData: IPhoto = {
   photoUrl_h: 'https://bit.ly/32RvRK2',
 }
 export const sampleContent: IContent = {
-  contentid: 'dedbdc9e-f87a-420b-b15d-3818dabdbeb0',
+  id: 'dedbdc9e-f87a-420b-b15d-3818dabdbeb0',
   title: '구로구 오래된 기찻길',
   description:
     '구로구에는 오래된 기찻길이 있다. 서울에서는 기찻길을 걸을 수 있는 곳이 흔치 않지만 이 곳에서는 많은 사람들이 산책로로, 사진을 위한 출사지로도 애용하는 장소, 구로구 항동 기찻길이다. 쭉 이어진 기찻길 초입에는 단지 내 주민들이 놀고있지만, 좀 더 걷다 보면 약간은 시골의 옛 풍경을 옮겨놓은 듯한 모습을 발견할 수 있다. 오래된 표지판이나 산책을 나온 부부, 철도 중간에 핀 초록색 풀이나 들꽃의 아이러니한 조화도 모두 항동 기찻길에서만 만나볼 수 있는 하나의 사진 포인트가 될 수 있다.',
@@ -129,7 +129,7 @@ export const sampleContent: IContent = {
 }
 export const sampleContents: IContent[] = [
   {
-    contentid: '1asdfzxcv',
+    id: '1asdfzxcv',
     imageid: 1,
     imageurl:
       'https://file.mk.co.kr/meet/neds/2013/05/image_readbot_2013_394957_1369187781924822.jpg',
@@ -171,7 +171,7 @@ export const sampleContents: IContent[] = [
     ],
   },
   {
-    contentid: '2asdfzxcv',
+    id: '2asdfzxcv',
     imageid: 23,
     imageurl:
       'https://file.mk.co.kr/meet/neds/2013/05/image__2013_394957_1369187781924826.jpg',
@@ -213,7 +213,7 @@ export const sampleContents: IContent[] = [
     ],
   },
   {
-    contentid: '3asdfzxcv',
+    id: '3asdfzxcv',
     imageid: 261,
     imageurl:
       'https://cdn.pixabay.com/photo/2019/05/27/19/22/asia-4233412_960_720.jpg',
