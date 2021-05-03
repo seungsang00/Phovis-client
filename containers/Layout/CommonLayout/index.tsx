@@ -20,7 +20,7 @@ const CommonLayout = ({ banner, children, title = 'Phovis' }: ILayout) => {
       <HeaderContainer>
         <Header />
       </HeaderContainer>
-      <Banner>{banner}</Banner>
+      {banner && <Banner>{banner}</Banner>}
       <Main>{children}</Main>
     </>
   )
