@@ -1,9 +1,9 @@
 import { LocationInput } from '@components/index'
 import { Input, LocationDiv } from './inputlocation.style'
-import { Location } from '@interfaces'
+import { LocationType } from '@interfaces'
 
 interface IInput {
-  location: Location
+  location: LocationType
 }
 
 const InputLocation = ({ location }: IInput) => {
@@ -18,7 +18,7 @@ const InputLocation = ({ location }: IInput) => {
 }
 
 interface IProps {
-  location: Location
+  location: LocationType
   onClick: () => void
 }
 

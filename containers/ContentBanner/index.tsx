@@ -1,21 +1,6 @@
 import { BookmarkBtn, LikeBtn, UserInfoHor } from '@components/index'
+import { IContentBanner } from '@interfaces'
 import { DivWithBgImg } from '@styles/index'
-
-/**
-title
-mainImgUrl
-likesCount
-isBookmarked
-username
-profileImgUrl
- */
-interface IProps {
-  title: string
-  mainImgUrl: string
-  username: string
-  userProfileUrl: string
-  likesCount: number
-}
 
 const ContentBanner = ({
   title,
@@ -23,7 +8,7 @@ const ContentBanner = ({
   username,
   userProfileUrl,
   likesCount,
-}: IProps) => {
+}: IContentBanner) => {
   return (
     <DivWithBgImg bgUrl={mainImgUrl}>
       <div className='top-right'>

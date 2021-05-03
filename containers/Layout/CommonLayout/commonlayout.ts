@@ -33,7 +33,7 @@ export const Banner = styled.div`
   border: 1px solid lightslategray;
 `
 export const Main = styled.main`
-  width: 100%;
+  width: 97%;
   padding: 0 20px;
   display: flex;
   justify-content: center;

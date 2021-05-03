@@ -1,6 +1,6 @@
 export interface IUser {
-  id: number
-  name: string
-  imgUrl?: string
+  id: number | null
+  userName: string | null
+  profileImg?: string
   contentCount?: number
 }
