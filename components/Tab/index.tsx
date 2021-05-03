@@ -1,13 +1,14 @@
 import Link from 'next/link'
 import { TabWrapper } from './tab.style'
 
-const Tab = ({ tablist }: any) => {
+const Tab = ({ tablist, onClick }: any) => {
   return (
     <TabWrapper>
       <ul>
         {tablist.map((tab: string) => (
-          <li>
-            <Link href={`/user/${tab}`}>{tab}</Link>
+          <li onClick={() => onClick(tab)}>
+            <div>{tab}</div>
+            {/* <Link href={`/user/${tab}`}>{tab}</Link> */}
           </li>
         ))}
       </ul>
