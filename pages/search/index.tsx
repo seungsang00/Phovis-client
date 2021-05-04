@@ -9,7 +9,7 @@ import { IContent } from '@interfaces'
 import { sampleContents } from '@utils/index'
 //
 
-const LOCAL_KEY_SEARCh_HISTORY = 'LOCAL_KEY_SEARCh_HISTORY'
+const LOCAL_KEY_SEARCH_HISTORY = 'LOCAL_KEY_SEARCH_HISTORY'
 
 const SearchPage = () => {
   const router = useRouter()
@@ -28,7 +28,7 @@ const SearchPage = () => {
       loadSearchResult(searchKeyword)
     }
 
-    const localSearchHistory = localStorage.getItem(LOCAL_KEY_SEARCh_HISTORY)
+    const localSearchHistory = localStorage.getItem(LOCAL_KEY_SEARCH_HISTORY)
     if (localSearchHistory) {
       const parsed = JSON.parse(localSearchHistory)
       setSearchHistory(parsed)
@@ -38,7 +38,7 @@ const SearchPage = () => {
   useEffect(() => {
     console.log('new history : ', searchHistory)
     localStorage.setItem(
-      LOCAL_KEY_SEARCh_HISTORY,
+      LOCAL_KEY_SEARCH_HISTORY,
       JSON.stringify(searchHistory)
     )
   }, [searchHistory])
