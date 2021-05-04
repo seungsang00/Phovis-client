@@ -39,7 +39,7 @@ const Like = ({ id, like, isChecked = false }: props) => {
 
     if (status === 201) {
       setActive(data.isLike)
-      data.isLike ? setCount(count - 1) : setCount(count + 1)
+      data.isLike ? setCount(count + 1) : setCount(count - 1)
     }
     // console.log(e)
   }

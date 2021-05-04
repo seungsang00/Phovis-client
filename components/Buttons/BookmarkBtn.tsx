@@ -47,6 +47,7 @@ const BookmarkBtn = ({ id, isChecked = false }: Props) => {
         id={`star_${id}`}
         className='hide-checkbox'
         checked={isBookmarked}
+        readOnly={true}
       />
       <label
         onClick={handleClick}

@@ -17,7 +17,7 @@ const UserPage = () => {
   const router = useRouter()
   const user_id = router.query.id
 
-  const [selctTab, setSelectTab] = useState('Content')
+  const [selectedTab, setSelectedTab] = useState('Content')
   const [userContents, setUserContents] = useState<IContent[]>([])
   const [userLikesContents, setUserLikesContents] = useState<IContent[]>([])
   const [userBookmarkContents, setUserBookmarkContents] = useState<IContent[]>(
@@ -35,6 +35,10 @@ const UserPage = () => {
   }, [])
 
   useEffect(() => {
+    if (user_id) {
+      loadContent(selectedTab)
+    }
+
     if (user_id && user && String(user.id) === user_id) {
       console.log('login user id : ', user.id)
       console.log('Set my page')
@@ -46,7 +50,7 @@ const UserPage = () => {
   }, [user, user_id])
 
   const onClickTabHandler = (tab: string) => {
-    setSelectTab(tab)
+    setSelectedTab(tab)
     loadContent(tab)
   }
 
@@ -114,6 +118,8 @@ const UserPage = () => {
   }
 
   const loadContent = async (tab: string) => {
+    console.log('tab : ', tab)
+
     if (tab === 'Content') {
       loadUserContents()
     } else if (tab === 'Likes') {
@@ -141,19 +147,19 @@ const UserPage = () => {
           <Tab
             tablist={tabList}
             onClick={onClickTabHandler}
-            selectedTab={selctTab}
+            selectedTab={selectedTab}
           />
           {/* 여기에 탭 메뉴에 해당하는 내용을 넣어주세요. 동적 라우트로 처리하는게 좋을까요? */}
-          {selctTab === 'Content' && (
+          {selectedTab === 'Content' && (
             <UserContentsTab userContents={userContents} />
           )}
-          {selctTab === 'Likes' && (
+          {selectedTab === 'Likes' && (
             <UserContentsTab userContents={userLikesContents} />
           )}
-          {selctTab === 'Bookmark' && (
+          {selectedTab === 'Bookmark' && (
             <UserContentsTab userContents={userBookmarkContents} />
           )}
-          {selctTab === 'Setting' && <ProfileSetting user={user as IUser} />}
+          {selectedTab === 'Setting' && <ProfileSetting user={user as IUser} />}
         </TabContainer>
       </CommonLayout>
     </>

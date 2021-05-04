@@ -133,11 +133,12 @@ const ComponentSamplePage = () => {
       <hr />
       <LocationInfo locationInfo={locationData} />
       <hr />
-      <LikeBtn like={23} isChecked={true} />
+      <LikeBtn id='TEST' like={23} isChecked={true} />
       <PhotoCardInput location={locationData} />
       <UserInfoHor userName={'jeong'} />
       <UserInfoVer userName={'jeong'} />
       <PhotoCardPreview
+        id='TEST'
         description={'장소에 대한 정보'}
         imageurl={''}
         userName={'jeong'}
@@ -152,6 +153,7 @@ const ComponentSamplePage = () => {
       <UserInfoVer userName={'jeong'} />
       <hr />
       <PhotoCardPreview
+        id='TEST'
         description={'장소에 대한 정보'}
         imageurl={''}
         userName={'jeong'}
