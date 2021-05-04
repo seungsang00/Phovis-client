@@ -1,3 +1,4 @@
+import { IUser } from '@interfaces'
 import axios, { AxiosResponse } from 'axios'
 import * as actionTypes from './actionTypes'
 
@@ -9,13 +10,13 @@ const {
 } = actionTypes
 const LOCAL_KEY_ACCESS_TOKEN = 'LOCAL_ACCESS_TOKEN'
 
-type User = {
-  id: number
-  userName: string
-  email: string
-  type: string
-  profileImg: string
-}
+// type User = {
+//   id: number
+//   userName: string
+//   email: string
+//   type: string
+//   profileImg: string
+// }
 interface Signin {
   email: string
   password: string
@@ -30,7 +31,7 @@ type userState = {
   isLogin: boolean
   accessToken?: string
   error: null | string | AxiosResponse<any>
-  user?: User | null
+  user?: IUser | null
   test?: any
 }
 
@@ -219,23 +220,9 @@ export const resetErrorMessage = () => {
   }
 }
 
-export const updateUserAvatar = (accessToken: string, url: string) => {
-  return async (dispatch: Function) => {
-    try {
-      const res = await axios.put(`https://localhost:4000/user/info`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        image: url,
-      })
-      if (res.status === 200) {
-        dispatch(successUpdateUserAvatar(res))
-      } else {
-        dispatch(errorUpdateUserAvatar('failed update user profile image'))
-      }
-    } catch (e) {
-      dispatch(errorUpdateUserAvatar('error update user profile image : ' + e))
-    }
+export const updateUserAvatar = (profileImgUrl: string) => {
+  return (dispatch: Function) => {
+    dispatch(successUpdateUserAvatar(profileImgUrl))
   }
 }
 
@@ -294,10 +281,12 @@ function user(state: userState = initialState, action: userAction): userState {
       return { ...state, error: null }
 
     case UserAction.UPDATE_USER_AVATAR_SUCCESS:
-      const getUpdateResponse = action.payload as AxiosResponse
-      console.log(`응답>>`, getUpdateResponse)
-      const profileImgUrl = { ...state, ...getUpdateResponse.data }
-      return { ...state }
+      const profileImg = action.payload as string
+      console.log(`응답>>`, profileImg)
+      return {
+        ...state,
+        user: { ...state.user, profileImg },
+      }
     default:
       return state
   }

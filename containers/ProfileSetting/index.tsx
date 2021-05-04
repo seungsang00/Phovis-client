@@ -1,5 +1,5 @@
-import { RootReducer } from '@actions/reducer'
-import { getUserInfo } from '@actions/users'
+// import { RootReducer } from '@actions/reducer'
+// import { getUserInfo } from '@actions/users'
 import {
   Modal,
   ProfileInput,
@@ -7,9 +7,10 @@ import {
   ToggleBtn,
 } from '@components/index'
 import { PasswordConfirm } from '@containers/index'
-import useAction from '@hooks/useAction'
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+// import useAction from '@hooks/useAction'
+import { IUser } from '@interfaces'
+import { useState } from 'react'
+// import { useSelector } from 'react-redux'
 import { SettingContainer } from './profilesetting.style'
 
 const props = {
@@ -18,18 +19,12 @@ const props = {
     'https://media.vlpt.us/images/seungsang00/profile/08b725c1-cc7f-4bed-9292-97f2f7ff3415/%E3%85%87%E3%85%85%E3%85%87.jpeg?w=240',
   handlePublicSection: () => console.log(`public changed`),
 }
-const ProfileSetting = () => {
-  // ! get user state
-  const _getUserInfo = useAction(getUserInfo)
 
-  const { isLogin, accessToken, user } = useSelector(
-    (state: RootReducer) => state.user
-  )
+interface IProps {
+  user: IUser
+}
 
-  useEffect(() => {
-    _getUserInfo(accessToken)
-  }, [])
-
+const ProfileSetting = ({ user }: IProps) => {
   // ! Modal control
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
 
@@ -71,7 +66,9 @@ const ProfileSetting = () => {
             <button onClick={handleModalOpen}>Edit password</button>
             {modalIsOpen && (
               <Modal w='400px' h='500px' handleModalClose={handleModalClose}>
-                <PasswordConfirm />
+                <PasswordConfirm
+                  handleModalClose={() => setModalIsOpen(false)}
+                />
               </Modal>
             )}
             {/* <ProfileInput

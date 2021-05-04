@@ -9,9 +9,21 @@ type props = {
 const PhotoCardGallery = ({ photocards }: props) => {
   return (
     <PhotocardGalleryContainer>
-      {photocards.map((card: IPhotoCard) => (
-        <PhotoCardPreview key={card.id} {...card} />
-      ))}
+      {photocards &&
+        photocards.length > 0 &&
+        photocards.map((card: IPhotoCard) => {
+          const { description, url, userName, profileImage, like } = card
+          return (
+            <PhotoCardPreview
+              key={card.photocardId}
+              description={description}
+              imageurl={url}
+              userName={userName}
+              profileImage={profileImage}
+              like={like}
+            />
+          )
+        })}
     </PhotocardGalleryContainer>
   )
 }

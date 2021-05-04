@@ -47,15 +47,9 @@ export const getContentData = (contentid: string) => {
       const res = await axios.get(
         `https://localhost:4000/content?id=${contentid}`
       )
-      console.log(`응답??`, res)
       if (res.status === 200) {
-        const { result } = res.data
-        // todo: setStatus
-        dispatch(
-          dispatchGetData(ContentAction.GET_CONTENT_DATA_SUCCESS, result)
-        )
+        dispatch(dispatchGetData(ContentAction.GET_CONTENT_DATA_SUCCESS, res))
       } else {
-        // todo: error
         dispatch(
           dispatchGetData(
             ContentAction.GET_CONTENT_DATA_ERROR,
@@ -67,30 +61,67 @@ export const getContentData = (contentid: string) => {
       dispatch(
         dispatchGetData(
           ContentAction.GET_CONTENT_DATA_ERROR,
-          'error load banner : ' + e
+          'error load content : ' + e
         )
       )
     }
   }
 }
 
-export const getRelatedContentList = () => {
+export const getRelatedContentList = (tags: string) => {
   return async (dispatch: Function) => {
     try {
-      // todo: 연관 컨텐츠 요청
+      // todo: tag 기반 연관 컨텐츠 요청. 최대 10개
+      const res = await axios.get(
+        `https://localhost:4000/content?tag=${tags}&maxnum=10`
+      )
+      // console.log(res)
+      if (res.status === 200) {
+        dispatch(
+          dispatchGetData(ContentAction.GET_RELATED_CONTENT_LIST_SUCCESS, res)
+        )
+      } else {
+        dispatch(
+          dispatchGetData(
+            ContentAction.GET_RELATED_CONTENT_LIST_ERROR,
+            'failed load related contents'
+          )
+        )
+      }
     } catch (e) {
-      throw e
+      dispatchGetData(
+        ContentAction.GET_RELATED_CONTENT_LIST_ERROR,
+        'error load related contents : ' + e
+      )
     }
   }
 }
 
-export const getRelatedPhotocardList = () => {
+export const getRelatedPhotocardList = (tags: string) => {
   return async (dispatch: Function) => {
     try {
       // TODO: 연관 포토카드 요청
-      const result = await axios.get(`https://localhost:4000/photocard`)
+      const res = await axios.get(
+        `https://localhost:4000/photocard?tag=${tags}&maxnum=10`
+      )
+      console.log(res)
+      if (res.status === 200) {
+        dispatch(
+          dispatchGetData(ContentAction.GET_PHOTO_CARD_LIST_SUCCESS, res)
+        )
+      } else {
+        dispatch(
+          dispatchGetData(
+            ContentAction.GET_PHOTO_CARD_LIST_ERROR,
+            'failed load photocards'
+          )
+        )
+      }
     } catch (e) {
-      throw e
+      dispatchGetData(
+        ContentAction.GET_PHOTO_CARD_LIST_ERROR,
+        'error load photocards : ' + e
+      )
     }
   }
 }
@@ -103,11 +134,20 @@ function content(
 ): ContentState {
   switch (action.type) {
     case ContentAction.GET_CONTENT_DATA_SUCCESS:
-      const getContentData = action.payload
+      const { result: getContentData } = action.payload.data
       const getContent = { ...state.contentData, ...getContentData }
-      // console.log(`페이로드`, action.payload)
-      // console.log(`겟컨텐츠`, getContent)
       return { ...state, contentData: getContent }
+
+    case ContentAction.GET_RELATED_CONTENT_LIST_SUCCESS:
+      const { data: getRelatedContents } = action.payload.data
+      const getRelated = [...state.relatedContentList, ...getRelatedContents]
+      return { ...state, relatedContentList: getRelated }
+
+    case ContentAction.GET_PHOTO_CARD_LIST_SUCCESS:
+      const { data: getPhotoCardList } = action.payload
+      const getPhotoCards = [...state.photocardList, ...getPhotoCardList]
+      return { ...state, photocardList: getPhotoCards }
+
     default:
       return state
   }

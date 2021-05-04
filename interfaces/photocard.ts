@@ -1,7 +1,12 @@
+import { LocationType } from './contentform'
+
 export type IPhotoCard = {
-  id: string
-  imageurl: string
+  photocardId: string
+  imageId?: number
+  url: string
   description?: string
+  location?: LocationType
+  tags?: string[]
   userName: string
   profileImage?: string
   like?: number

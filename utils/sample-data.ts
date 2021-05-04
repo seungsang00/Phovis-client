@@ -2,21 +2,36 @@ import { IUser, IPhoto, IPhotoCard, IContent } from '@interfaces'
 
 /** Dummy user data. */
 export const sampleUserData: IUser[] = [
-  { id: 101, userName: 'Alice', profileImg: 'https://bit.ly/3euIgJj', contentCount: 5 },
-  { id: 102, userName: 'Bob', profileImg: 'https://bit.ly/3euIgJj', contentCount: 3 },
+  {
+    id: 101,
+    userName: 'Alice',
+    profileImg: 'https://bit.ly/3euIgJj',
+    contentCount: 5,
+  },
+  {
+    id: 102,
+    userName: 'Bob',
+    profileImg: 'https://bit.ly/3euIgJj',
+    contentCount: 3,
+  },
   {
     id: 103,
     userName: 'Caroline',
     profileImg: 'https://bit.ly/3euIgJj',
     contentCount: 15,
   },
-  { id: 104, userName: 'Dave', profileImg: 'https://bit.ly/3euIgJj', contentCount: 8 },
+  {
+    id: 104,
+    userName: 'Dave',
+    profileImg: 'https://bit.ly/3euIgJj',
+    contentCount: 8,
+  },
 ]
 
 export const samplePhotoCardData: IPhotoCard[] = [
   {
-    id: '1qwerasdf',
-    imageurl:
+    photocardId: '1qwerasdf',
+    url:
       'https://cdn.pixabay.com/photo/2019/03/25/20/17/kaohsiung-4081256_960_720.jpg',
     description: '멋진 풍경이였어요',
     userName: 'seungsang00',
@@ -24,8 +39,8 @@ export const samplePhotoCardData: IPhotoCard[] = [
     like: 30,
   },
   {
-    id: '2qwerasdf',
-    imageurl:
+    photocardId: '2qwerasdf',
+    url:
       'https://cdn.pixabay.com/photo/2020/11/07/23/22/beach-5722568__340.jpg',
     description: '멋진 풍경이였어요',
     userName: 'seungsang00',
@@ -33,8 +48,8 @@ export const samplePhotoCardData: IPhotoCard[] = [
     like: 30,
   },
   {
-    id: '3qwerasdf',
-    imageurl:
+    photocardId: '3qwerasdf',
+    url:
       'https://cdn.pixabay.com/photo/2020/10/27/20/17/lake-5691800_960_720.jpg',
     description: '멋진 풍경이였어요',
     userName: 'seungsang00',
@@ -42,8 +57,8 @@ export const samplePhotoCardData: IPhotoCard[] = [
     like: 30,
   },
   {
-    id: '4qwerasdf',
-    imageurl:
+    photocardId: '4qwerasdf',
+    url:
       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg',
     description: '멋진 풍경이였어요',
     userName: 'seungsang00',
@@ -51,8 +66,8 @@ export const samplePhotoCardData: IPhotoCard[] = [
     like: 30,
   },
   {
-    id: '5qwerasdf',
-    imageurl:
+    photocardId: '5qwerasdf',
+    url:
       'https://cdn.pixabay.com/photo/2021/01/08/17/56/river-5900547__340.jpg',
     description: '멋진 풍경이였어요',
     userName: 'seungsang00',

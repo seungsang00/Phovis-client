@@ -3,10 +3,11 @@ import { FormEvent, useState } from 'react'
 
 type props = {
   like: number
+  isChecked?: boolean
 }
 
-const Like = ({ like }: props) => {
-  const [isActive, setActive] = useState<boolean>(false)
+const Like = ({ like, isChecked = false }: props) => {
+  const [isActive, setActive] = useState<boolean>(isChecked)
   const [count, setCount] = useState<number>(like)
 
   const handleClick = (e: FormEvent) => {

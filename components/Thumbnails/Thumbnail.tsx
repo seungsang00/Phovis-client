@@ -14,6 +14,8 @@ interface IRect {
   username: string
   bgImage: string
   likeCount: number
+  isBookMark?: boolean
+  isLike?: boolean
 }
 
 // NOTE : ThumbnailRect, ThumbnailSquare 컴포넌트 하단에 태그를 노출 시키면 좋을것 같아요
@@ -24,15 +26,17 @@ export const ThumbnailRect = ({
   username,
   bgImage,
   likeCount,
+  isBookMark = false,
+  isLike = false,
 }: IRect) => (
   <ThumbnailContainer_rect>
     <DivWithBgImg bgUrl={bgImage} p={'24px'}>
       <span className='bookmark'>
-        <BookmarkBtn id={id} />
+        <BookmarkBtn id={id} isChecked={isBookMark} />
       </span>
       <UserInfoHor userName={username} profileImage={profileImage} />
       <span className='like'>
-        <LikeBtn like={likeCount} />
+        <LikeBtn like={likeCount} isChecked={isLike} />
       </span>
     </DivWithBgImg>
   </ThumbnailContainer_rect>

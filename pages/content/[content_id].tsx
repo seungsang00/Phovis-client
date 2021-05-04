@@ -12,14 +12,19 @@ import {
   samplePhotoCardData,
 } from '@utils/index'
 import useAction from '@hooks/useAction'
-import { getContentData } from '@actions/content'
+import {
+  getContentData,
+  getRelatedContentList,
+  getRelatedPhotocardList,
+} from '@actions/content'
 
-// TODO: content_id로 서버에 데이터를 요청합니다
 const ContentPage = () => {
   const router = useRouter()
   const { content_id } = router.query
 
   const _getContentData = useAction(getContentData)
+  const _getRelatedContentList = useAction(getRelatedContentList)
+  const _getRelatedPhotoCardList = useAction(getRelatedPhotocardList)
 
   useEffect(() => {
     // TODO: get content data from redux store
@@ -28,9 +33,7 @@ const ContentPage = () => {
     }
   }, [content_id])
 
-  const { contentData, relatedContentList, photocardList } = useSelector(
-    (state: RootReducer) => state.content
-  )
+  const { contentData } = useSelector((state: RootReducer) => state.content)
 
   const {
     title,
@@ -42,6 +45,20 @@ const ContentPage = () => {
     images,
     tag,
   } = contentData
+
+  useEffect(() => {
+    const tags = tag?.join(',')
+    console.log(tags)
+    if (tags) {
+      _getRelatedContentList(tags as string)
+      _getRelatedPhotoCardList(tags as string)
+    }
+  }, [tag])
+
+  const { relatedContentList, photocardList } = useSelector(
+    (state: RootReducer) => state.content
+  )
+  console.log(relatedContentList)
 
   return (
     <>
