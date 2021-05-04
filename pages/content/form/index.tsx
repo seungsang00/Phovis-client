@@ -3,9 +3,9 @@ import {
   AddTagsSection,
   AddLocationSection,
   MapContainer,
+  FormLayout,
 } from '@containers/index'
 import React, { ChangeEvent, useRef, useState } from 'react'
-import { FormLayout } from './form.style'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '@actions/reducer'
 import { IContentForm, LocationType, Tag } from '@interfaces'
