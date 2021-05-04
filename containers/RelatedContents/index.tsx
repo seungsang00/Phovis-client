@@ -10,12 +10,12 @@ const RelatedContents = ({ related }: IProps) => {
     <Wrapper>
       <h2 className='section-title'>여기는 어때요?</h2>
       <div className='thumbnails'>
-        {related.map(({ contentid, imageurl, title, user }) => (
+        {related.map(({ id, mainimageUrl, title, user }) => (
           <ContentThumbnail
-            contentid={contentid}
-            imageurl={imageurl}
-            title={title}
-            username={user.name}
+            contentid={id as string}
+            imageurl={mainimageUrl as string}
+            title={title as string}
+            username={user.userName as string}
           />
         ))}
       </div>
