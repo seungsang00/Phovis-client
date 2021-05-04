@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { TabWrapper } from './tab.style'
 
 const Tab = ({ tablist, onClick }: any) => {
@@ -8,7 +7,6 @@ const Tab = ({ tablist, onClick }: any) => {
         {tablist.map((tab: string) => (
           <li key={tab} onClick={() => onClick(tab)}>
             <div>{tab}</div>
-            {/* <Link href={`/user/${tab}`}>{tab}</Link> */}
           </li>
         ))}
       </ul>

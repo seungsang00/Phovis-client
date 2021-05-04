@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { KakaoMapContainer, SearchInput, SubmitButton } from '@components/index'
-import { Location, Tag } from '@interfaces'
+import { LocationType, Tag } from '@interfaces'
 
 interface IProps {
-  locationInfo: Location
+  locationInfo: LocationType
   tags: Tag[]
-  handleLocation: (value: Location) => void
+  handleLocation: (value: LocationType) => void
   setLocationTag: (tag: Tag[]) => void
   handleModalClose: () => void
 }
