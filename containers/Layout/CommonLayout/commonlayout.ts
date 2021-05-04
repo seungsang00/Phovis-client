@@ -25,6 +25,9 @@ export const HeaderInner = styled.div`
   div {
     display: flex;
   }
+  .main-logo {
+    cursor: pointer;
+  }
 `
 export const Banner = styled.div`
   width: 100%;
@@ -34,8 +37,9 @@ export const Banner = styled.div`
 `
 export const Main = styled.main`
   width: 97%;
+  min-height: 90vh;
   padding: 0 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  min-height: 1000px;
 `

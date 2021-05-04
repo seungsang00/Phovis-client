@@ -1,11 +1,5 @@
 import { TabWrapper } from './tab.style'
 
-interface IProps {
-  tablist: string[]
-  onClick: () => void
-  selectedTab?: string
-}
-
 const Tab = ({ tablist, onClick, selectedTab }: any) => {
   return (
     <TabWrapper>

@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { Tab } from '@components/index'
 import { CommonLayout } from '@containers/Layout'
-import { ProfileSetting, UserContentsTab } from '@containers/index'
+import { MainHeader, ProfileSetting, UserContentsTab } from '@containers/index'
 import { RootReducer } from '@actions/reducer'
 import { getUserInfo } from '@actions/users'
 import { useSelector } from 'react-redux'
@@ -24,7 +24,9 @@ const UserPage = () => {
     []
   )
 
-  const { accessToken, user } = useSelector((state: RootReducer) => state.user)
+  const { accessToken, user, isLogin } = useSelector(
+    (state: RootReducer) => state.user
+  )
 
   const _getUserInfo = useAction(getUserInfo)
 
@@ -123,14 +125,18 @@ const UserPage = () => {
     }
   }
 
+  let userId
+  if (user) {
+    userId = user.id
+  }
+
   return (
     <>
       <Head>
         <title>Phovis - Profile</title>
-        <meta charSet='utf-8' />
-        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <CommonLayout>
+      <CommonLayout
+        header={<MainHeader userId={userId as string} isLogin={isLogin} />}>
         <TabContainer>
           <Tab
             tablist={tabList}
