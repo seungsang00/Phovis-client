@@ -1,15 +1,22 @@
+import { IUser } from '@interfaces'
 import axios, { AxiosResponse } from 'axios'
 import * as actionTypes from './actionTypes'
 
-const { AuthAction, USER_SIGNIN_SUCCESS, USER_SIGNIN_ERROR } = actionTypes
+const {
+  AuthAction,
+  USER_SIGNIN_SUCCESS,
+  USER_SIGNIN_ERROR,
+  UserAction,
+} = actionTypes
 const LOCAL_KEY_ACCESS_TOKEN = 'LOCAL_ACCESS_TOKEN'
 
-type User = {
-  id: number
-  userName: string
-  email: string
-  profile: string
-}
+// type User = {
+//   id: number
+//   userName: string
+//   email: string
+//   type: string
+//   profileImg: string
+// }
 interface Signin {
   email: string
   password: string
@@ -24,7 +31,7 @@ type userState = {
   isLogin: boolean
   accessToken?: string
   error: null | string | AxiosResponse<any>
-  user?: User | null
+  user?: IUser | null
   test?: any
 }
 
@@ -86,6 +93,16 @@ const errorLoginWithKakao = (data: AxiosResponse | string) => ({
   payload: data,
 })
 
+const successUpdateUserAvatar = (data: AxiosResponse | string) => ({
+  type: UserAction.UPDATE_USER_AVATAR_SUCCESS,
+  payload: data,
+})
+
+const errorUpdateUserAvatar = (data: AxiosResponse | string) => ({
+  type: UserAction.UPDATE_USER_AVATAR_ERROR,
+  payload: data,
+})
+
 // TODO : make disfetch factory pattern
 
 export const signin = ({ email, password }: Signin) => {
@@ -143,8 +160,8 @@ export const getUserInfo = (stateAccessToken?: String) => {
       })
 
       if (result.status === 200) {
-        if(!stateAccessToken){
-          result.data.accessToken = accessToken; 
+        if (!stateAccessToken) {
+          result.data.accessToken = accessToken
         }
         dispatch(successGetUserInfo(result))
       } else {
@@ -196,10 +213,16 @@ export const loginWithKakao = (code: string) => {
   }
 }
 
-export const resetErrorMessage = () =>{
+export const resetErrorMessage = () => {
   return {
-    type : AuthAction.RESET_ERROR_MESSAGE,
-    payload: null
+    type: AuthAction.RESET_ERROR_MESSAGE,
+    payload: null,
+  }
+}
+
+export const updateUserAvatar = (profileImgUrl: string) => {
+  return (dispatch: Function) => {
+    dispatch(successUpdateUserAvatar(profileImgUrl))
   }
 }
 
@@ -215,6 +238,8 @@ type userAction =
   | ReturnType<typeof errorLoginWithGoogle>
   | ReturnType<typeof successLoginWithKakao>
   | ReturnType<typeof errorLoginWithKakao>
+  | ReturnType<typeof successUpdateUserAvatar>
+  | ReturnType<typeof errorUpdateUserAvatar>
 
 // 이 리덕스 모듈에서 관리 할 상태의 타입을 선언합니다
 
@@ -253,8 +278,15 @@ function user(state: userState = initialState, action: userAction): userState {
       return { ...state, user: null, isLogin: false }
 
     case AuthAction.RESET_ERROR_MESSAGE:
-      return {...state, error: null}
+      return { ...state, error: null }
 
+    case UserAction.UPDATE_USER_AVATAR_SUCCESS:
+      const profileImg = action.payload as string
+      console.log(`응답>>`, profileImg)
+      return {
+        ...state,
+        user: { ...state.user, profileImg },
+      }
     default:
       return state
   }

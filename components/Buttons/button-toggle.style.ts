@@ -1,20 +1,23 @@
 import styled from '@styles/themed-components'
 
 export const ToggleContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  max-width: 200px;
+  /* max-width: 200px; */
   min-width: 200px;
   height: 100px;
-  justify-content: center;
-  align-items: center;
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-  & > span {
+  span.section-name {
     font-size: 1.25rem;
     font-weight: 500;
     justify-self: flex-end;
-    padding: 12px;
+  }
+
+  p.section-description {
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
   }
 `
 

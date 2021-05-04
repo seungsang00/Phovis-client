@@ -3,7 +3,6 @@ import {
   AddTagsSection,
   AddLocationSection,
   MapContainer,
-  FormLayout,
 } from '@containers/index'
 import React, { ChangeEvent, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -12,6 +11,7 @@ import { IContentForm, LocationType, Tag } from '@interfaces'
 import { DivWithBgImg } from '@styles/common'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { FormLayout } from '@containers/Layout/PageLayout'
 
 const ContentForm = () => {
   // ! 유저 정보 받아오기
@@ -233,7 +233,7 @@ const ContentForm = () => {
             onClick={handleModalOpen}
           />
           {modalIsOpen && (
-            <Modal handleModalClose={handleModalClose}>
+            <Modal w='800px' h='800px' handleModalClose={handleModalClose}>
               <MapContainer
                 locationInfo={content.location}
                 tags={content.tags}

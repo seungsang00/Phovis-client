@@ -3,13 +3,14 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { Tab } from '@components/index'
 import { CommonLayout } from '@containers/Layout'
-import { UserContentsTab, TabContainer } from '@containers/index'
+import { ProfileSetting, UserContentsTab } from '@containers/index'
 import { RootReducer } from '@actions/reducer'
 import { getUserInfo } from '@actions/users'
 import { useSelector } from 'react-redux'
-import { IContent } from '@interfaces'
+import { IContent, IUser } from '@interfaces'
 import useAction from '@hooks/useAction'
 import axios from 'axios'
+import { TabContainer } from '@containers/Layout/PageLayout'
 
 const UserPage = () => {
   const tabList = ['Content', 'Likes', 'Bookmark', 'Setting']
@@ -146,9 +147,7 @@ const UserPage = () => {
           {selctTab === 'Bookmark' && (
             <UserContentsTab userContents={userBookmarkContents} />
           )}
-          {selctTab === 'Setting' && (
-            <div>Setting Tab Compoent 를 작성해 주세요</div>
-          )}
+          {selctTab === 'Setting' && <ProfileSetting user={user as IUser} />}
         </TabContainer>
       </CommonLayout>
     </>
