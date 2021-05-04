@@ -17,6 +17,8 @@ import {
   GoogleLoginResponse,
   GoogleLoginResponseOffline,
 } from 'react-google-login'
+import { CommonLayout } from '@containers/Layout'
+import MainHeader from '@containers/MainHeader'
 
 // import useAction from '../../../hooks/useAction';
 
@@ -27,7 +29,9 @@ const Login = () => {
     checkKeepLoggedIn: false,
   })
 
-  const { isLogin, error } = useSelector((state: RootReducer) => state.user)
+  const { isLogin, error, user } = useSelector(
+    (state: RootReducer) => state.user
+  )
   const dispatch = useDispatch()
   // const _Login = useAction(login);
 
@@ -36,7 +40,7 @@ const Login = () => {
   useEffect(() => {
     if (isLogin) {
       alert('Login success')
-      router.push('/main')
+      router.push('/')
     }
     if (error) {
       // TODO : show error UI
@@ -98,50 +102,64 @@ const Login = () => {
     )
   }
 
+  let userId
+  if (user) {
+    userId = user.id
+  }
+
   return (
-    <div>
-      <section>
-        <article>
-          <h2>Log in</h2>
-          <LableTextInput
-            name='email'
-            label='Email'
-            onChange={inputChangeHandler}
-            value={input.email}
+    <>
+      <CommonLayout
+        header={
+          <MainHeader
+            isLogin={false}
+            userId={userId as string}
+            hideLoginBtn={true}
           />
-          <PasswordInput
-            name='password'
-            label='Password'
-            onChange={inputChangeHandler}
-            value={input.password}
-          />
-          <div>
-            <Checkbox
-              name='checkKeepLoggedIn'
-              text='Keep me logged in'
-              onChange={checkChangeHandler}
+        }>
+        <section>
+          <article>
+            <h2>Log in</h2>
+            <LableTextInput
+              name='email'
+              label='Email'
+              onChange={inputChangeHandler}
+              value={input.email}
             />
-            <Link href='/auth/forgotpassword'>Forgot your password ?</Link>
-          </div>
-          <SubmitButton text='Sign in' onSubmit={requestLogin} />
-          <Link href='/auth/signup'>Go to sign up new account !</Link>
-          <hr />
-          <p>Or login with SNS account</p>
-          <div>
-            <GoogleLoginButton
-              clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string}
-              onSubmit={requestGoogleLogin}
+            <PasswordInput
+              name='password'
+              label='Password'
+              onChange={inputChangeHandler}
+              value={input.password}
             />
-            <KakaoLoginButton onSubmit={requestkaKaoLogin} />
-          </div>
-        </article>
-        <article>
-          <h2>Title text and Logo</h2>
-          <img />
-          <p>Main comment</p>
-        </article>
-      </section>
-    </div>
+            <div>
+              <Checkbox
+                name='checkKeepLoggedIn'
+                text='Keep me logged in'
+                onChange={checkChangeHandler}
+              />
+              <Link href='/auth/forgotpassword'>Forgot your password ?</Link>
+            </div>
+            <SubmitButton text='Sign in' onSubmit={requestLogin} />
+            <Link href='/auth/signup'>Go to sign up new account !</Link>
+            <hr />
+            <p>Or login with SNS account</p>
+            <div>
+              <GoogleLoginButton
+                clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string}
+                onSubmit={requestGoogleLogin}
+              />
+              <KakaoLoginButton onSubmit={requestkaKaoLogin} />
+            </div>
+          </article>
+          <article>
+            <h2>Title text and Logo</h2>
+            <img />
+            <p>Main comment</p>
+          </article>
+        </section>
+      </CommonLayout>
+    </>
   )
 }
 

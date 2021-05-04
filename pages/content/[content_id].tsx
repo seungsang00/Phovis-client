@@ -1,4 +1,9 @@
-import { CommonLayout, ContentBanner, ContentMain } from 'containers'
+import {
+  CommonLayout,
+  ContentBanner,
+  ContentMain,
+  MainHeader,
+} from 'containers'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
@@ -19,6 +24,7 @@ import {
 } from '@actions/content'
 
 const ContentPage = () => {
+  const { isLogin, user } = useSelector((state: RootReducer) => state.user)
   const router = useRouter()
   const { content_id } = router.query
 
@@ -38,13 +44,13 @@ const ContentPage = () => {
   const {
     title,
     mainimageUrl,
-    user,
     likecount,
     description,
     location,
     images,
     tag,
   } = contentData
+  const creator = contentData.user
 
   useEffect(() => {
     const tags = tag?.join(',')
@@ -60,6 +66,11 @@ const ContentPage = () => {
   )
   console.log(relatedContentList)
 
+  let userId
+  if (user) {
+    userId = user.id
+  }
+
   return (
     <>
       <Head>
@@ -68,12 +79,13 @@ const ContentPage = () => {
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
       <CommonLayout
+        header={<MainHeader isLogin={isLogin} userId={userId as string} />}
         banner={
           <ContentBanner
             title={title || sampleContent.title}
             mainImgUrl={mainimageUrl || sampleContent.mainimageUrl}
-            username={user.userName || sampleContent.user.userName}
-            userProfileUrl={user.profileImg || sampleContent.user.profileImg}
+            username={creator.userName || sampleContent.user.userName}
+            userProfileUrl={creator.profileImg || sampleContent.user.profileImg}
             likesCount={likecount || sampleContent.likecount}
           />
         }>

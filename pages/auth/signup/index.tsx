@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 import { LableTextInput, PasswordInput, SubmitButton } from '@components/index'
 
 import axios from 'axios'
+import { CommonLayout } from '@containers/Layout'
+import MainHeader from '@containers/MainHeader'
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -49,38 +51,35 @@ const Signup = () => {
   }
 
   return (
-    <div>
-      <section>
-        <article>
-          <h2>Title text and Logo</h2>
-          <img />
-          <p>Wellcome comment</p>
-        </article>
-        <article>
-          <h2>Sign up</h2>
-          <LableTextInput
-            name='userName'
-            label='User name'
-            onChange={inputChangeHandler}
-            value={input.userName}
-          />
-          <LableTextInput
-            name='email'
-            label='Email address'
-            onChange={inputChangeHandler}
-            value={input.email}
-          />
-          <PasswordInput
-            name='password'
-            label='Password'
-            onChange={inputChangeHandler}
-            value={input.password}
-          />
-          <SubmitButton text='Sign in' onSubmit={requestSignUp} />
-          <Link href='/auth/login'>Back to login</Link>
-        </article>
-      </section>
-    </div>
+    <>
+      <CommonLayout header={<MainHeader isLogin={false} userId={null} />}>
+        <section>
+          <article>
+            <h2>Sign up</h2>
+            <LableTextInput
+              name='userName'
+              label='User name'
+              onChange={inputChangeHandler}
+              value={input.userName}
+            />
+            <LableTextInput
+              name='email'
+              label='Email address'
+              onChange={inputChangeHandler}
+              value={input.email}
+            />
+            <PasswordInput
+              name='password'
+              label='Password'
+              onChange={inputChangeHandler}
+              value={input.password}
+            />
+            <SubmitButton text='Sign in' onSubmit={requestSignUp} />
+            <Link href='/auth/login'>Back to login</Link>
+          </article>
+        </section>
+      </CommonLayout>
+    </>
   )
 }
 
