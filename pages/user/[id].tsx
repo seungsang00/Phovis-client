@@ -2,23 +2,20 @@ import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { Tab } from '@components/index'
-import {
-  UserContentsTab,
-  CommonLayout,
-  ProfileSetting,
-} from '@containers/index'
-import { TabContainer } from './userpage.style'
+import { CommonLayout } from '@containers/Layout'
+import { ProfileSetting, UserContentsTab } from '@containers/index'
 import { RootReducer } from '@actions/reducer'
 import { getUserInfo } from '@actions/users'
 import { useSelector } from 'react-redux'
 import { IContent, IUser } from '@interfaces'
 import useAction from '@hooks/useAction'
 import axios from 'axios'
+import { TabContainer } from '@containers/Layout/PageLayout'
 
 const UserPage = () => {
   const tabList = ['Content', 'Likes', 'Bookmark', 'Setting']
   const router = useRouter()
-  const user_id = Number(router.query.id)
+  const user_id = router.query.id
 
   const [selctTab, setSelectTab] = useState('Content')
   const [userContents, setUserContents] = useState<IContent[]>([])
@@ -36,7 +33,7 @@ const UserPage = () => {
   }, [])
 
   useEffect(() => {
-    if (user_id && user && user.id === user_id) {
+    if (user_id && user && String(user.id) === user_id) {
       console.log('login user id : ', user.id)
       console.log('Set my page')
     } else {
@@ -57,6 +54,7 @@ const UserPage = () => {
         'https://localhost:4000/content',
         {
           params: {
+            maxnum: 15,
             userId: user_id,
           },
         }
@@ -64,7 +62,7 @@ const UserPage = () => {
 
       if (status === 200) {
         console.log('loadUserContents : ', data)
-        setUserContents([...userContents, ...data])
+        setUserContents([...data])
       }
     } catch (err) {
       console.log(err)
@@ -77,6 +75,7 @@ const UserPage = () => {
         'https://localhost:4000/content',
         {
           params: {
+            maxnum: 15,
             userId: user_id,
             filter: 'like',
           },
@@ -84,7 +83,7 @@ const UserPage = () => {
       )
       if (status === 200) {
         console.log('loadUserLikeContents : ', data)
-        setUserLikesContents([...userLikesContents, ...data])
+        setUserLikesContents([...data])
       }
     } catch (err) {
       console.log(err)
@@ -97,6 +96,7 @@ const UserPage = () => {
         'https://localhost:4000/content',
         {
           params: {
+            maxnum: 15,
             userId: user_id,
             filter: 'bookmark',
           },
@@ -104,7 +104,7 @@ const UserPage = () => {
       )
       if (status === 200) {
         console.log('loadUserBookmarkContents : ', data)
-        setUserBookmarkContents([...userBookmarkContents, ...data])
+        setUserBookmarkContents([...data])
       }
     } catch (err) {
       console.log(err)
@@ -132,25 +132,20 @@ const UserPage = () => {
       </Head>
       <CommonLayout>
         <TabContainer>
-          <Tab tablist={tabList} onClick={onClickTabHandler} />
+          <Tab
+            tablist={tabList}
+            onClick={onClickTabHandler}
+            selectedTab={selctTab}
+          />
           {/* 여기에 탭 메뉴에 해당하는 내용을 넣어주세요. 동적 라우트로 처리하는게 좋을까요? */}
           {selctTab === 'Content' && (
-            <div>
-              Content Tab Compoent 를 작성해 주세요
-              <UserContentsTab userContents={userContents} />
-            </div>
+            <UserContentsTab userContents={userContents} />
           )}
           {selctTab === 'Likes' && (
-            <div>
-              Likes Tab Compoent 를 작성해 주세요
-              <UserContentsTab userContents={userLikesContents} />
-            </div>
+            <UserContentsTab userContents={userLikesContents} />
           )}
           {selctTab === 'Bookmark' && (
-            <div>
-              Bookmark Tab Compoent 를 작성해 주세요
-              <UserContentsTab userContents={userBookmarkContents} />
-            </div>
+            <UserContentsTab userContents={userBookmarkContents} />
           )}
           {selctTab === 'Setting' && <ProfileSetting user={user as IUser} />}
         </TabContainer>

@@ -5,13 +5,13 @@ import {
   MapContainer,
 } from '@containers/index'
 import React, { ChangeEvent, useRef, useState } from 'react'
-import { FormLayout } from './form.style'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '@actions/reducer'
 import { IContentForm, LocationType, Tag } from '@interfaces'
 import { DivWithBgImg } from '@styles/common'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { FormLayout } from '@containers/Layout/PageLayout'
 
 const ContentForm = () => {
   // ! 유저 정보 받아오기

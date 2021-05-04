@@ -18,6 +18,10 @@ export const TabWrapper = styled.div`
     margin: 0 10px;
     font-size: 1.2rem;
 
+    &.active{
+      border-bottom: 1px solid blue;
+    }
+
     &:hover {
       border-bottom: 3px solid blue;
     }
