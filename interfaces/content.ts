@@ -12,17 +12,23 @@ export interface IContent {
   likecount: number
   images: IImage[]
   title: string | null
+  isLike?: boolean
+  isBookMark?: boolean
 }
 
 export interface IContentBanner {
+  id?: string
   title: string | null
   mainImgUrl: string | null
   username: string | null
   userProfileUrl?: string
   likesCount: number
+  isLike?: boolean
+  isBookMark?: boolean
 }
 
 export interface IContentMain {
+  id?: string
   description: string | null
   location: LocationType
   images: IImage[]
