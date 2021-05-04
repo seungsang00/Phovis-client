@@ -3,10 +3,11 @@ import { BookmarkContainer } from './button-bookmark.style'
 
 type Props = {
   id?: String
+  isChecked?: boolean
 }
 
-const BookmarkBtn = ({ id }: Props) => {
-  const [isBookmarked, setIsBookmark] = useState<boolean>(false)
+const BookmarkBtn = ({ id, isChecked = false }: Props) => {
+  const [isBookmarked, setIsBookmark] = useState<boolean>(isChecked)
 
   const handleClick = () => {
     setIsBookmark(!isBookmarked)
