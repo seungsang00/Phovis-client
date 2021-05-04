@@ -133,7 +133,7 @@ const ComponentSamplePage = () => {
       <hr />
       <LocationInfo locationInfo={locationData} />
       <hr />
-      <LikeBtn like={23} />
+      <LikeBtn like={23} isChecked={true} />
       <PhotoCardInput location={locationData} />
       <UserInfoHor userName={'jeong'} />
       <UserInfoVer userName={'jeong'} />
