@@ -37,6 +37,7 @@ export const GlobalStyle = createGlobalStyle`
     outline: none;
     padding: .3rem;
   }
+
   /* header 부분은 임시 페이지를 위한 내용이므로 추후 수정해야 합니다. */
   header {
     display: flex;
@@ -64,5 +65,11 @@ export const GlobalStyle = createGlobalStyle`
 
   .banner {
     height: 15rem;
+  }
+
+  .flex {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
   }
 `

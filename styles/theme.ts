@@ -63,6 +63,11 @@ const display = {
     flex-direction: column;
     align-items: flex-start;
   `,
+  flexStartRow: `
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  `,
 }
 
 const concept = {

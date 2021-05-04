@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@styles/themed-components'
 
 export const PhotocardGalleryContainer = styled.div`
   width: 100%;

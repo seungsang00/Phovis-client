@@ -8,7 +8,12 @@ type Props = {
 
 const LinkBanner = ({ link }: Props) => (
   <LinkBannerDiv>
-    <Link href={link}>나만의 출사 장소를 추천해주세요 + 추천하러 가기</Link>
+    <Link href={link}>
+      <div>
+        <span>나만의 출사 장소를 추천해주세요</span>
+        <span>📝 추천글 쓰러가기</span>
+      </div>
+    </Link>
   </LinkBannerDiv>
 )
 export default LinkBanner
