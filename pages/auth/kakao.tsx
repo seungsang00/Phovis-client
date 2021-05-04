@@ -9,7 +9,7 @@ import { RootReducer } from 'modules/reducer'
 
 const KakaoLoginPage = () => {
   const router = useRouter()
-  const { isLogin } = useSelector((state: RootReducer) => state.user)
+  const { isLogin, error } = useSelector((state: RootReducer) => state.user)
   const { code } = router.query
 
   const _loginWithKakao = useAction(loginWithKakao)
@@ -18,7 +18,12 @@ const KakaoLoginPage = () => {
     if (isLogin) {
       window.close()
     }
-  }, [isLogin])
+
+    if (error) {
+      alert('Login Fail : ' + error)
+      window.close()
+    }
+  }, [isLogin, error])
   useEffect(() => {
     if (code) {
       _loginWithKakao(code as string)
