@@ -3,11 +3,7 @@ import { useRouter } from 'next/router'
 import { CommonLayout, SearchHeader, SearchContents } from '@containers/index'
 import { IContent } from '@interfaces'
 
-// import axios from 'axios'
-
-// NOTE : Test data
-import { sampleContents } from '@utils/index'
-//
+import axios from 'axios'
 
 const LOCAL_KEY_SEARCH_HISTORY = 'LOCAL_KEY_SEARCH_HISTORY'
 
@@ -36,7 +32,6 @@ const SearchPage = () => {
   }, [])
 
   useEffect(() => {
-    console.log('new history : ', searchHistory)
     localStorage.setItem(
       LOCAL_KEY_SEARCH_HISTORY,
       JSON.stringify(searchHistory)
@@ -54,37 +49,34 @@ const SearchPage = () => {
     setKeyword('')
   }
 
-  const loadSearchResult = (keyword: string) => {
+  const loadSearchResult = async (keyword: string) => {
     setIsLoading(true)
 
-    // TODO : get search data from server
-    setTimeout(() => {
-      setIsLoading(false)
-      if (!keyword) {
-        setSearchResult([])
-      } else {
-        setSearchResult(sampleContents)
-        setSearchHistory([...searchHistory, keyword])
-      }
-    }, 2000)
+    const {
+      status,
+      data: { data },
+    } = await axios.get('https://localhost:4000/content', {
+      params: {
+        maxnum: 15,
+        tag: keyword,
+      },
+    })
 
-    // const { status, data } = await axios.get('https://localhost:4000/content', {
-    //   params: {
-    //     maxnum: 15,
-    //     tag: keyword,
-    //   },
-    // })
+    if (status === 200) {
+      // TODO : show data
+      console.log(status, data)
+      setSearchResult(data)
+    } else {
+      // TODO : show no result
+      setSearchResult([])
+    }
 
-    // if(status === 200){
-    //   // TODO : show data
-    // }
-    // else{
-    //   // TODO : show no result
-    // }
+    setIsLoading(false)
   }
 
   const onLoadData = (): void => {
-    console.log('onLoadData')
+    // TODO : When reach end of page load more data
+    // console.log('onLoadData')
   }
 
   return (
@@ -101,8 +93,6 @@ const SearchPage = () => {
           searchResult={searchResult}
           onLoadData={onLoadData}
         />
-        {searchHistory.length > 0 &&
-          searchHistory.map((el, idx) => <div key={idx}>{el}</div>)}
       </main>
     </CommonLayout>
   )

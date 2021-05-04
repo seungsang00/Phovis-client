@@ -30,7 +30,7 @@ export const getBannderContentList = () =>{
       const result = await axios.get('https://localhost:4000/content',{
         params:{
           maxnum:3,
-          tag:'야경,맛집,경복궁',
+          tag:'새벽,야경,서울',
         },
         withCredentials: true,
       });
@@ -53,7 +53,7 @@ export const getRecommendContentList = () =>{
       const result = await axios.get('https://localhost:4000/content',{
         params:{
           maxnum:6,
-          name:'한옥마을',
+          tag:'서울,야경,새벽',
         },
         withCredentials: true,
       });
@@ -99,7 +99,7 @@ export const getPhotoCardList = () =>{
     try{
       const result = await axios.get('https://localhost:4000/photocard',{
         params:{
-          maxnum:15,
+          random:1
         },
         withCredentials: true,
       });
@@ -123,7 +123,7 @@ function main(state:mainContentsState = initialState, action:mainAction): mainCo
 
   switch (action.type){
     case ContentAction.GET_BANNER_SUCCESS:
-      const { data:getBannerList } = action.payload;
+      const { data:{data:getBannerList} } = action.payload;
       const getBanner = [...state.bannerContentList, ...getBannerList]
       return { ...state, bannerContentList: getBanner }
 
@@ -131,7 +131,7 @@ function main(state:mainContentsState = initialState, action:mainAction): mainCo
       return { ...state, error: action.payload }
 
     case ContentAction.GET_RECOMMEND_SUCCESS:
-      const { data:getRecommendContent } = action.payload;
+      const { data:{data:getRecommendContent} } = action.payload;
       const getRecommend = [...state.recommendContentList, ...getRecommendContent]
       return { ...state, recommendContentList: getRecommend} 
 
@@ -148,6 +148,8 @@ function main(state:mainContentsState = initialState, action:mainAction): mainCo
 
     case ContentAction.GET_PHOTO_CARD_LIST_SUCCESS:
       const { data:getPhotoCardList } = action.payload;
+      console.log('getPhotoCardList : ', getPhotoCardList)
+
       const getPhotoCard = [...state.photocardList, ...getPhotoCardList]
       return { ...state, photocardList:getPhotoCard } 
 
