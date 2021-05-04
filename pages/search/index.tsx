@@ -3,9 +3,13 @@ import { useRouter } from 'next/router'
 import { CommonLayout, SearchHeader, SearchContents } from '@containers/index'
 import { IContent } from '@interfaces'
 
+// import axios from 'axios'
+
 // NOTE : Test data
 import { sampleContents } from '@utils/index'
 //
+
+const LOCAL_KEY_SEARCh_HISTORY = 'LOCAL_KEY_SEARCh_HISTORY'
 
 const SearchPage = () => {
   const router = useRouter()
@@ -14,6 +18,7 @@ const SearchPage = () => {
 
   const [keyword, setKeyword] = useState<string>('')
   const [searchKeyword, setSearchKeyword] = useState<string>(queryKeyword)
+  const [searchHistory, setSearchHistory] = useState<string[]>([])
   const [searchResult, setSearchResult] = useState<IContent[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -22,7 +27,21 @@ const SearchPage = () => {
     if (searchKeyword) {
       loadSearchResult(searchKeyword)
     }
+
+    const localSearchHistory = localStorage.getItem(LOCAL_KEY_SEARCh_HISTORY)
+    if (localSearchHistory) {
+      const parsed = JSON.parse(localSearchHistory)
+      setSearchHistory(parsed)
+    }
   }, [])
+
+  useEffect(() => {
+    console.log('new history : ', searchHistory)
+    localStorage.setItem(
+      LOCAL_KEY_SEARCh_HISTORY,
+      JSON.stringify(searchHistory)
+    )
+  }, [searchHistory])
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setKeyword(e.target.value)
@@ -45,8 +64,23 @@ const SearchPage = () => {
         setSearchResult([])
       } else {
         setSearchResult(sampleContents)
+        setSearchHistory([...searchHistory, keyword])
       }
     }, 2000)
+
+    // const { status, data } = await axios.get('https://localhost:4000/content', {
+    //   params: {
+    //     maxnum: 15,
+    //     tag: keyword,
+    //   },
+    // })
+
+    // if(status === 200){
+    //   // TODO : show data
+    // }
+    // else{
+    //   // TODO : show no result
+    // }
   }
 
   const onLoadData = (): void => {
@@ -67,9 +101,13 @@ const SearchPage = () => {
           searchResult={searchResult}
           onLoadData={onLoadData}
         />
+        {searchHistory.length > 0 &&
+          searchHistory.map((el, idx) => <div key={idx}>{el}</div>)}
       </main>
     </CommonLayout>
   )
 }
 
 export default SearchPage
+
+// TODO : make server side render method
