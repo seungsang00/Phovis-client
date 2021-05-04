@@ -6,7 +6,7 @@ const Tab = ({ tablist, onClick }: any) => {
     <TabWrapper>
       <ul>
         {tablist.map((tab: string) => (
-          <li onClick={() => onClick(tab)}>
+          <li key={tab} onClick={() => onClick(tab)}>
             <div>{tab}</div>
             {/* <Link href={`/user/${tab}`}>{tab}</Link> */}
           </li>
