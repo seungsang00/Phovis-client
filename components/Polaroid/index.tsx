@@ -1,6 +1,5 @@
 import { Wrapper } from './polaroid.style'
 import { IPhotoCard } from '@interfaces'
-// import { LikeBtn } from '@components/Buttons'
 
 const Polaroid = ({ url, userName, description }: IPhotoCard) => {
   return (

@@ -17,7 +17,7 @@ export interface IContent {
 }
 
 export interface IContentBanner {
-  id?: string
+  id: string
   title: string | null
   mainImgUrl: string | null
   username: string | null

@@ -147,9 +147,7 @@ function main(state:mainContentsState = initialState, action:mainAction): mainCo
       return { ...state, error: action.payload }
 
     case ContentAction.GET_PHOTO_CARD_LIST_SUCCESS:
-      const { data:getPhotoCardList } = action.payload;
-      console.log('getPhotoCardList : ', getPhotoCardList)
-
+      const { data:{data:getPhotoCardList}} = action.payload;
       const getPhotoCard = [...state.photocardList, ...getPhotoCardList]
       return { ...state, photocardList:getPhotoCard } 
 

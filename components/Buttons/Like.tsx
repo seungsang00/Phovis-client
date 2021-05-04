@@ -1,21 +1,47 @@
 import { LikeContainer, ImgContainer } from './like.style'
 import { FormEvent, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { RootReducer } from '@actions/reducer'
+import axios from 'axios'
 
 type props = {
+  id: string
   like: number
   isChecked?: boolean
 }
 
-const Like = ({ like, isChecked = false }: props) => {
+const Like = ({ id, like, isChecked = false }: props) => {
   const [isActive, setActive] = useState<boolean>(isChecked)
   const [count, setCount] = useState<number>(like)
 
-  const handleClick = (e: FormEvent) => {
+  const { isLogin, accessToken } = useSelector(
+    (state: RootReducer) => state.user
+  )
+
+  const handleClick = async (e: FormEvent) => {
     e.preventDefault()
-    setActive(!isActive)
-    console.log(e)
-    // like state도 1씩증가하고 빠지고 하는거 필요함.
-    isActive ? setCount(count - 1) : setCount(count + 1)
+
+    // 로그인한 사용자가 아니면 좋아요를 할 수 없다.
+    if (!isLogin) return
+
+    const { status, data } = await axios.put(
+      'https://localhost:4000/user/like',
+      {
+        id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        withCredentials: true,
+      }
+    )
+
+    if (status === 201) {
+      setActive(data.isLike)
+      data.isLike ? setCount(count - 1) : setCount(count + 1)
+    }
+    // console.log(e)
   }
 
   return (
