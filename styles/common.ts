@@ -1,5 +1,5 @@
 // 여러 상위 컴포넌트에 사용되는 컴포넌트들
-import styled, { withProps } from '../styles/themed-components'
+import styled, { withProps } from '@styles/themed-components'
 
 // 배경 이미지를 갖는 div 엘리먼트
 interface IBg {
@@ -17,6 +17,32 @@ export const DivWithBgImg = withProps<IBg, HTMLDivElement>(styled.div)`
   justify-content: flex-end;
   padding: ${(props) => props.p};
   overflow: hidden;
+
+  div.main-title {
+    font-size: 3rem;
+    font-weight: 700;
+    position: absolute;
+    left: 40px;
+    bottom: 50vh;
+  }
+  div.top-right {
+    position: absolute;
+    right: 30px;
+    top: 81px;
+    z-index: 1;
+  }
+  div.bottom-left {
+    position: absolute;
+    left: 30px;
+    bottom: 41vh;
+    z-index: 1;
+  }
+  div.bottom-right {
+    position: absolute;
+    right: 30px;
+    bottom: 41vh;
+    z-index: 1;
+  }
 `
 
 // 유저 프로필이미지

@@ -16,7 +16,18 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "esnext"
+    "target": "esnext",
+    // ! paths 설정해주기
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@containers/*": ["containers/*"],
+      "@utils/*": ["utils/*"],
+      "@hooks/*": ["hooks/*"],
+      "@actions/*": ["modules/*"],
+      "@interfaces": ["interfaces/index"],
+      "@styles/*": ["styles/*"]
+    }
   },
   "exclude": ["node_modules"],
   "include": ["**/*.ts", "**/*.tsx"]

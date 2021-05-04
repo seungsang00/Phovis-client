@@ -1,73 +1,171 @@
+import React, { useState } from 'react'
 import Link from 'next/link'
-import Layout from '../components/Layout'
-import TabMenu from '../components/TabMenu'
-import LocationInfo from '../components/LocationInfo'
-import Like from '../components/Like'
-import PhotoCardInput from '../components/PhotoCardInput'
-import UserHor from '../components/UserInfo-hor'
-import UserVer from '../components/UserInfo-ver'
-import PhotoCardPreview from '../components/PhotoCardPreview'
-import UserCard from '../components/UserCard'
-import { sampleUserData, samplePhotoData } from '../utils/sample-data'
-import { sampleHandler } from '../utils/sample-function'
-import UserBanner from '../components/UserBanner'
+import {
+  Layout,
+  LinkTitle,
+  LinkBanner,
+  SearchBar,
+  SearchBarBig,
+  TagBig,
+  TagSmall,
+  ThumbnailRect,
+  ThumbnailSquare,
+  LikeBtn,
+  ToggleBtn,
+  BookmarkBtn,
+  MainBanner,
+  UserBanner,
+  UserCard,
+  PhotoCardPreview,
+  UserInfoVer,
+  UserInfoHor,
+  TabMenu,
+  LocationInfo,
+} from '@components/index'
+import { PhotoCardInput } from '@containers/index'
+import {
+  sampleUserData,
+  samplePhotoData,
+  sampleContents,
+  sampleHandler,
+} from '@utils/index'
 
-const { name, imgUrl, contentCount } = sampleUserData[0]
-const { photoUrl_v } = samplePhotoData
-const { handleUnfollow } = sampleHandler
+const { handleUnfollow, handleToggle, handler } = sampleHandler
+const { photoUrl_v, photoUrl_s } = samplePhotoData
+const { userName, profileImg, contentCount } = sampleUserData[0]
 
-const ComponentSamplePage = () => (
-  <Layout title='Component Sample | Next.js + TypeScript Example'>
-    <h1>Component Sample</h1>
-    <p>This is the Component Sample page</p>
-    <hr />
-    <UserCard
-      username={name}
-      profileImage={imgUrl}
-      contentCount={contentCount}
-      onClick={handleUnfollow}
-    />
-    <hr />
-    <UserBanner username={name} profileImage={imgUrl} bgImage={photoUrl_v} />
-    <hr />
-    {/* 여기에 새로 생성한 컴포넌트들을 배치해주세요 */}
-    <hr />
-    <TabMenu isOwner={true} />
-    <hr />
-    <LocationInfo location={'서울시 강서구 서울식물원'} />
-    <hr />
-    <Like like={23} />
-    <PhotoCardInput location={''} />
-    <UserHor userName={'jeong'} />
-    <UserVer userName={'jeong'} />
-    <PhotoCardPreview
-      description={'장소에 대한 정보'}
-      imageurl={''}
-      userName={'jeong'}
-      profileImage={''}
-      like={24}
-    />
-    <hr />
-    <PhotoCardInput location={''} />
-    <hr />
-    <UserHor userName={'jeong'} />
-    <hr />
-    <UserVer userName={'jeong'} />
-    <hr />
-    <PhotocardPreview
-      description={'장소에 대한 정보'}
-      imageurl={''}
-      userName={'jeong'}
-      profileImage={''}
-      like={24}
-    />
-    <hr />
-    <p>
-      <Link href='/'>
-        <a>Go home</a>
-      </Link>
-    </p>
-  </Layout>
-)
+const ComponentSamplePage = () => {
+  const [input, setInput] = useState({
+    search: '',
+  })
+
+  const locationData = {
+    keyword: '서울',
+    location: '서울시 강서구 서울식물원',
+    lat: 1,
+    lng: 1,
+  }
+
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const {
+      target: { name, value },
+    } = e
+    setInput({
+      ...input,
+      [name]: value,
+    })
+  }
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+    console.log('load submit !')
+  }
+
+  const onClickMainBannerItem = (contentId: String) => {
+    console.log(contentId)
+  }
+
+  return (
+    <Layout title='Component Sample | Next.js + TypeScript Example'>
+      <h1>Component Sample</h1>
+      <p>This is the Component Sample page</p>
+      <hr />
+      <MainBanner
+        contents={sampleContents}
+        onClickItem={onClickMainBannerItem}
+      />
+      <LinkTitle to='/sample' />
+      <hr />
+      <SearchBar
+        name='search'
+        value={input.search}
+        onChange={onChangeInput}
+        onSubmit={onSubmit}
+      />
+      <hr />
+      <SearchBarBig
+        name='search'
+        value='직전에검색한키워드가들어갑니다'
+        onChange={onChangeInput}
+        onSubmit={onSubmit}
+      />
+      <hr />
+      <LinkBanner link='/' />
+      <hr />
+      <TagBig tagname={'야경'} onClick={handler} />
+      <hr />
+      <TagSmall tagname={'야경'} onClick={handler} />
+      <hr />
+      <ThumbnailSquare
+        profileImage={profileImg}
+        username={userName as string}
+        bgImage={photoUrl_s}
+      />
+      <hr />
+      <ThumbnailRect
+        id='sampleId'
+        profileImage={profileImg}
+        username={userName as string}
+        bgImage={photoUrl_v}
+        likeCount={30}
+      />
+      <hr />
+      <UserCard
+        username={userName as string}
+        profileImage={profileImg}
+        contentCount={contentCount}
+        onClick={handleUnfollow}
+      />
+      <hr />
+      <UserBanner
+        username={userName as string}
+        profileImage={profileImg}
+        bgImage={photoUrl_v}
+      />
+      <hr />
+      <BookmarkBtn id='bookMarkTest' />
+      <hr />
+      <ToggleBtn sectionName={'Bookmark'} onClick={handleToggle} />
+      <hr />
+      {/* 여기에 새로 생성한 컴포넌트들을 배치해주세요 */}
+      <hr />
+      <TabMenu isOwner={true} />
+      <hr />
+      <LocationInfo locationInfo={locationData} />
+      <hr />
+      <LikeBtn like={23} isChecked={true} />
+      <PhotoCardInput location={locationData} />
+      <UserInfoHor userName={'jeong'} />
+      <UserInfoVer userName={'jeong'} />
+      <PhotoCardPreview
+        description={'장소에 대한 정보'}
+        imageurl={''}
+        userName={'jeong'}
+        profileImage={''}
+        like={24}
+      />
+      <hr />
+      <PhotoCardInput location={locationData} />
+      <hr />
+      <UserInfoHor userName={'jeong'} />
+      <hr />
+      <UserInfoVer userName={'jeong'} />
+      <hr />
+      <PhotoCardPreview
+        description={'장소에 대한 정보'}
+        imageurl={''}
+        userName={'jeong'}
+        profileImage={''}
+        like={24}
+      />
+      <hr />
+      <p>
+        <Link href='/'>
+          <a>Go home</a>
+        </Link>
+      </p>
+    </Layout>
+  )
+}
 
 export default ComponentSamplePage

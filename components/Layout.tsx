@@ -6,7 +6,6 @@ type Props = {
   children?: ReactNode
   title?: string
 }
-
 const Layout = ({ children, title = 'This is the default title' }: Props) => (
   <div>
     <Head>
@@ -31,7 +30,18 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
         <Link href='/users'>
           <a>Users List</a>
         </Link>{' '}
-        | <a href='/api/users'>Users API</a>
+        | <a href='/api/users'>Users API</a>|{' '}
+        <Link href='/auth/login'>
+          <a>Login</a>
+        </Link>{' '}
+        |{' '}
+        <Link href='/auth/signup'>
+          <a>Signup</a>
+        </Link>{' '}
+        |{' '}
+        <Link href='/main'>
+          <a>Main</a>
+        </Link>
       </nav>
     </header>
     {children}
