@@ -13,7 +13,7 @@ const Tab = ({ tablist, onClick, selectedTab }: any) => {
         {tablist &&
           tablist.length > 0 &&
           tablist.map((tab: string) => {
-            const isActive = tab === selectedTab ? 'active' : null
+            const isActive = tab === selectedTab ? true : false
             return (
               <li
                 {...(isActive && { className: 'active' })}
