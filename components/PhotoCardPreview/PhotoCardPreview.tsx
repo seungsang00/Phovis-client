@@ -18,9 +18,9 @@ type Props = {
 const PhotoCardPreview = ({
   description = '장소에 대한 정보',
   imageurl,
-  userName = 'jeong',
+  userName,
   profileImage,
-  like = 24,
+  like,
 }: Props) => {
   return (
     <PhotoCardPreviewContainer>
@@ -35,7 +35,7 @@ const PhotoCardPreview = ({
             userName={userName}
             profileImage={profileImage || '/src/tmpProfileImg.webp'}
           />
-          <LikeBtn like={like} />
+          <LikeBtn like={like || 0} />
         </div>
       </PhotoContainer>
       <DscriptionContainer>

@@ -9,16 +9,21 @@ const Polaroids = ({ photocards }: IProps) => {
     <div>
       <h2 className='section-title'>📸 이런 사진을 찍을 수 있어요</h2>
       <div className='thumbnails'>
-        {photocards.map(({ id, imageurl, description, userName, like }) => (
-          <Polaroid
-            key={id}
-            id={id}
-            imageurl={imageurl}
-            description={description}
-            userName={userName}
-            like={like}
-          />
-        ))}
+        {photocards &&
+          photocards.length > 0 &&
+          photocards.map((photoCard) => {
+            const { photocardId, url, description, userName, like } = photoCard
+            return (
+              <Polaroid
+                key={photocardId}
+                photocardId={photocardId}
+                url={url}
+                description={description}
+                userName={userName}
+                like={like}
+              />
+            )
+          })}
       </div>
     </div>
   )

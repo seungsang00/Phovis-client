@@ -16,7 +16,10 @@ const ContentBanner = ({
       </div>
       <div className='main-title'>{title}</div>
       <div className='bottom-left'>
-        <UserInfoHor userName={username} profileImage={userProfileUrl} />
+        <UserInfoHor
+          userName={username || 'Anonymous'}
+          profileImage={userProfileUrl}
+        />
       </div>
       <div className='bottom-right'>
         <LikeBtn like={likesCount} />
