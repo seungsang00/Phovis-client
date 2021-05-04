@@ -24,7 +24,7 @@ const SearchContents = ({
     onIntersect: ([{ isIntersecting }]) => {
       if (isIntersecting) {
         // Load Data
-        console.log('This is End of Page, Load more data from server')
+        // console.log('This is End of Page, Load more data from server')
         onLoadData()
       }
     },
@@ -59,7 +59,6 @@ const SearchContents = ({
                 key={id}
                 title={title as string}
                 contentid={id as string}
-                // profileImage='https://bit.ly/3euIgJj'
                 username={userName as string}
                 imageurl={mainimageUrl as string}
               />
