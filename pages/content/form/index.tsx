@@ -3,8 +3,10 @@ import {
   AddTagsSection,
   AddLocationSection,
   MapContainer,
+  CommonLayout,
+  MainHeader,
 } from '@containers/index'
-import React, { ChangeEvent, useRef, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '@actions/reducer'
 import { IContentForm, LocationType, Tag } from '@interfaces'
@@ -15,7 +17,15 @@ import { FormLayout } from '@containers/Layout/PageLayout'
 
 const ContentForm = () => {
   // ! 유저 정보 받아오기
-  const { accessToken } = useSelector((state: RootReducer) => state.user)
+  const { isLogin, accessToken, user } = useSelector(
+    (state: RootReducer) => state.user
+  )
+
+  useEffect(() => {
+    if (!isLogin) {
+      router.push('/auth/login')
+    }
+  }, [])
 
   // ! 초기 상태
   const initialState: IContentForm = {
@@ -71,8 +81,9 @@ const ContentForm = () => {
       if (res.status === 201) {
         // TODO: 요청이 정상적으로 이루어지면 작성한 콘텐츠 view 페이지로 이동
         // ! 응답으로 콘텐츠 id를 받아옵니다.
-        // router.push(`/content/view/${content_id}`)
-        router.push(`/main`) // 임시로 main 페이지로 이동
+        const content_id = res.data.id
+        router.push(`/content/view/${content_id}`)
+        // router.push(`/main`) // 임시로 main 페이지로 이동
       }
     } catch (e) {
       throw e
@@ -190,97 +201,105 @@ const ContentForm = () => {
     })
   }
 
+  let userId
+  if (user) {
+    userId = user.id
+  }
+
   return (
-    <FormLayout>
-      <main>
-        <section className='banner'>
-          <DivWithBgImg
-            bgUrl={
-              content.mainImage.url ||
-              (content.images[0] && content.images[0].url)
-            }
-            p={'24px'}>
-            <input
-              name='title'
-              type='text'
-              placeholder='Content Title Here'
-              value={content.title}
-              onChange={inputChangeHandler}
-              autoFocus
-            />
-          </DivWithBgImg>
-        </section>
-
-        <section>
-          <textarea
-            name='description'
-            value={content.description}
-            onChange={inputChangeHandler}
-            placeholder='추천글을 작성해주세요'></textarea>
-        </section>
-
-        <section>
-          <AddTagsSection
-            locationTag={content.location.keyword}
-            tagList={content.tags}
-            setTagList={handleTags}
-          />
-        </section>
-
-        <section>
-          <AddLocationSection
-            location={content.location}
-            onClick={handleModalOpen}
-          />
-          {modalIsOpen && (
-            <Modal w='800px' h='800px' handleModalClose={handleModalClose}>
-              <MapContainer
-                locationInfo={content.location}
-                tags={content.tags}
-                handleLocation={setLocation}
-                setLocationTag={handleTags}
-                handleModalClose={() => setModalIsOpen(false)}
+    <CommonLayout
+      header={<MainHeader isLogin={isLogin} userId={userId as string} />}>
+      <FormLayout>
+        <main>
+          <section className='banner'>
+            <DivWithBgImg
+              bgUrl={
+                content.mainImage.url ||
+                (content.images[0] && content.images[0].url)
+              }
+              p={'24px'}>
+              <input
+                name='title'
+                type='text'
+                placeholder='Content Title Here'
+                value={content.title}
+                onChange={inputChangeHandler}
+                autoFocus
               />
-            </Modal>
-          )}
-        </section>
+            </DivWithBgImg>
+          </section>
 
-        <section className='form'>
-          <div>
-            {content.images.map(
-              ({ url, data, name, description }: any, idx: number) => (
-                <ImagePreview>
-                  <img
-                    src={url}
-                    key={name}
-                    alt='preview'
-                    title='클릭해서 배너이미지로 지정할 수 있습니다'
-                    onClick={() => selectBannerImg(url, data)}
-                  />
-                  <input
-                    id={'' + idx}
-                    key={idx}
-                    type='text'
-                    value={description}
-                    onChange={(e) => onChange(e, addDescription)}
-                    placeholder={description || '설명을 추가해주세요'}
-                  />
-                </ImagePreview>
-              )
-            )}
-            <MultiForm
-              method='post'
-              encType='multipart/form-data'
-              handleFile={handleFile}
+          <section>
+            <textarea
+              name='description'
+              value={content.description}
+              onChange={inputChangeHandler}
+              placeholder='추천글을 작성해주세요'></textarea>
+          </section>
+
+          <section>
+            <AddTagsSection
+              locationTag={content.location.keyword}
+              tagList={content.tags}
+              setTagList={handleTags}
             />
-          </div>
-        </section>
+          </section>
 
-        <section className='buttons'>
-          <DefaultBtn onClick={handleSubmit}>등록하기</DefaultBtn>
-        </section>
-      </main>
-    </FormLayout>
+          <section>
+            <AddLocationSection
+              location={content.location}
+              onClick={handleModalOpen}
+            />
+            {modalIsOpen && (
+              <Modal w='800px' h='800px' handleModalClose={handleModalClose}>
+                <MapContainer
+                  locationInfo={content.location}
+                  tags={content.tags}
+                  handleLocation={setLocation}
+                  setLocationTag={handleTags}
+                  handleModalClose={() => setModalIsOpen(false)}
+                />
+              </Modal>
+            )}
+          </section>
+
+          <section className='form'>
+            <div>
+              {content.images.map(
+                ({ url, data, name, description }: any, idx: number) => (
+                  <ImagePreview>
+                    <img
+                      src={url}
+                      key={name}
+                      alt='preview'
+                      title='클릭해서 배너이미지로 지정할 수 있습니다'
+                      onClick={() => selectBannerImg(url, data)}
+                    />
+                    <input
+                      id={'' + idx}
+                      key={idx}
+                      type='text'
+                      value={description}
+                      onChange={(e) => onChange(e, addDescription)}
+                      placeholder={description || '설명을 추가해주세요'}
+                    />
+                  </ImagePreview>
+                )
+              )}
+              <MultiForm
+                method='post'
+                encType='multipart/form-data'
+                handleFile={handleFile}
+              />
+            </div>
+          </section>
+
+          <section className='buttons'>
+            <DefaultBtn onClick={handleSubmit}>등록하기</DefaultBtn>
+          </section>
+        </main>
+      </FormLayout>
+    </CommonLayout>
   )
 }
 

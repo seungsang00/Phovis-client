@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { CommonLayout, SearchHeader, SearchContents } from '@containers/index'
+import {
+  CommonLayout,
+  SearchHeader,
+  SearchContents,
+  MainHeader,
+} from '@containers/index'
 import { IContent } from '@interfaces'
 
 import axios from 'axios'
+import { useSelector } from 'react-redux'
+import { RootReducer } from '@actions/reducer'
 
 const LOCAL_KEY_SEARCH_HISTORY = 'LOCAL_KEY_SEARCH_HISTORY'
 
 const SearchPage = () => {
+  const { isLogin, user } = useSelector((state: RootReducer) => state.user)
   const router = useRouter()
   const { query } = router
   const queryKeyword = (query.keyword as string) || ''
@@ -79,17 +87,23 @@ const SearchPage = () => {
     // console.log('onLoadData')
   }
 
+  let userId
+  if (user) {
+    userId = user.id
+  }
+
   return (
-    <CommonLayout>
+    <CommonLayout
+      header={<MainHeader isLogin={isLogin} userId={userId as string} />}>
       <main>
         <SearchHeader
           search={keyword}
+          searchKeyword={searchKeyword}
           onSubmit={onSubmitKeyword}
           onChange={onChangeInput}
         />
         <SearchContents
           isLoading={isLoading}
-          searchKeyword={searchKeyword}
           searchResult={searchResult}
           onLoadData={onLoadData}
         />
