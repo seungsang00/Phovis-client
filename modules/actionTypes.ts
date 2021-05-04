@@ -27,6 +27,11 @@ enum ContentAction {
   GET_RELATED_CONTENT_LIST_ERROR = 'CONTENT/RELATEDCONTENTLIST/LOAD/ERROR',
 }
 
-export { AuthAction, ContentAction }
+enum UserAction {
+  UPDATE_USER_AVATAR_SUCCESS = 'USER/AVATAR/UPDATE/SUCCESS',
+  UPDATE_USER_AVATAR_ERROR = 'USER/AVATAR/UPDATE/ERROR',
+}
+
+export { AuthAction, ContentAction, UserAction }
 export const USER_SIGNIN_SUCCESS = 'USER/SIGNIN/SUCCESS' as const
 export const USER_SIGNIN_ERROR = 'USER/SIGNIN/ERROR' as const

@@ -8,6 +8,7 @@ import { RootReducer } from '@actions/reducer'
 import { getUserInfo } from '@actions/users'
 import { useSelector } from 'react-redux'
 import useAction from '@hooks/useAction'
+import ProfileSetting from '@containers/ProfileSetting'
 
 const UserPage = () => {
   const tabList = ['Content', 'Likes', 'Bookmark', 'Setting']
@@ -62,9 +63,7 @@ const UserPage = () => {
           {selctTab === 'Bookmark' && (
             <div>Bookmark Tab Compoent 를 작성해 주세요</div>
           )}
-          {selctTab === 'Setting' && (
-            <div>Setting Tab Compoent 를 작성해 주세요</div>
-          )}
+          {selctTab === 'Setting' && <ProfileSetting />}
         </TabContainer>
       </CommonLayout>
     </>

@@ -1,18 +1,25 @@
-import styled from '@styles/themed-components'
+import styled, { withProps } from '@styles/themed-components'
 
 export const ModalOverlay = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   ${({ theme }) => theme.concept.glassmorphism};
   ${({ theme }) => theme.display.flexCenterCol};
+  z-index: 99;
 `
-export const ModalContent = styled.div`
-  width: 800px;
-  height: 800px;
+
+interface ModalSize {
+  width: string
+  height: string
+}
+export const ModalContent = withProps<ModalSize, HTMLDivElement>(styled.div)`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   ${({ theme }) => theme.display.flexCenterCol};
   background-color: lightcyan;
-  border-radius: 50px;
+  border-radius: 6px;
+  z-index: 999;
 `

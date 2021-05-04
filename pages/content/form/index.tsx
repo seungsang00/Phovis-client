@@ -8,7 +8,7 @@ import React, { ChangeEvent, useRef, useState } from 'react'
 import { FormLayout } from './form.style'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '@actions/reducer'
-import { IContentForm, Location, Tag } from '@interfaces'
+import { IContentForm, LocationType, Tag } from '@interfaces'
 import { DivWithBgImg } from '@styles/common'
 import { useRouter } from 'next/router'
 import axios from 'axios'
@@ -88,7 +88,7 @@ const ContentForm = () => {
   }
 
   // ! 위치 정보
-  const setLocation = (value: Location) => {
+  const setLocation = (value: LocationType) => {
     setContent({
       ...content,
       location: value,
@@ -233,7 +233,7 @@ const ContentForm = () => {
             onClick={handleModalOpen}
           />
           {modalIsOpen && (
-            <Modal handleModalClose={handleModalClose}>
+            <Modal w='800px' h='800px' handleModalClose={handleModalClose}>
               <MapContainer
                 locationInfo={content.location}
                 tags={content.tags}
