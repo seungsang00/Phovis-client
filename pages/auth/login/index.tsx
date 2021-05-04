@@ -36,17 +36,12 @@ const Login = () => {
   useEffect(() => {
     if (isLogin) {
       alert('Login success')
-      // redirect main page & laod user data.
-
-      // NOTE : load user data on main page.
-      // dispatch(getUserInfo(user.accessToken))
       router.push('/main')
-      // router.push('/content/form')
     }
     if (error) {
       // TODO : show error UI
       alert(`Login fail : ${error}`)
-      resetErrorMessage()
+      dispatch(resetErrorMessage())
     }
   }, [isLogin, error])
 
