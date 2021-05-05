@@ -22,10 +22,10 @@ const Polaroids = ({ locationinfo, photocards, contentId }: IProps) => {
     setModify(false)
     setModalIsOpen(true)
   }
-  const handleModify = (id: string, userid: string) => {
+  const handleModify = (photocadid: string, userid: string) => {
     if (userid === id) {
       setModify(true)
-      settargetModify(id)
+      settargetModify(photocadid)
       setModalIsOpen(true)
     } else {
       alert('자신의 게시물만 수정할 수 있습니다')
