@@ -1,4 +1,5 @@
 import styled from '@styles/themed-components'
+import { view_active, view_inactive } from '../../public/src/icons'
 
 export const InputContainer = styled.div`
   ${({ theme }) => theme.display.flexStartCol};

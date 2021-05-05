@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     font-size: 1rem;
     overflow-x: hidden;
+    color: ${theme.color.white};
     background-color: ${theme.color.primary};
   }
   a, a:focus, a:hover {

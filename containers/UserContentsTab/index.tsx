@@ -1,6 +1,7 @@
 import React from 'react'
 import { IContent } from '@interfaces'
 import { ThumbnailRect } from '@components/index'
+import { TabContentSection } from '@containers/Layout'
 
 interface IProps {
   userContents: IContent[]
@@ -8,7 +9,7 @@ interface IProps {
 
 const UserContentsTab = ({ userContents }: IProps) => {
   return (
-    <section>
+    <TabContentSection>
       {userContents.length > 0 &&
         userContents.map((content) => {
           const {
@@ -32,7 +33,7 @@ const UserContentsTab = ({ userContents }: IProps) => {
             />
           )
         })}
-    </section>
+    </TabContentSection>
   )
 }
 

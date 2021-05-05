@@ -5,3 +5,8 @@ export const TabContainer = styled.div`
   display: flex;
   flex-direction: column;
 `
+export const TabContentSection = styled.section`
+  padding: 8rem 8rem 8rem 10rem;
+  display: flex;
+  justify-content: flex-end;
+`

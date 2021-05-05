@@ -22,3 +22,15 @@ export const SettingContainer = styled.section`
     grid-template-columns: 370px 1fr;
   }
 `
+
+export const EditPassword = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+
+  & button {
+    font-size: 0.8rem;
+    color: ${({ theme }) => theme.color.secondary};
+  }
+`

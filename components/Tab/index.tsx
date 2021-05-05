@@ -1,8 +1,8 @@
-import { TabWrapper } from './tab.style'
+import { SideTab } from './tab.style'
 
 const Tab = ({ tablist, onClick, selectedTab }: any) => {
   return (
-    <TabWrapper>
+    <SideTab>
       <ul>
         {tablist &&
           tablist.length > 0 &&
@@ -17,13 +17,8 @@ const Tab = ({ tablist, onClick, selectedTab }: any) => {
               </li>
             )
           })}
-        {/* {tablist.map((tab: string) => (
-          <li key={tab} onClick={() => onClick(tab)}>
-            <div>{tab}</div>
-          </li>
-        ))} */}
       </ul>
-    </TabWrapper>
+    </SideTab>
   )
 }
 export default Tab

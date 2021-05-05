@@ -42,13 +42,13 @@ const UserPage = () => {
   }, [user_id])
 
   useEffect(() => {
-    if (userInfo && user && String(user.id) === userInfo.id) {
+    if (user && String(user.id) === user_id) {
       console.log(`user id query parameter : `, user_id)
       console.log('login user id : ', user.id)
       console.log('Set my page')
       setTabList(['Content', 'Likes', 'Bookmark', 'Setting'])
     }
-  }, [user, userInfo])
+  }, [user, user_id])
 
   const onClickTabHandler = (tab: string) => {
     setSelectedTab(tab)
@@ -151,7 +151,7 @@ const UserPage = () => {
       loadUserBookmarkContents()
     } else if (tab === 'Setting') {
       // _getUserInfo(accessToken)
-      loadUserInfo()
+      // loadUserInfo()
     }
   }
 
