@@ -68,7 +68,8 @@ export const PhtoCards = styled.div`
     }
 
     &:nth-child(1){
-      transform: translate(-55%, -45%);
+      z-index:1;
+      transform: translate(-45%, -35%);
     }
     &:nth-child(2){
       transform: translate(50%, -55%);

@@ -13,6 +13,7 @@ export const Container = styled.article`
 `
 export const Title = styled.div`
   margin-bottom: 2rem;
+  padding: 0 1rem;
 `
 
 export const ContentGrid = styled.div`
@@ -22,18 +23,20 @@ export const ContentGrid = styled.div`
 `
 
 export const ContentTagContainer = styled.div`
-  /* flex:7; */
   display: flex;
   align-items: center;
 `
 
 export const TagList = styled.div`
-  /* flex:3; */
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 
   & h3 {
     margin-bottom: 1.5rem;
+    font-size: 24px;
+    text-align: center;
   }
 
   & .tags {
@@ -42,7 +45,7 @@ export const TagList = styled.div`
     align-items: center;
 
     & button:not(:last-child) {
-      margin-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
     }
   }
 `

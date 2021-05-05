@@ -1,21 +1,3 @@
-// import Link from 'next/link'
-// import Layout from '../components/Layout'
-
-// const IndexPage = () => (
-//   <Layout title='Home | Next.js + TypeScript Example'>
-//     <h1>Hello Next.js 👋</h1>
-//     <p>
-//       <Link href='/about'>
-//         <a>About</a>
-//       </Link>
-//       <hr />
-//       <Link href='/content/form'>출장글 쓰러가기</Link>
-//     </p>
-//   </Layout>
-// )
-
-// export default IndexPage
-
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
@@ -30,14 +12,18 @@ import {
 } from '@actions/main'
 import useAction from '../hooks/useAction'
 
+import { MainBanner, LinkBanner } from '@components/index'
+
 import {
   MainRecommend,
+  MainSidebar,
   MainGallery,
   MainHeader,
-  MainSideMenu,
-  MainSectionHeader,
-  CommonLayout,
 } from '@containers/index'
+
+// NOTE : Test data
+import { sampleContents, samplePhotoCardData } from '@utils/index'
+//
 
 const MainPage = () => {
   const [input, setInput] = useState({
@@ -77,7 +63,13 @@ const MainPage = () => {
     console.log('recommendContentList : ', recommendContentList)
     console.log('trendTagList : ', trendTagList)
     console.log('photocardList : ', photocardList)
-  }, [photocardList])
+  }, [
+    error,
+    bannerContentList,
+    recommendContentList,
+    trendTagList,
+    photocardList,
+  ])
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const {
@@ -95,8 +87,11 @@ const MainPage = () => {
   }
 
   const onTagClickHandler = (tag: String) => {
-    // console.log('Tag click : ', tag)
-    router.push(`/search?keyword=${tag}`, `/search`)
+    console.log('Tag click : ', tag)
+  }
+
+  const onClickMainBannerItem = (contentId: String) => {
+    console.log(contentId)
   }
 
   const onScrollEnd = () => {
@@ -109,40 +104,45 @@ const MainPage = () => {
   }
 
   return (
-    <>
+    <div>
       <Head>
         <title>Phovis - Main</title>
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <CommonLayout
-        title='Phovis'
-        header={
-          <MainHeader
-            isLogin={isLogin}
-            userId={userId as string}
-            search={input.search}
-            onChangeInput={onChangeInput}
-            onSearchKeywordSubmit={onSearchKeywordSubmit}
-          />
-        }>
-        <main>
-          <MainSideMenu isLogin={isLogin} />
-          <section id='section-header' style={{ paddingTop: '60px' }}>
-            <MainSectionHeader />
-          </section>
-          <section id='section-recommend'>
-            <MainRecommend
-              contentList={recommendContentList}
-              photoCards={photocardList}
-              tags={trendTagList}
-              onTagClickHandler={onTagClickHandler}
-            />
-          </section>
-          <section id='section-photo-card'>
-            <MainGallery photoCards={photocardList} onScrollEnd={onScrollEnd} />
-          </section>
-        </main>
-      </CommonLayout>
-    </>
+      <main>
+        <MainHeader
+          isLogin={isLogin}
+          userId={userId as string}
+          search={input.search}
+          onChangeInput={onChangeInput}
+          onSearchKeywordSubmit={onSearchKeywordSubmit}
+        />
+
+        <MainBanner
+          contents={sampleContents}
+          onClickItem={onClickMainBannerItem}
+        />
+
+        <MainRecommend
+          tags={trendTagList}
+          onTagClickHandler={onTagClickHandler}
+          photoCards={samplePhotoCardData}
+        />
+
+        <MainSidebar
+          tags={trendTagList}
+          onTagClickHandler={onTagClickHandler}
+        />
+
+        <LinkBanner link={isLogin ? '/content/form' : '/auth/login'} />
+
+        <MainGallery
+          photoCards={samplePhotoCardData}
+          onScrollEnd={onScrollEnd}
+        />
+      </main>
+    </div>
   )
 }
 
