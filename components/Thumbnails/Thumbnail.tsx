@@ -77,7 +77,7 @@ export const ContentThumbnail = ({
   const router = useRouter()
 
   const handleThumbnailClick = () => {
-    console.log(`content/${contentid} 로 이동`)
+    // console.log(`content/${contentid} 로 이동`)
     router.push(`content/${contentid}`)
   }
   return (

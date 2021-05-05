@@ -42,6 +42,7 @@ import {
 
 // NOTE : Test data
 import { sampleContents, samplePhotoCardData } from '@utils/index'
+import { MainGridContainer } from '@containers/Layout/PageLayout'
 const sampleTag = ['야경', '서울', '밤바다', '등산', '여름']
 //
 
@@ -107,7 +108,8 @@ const MainPage = () => {
   }
 
   const onTagClickHandler = (tag: String) => {
-    console.log('Tag click : ', tag)
+    // console.log('Tag click : ', tag)
+    router.push(`/search?keyword=${tag}`, `/search`)
   }
 
   const onClickMainBannerItem = (contentId: String) => {
@@ -144,18 +146,26 @@ const MainPage = () => {
             onClickItem={onClickMainBannerItem}
           />
         }>
-        <>
-          <MainRecommend photoCards={samplePhotoCardData} />
+        <MainGridContainer>
+          <div>
+            <MainSidebar
+              tags={sampleTag}
+              onTagClickHandler={onTagClickHandler}
+            />
+            <LinkBanner link={isLogin ? '/content/form' : '/auth/login'} />
+          </div>
+          <div>
+            <MainRecommend
+              contentList={sampleContents}
+              photoCards={samplePhotoCardData}
+            />
 
-          <MainSidebar tags={sampleTag} onTagClickHandler={onTagClickHandler} />
-
-          <LinkBanner link={isLogin ? '/content/form' : '/auth/login'} />
-
-          <MainGallery
-            photoCards={samplePhotoCardData}
-            onScrollEnd={onScrollEnd}
-          />
-        </>
+            <MainGallery
+              photoCards={samplePhotoCardData}
+              onScrollEnd={onScrollEnd}
+            />
+          </div>
+        </MainGridContainer>
       </CommonLayout>
     </>
   )
