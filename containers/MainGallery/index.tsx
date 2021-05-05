@@ -3,6 +3,8 @@ import { IPhotoCard } from '@interfaces'
 import { Polaroids } from '@containers/index'
 import { useInfinteScroll } from '@hooks/useInfinteScroll'
 
+import { Container, Title, ContentContainer } from './MainGallery.style'
+
 interface IProps {
   photoCards: IPhotoCard[]
   onScrollEnd: () => void
@@ -27,14 +29,17 @@ const MainGallery = ({ photoCards, onScrollEnd }: IProps) => {
   })
 
   return (
-    <section>
+    <Container>
+      <Title>
+        <h1 className='section-title'>📸 이런 사진을 찍을 수 있어요</h1>
+      </Title>
       {photoCards.length > 0 && (
-        <div className='flex'>
+        <ContentContainer>
           <Polaroids type={'main'} photocards={photoCards} />
-        </div>
+        </ContentContainer>
       )}
-      {photoCards.length > 0 && <div ref={setTarget}>Content Loder</div>}
-    </section>
+      {photoCards.length > 0 && <div ref={setTarget}></div>}
+    </Container>
   )
 }
 

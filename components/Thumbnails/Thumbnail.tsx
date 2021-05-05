@@ -16,7 +16,7 @@ interface IRect {
   username: string
   bgImage: string
   likeCount: number
-  isBookMark?: boolean
+  isBookmark?: boolean
   isLike?: boolean
 }
 
@@ -28,13 +28,13 @@ export const ThumbnailRect = ({
   username,
   bgImage,
   likeCount,
-  isBookMark = false,
+  isBookmark = false,
   isLike = false,
 }: IRect) => (
   <ThumbnailContainer_rect>
     <DivWithBgImg bgUrl={bgImage} p={'24px'}>
       <span className='bookmark'>
-        <BookmarkBtn id={id} isChecked={isBookMark} />
+        <BookmarkBtn id={id} isChecked={isBookmark} />
       </span>
       <UserInfoHor userName={username} profileImage={profileImage} />
       <span className='like'>

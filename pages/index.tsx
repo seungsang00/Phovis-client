@@ -30,13 +30,12 @@ import {
 } from '@actions/main'
 import useAction from '../hooks/useAction'
 
-import { MainBanner, LinkBanner } from '@components/index'
-
 import {
   MainRecommend,
-  MainSidebar,
   MainGallery,
   MainHeader,
+  MainSideMenu,
+  MainSectionHeader,
   CommonLayout,
 } from '@containers/index'
 
@@ -104,12 +103,8 @@ const MainPage = () => {
     router.push(`/search?keyword=${tag}`, `/search`)
   }
 
-  const onClickMainBannerItem = (contentId: String) => {
-    console.log(contentId)
-  }
-
   const onScrollEnd = () => {
-    _getPhotoCardList()
+    // _getPhotoCardList()
   }
 
   let userId
@@ -123,6 +118,7 @@ const MainPage = () => {
         <title>Phovis - Main</title>
       </Head>
       <CommonLayout
+        title='Phovis'
         header={
           <MainHeader
             isLogin={isLogin}
@@ -131,30 +127,27 @@ const MainPage = () => {
             onChangeInput={onChangeInput}
             onSearchKeywordSubmit={onSearchKeywordSubmit}
           />
-        }
-        banner={
-          <MainBanner
-            contents={sampleContents}
-            onClickItem={onClickMainBannerItem}
-          />
         }>
-        <MainGridContainer>
-          <div>
-            <MainSidebar
-              tags={trendTagList}
-              onTagClickHandler={onTagClickHandler}
-            />
-            <LinkBanner link={isLogin ? '/content/form' : '/auth/login'} />
-          </div>
-          <div>
+        <main>
+          <MainSideMenu isLogin={isLogin} />
+          <section id='section-header' style={{ paddingTop: '60px' }}>
+            <MainSectionHeader />
+          </section>
+          <section id='section-recommend'>
             <MainRecommend
               contentList={recommendContentList}
               photoCards={photocardList}
+              tags={trendTagList}
+              onTagClickHandler={onTagClickHandler}
             />
-
-            <MainGallery photoCards={photocardList} onScrollEnd={onScrollEnd} />
-          </div>
-        </MainGridContainer>
+          </section>
+          <section id='section-photo-card'>
+            <MainGallery
+              photoCards={photocardList}
+              onScrollEnd={onScrollEnd}
+            />
+          </section>
+        </main>
       </CommonLayout>
     </>
   )

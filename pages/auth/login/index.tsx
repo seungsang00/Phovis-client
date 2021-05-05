@@ -7,18 +7,22 @@ import { login, loginWithGoogle, resetErrorMessage } from '@actions/users'
 import {
   LableTextInput,
   PasswordInput,
-  Checkbox,
-  SubmitButton,
   GoogleLoginButton,
   KakaoLoginButton,
+  LoginButton,
+  SignButton,
 } from '@components/index'
 
 import {
   GoogleLoginResponse,
   GoogleLoginResponseOffline,
 } from 'react-google-login'
-import { CommonLayout } from '@containers/Layout'
-import MainHeader from '@containers/MainHeader'
+import {
+  CommonLayout,
+  SignPageLayout,
+  MainHeader,
+  SignSection,
+} from '@containers/index'
 
 // import useAction from '../../../hooks/useAction';
 
@@ -59,16 +63,6 @@ const Login = () => {
     })
   }
 
-  const checkChangeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const {
-      target: { checked: checkKeepLoggedIn },
-    } = e
-    setInput({
-      ...input,
-      checkKeepLoggedIn,
-    })
-  }
-
   const requestLogin = async () => {
     dispatch(login(input))
   }
@@ -87,7 +81,7 @@ const Login = () => {
     }
   }
 
-  const requestkaKaoLogin: React.MouseEventHandler<HTMLDivElement> = () => {
+  const requestkaKaoLogin: React.MouseEventHandler<HTMLButtonElement> = () => {
     // console.log('requestkaKaoLogin')
     // 카카오 로그인 버튼클릭시 redirect 주소창이 열린다.
     // redirect 한 장소에서 카카오 계정 정보를 받아온 뒤 새 윈도우가 닫힌다.
@@ -117,47 +111,56 @@ const Login = () => {
             hideLoginBtn={true}
           />
         }>
-        <section>
-          <article>
-            <h2>Log in</h2>
-            <LableTextInput
-              name='email'
-              label='Email'
-              onChange={inputChangeHandler}
-              value={input.email}
-            />
-            <PasswordInput
-              name='password'
-              label='Password'
-              onChange={inputChangeHandler}
-              value={input.password}
-            />
-            <div>
-              <Checkbox
-                name='checkKeepLoggedIn'
-                text='Keep me logged in'
-                onChange={checkChangeHandler}
+        <SignPageLayout className='sign-area'>
+          <SignSection className='sign-in'>
+            <article>
+              <h2 className='title'>
+                Sign in <span className='main-logo'>Phovis</span>
+              </h2>
+              <LableTextInput
+                name='email'
+                onChange={inputChangeHandler}
+                placeholder='Email'
+                value={input.email}
+                autoFocus={true}
               />
-              <Link href='/auth/forgotpassword'>Forgot your password ?</Link>
-            </div>
-            <SubmitButton text='Sign in' onSubmit={requestLogin} />
-            <Link href='/auth/signup'>Go to sign up new account !</Link>
-            <hr />
-            <p>Or login with SNS account</p>
-            <div>
-              <GoogleLoginButton
-                clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string}
-                onSubmit={requestGoogleLogin}
+              <PasswordInput
+                name='password'
+                placeholder='Password'
+                onChange={inputChangeHandler}
+                value={input.password}
               />
-              <KakaoLoginButton onSubmit={requestkaKaoLogin} />
-            </div>
-          </article>
-          <article>
-            <h2>Title text and Logo</h2>
-            <img />
-            <p>Main comment</p>
-          </article>
-        </section>
+              <LoginButton text='Sign in' onSubmit={requestLogin} />
+
+              <p className='division'>or login with social account</p>
+
+              <div>
+                <GoogleLoginButton
+                  clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string}
+                  onSubmit={requestGoogleLogin}
+                />
+                <KakaoLoginButton onSubmit={requestkaKaoLogin} />
+              </div>
+            </article>
+            {/* <article>
+              <h2>Title text and Logo</h2>
+              <img />
+              <p>Main comment</p>
+            </article> */}
+          </SignSection>
+          <SignSection className='sign-up'>
+            <article className='sign'>
+              <h2 className='title'>
+                Sign up <span className='main-logo'>Phovis</span>
+              </h2>
+              <p className='division'>sign up and share your Phovis</p>
+              <Link href='/auth/signup'>
+                <SignButton>Sign Up</SignButton>
+              </Link>
+              <section className='sign-aside sign-up'></section>
+            </article>
+          </SignSection>
+        </SignPageLayout>
       </CommonLayout>
     </>
   )

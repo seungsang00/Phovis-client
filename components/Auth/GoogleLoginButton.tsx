@@ -3,6 +3,7 @@ import GoogleLogin, {
   GoogleLoginResponse,
   GoogleLoginResponseOffline,
 } from 'react-google-login'
+import { SocialButton } from './social-login-button.style'
 
 type Props = {
   clientId: string
@@ -16,9 +17,11 @@ const GoogleLoginButton = ({ clientId, onSubmit }: Props) => (
     <GoogleLogin
       clientId={clientId}
       render={(renderProps) => (
-        <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
-          Google
-        </button>
+        <SocialButton
+          onClick={renderProps.onClick}
+          disabled={renderProps.disabled}>
+          Google 계정으로 로그인
+        </SocialButton>
       )}
       onSuccess={onSubmit}
       onFailure={onSubmit}

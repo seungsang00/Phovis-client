@@ -9,6 +9,9 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   }
+  html{
+    scroll-behavior:smooth;
+  }
   body {
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     font-size: 1rem;
@@ -21,6 +24,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   input, button {
     font-size: inherit;
+    background: none;
     background-color: transparent;
     border: none;
     outline: none;
