@@ -37,6 +37,7 @@ import {
   MainSidebar,
   MainGallery,
   MainHeader,
+  MainSideMenu,
   CommonLayout,
 } from '@containers/index'
 
@@ -130,7 +131,8 @@ const MainPage = () => {
       <Head>
         <title>Phovis - Main</title>
       </Head>
-      <CommonLayout
+      {/* 이전에 사용하던 레이아웃은 이제 사용하지 않음 */}
+      {/* <CommonLayout
         header={
           <MainHeader
             isLogin={isLogin}
@@ -146,6 +148,7 @@ const MainPage = () => {
             onClickItem={onClickMainBannerItem}
           />
         }>
+
         <MainGridContainer>
           <div>
             <MainSidebar
@@ -166,6 +169,31 @@ const MainPage = () => {
             />
           </div>
         </MainGridContainer>
+      </CommonLayout> */}
+
+      <CommonLayout
+        title='Phovis'
+        header={
+          <MainHeader
+            isLogin={isLogin}
+            userId={userId as string}
+            search={input.search}
+            onChangeInput={onChangeInput}
+            onSearchKeywordSubmit={onSearchKeywordSubmit}
+          />
+        }>
+        <main>
+          <MainSideMenu isLogin={isLogin} />
+          <section
+            id='section-header'
+            style={{ height: '100vh', backgroundColor: 'red' }}></section>
+          <section
+            id='section-recommend'
+            style={{ height: '100vh', backgroundColor: 'green' }}></section>
+          <section
+            id='section-photo-card'
+            style={{ height: '100vh', backgroundColor: 'yellow' }}></section>
+        </main>
       </CommonLayout>
     </>
   )
