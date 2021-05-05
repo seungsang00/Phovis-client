@@ -14,6 +14,7 @@ import { DivWithBgImg } from '@styles/common'
 import { useRouter } from 'next/router'
 import axios, { AxiosResponse } from 'axios'
 import { FormLayout } from '@containers/Layout/PageLayout'
+import { Main } from './contentform.style'
 
 const ContentForm = () => {
   // ! 유저 정보 받아오기
@@ -290,7 +291,7 @@ const ContentForm = () => {
     <CommonLayout
       header={<MainHeader isLogin={isLogin} userId={userId as string} />}>
       <FormLayout>
-        <main>
+        <Main>
           <section className='banner'>
             <DivWithBgImg
               bgUrl={
@@ -299,6 +300,7 @@ const ContentForm = () => {
               }
               p={'24px'}>
               <input
+                className='title'
                 name='title'
                 type='text'
                 placeholder='Content Title Here'
@@ -309,7 +311,7 @@ const ContentForm = () => {
             </DivWithBgImg>
           </section>
 
-          <section>
+          <section className='textarea'>
             <textarea
               name='description'
               value={content.description}
@@ -325,7 +327,7 @@ const ContentForm = () => {
             />
           </section>
 
-          <section>
+          <section className='locationContainer'>
             <AddLocationSection
               location={content.location}
               onClick={handleModalOpen}
@@ -344,7 +346,7 @@ const ContentForm = () => {
           </section>
 
           <section className='form'>
-            <div>
+            <div className='container'>
               {content.images.map(
                 ({ url, data, name, description }: any, idx: number) => (
                   <ImagePreview>
@@ -377,7 +379,7 @@ const ContentForm = () => {
           <section className='buttons'>
             <DefaultBtn onClick={handleSubmit}>등록하기</DefaultBtn>
           </section>
-        </main>
+        </Main>
       </FormLayout>
     </CommonLayout>
   )
