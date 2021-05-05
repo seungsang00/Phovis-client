@@ -41,7 +41,7 @@ const ContentPage = () => {
   }, [content_id])
 
   const { contentData } = useSelector((state: RootReducer) => state.content)
-
+  // const { id } = useSelector((state: RootReducer) => state.user)
   const {
     id,
     title,
@@ -59,7 +59,7 @@ const ContentPage = () => {
     console.log(tags)
     if (tags) {
       _getRelatedContentList(tags as string)
-      _getRelatedPhotoCardList(tags as string)
+      _getRelatedPhotoCardList(content_id as string)
     }
   }, [tag])
 
@@ -67,12 +67,15 @@ const ContentPage = () => {
     (state: RootReducer) => state.content
   )
   console.log(relatedContentList)
+  console.log(photocardList)
 
   let userId
   if (user) {
     userId = user.id
   }
+  // const handlemodify = (id: string): void => {
 
+  // }
   return (
     <>
       <Head>
@@ -84,6 +87,7 @@ const ContentPage = () => {
         header={<MainHeader isLogin={isLogin} userId={userId as string} />}
         banner={
           <ContentBanner
+            // handlemodify={handlemodify}
             id={id as string}
             title={title || sampleContent.title}
             mainImgUrl={mainimageUrl || sampleContent.mainimageUrl}
@@ -96,6 +100,7 @@ const ContentPage = () => {
           />
         }>
         <ContentMain
+          contentId={(content_id as string) || (sampleContent.id as string)}
           description={description || sampleContent.description}
           location={location || sampleContent.location}
           images={images || sampleContent.images}
