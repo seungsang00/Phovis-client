@@ -30,9 +30,7 @@ export const SearchBar = ({
       placeholder={placeholder}
       required
     />
-    <SearchButton className='search-btn' type='submit'>
-      <span>Search</span>
-    </SearchButton>
+    <SearchButton className='search-btn' type='submit' />
   </SearchForm>
 )
 

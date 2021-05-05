@@ -1,5 +1,15 @@
-import styled from 'styled-components'
+import styled, { withProps } from '@styles/themed-components'
+import { like_active, like_inactive } from '@styles/icons'
 
+interface IButton {
+  isActive: boolean
+}
+export const LikeButton = withProps<IButton, HTMLButtonElement>(styled.button)`
+  width: 24px;
+  height: 24px;
+  ${(props) => (props.isActive ? like_active : like_inactive)};
+  cursor: pointer;
+`
 export const LikeContainer = styled.div`
   padding: 10px;
   justify-content: end;
@@ -7,22 +17,15 @@ export const LikeContainer = styled.div`
   align-items: center;
 `
 
-interface WrapperProps {
-  isActive: boolean
-}
-
-export const ImgContainer = styled.div<WrapperProps>`
+export const ImgContainer = withProps<IButton, HTMLDivElement>(styled.div)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  .heart {
-    fill: ${(props) => (props.isActive ? 'red' : '#ccc')};
-    position: relative;
-  }
+  
   & > span {
     padding-left: 8px;
     line-height: 1.5rem;
     font-size: 1.25rem;
-    color: #fff;
+    color: #f3f3f3;
   }
 `

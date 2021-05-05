@@ -220,6 +220,13 @@ export const resetErrorMessage = () => {
   }
 }
 
+export const logout = () => {
+  return {
+    type: AuthAction.LOGOUT_SUCCESS,
+    payload: null,
+  }
+}
+
 export const updateUserAvatar = (profileImgUrl: string) => {
   return (dispatch: Function) => {
     dispatch(successUpdateUserAvatar(profileImgUrl))
@@ -272,10 +279,10 @@ function user(state: userState = initialState, action: userAction): userState {
       const userData = { ...data }
       delete userData.message
 
-      if('accessToken' in userData){
-        const {accessToken} = userData;
+      if ('accessToken' in userData) {
+        const { accessToken } = userData
         delete userData.accessToken
-        state.accessToken = accessToken;
+        state.accessToken = accessToken
       }
       return { ...state, user: userData, isLogin: true }
 
@@ -287,11 +294,17 @@ function user(state: userState = initialState, action: userAction): userState {
 
     case UserAction.UPDATE_USER_AVATAR_SUCCESS:
       const profileImg = action.payload as string
-      console.log(`응답>>`, profileImg)
       return {
         ...state,
         user: { ...state.user, profileImg },
       }
+
+    case AuthAction.LOGOUT_SUCCESS:
+      localStorage.removeItem(LOCAL_KEY_ACCESS_TOKEN)
+      return {
+        ...initialState,
+      }
+
     default:
       return state
   }

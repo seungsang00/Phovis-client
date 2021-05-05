@@ -1,8 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { SearchBar } from '@components/index'
+import { SearchBar, UserPageButton, MyPageButton } from '@components/index'
 import { HeaderInner } from '@containers/Layout/CommonLayout/commonlayout'
+import { useRouter } from 'next/router'
 
 interface IProps {
   isLogin: boolean
@@ -20,38 +21,50 @@ const MainHeader = ({
   hideLoginBtn,
   onChangeInput,
   onSearchKeywordSubmit,
-}: IProps) => (
-  <HeaderInner>
-    <div className='global-menu'>
-      <Link href='/'>
-        <h2 className='main-logo'>Phovis</h2>
-      </Link>
-    </div>
-    <div className='sub-menu'>
-      {onChangeInput && onSearchKeywordSubmit && (
-        <SearchBar
-          name='search'
-          value={search as string}
-          onChange={onChangeInput}
-          onSubmit={onSearchKeywordSubmit}
-        />
-      )}
-      {!hideLoginBtn && (
-        <div>
-          {isLogin && userId ? (
-            <Link href={`/user/${userId}`}>
-              <span className='link-text'>마이 페이지</span>
-            </Link>
-          ) : (
-            <Link href='/auth/login'>
-              <span className='link-text'>로그인</span>
-            </Link>
-          )}
-          {/* {!isLogin && <Link href='/auth/login'>로그인</Link>} */}
-        </div>
-      )}
-    </div>
-  </HeaderInner>
-)
+}: IProps) => {
+  const router = useRouter()
+
+  const moveToLogin = () => {
+    router.push('/auth/login')
+  }
+
+  const moveToMyPage = () => {
+    router.push(`/user/${userId}`)
+  }
+
+  return (
+    <HeaderInner>
+      <div className='global-menu'>
+        <Link href='/'>
+          <h2 className='main-logo'>Phovis</h2>
+        </Link>
+      </div>
+      <div className='sub-menu'>
+        {onChangeInput && onSearchKeywordSubmit && (
+          <SearchBar
+            name='search'
+            value={search as string}
+            onChange={onChangeInput}
+            onSubmit={onSearchKeywordSubmit}
+          />
+        )}
+        {!hideLoginBtn && (
+          <div>
+            {isLogin && userId ? (
+              <div onClick={moveToMyPage}>
+                <MyPageButton />
+              </div>
+            ) : (
+              <div onClick={moveToLogin}>
+                <UserPageButton />
+              </div>
+            )}
+            {/* {!isLogin && <Link href='/auth/login'>로그인</Link>} */}
+          </div>
+        )}
+      </div>
+    </HeaderInner>
+  )
+}
 
 export default MainHeader

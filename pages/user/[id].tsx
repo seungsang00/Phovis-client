@@ -16,7 +16,7 @@ const UserPage = () => {
   const router = useRouter()
   const user_id = router.query.id
 
-  const [userInfo, setUserInfo] = useState<IUser | null>(null)
+  // const [userInfo, setUserInfo] = useState<IUser | null>(null)
   const [tabList, setTabList] = useState(['Content', 'Likes', 'Bookmark'])
   const [selectedTab, setSelectedTab] = useState('Content')
   const [userContents, setUserContents] = useState<IContent[]>([])
@@ -42,13 +42,13 @@ const UserPage = () => {
   }, [user_id])
 
   useEffect(() => {
-    if (userInfo && user && String(user.id) === userInfo.id) {
+    if (user && String(user.id) === user_id) {
       console.log(`user id query parameter : `, user_id)
       console.log('login user id : ', user.id)
       console.log('Set my page')
       setTabList(['Content', 'Likes', 'Bookmark', 'Setting'])
     }
-  }, [user, userInfo])
+  }, [user, user_id])
 
   const onClickTabHandler = (tab: string) => {
     setSelectedTab(tab)
@@ -118,27 +118,27 @@ const UserPage = () => {
     }
   }
 
-  const loadUserInfo = async () => {
-    try {
-      const { status, data } = await axios.get(
-        'https://localhost:4000/user/info',
-        {
-          params: {
-            id: user_id,
-          },
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
-      if (status === 200) {
-        console.log('loadUserInfo : ', data)
-        setUserInfo({ ...data })
-      }
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  // const loadUserInfo = async () => {
+  //   try {
+  //     const { status, data } = await axios.get(
+  //       'https://localhost:4000/user/info',
+  //       {
+  //         params: {
+  //           id: user_id,
+  //         },
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       }
+  //     )
+  //     if (status === 200) {
+  //       console.log('loadUserInfo : ', data)
+  //       setUserInfo({ ...data })
+  //     }
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
 
   const loadContent = async (tab: string) => {
     console.log('tab : ', tab)
@@ -151,7 +151,7 @@ const UserPage = () => {
       loadUserBookmarkContents()
     } else if (tab === 'Setting') {
       // _getUserInfo(accessToken)
-      loadUserInfo()
+      // loadUserInfo()
     }
   }
 
