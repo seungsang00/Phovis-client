@@ -76,3 +76,13 @@ export const PhotoWrap = styled.div`
     }
   }
 `
+
+export const PhotoModal = styled.div`
+  transition: all 0.3s;
+  transform: scale(0.5);
+  object-fit: contain;
+
+  .active {
+    box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+  }
+`
