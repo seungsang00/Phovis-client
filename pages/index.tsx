@@ -38,6 +38,7 @@ import {
   MainGallery,
   MainHeader,
   MainSideMenu,
+  MainSectionHeader,
   CommonLayout,
 } from '@containers/index'
 
@@ -186,7 +187,9 @@ const MainPage = () => {
           <MainSideMenu isLogin={isLogin} />
           <section
             id='section-header'
-            style={{ height: '100vh', backgroundColor: 'red' }}></section>
+            style={{ height: '100vh', backgroundColor: 'red' }}>
+            <MainSectionHeader />
+          </section>
           <section
             id='section-recommend'
             style={{ height: '100vh', backgroundColor: 'green' }}></section>
