@@ -4,7 +4,7 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 36px 0;
+  padding: 36px 10rem;
 
   .section-title {
     margin-bottom: 1rem;
@@ -16,6 +16,7 @@ export const MainContainer = styled.div`
   }
 
   section.description {
+
     font-size: 1.2rem;
     line-height: 2rem;
   }
@@ -31,5 +32,15 @@ export const MainContainer = styled.div`
     /* text-align: left;
     display: flex;
     justify-content: flex-start; */
+  }
+
+  @media ${({ theme }) => theme.size.desktop} {
+    padding: 36px 10rem;
+  }
+  @media ${({ theme }) => theme.size.tabletM} {
+    padding: 36px 6rem;
+  }
+  @media ${({ theme }) => theme.size.tabletS} {
+    padding: 36px 4rem;
   }
 `

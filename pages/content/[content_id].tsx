@@ -67,8 +67,8 @@ const ContentPage = () => {
     }
   }, [tag])
 
-  console.log(relatedContentList)
-  console.log('다시불러오니?', photocardList)
+  // console.log(relatedContentList)
+  // console.log('다시불러오니?', photocardList)
 
   let userId = ''
   if (user) {

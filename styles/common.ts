@@ -17,13 +17,14 @@ export const DivWithBgImg = withProps<IBg, HTMLDivElement>(styled.div)`
   justify-content: flex-end;
   padding: ${(props) => props.p};
   overflow: hidden;
+  position: relative;
 
   div.main-title {
     font-size: 3rem;
     font-weight: 700;
     position: absolute;
     left: 40px;
-    bottom: 50vh;
+    bottom: 80px;
   }
   div.top-right {
     position: absolute;
@@ -34,13 +35,13 @@ export const DivWithBgImg = withProps<IBg, HTMLDivElement>(styled.div)`
   div.bottom-left {
     position: absolute;
     left: 30px;
-    bottom: 41vh;
+    bottom: 10px;
     z-index: 1;
   }
   div.bottom-right {
     position: absolute;
     right: 30px;
-    bottom: 41vh;
+    bottom: 10px;
     z-index: 1;
   }
 `

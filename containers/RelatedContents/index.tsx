@@ -12,6 +12,7 @@ const RelatedContents = ({ related }: IProps) => {
       <div className='thumbnails'>
         {related.map(({ id, mainimageUrl, title, user }) => (
           <ContentThumbnail
+            key={id}
             contentid={id as string}
             imageurl={mainimageUrl as string}
             title={title as string}

@@ -29,6 +29,7 @@ const ContentMain = ({
       <section className='photo'>
         {images.map((el) => (
           <Photo
+            key={el.id}
             id={el.id}
             imageurl={el.imageurl}
             description={el.description}
@@ -41,7 +42,7 @@ const ContentMain = ({
       </section>
       <section className='tags'>
         {tags?.map((el) => (
-          <TagSmall tagname={el} onClick={handleTagClick} />
+          <TagSmall key={el} tagname={el} onClick={handleTagClick} />
         ))}
       </section>
       <section className='related-contents'>
