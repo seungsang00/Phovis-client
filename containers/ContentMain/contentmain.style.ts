@@ -16,7 +16,6 @@ export const MainContainer = styled.div`
   }
 
   section.description {
-
     font-size: 1.2rem;
     line-height: 2rem;
   }
