@@ -12,11 +12,14 @@ import { RootReducer } from '@actions/reducer'
 import { IContentForm, LocationType, Tag } from '@interfaces'
 import { DivWithBgImg } from '@styles/common'
 import { useRouter } from 'next/router'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { FormLayout } from '@containers/Layout/PageLayout'
 
 const ContentForm = () => {
   // ! 유저 정보 받아오기
+  const router = useRouter()
+  let { contentId } = router.query
+
   const { isLogin, accessToken, user } = useSelector(
     (state: RootReducer) => state.user
   )
@@ -47,7 +50,62 @@ const ContentForm = () => {
   const [content, setContent] = useState<IContentForm>(initialState)
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
   const file_url = useRef<string | ArrayBuffer | null>(null)
-  const router = useRouter()
+
+  //수정하고 싶어하는 사람인지 로직
+  const handleModify = async (contentId: string) => {
+    const res = await axios.get(
+      `https://localhost:4000/content?id=${contentId}`
+    )
+
+    const { description, title, tag, mainimageUrl, images, location } = res.data
+      .result as any
+
+    if (images) {
+      for (let i = 0; i < images.length; i++) {
+        const { imageurl, description } = images[i]
+        const blob = await fetch(imageurl).then((r) => r.blob())
+        const ext = imageurl.split('.').pop()
+        const filename = imageurl.split('/').pop()
+        const metadata = { type: `image/${ext}` }
+        const file = new File([blob], filename, metadata)
+
+        images[i] = {
+          data: file,
+          name: file.name,
+          url: `${imageurl}`, // 이미지파일의 임시 url은 reader의 result 속성에 담겨있습니다
+          description,
+          type: 'content',
+        }
+      }
+    }
+    const blob = await fetch(mainimageUrl).then((r) => r.blob())
+    const ext = mainimageUrl.split('.').pop()
+    const filename = mainimageUrl.split('/').pop()
+    const metadata = { type: `image/${ext}` }
+    const file = new File([blob], filename, metadata)
+
+    const tags: Tag[] = tag.map((el: string) => ({ id: el, name: el }))
+
+    setContent({
+      ...content,
+      title,
+      mainImage: {
+        data: file,
+        url: `${mainimageUrl}`,
+      },
+      tags,
+      description,
+      location,
+      images,
+    })
+  }
+
+  useEffect(() => {
+    //수정하고 싶어하는 사람인지 확인
+    if (contentId) {
+      handleModify(contentId as string)
+    }
+  }, [])
 
   // ! 서버에 파일 전송
   const handleSubmit = async () => {
@@ -55,7 +113,16 @@ const ContentForm = () => {
     // 전송할 폼데이터를 생성합니다
     const formData = new FormData()
     const { title, description, tags, location, images, mainImage } = content
-
+    if (!title) {
+      alert('title을 입력하세요')
+      return
+    } else if (!description) {
+      alert('사진과 장소에 대한 설명을 추가하세요')
+      return
+    } else if (!location) {
+      alert('정확한 장소를 지도에 표시해주세요')
+      return
+    }
     formData.append('title', title)
     formData.append('description', description)
     formData.append('location', JSON.stringify(location))
@@ -71,18 +138,31 @@ const ContentForm = () => {
     })
 
     try {
-      const res = await axios.post(`https://localhost:4000/content`, formData, {
-        headers: {
-          authorization: `Bearer ${accessToken}`,
-        },
-        // withCredentials: true, // 현재 client가 http라면 주석처리
-      })
-      console.log(`응답>>`, res)
+      let res = {} as AxiosResponse
+      if (!contentId) {
+        res = await axios.post(`https://localhost:4000/content`, formData, {
+          headers: {
+            authorization: `Bearer ${accessToken}`,
+          },
+          // withCredentials: true, // 현재 client가 http라면 주석처리
+        })
+      } else {
+        res = await axios.put(
+          `https://localhost:4000/content?contentid=${contentId}`,
+          formData,
+          {
+            headers: {
+              authorization: `Bearer ${accessToken}`,
+            },
+          }
+        )
+      }
       if (res.status === 201) {
         // TODO: 요청이 정상적으로 이루어지면 작성한 콘텐츠 view 페이지로 이동
         // ! 응답으로 콘텐츠 id를 받아옵니다.
+        console.log(`응답>>`, res)
         const content_id = res.data.id
-        router.push(`/content/view/${content_id}`)
+        router.push(`/content/[content_id]`, `/content/${content_id}`)
         // router.push(`/main`) // 임시로 main 페이지로 이동
       }
     } catch (e) {

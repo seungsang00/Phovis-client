@@ -45,7 +45,7 @@ const ContentPage = () => {
   const { relatedContentList, photocardList } = useSelector(
     (state: RootReducer) => state.content
   )
-  // const { id } = useSelector((state: RootReducer) => state.user)
+
   const {
     id,
     title,
@@ -70,13 +70,15 @@ const ContentPage = () => {
   console.log(relatedContentList)
   console.log('다시불러오니?', photocardList)
 
-  let userId
+  let userId = ''
   if (user) {
-    userId = user.id
+    userId = user.id as string
   }
-  // const handlemodify = (id: string): void => {
-
-  // }
+  const handlemodify = (id: string): void => {
+    if (creator.id === userId) {
+      router.push(`/content/form?isModify=${true}&contentId=${id}`)
+    }
+  }
   return (
     <>
       <Head>
@@ -88,7 +90,9 @@ const ContentPage = () => {
         header={<MainHeader isLogin={isLogin} userId={userId as string} />}
         banner={
           <ContentBanner
-            // handlemodify={handlemodify}
+            handlemodify={() => handlemodify(id as string)}
+            owner={creator.id as string}
+            userId={userId as string}
             id={id as string}
             title={title || sampleContent.title}
             mainImgUrl={mainimageUrl || sampleContent.mainimageUrl}

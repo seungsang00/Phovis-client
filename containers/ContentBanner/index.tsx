@@ -2,9 +2,11 @@ import { BookmarkBtn, LikeBtn, UserInfoHor } from '@components/index'
 import { IContentBanner } from '@interfaces'
 import { DivWithBgImg } from '@styles/index'
 
-// interface props {
-//   handlemodify?: (id: string) => void
-// }
+interface props {
+  handlemodify: () => void
+  userId?: string
+  owner: string
+}
 
 const ContentBanner = ({
   id,
@@ -15,9 +17,13 @@ const ContentBanner = ({
   likesCount,
   isLike = false,
   isBookmark = false,
-}: IContentBanner) => {
+  userId,
+  owner,
+  handlemodify,
+}: IContentBanner & props) => {
   return (
     <DivWithBgImg bgUrl={mainImgUrl}>
+      {owner === userId && <div onClick={handlemodify}>수정</div>}
       <div className='top-right'>
         <BookmarkBtn id={id} isChecked={isBookmark} />
       </div>
