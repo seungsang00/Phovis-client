@@ -30,11 +30,8 @@ import {
 } from '@actions/main'
 import useAction from '../hooks/useAction'
 
-import { MainBanner, LinkBanner } from '@components/index'
-
 import {
   MainRecommend,
-  MainSidebar,
   MainGallery,
   MainHeader,
   MainSideMenu,
@@ -44,7 +41,6 @@ import {
 
 // NOTE : Test data
 import { sampleContents, samplePhotoCardData } from '@utils/index'
-import { MainGridContainer } from '@containers/Layout/PageLayout'
 const sampleTag = ['야경', '서울', '밤바다', '등산', '여름']
 //
 
@@ -112,10 +108,6 @@ const MainPage = () => {
   const onTagClickHandler = (tag: String) => {
     // console.log('Tag click : ', tag)
     router.push(`/search?keyword=${tag}`, `/search`)
-  }
-
-  const onClickMainBannerItem = (contentId: String) => {
-    console.log(contentId)
   }
 
   const onScrollEnd = () => {
