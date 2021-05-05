@@ -1,4 +1,10 @@
 import React, { useState } from 'react'
+import {
+  InputContainer,
+  ShowController,
+  Input,
+  PasswordContainer,
+} from './input.style'
 
 type Props = {
   label?: string
@@ -21,10 +27,10 @@ const PasswordInput = ({
   }
 
   return (
-    <div>
-      <label htmlFor={name}>{label}</label>
-      <div>
-        <input
+    <InputContainer>
+      {label && <label htmlFor={name}>{label}</label>}
+      <PasswordContainer>
+        <Input
           type={viewPassword ? 'text' : 'password'}
           id={name}
           name={name}
@@ -32,9 +38,9 @@ const PasswordInput = ({
           value={value}
           onChange={onChange}
         />
-        <div onClick={passwordVisibleHandler}>Eye Icon</div>
-      </div>
-    </div>
+        <ShowController onClick={passwordVisibleHandler}></ShowController>
+      </PasswordContainer>
+    </InputContainer>
   )
 }
 

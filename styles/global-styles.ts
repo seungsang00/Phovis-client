@@ -21,6 +21,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   input, button {
     font-size: inherit;
+    background: none;
     background-color: transparent;
     border: none;
     outline: none;

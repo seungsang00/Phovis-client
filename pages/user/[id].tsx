@@ -16,7 +16,7 @@ const UserPage = () => {
   const router = useRouter()
   const user_id = router.query.id
 
-  const [userInfo, setUserInfo] = useState(null)
+  const [userInfo, setUserInfo] = useState<IUser | null>(null)
   const [tabList, setTabList] = useState(['Content', 'Likes', 'Bookmark'])
   const [selectedTab, setSelectedTab] = useState('Content')
   const [userContents, setUserContents] = useState<IContent[]>([])
