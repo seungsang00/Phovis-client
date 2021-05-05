@@ -7,7 +7,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '@actions/reducer'
 import { IPhotoCard, LocationType } from '@interfaces'
 import { useRouter } from 'next/router'
-import { addRelatedPhotocardList } from '@actions/content'
+import {
+  addRelatedPhotocardList,
+  getRelatedPhotocardList,
+} from '@actions/content'
+import useAction from '@hooks/useAction'
 
 interface props {
   contentId?: string
@@ -29,6 +33,7 @@ const PhotoCardInput = ({
   const [message, setMessage] = useState<string>('')
   const [fileSelected, setFileSelected] = useState<File>()
   const { accessToken } = useSelector((state: RootReducer) => state.user)
+  const _getRelatedPhotoCardList = useAction(getRelatedPhotocardList)
 
   const getPhotocardData = async () => {
     const result = await axios.get<IPhotoCard>(
@@ -103,6 +108,7 @@ const PhotoCardInput = ({
       }
       if (res.status === 200 || res.status === 201) {
         dispatch(addRelatedPhotocardList(res.data))
+        _getRelatedPhotoCardList(contentId as string)
         handleModalClose(false)
         router.push(`/content/[content_id]`, `/content/${contentId}`)
       }
