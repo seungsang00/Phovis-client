@@ -71,8 +71,7 @@ const ContentPage = () => {
 
   let userId
   if (user) {
-    const { id } = user
-    userId = id ? id : null
+    userId = user.id
   }
   // const handlemodify = (id: string): void => {
 
@@ -88,11 +87,8 @@ const ContentPage = () => {
         header={<MainHeader isLogin={isLogin} userId={userId as string} />}
         banner={
           <ContentBanner
-<<<<<<< HEAD
             // handlemodify={handlemodify}
-=======
             id={id as string}
->>>>>>> 6b6fbf856669422ccf38ea1f62e1925b848f01a7
             title={title || sampleContent.title}
             mainImgUrl={mainimageUrl || sampleContent.mainimageUrl}
             username={
