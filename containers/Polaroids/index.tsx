@@ -3,21 +3,33 @@ import PhotoCardInput from '@containers/PhotoCardInput'
 import { IPhotoCard, LocationType } from '@interfaces'
 import Image from 'next/image'
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 interface IProps {
   photocards: IPhotoCard[]
   contentId: string
   locationinfo: LocationType
+  handleModify?: React.MouseEvent<HTMLButtonElement>
 }
 const Polaroids = ({ locationinfo, photocards, contentId }: IProps) => {
   // ! Modal control
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
   const [isModify, setModify] = useState<boolean>(false)
   const [targetModifyPhotocardId, settargetModify] = useState<string>('')
+  const { id } = useSelector((state: RootReducer) => state.user)
 
   const handleModalOpen = () => {
-    setModalIsOpen(true)
     setModify(false)
+    setModalIsOpen(true)
+  }
+  const handleModify = (id: string, userid: string) => {
+    if (userid === id) {
+      setModify(true)
+      settargetModify(id)
+      setModalIsOpen(true)
+    } else {
+      alert('자신의 게시물만 수정할 수 있습니다')
+    }
   }
 
   const handleModalClose = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -61,16 +73,14 @@ const Polaroids = ({ locationinfo, photocards, contentId }: IProps) => {
               description,
               userName,
               like,
+              userId,
             } = photoCard
             return (
               <Polaroid
                 key={photocardId}
-                handleModify={() => {
-                  setModify(true)
-                  settargetModify(photocardId as string)
-                  console.log('click', targetModifyPhotocardId, isModify)
-                  handleModalOpen()
-                }}
+                handleModify={() =>
+                  handleModify(photocardId as string, userId as string)
+                }
                 imageurl={imageurl}
                 description={description}
                 userName={userName}

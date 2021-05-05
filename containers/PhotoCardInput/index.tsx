@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { PhotoCardInputContainer, ImageInputbtn } from './photocard-input'
 import LocationInfo from '../../components/LocationInfo/LocationInfo'
 import { Button } from '@styles/index'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '@actions/reducer'
 import { IPhotoCard, LocationType } from '@interfaces'
@@ -28,10 +28,11 @@ const PhotoCardInput = ({
 
   const getPhotocardData = async () => {
     const result = await axios.get<IPhotoCard>(
-      `https://localhost:4000/photocard?photocardId=${photocardId}`
+      `https://localhost:4000/photocard?photocardId=${photocardId}`,
+      { headers: { aouthorization: `bearer ${accessToken}` } }
     )
 
-    const { description: message, imageurl } = result as any
+    const { description: message, imageurl } = result.data as any
     const blob = await fetch(imageurl).then((r) => r.blob())
     const ext = imageurl.split('.').pop()
     const filename = imageurl.split('/').pop()
@@ -43,7 +44,7 @@ const PhotoCardInput = ({
   }
 
   useEffect(() => {
-    console.log('token', accessToken)
+    console.log('token', accessToken, isModify)
     if (isModify) {
       getPhotocardData()
     }
@@ -76,20 +77,27 @@ const PhotoCardInput = ({
       formData.append('image', fileSelected, fileSelected.name)
       formData.append('image', JSON.stringify(description))
       //to-do 여기에 서버 통신을 보내면 됨 formData에 Blob이 담겨있음
-
-      const res = await axios.post(
-        'https://localhost:4000/photocard',
-        formData,
-        {
+      let res = {} as AxiosResponse
+      if (isModify) {
+        res = await axios.put('https://localhost:4000/photocard', formData, {
+          headers: {
+            authorization: `Bearer ${accessToken}`,
+          },
+          params: {
+            contentId,
+            photocardId,
+          },
+        })
+      } else {
+        res = await axios.post('https://localhost:4000/photocard', formData, {
           headers: {
             authorization: `Bearer ${accessToken}`,
           },
           params: {
             contentId,
           },
-        }
-      )
-
+        })
+      }
       if (res.status === 201) {
         handleModalClose()
       }

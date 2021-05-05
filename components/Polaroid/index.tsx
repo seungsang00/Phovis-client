@@ -2,8 +2,8 @@ import { Wrapper } from './polaroid.style'
 import { IPhotoCard } from '@interfaces'
 // import { LikeBtn } from '@components/Buttons'
 
-type Props = {
-  handleModify?: React.MouseEventHandler<HTMLDivElement>
+interface Props {
+  handleModify: () => void
 }
 
 const Polaroid = ({
@@ -14,7 +14,7 @@ const Polaroid = ({
 }: IPhotoCard & Props) => {
   return (
     <Wrapper>
-      <div onClick={handleModify}>수정하기</div>
+      <button onClick={handleModify}>수정하기</button>
       <div className='polaroid'>
         <img src={imageurl} />
         <div className='caption'>

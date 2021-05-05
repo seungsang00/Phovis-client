@@ -10,4 +10,5 @@ export type IPhotoCard = {
   profileImage?: string
   like?: number
   imageurl?: string
+  userId?: string
 }
