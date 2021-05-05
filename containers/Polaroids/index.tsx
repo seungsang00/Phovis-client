@@ -66,7 +66,7 @@ const Polaroids = ({ locationinfo, photocards, contentId, type }: IProps) => {
           )}
         </div>
         {modalIsOpen && (
-          <Modal w='400px' h='500px' handleModalClose={handleModalClose}>
+          <Modal w='400px' h='600px' handleModalClose={handleModalClose}>
             <PhotoCardInput
               isModify={isModify}
               photocardId={targetModifyPhotocardId}
