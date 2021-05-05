@@ -51,7 +51,7 @@ const ContentPage = () => {
     console.log(tags)
     if (tags) {
       _getRelatedContentList(tags as string)
-      _getRelatedPhotoCardList(tags as string)
+      _getRelatedPhotoCardList(content_id as string)
     }
   }, [tag])
 
@@ -59,6 +59,7 @@ const ContentPage = () => {
     (state: RootReducer) => state.content
   )
   console.log(relatedContentList)
+  console.log(photocardList)
 
   return (
     <>
@@ -78,12 +79,13 @@ const ContentPage = () => {
           />
         }>
         <ContentMain
+          contentId={(content_id as string) || (sampleContent.id as string)}
           description={description || sampleContent.description}
           location={location || sampleContent.location}
           images={images || sampleContent.images}
           tags={tag || sampleContent.tag}
           related={relatedContentList || sampleContents}
-          photocards={photocardList || samplePhotoCardData}
+          photocards={samplePhotoCardData}
         />
       </CommonLayout>
     </>

@@ -28,6 +28,7 @@ export interface IContentBanner {
 }
 
 export interface IContentMain {
+  contentId: string
   id?: string
   description: string | null
   location: LocationType

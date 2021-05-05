@@ -12,13 +12,13 @@ const MainRecommend = ({ photoCards }: IProps) => (
     <div>
       {photoCards.length > 0 &&
         photoCards.map((data) => {
-          const { photocardId, profileImage, userName, url } = data
+          const { photocardId, profileImage, userName, imageurl } = data
           return (
             <ThumbnailSquare
               key={photocardId}
               profileImage={profileImage}
               username={userName}
-              bgImage={url}
+              bgImage={imageurl}
             />
           )
         })}
