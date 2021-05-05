@@ -119,7 +119,7 @@ const MainPage = () => {
   }
 
   const onScrollEnd = () => {
-    _getPhotoCardList()
+    // _getPhotoCardList()
   }
 
   let userId
@@ -132,46 +132,6 @@ const MainPage = () => {
       <Head>
         <title>Phovis - Main</title>
       </Head>
-      {/* 이전에 사용하던 레이아웃은 이제 사용하지 않음 */}
-      {/* <CommonLayout
-        header={
-          <MainHeader
-            isLogin={isLogin}
-            userId={userId as string}
-            search={input.search}
-            onChangeInput={onChangeInput}
-            onSearchKeywordSubmit={onSearchKeywordSubmit}
-          />
-        }
-        banner={
-          <MainBanner
-            contents={sampleContents}
-            onClickItem={onClickMainBannerItem}
-          />
-        }>
-
-        <MainGridContainer>
-          <div>
-            <MainSidebar
-              tags={sampleTag}
-              onTagClickHandler={onTagClickHandler}
-            />
-            <LinkBanner link={isLogin ? '/content/form' : '/auth/login'} />
-          </div>
-          <div>
-            <MainRecommend
-              contentList={sampleContents}
-              photoCards={samplePhotoCardData}
-            />
-
-            <MainGallery
-              photoCards={samplePhotoCardData}
-              onScrollEnd={onScrollEnd}
-            />
-          </div>
-        </MainGridContainer>
-      </CommonLayout> */}
-
       <CommonLayout
         title='Phovis'
         header={
@@ -185,17 +145,23 @@ const MainPage = () => {
         }>
         <main>
           <MainSideMenu isLogin={isLogin} />
-          <section
-            id='section-header'
-            style={{ height: '100vh', backgroundColor: 'red' }}>
+          <section id='section-header' style={{ paddingTop: '60px' }}>
             <MainSectionHeader />
           </section>
-          <section
-            id='section-recommend'
-            style={{ height: '100vh', backgroundColor: 'green' }}></section>
-          <section
-            id='section-photo-card'
-            style={{ height: '100vh', backgroundColor: 'yellow' }}></section>
+          <section id='section-recommend'>
+            <MainRecommend
+              contentList={sampleContents}
+              photoCards={samplePhotoCardData}
+              tags={sampleTag}
+              onTagClickHandler={onTagClickHandler}
+            />
+          </section>
+          <section id='section-photo-card'>
+            <MainGallery
+              photoCards={samplePhotoCardData}
+              onScrollEnd={onScrollEnd}
+            />
+          </section>
         </main>
       </CommonLayout>
     </>
