@@ -11,7 +11,7 @@ import { addRelatedPhotocardList } from '@actions/content'
 
 interface props {
   contentId?: string
-  handleModalClose: () => void
+  handleModalClose: (e: boolean) => void
   location?: LocationType
   isModify?: boolean
   photocardId: string
@@ -48,7 +48,6 @@ const PhotoCardInput = ({
   }
 
   useEffect(() => {
-    console.log('token', accessToken, isModify)
     if (isModify) {
       getPhotocardData()
     }
@@ -102,9 +101,9 @@ const PhotoCardInput = ({
           },
         })
       }
-      if (res.status === 200) {
+      if (res.status === 200 || res.status === 201) {
         dispatch(addRelatedPhotocardList(res.data))
-        handleModalClose()
+        handleModalClose(false)
         router.push(`/content/[content_id]`, `/content/${contentId}`)
       }
     }
