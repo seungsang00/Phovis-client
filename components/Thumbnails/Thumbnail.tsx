@@ -37,7 +37,7 @@ export const ThumbnailRect = ({
       </span>
       <UserInfoHor userName={username} profileImage={profileImage} />
       <span className='like'>
-        <LikeBtn like={likeCount || 0} isChecked={isLike} />
+        <LikeBtn id={id} like={likeCount || 0} isChecked={isLike} />
       </span>
     </DivWithBgImg>
   </ThumbnailContainer_rect>

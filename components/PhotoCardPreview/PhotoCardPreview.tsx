@@ -8,6 +8,7 @@ import { LikeBtn } from '@components/Buttons'
 import UserInfoHor from '../UserInfo/UserInfo-hor'
 
 type Props = {
+  id: string
   imageurl: string | null
   description?: string
   userName: string
@@ -17,6 +18,7 @@ type Props = {
 }
 
 const PhotoCardPreview = ({
+  id,
   description = '장소에 대한 정보',
   imageurl,
   userName,
@@ -37,7 +39,7 @@ const PhotoCardPreview = ({
             userName={userName}
             profileImage={profileImage || '/src/tmpProfileImg.webp'}
           />
-          <LikeBtn like={like || 0} isChecked={isLike} />
+          <LikeBtn id={id} like={like || 0} isChecked={isLike} />
         </div>
       </PhotoContainer>
       <DscriptionContainer>
