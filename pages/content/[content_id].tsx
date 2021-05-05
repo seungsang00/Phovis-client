@@ -35,12 +35,16 @@ const ContentPage = () => {
 
   useEffect(() => {
     // TODO: get content data from redux store
+
     if (content_id) {
       _getContentData(content_id as string)
     }
   }, [content_id])
 
   const { contentData } = useSelector((state: RootReducer) => state.content)
+  const { relatedContentList, photocardList } = useSelector(
+    (state: RootReducer) => state.content
+  )
   // const { id } = useSelector((state: RootReducer) => state.user)
   const {
     id,
@@ -61,13 +65,10 @@ const ContentPage = () => {
       _getRelatedContentList(tags as string)
       _getRelatedPhotoCardList(content_id as string)
     }
-  }, [tag])
+  }, [tag, photocardList])
 
-  const { relatedContentList, photocardList } = useSelector(
-    (state: RootReducer) => state.content
-  )
   console.log(relatedContentList)
-  console.log(photocardList)
+  console.log('다시불러오니?', photocardList)
 
   let userId
   if (user) {
