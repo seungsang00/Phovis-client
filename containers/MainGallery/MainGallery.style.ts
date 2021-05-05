@@ -13,6 +13,7 @@ export const Container = styled.article`
 `
 export const Title = styled.div`
   margin-bottom: 2rem;
+  padding: 0 1rem;
 `
 
 export const ContentContainer = styled.div`
