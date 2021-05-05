@@ -3,6 +3,7 @@ import styled from '@styles/themed-components'
 export const SearchForm = styled.form`
   width: fit-content;
   padding: 0 7px;
+  color: #fff;
   border-bottom: 1px solid ${({ theme }) => theme.color.black};
 `
 
@@ -10,10 +11,12 @@ export const SearchInput = styled.input`
   width: fit-content;
   min-width: 500px;
   height: 42px;
+  color: #fff;
 `
 
 export const SearchButton = styled.button`
   cursor: pointer;
+  color: #fff;
 `
 
 export const SearchFormBig = styled.form`

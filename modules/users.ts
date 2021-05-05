@@ -270,8 +270,13 @@ function user(state: userState = initialState, action: userAction): userState {
     case AuthAction.GET_INFO_SUCCESS:
       const { data } = action.payload as AxiosResponse
       const userData = { ...data }
-      // console.log('user data : ',data);
       delete userData.message
+
+      if('accessToken' in userData){
+        const {accessToken} = userData;
+        delete userData.accessToken
+        state.accessToken = accessToken;
+      }
       return { ...state, user: userData, isLogin: true }
 
     case AuthAction.GET_INFO_ERROR:

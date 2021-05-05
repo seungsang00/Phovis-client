@@ -6,17 +6,11 @@ import { IContent } from '@interfaces'
 
 interface IProps {
   isLoading: boolean
-  searchKeyword: string
   searchResult: IContent[]
   onLoadData: () => void
 }
 
-const SearchContents = ({
-  isLoading,
-  searchKeyword,
-  searchResult,
-  onLoadData,
-}: IProps) => {
+const SearchContents = ({ isLoading, searchResult, onLoadData }: IProps) => {
   const [target, setTarget] = useState<Element | null>(null)
   useInfinteScroll({
     root: null,
@@ -34,8 +28,6 @@ const SearchContents = ({
 
   return (
     <section>
-      <h2>{searchKeyword}</h2>
-
       {isLoading && <div>Loading...</div>}
 
       {!isLoading && searchResult.length === 0 && (

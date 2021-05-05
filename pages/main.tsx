@@ -15,10 +15,10 @@ import useAction from '../hooks/useAction'
 import { MainBanner, LinkBanner } from '@components/index'
 
 import {
-  MainHeader,
   MainRecommend,
   MainSidebar,
   MainGallery,
+  MainHeader,
 } from '@containers/index'
 
 // NOTE : Test data
@@ -39,7 +39,7 @@ const MainPage = () => {
   const _getTrendTagList = useAction(getTrendTagList)
   const _getPhotoCardList = useAction(getPhotoCardList)
 
-  const { isLogin, accessToken } = useSelector(
+  const { isLogin, accessToken, user } = useSelector(
     (state: RootReducer) => state.user
   )
   const {
@@ -99,6 +99,11 @@ const MainPage = () => {
     // _getPhotoCardList()
   }
 
+  let userId
+  if (user) {
+    userId = user.id
+  }
+
   return (
     <div>
       <Head>
@@ -109,6 +114,7 @@ const MainPage = () => {
       <main>
         <MainHeader
           isLogin={isLogin}
+          userId={userId as string}
           search={input.search}
           onChangeInput={onChangeInput}
           onSearchKeywordSubmit={onSearchKeywordSubmit}

@@ -1,15 +1,27 @@
 import Head from 'next/head'
 import { ReactNode } from 'react'
 import { HeaderContainer, Banner, Main } from './commonlayout'
-import Header from './header'
+// import Header from './header'
 
 interface ILayout {
   header?: ReactNode
   banner?: ReactNode
   children?: ReactNode
   title?: string
+  headerData?: IHeader
 }
-const CommonLayout = ({ banner, children, title = 'Phovis' }: ILayout) => {
+interface IHeader {
+  isLogin: boolean
+  searchString: string
+  onChangeInput: () => void
+  onSearchKeywordSubmit: () => void
+}
+const CommonLayout = ({
+  header,
+  banner,
+  children,
+  title = 'Phovis',
+}: ILayout) => {
   return (
     <>
       <Head>
@@ -17,9 +29,7 @@ const CommonLayout = ({ banner, children, title = 'Phovis' }: ILayout) => {
         <meta charSet='utf-8' />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <HeaderContainer>
-        <Header />
-      </HeaderContainer>
+      {header && <HeaderContainer>{header}</HeaderContainer>}
       {banner && <Banner>{banner}</Banner>}
       <Main>{children}</Main>
     </>

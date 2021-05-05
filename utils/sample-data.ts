@@ -3,25 +3,25 @@ import { IUser, IPhoto, IPhotoCard, IContent } from '@interfaces'
 /** Dummy user data. */
 export const sampleUserData: IUser[] = [
   {
-    id: 101,
+    id: '101',
     userName: 'Alice',
     profileImg: 'https://bit.ly/3euIgJj',
     contentCount: 5,
   },
   {
-    id: 102,
+    id: '102',
     userName: 'Bob',
     profileImg: 'https://bit.ly/3euIgJj',
     contentCount: 3,
   },
   {
-    id: 103,
+    id: '103',
     userName: 'Caroline',
     profileImg: 'https://bit.ly/3euIgJj',
     contentCount: 15,
   },
   {
-    id: 104,
+    id: '104',
     userName: 'Dave',
     profileImg: 'https://bit.ly/3euIgJj',
     contentCount: 8,
@@ -89,7 +89,7 @@ export const sampleContent: IContent = {
     '구로구에는 오래된 기찻길이 있다. 서울에서는 기찻길을 걸을 수 있는 곳이 흔치 않지만 이 곳에서는 많은 사람들이 산책로로, 사진을 위한 출사지로도 애용하는 장소, 구로구 항동 기찻길이다. 쭉 이어진 기찻길 초입에는 단지 내 주민들이 놀고있지만, 좀 더 걷다 보면 약간은 시골의 옛 풍경을 옮겨놓은 듯한 모습을 발견할 수 있다. 오래된 표지판이나 산책을 나온 부부, 철도 중간에 핀 초록색 풀이나 들꽃의 아이러니한 조화도 모두 항동 기찻길에서만 만나볼 수 있는 하나의 사진 포인트가 될 수 있다.',
   tag: ['서울', '향동철길', '기찻길', '레트로'],
   user: {
-    id: 1015,
+    id: '1015',
     userName: 'seung',
     profileImg: 'https://bit.ly/3aTx4ov',
   },
@@ -153,7 +153,7 @@ export const sampleContents: IContent[] = [
     title: '구로구의 오래된 기찻길',
     location: { location: '구로구 향동', lat: 545.551555, lng: 54.5512 },
     user: {
-      id: 32901,
+      id: '32901',
       userName: 'sim',
       profileImg: 'https://bit.ly/3gV8yqZ',
     },
@@ -196,7 +196,7 @@ export const sampleContents: IContent[] = [
     location: { location: '북촌 한옥마을', lat: 545.551555, lng: 54.5512 },
     tag: ['서울', '한옥마을', '전통'],
     user: {
-      id: 5700,
+      id: '5700',
       userName: 'one',
     },
     likecount: 42,
@@ -237,7 +237,7 @@ export const sampleContents: IContent[] = [
     title: '과거와 현재가 공존하는 장소 북촌한옥마을',
     location: { location: '북촌 한옥마을', lat: 545.551555, lng: 54.5512 },
     user: {
-      id: 5,
+      id: '5',
       userName: 'jeong',
     },
     likecount: 42,

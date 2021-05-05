@@ -1,5 +1,5 @@
 export interface IUser {
-  id?: number | null
+  id?: string | null
   userName?: string | null
   profileImg?: string
   contentCount?: number

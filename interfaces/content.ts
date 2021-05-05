@@ -20,7 +20,7 @@ export interface IContentBanner {
   id?: string
   title: string | null
   mainImgUrl: string | null
-  username: string | null
+  username?: string | null
   userProfileUrl?: string
   likesCount: number
   isLike?: boolean
