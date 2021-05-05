@@ -1,16 +1,19 @@
 // reset 또는 공통적으로 사용하는 css
 import { createGlobalStyle } from 'styled-components'
+import theme from '@styles/theme'
 
 export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   }
   body {
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     font-size: 1rem;
     overflow-x: hidden;
+    background-color: ${theme.color.primary};
   }
   a, a:focus, a:hover {
     color: inherit;
@@ -38,6 +41,22 @@ export const GlobalStyle = createGlobalStyle`
     padding: .3rem;
   }
 
+  .main-logo {
+    font-family: 'Girassol', cursive;
+    font-weight: 500;
+    letter-spacing: 4px;
+  }
+
+  .banner {
+    height: 15rem;
+  }
+
+  .flex {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
   /* header 부분은 임시 페이지를 위한 내용이므로 추후 수정해야 합니다. */
   header {
     display: flex;
@@ -63,13 +82,4 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
-  .banner {
-    height: 15rem;
-  }
-
-  .flex {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-  }
 `

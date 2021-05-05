@@ -31,7 +31,7 @@ export const HeaderInner = styled.div`
 `
 export const Banner = styled.div`
   width: 100%;
-  height: 55vh;
+  height: 40vh;
   overflow: hidden;
   border: 1px solid lightslategray;
 `
