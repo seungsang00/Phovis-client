@@ -1,5 +1,5 @@
 import React from 'react'
-import { IContent, IPhotoCard } from '@interfaces'
+import { IContent, IPhotoCard, ITag } from '@interfaces'
 import { ContentThumbnail, TagBig } from '@components/index'
 
 import {
@@ -13,7 +13,7 @@ import {
 interface IProps {
   contentList?: IContent[]
   photoCards: IPhotoCard[]
-  tags: string[]
+  tags: ITag[]
   onTagClickHandler: (tag: string) => void
 }
 
@@ -41,9 +41,9 @@ const MainRecommend = ({ contentList, tags, onTagClickHandler }: IProps) => (
           {tags.length > 0 &&
             tags.map((tag) => (
               <TagBig
-                key={tag}
-                tagname={tag}
-                onClick={() => onTagClickHandler(tag)}
+                key={tag.tag}
+                tagname={tag.tag as string}
+                onClick={() => onTagClickHandler(tag.tag as string)}
               />
             ))}
         </div>
