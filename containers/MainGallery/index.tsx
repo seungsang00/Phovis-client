@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { IPhotoCard } from '@interfaces'
-import { PhotoCardGallery } from '@containers/index'
+import { Polaroids } from '@containers/index'
 import { useInfinteScroll } from '@hooks/useInfinteScroll'
 
 interface IProps {
@@ -28,7 +28,11 @@ const MainGallery = ({ photoCards, onScrollEnd }: IProps) => {
 
   return (
     <section>
-      {photoCards.length > 0 && <PhotoCardGallery photocards={photoCards} />}
+      {photoCards.length > 0 && (
+        <div className='flex'>
+          <Polaroids photocards={photoCards} />
+        </div>
+      )}
       {photoCards.length > 0 && <div ref={setTarget}>Content Loder</div>}
     </section>
   )
