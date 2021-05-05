@@ -64,25 +64,27 @@ export const AvatarWithProps = withProps<IAvartar, HTMLDivElement>(styled.div)`
 
 // Submit Button
 interface ISize {
-  w?: number
-  h?: number
+  w?: number | string
+  h?: number | string
 }
 
 export const Button = withProps<ISize, HTMLButtonElement>(styled.button)`
-  width: ${(props) => props.w || 100}px;
-  height: ${(props) => props.h || 50}px;
-  border-radius: 10px;
+  width: ${(props) => props.w || '100%'};
+  height: ${(props) => props.h || '3rem'};
+  border-radius: 999px;
   text-align: center;
   line-height: ${(props) => props.h - 5}px;
-  color: ${({ theme }) => theme.color.green};
-  border: 3px solid ${({ theme }) => theme.color.green};
-  background-color: transparent;
+  color: ${({ theme }) => theme.color.white};
+  font-weight: 600;
+  border: 2px solid ${({ theme }) => theme.color.secondaryLight};
+  background-color: ${({ theme }) => theme.color.secondaryLight};
   font-size: ${(props) => props.fsize || 1}rem;
   padding: 0 12px;
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme.color.inActive};
+    background-color: ${({ theme }) => theme.color.secondary};
+    border: 2px solid ${({ theme }) => theme.color.secondary};
     color: #fff;
   }
 `

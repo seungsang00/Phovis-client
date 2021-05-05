@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { PhotoCardInputContainer, ImageInputbtn } from './photocard-input'
+import { PhotoCardInputContainer, ImageInputContainer } from './photocard-input'
 import LocationInfo from '../../components/LocationInfo/LocationInfo'
 import { Button } from '@styles/index'
 import axios, { AxiosResponse } from 'axios'
@@ -114,10 +114,26 @@ const PhotoCardInput = ({
       }
     }
   }
-  const ImgBtn = '/src/iconmonstr-picture-2.svg'
   return (
     <PhotoCardInputContainer>
-      <ImageInputbtn id='fileinput' type='file' onChange={handlefileChange} />
+      <ImageInputContainer>
+        <input
+          id='fileinput'
+          type='file'
+          accept='image/*'
+          onChange={handlefileChange}
+        />
+        <label htmlFor='fileinput'>
+          <img
+            src={`${
+              fileSelected
+                ? URL.createObjectURL(fileSelected)
+                : 'https://www.femtoscientific.com/wp-content/uploads/2014/12/default_image_01.png'
+            } `}
+          />
+        </label>
+      </ImageInputContainer>
+      {/* <ImageInputbtn id='fileinput' type='file' onChange={handlefileChange} />
       <label className='photocardinputbtn' htmlFor='fileinput'>
         <img
           alt='imageinputbtn'
@@ -125,9 +141,9 @@ const PhotoCardInput = ({
           height={24}
           src={`${fileSelected ? URL.createObjectURL(fileSelected) : ImgBtn}`}
         />
-      </label>
+      </label> */}
       <div className='titlecontainer'>
-        <label htmlFor='messagebox'>사진 이야기</label>
+        {/* <label htmlFor='messagebox'>사진 이야기</label> */}
         <LocationInfo locationInfo={location as LocationType} />
       </div>
       <textarea
@@ -135,12 +151,12 @@ const PhotoCardInput = ({
         name='messagebox'
         value={message}
         id='messagebox'
+        autoFocus
       />
-      <div>
-        <Button w={100} h={50} onClick={handleClick}>
-          등록하기
-        </Button>
-      </div>
+      <Button w={'100%'} h={'2.3rem'} onClick={handleClick}>
+        등록하기
+      </Button>
+      <div></div>
     </PhotoCardInputContainer>
   )
 }

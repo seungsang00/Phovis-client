@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@styles/themed-components'
 
 export const LocContainer = styled.div`
   width: 100%;
@@ -8,9 +8,9 @@ export const LocContainer = styled.div`
   justify-content: start;
 
   & span.location {
-    font-weight: 600;
-    font-size: 1rem;
-    line-height: 1.5rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+    line-height: 1.4rem;
     margin-left: 0.5rem;
   }
 `
