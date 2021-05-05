@@ -35,6 +35,14 @@ export const HeaderInner = styled.div`
     & .search-bar {
       margin-right: 2rem;
     }
+
+    & .link-text{
+      cursor:pointer;
+    }
+
+    & .link-text:hover{
+      color: ${ ({theme}) => theme.color.secondaryLight }
+    }
   }
 
   .main-logo {

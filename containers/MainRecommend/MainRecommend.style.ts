@@ -2,7 +2,7 @@ import styled from '@styles/themed-components'
 
 export const Container = styled.article`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   padding: 10vh 10vw;
   background-color: ${({ theme }) => theme.color.primary};
   color: ${({ theme }) => theme.color.white};
@@ -19,12 +19,24 @@ export const Title = styled.div`
 export const ContentGrid = styled.div`
   width: 70%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+
+  @media ${({ theme }) => theme.size.desktop} {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media ${({ theme }) => theme.size.tabletM} {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media ${({ theme }) => theme.size.tabletS} {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+  }
 `
 
 export const ContentTagContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 `
 
 export const TagList = styled.div`
@@ -47,5 +59,9 @@ export const TagList = styled.div`
     & button:not(:last-child) {
       margin-bottom: 1.25rem;
     }
+  }
+
+  @media ${({ theme }) => theme.size.tabletM} {
+    display: none;
   }
 `

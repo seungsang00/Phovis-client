@@ -65,7 +65,7 @@ const ContentPage = () => {
       _getRelatedContentList(tags as string)
       _getRelatedPhotoCardList(content_id as string)
     }
-  }, [tag, photocardList])
+  }, [tag])
 
   console.log(relatedContentList)
   console.log('다시불러오니?', photocardList)
