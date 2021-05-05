@@ -40,8 +40,8 @@ import {
 } from '@containers/index'
 
 // NOTE : Test data
-import { sampleContents } from '@utils/index'
-import { MainGridContainer } from '@containers/Layout/PageLayout'
+// import { sampleContents } from '@utils/index'
+// import { MainGridContainer } from '@containers/Layout/PageLayout'
 
 const MainPage = () => {
   const [input, setInput] = useState({
@@ -142,10 +142,7 @@ const MainPage = () => {
             />
           </section>
           <section id='section-photo-card'>
-            <MainGallery
-              photoCards={photocardList}
-              onScrollEnd={onScrollEnd}
-            />
+            <MainGallery photoCards={photocardList} onScrollEnd={onScrollEnd} />
           </section>
         </main>
       </CommonLayout>

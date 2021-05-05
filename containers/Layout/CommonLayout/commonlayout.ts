@@ -22,23 +22,29 @@ export const HeaderInner = styled.div`
   color: #fff;
   z-index: 1001;
   border-bottom: 1px solid hsla(0, 0%, 100%, 0.07);
+  /* ${({ theme }) => theme.concept.glassmorphism} */
 
   div {
     display: flex;
-    align-items:center;
+    align-items: center;
   }
 
-  .sub-menu{
-    margin-right:1rem;
+  .sub-menu {
+    margin-right: 1rem;
 
-    & .search-bar{
-    margin-right:2rem;
+    & .search-bar {
+      margin-right: 2rem;
     }
   }
 
   .main-logo {
     cursor: pointer;
   }
+
+  /* a {
+    width: 40px;
+    height: 40pc;
+  } */
 `
 export const Banner = styled.div`
   width: 100%;

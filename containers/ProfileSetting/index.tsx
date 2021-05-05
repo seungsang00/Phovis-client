@@ -1,17 +1,18 @@
-// import { RootReducer } from '@actions/reducer'
-// import { getUserInfo } from '@actions/users'
+import { RootReducer } from '@actions/reducer'
+import { logout } from '@actions/users'
 import {
   Modal,
   ProfileInput,
   ProfileImageInput,
   ToggleBtn,
+  DefaultBtn,
 } from '@components/index'
 import { PasswordConfirm } from '@containers/index'
 import { TabContentSection } from '@containers/Layout'
-// import useAction from '@hooks/useAction'
 import { IUser } from '@interfaces'
-import { useState } from 'react'
-// import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { SettingContainer, EditPassword } from './profilesetting.style'
 
 const props = {
@@ -22,10 +23,19 @@ const props = {
 }
 
 interface IProps {
-  user: IUser
+  user?: IUser
 }
 
-const ProfileSetting = ({ user }: IProps) => {
+const ProfileSetting = ({}: IProps) => {
+  const [isLogout, setIsLogout] = useState(false)
+  const { isLogin, user } = useSelector((state: RootReducer) => state.user)
+
+  useEffect(() => {
+    if (!isLogin || !user) {
+      router.push('/auth/login')
+    }
+  }, [])
+
   // ! Modal control
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
 
@@ -38,6 +48,21 @@ const ProfileSetting = ({ user }: IProps) => {
     if (target.localName === 'div' && target.className.includes('overlay')) {
       setModalIsOpen(false)
     }
+  }
+
+  // ! signout handler
+  const router = useRouter()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (isLogout && !isLogin) {
+      router.push('/')
+    }
+  }, [isLogout, isLogin])
+
+  const handleLogout = () => {
+    dispatch(logout())
+    setIsLogout(true)
   }
 
   return (
@@ -75,12 +100,6 @@ const ProfileSetting = ({ user }: IProps) => {
                   />
                 </Modal>
               )}
-              {/* <ProfileInput
-              label='이메일'
-              authType='kakao'
-              currentValue={'seungyeon@gmail.com'}
-            />
-            <ProfileInput label='이메일' currentValue={'seungyeon@gmail.com'} /> */}
             </div>
             <hr />
             <div className='public-setting-area'>
@@ -96,6 +115,9 @@ const ProfileSetting = ({ user }: IProps) => {
                   onClick={props.handlePublicSection}
                 />
               </div>
+            </div>
+            <div className='signout-button-area'>
+              <DefaultBtn onClick={handleLogout}>로그아웃</DefaultBtn>
             </div>
           </div>
         </div>

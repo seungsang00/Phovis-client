@@ -1,7 +1,7 @@
 import styled from '@styles/themed-components'
 
 export const Container = styled.article`
-  width:100vw;
+  width: 100vw;
   height: 100vh;
   padding: 10vh 10vw;
   background-color: ${({ theme }) => theme.color.primary};
@@ -16,7 +16,7 @@ export const Title = styled.div`
 `
 
 export const ContentGrid = styled.div`
-  width:70%;
+  width: 70%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 `
@@ -24,27 +24,25 @@ export const ContentGrid = styled.div`
 export const ContentTagContainer = styled.div`
   /* flex:7; */
   display: flex;
-  align-items:center;
+  align-items: center;
 `
 
 export const TagList = styled.div`
   /* flex:3; */
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
 
-  & h3{
-    margin-bottom:1.5rem;
+  & h3 {
+    margin-bottom: 1.5rem;
   }
 
-  & .tags{
+  & .tags {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
 
-    & button:not(:last-child){
-      margin-bottom:0.5rem;
+    & button:not(:last-child) {
+      margin-bottom: 0.5rem;
     }
-
   }
-
 `

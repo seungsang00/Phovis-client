@@ -21,6 +21,12 @@ export const SettingContainer = styled.section`
     display: grid;
     grid-template-columns: 370px 1fr;
   }
+
+  .signout-button-area {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 3rem;
+  }
 `
 
 export const EditPassword = styled.div`
@@ -31,6 +37,7 @@ export const EditPassword = styled.div`
 
   & button {
     font-size: 0.8rem;
+    cursor: pointer;
     color: ${({ theme }) => theme.color.secondary};
   }
 `

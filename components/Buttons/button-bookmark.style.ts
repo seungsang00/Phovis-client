@@ -1,30 +1,22 @@
-import styled from '@styles/themed-components'
+import styled, { withProps } from '@styles/themed-components'
+import { bookmark_active, bookmark_inactive } from '@styles/icons'
 
+interface IBookmark {
+  isBookmarked: boolean
+}
+
+export const BookmarkButton = withProps<IBookmark, HTMLButtonElement>(
+  styled.button
+)`
+  ${(props) => (props.isBookmarked ? bookmark_active : bookmark_inactive)};
+  width: 27px;
+  height: 27px;
+  min-width: 27px !important;
+  min-height: 27px !important;
+  cursor: pointer;
+`
 export const BookmarkContainer = styled.div`
   ${({ theme }) => theme.display.flexCenterRow};
   width: 50px;
   height: 50px;
-
-  .hide-checkbox {
-    display: none;
-  }
-
-  .star-checkbox {
-    cursor: pointer;
-  }
-
-  .star-checkbox::before {
-    content: '☆';
-    font-size: 40px;
-    color: ${({ theme }) => theme.color.inActive};
-  }
-  .hide-checkbox:checked + .star-checkbox:before {
-    content: '★';
-    font-weight: 900;
-    color: ${({ theme }) => theme.color.yellow};
-  }
-`
-
-export const BookmarkCheckbox = styled.input`
-  display: none;
 `

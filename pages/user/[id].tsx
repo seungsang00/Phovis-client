@@ -16,7 +16,7 @@ const UserPage = () => {
   const router = useRouter()
   const user_id = router.query.id
 
-  const [userInfo, setUserInfo] = useState<IUser | null>(null)
+  // const [userInfo, setUserInfo] = useState<IUser | null>(null)
   const [tabList, setTabList] = useState(['Content', 'Likes', 'Bookmark'])
   const [selectedTab, setSelectedTab] = useState('Content')
   const [userContents, setUserContents] = useState<IContent[]>([])
@@ -118,27 +118,27 @@ const UserPage = () => {
     }
   }
 
-  const loadUserInfo = async () => {
-    try {
-      const { status, data } = await axios.get(
-        'https://localhost:4000/user/info',
-        {
-          params: {
-            id: user_id,
-          },
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
-      if (status === 200) {
-        console.log('loadUserInfo : ', data)
-        setUserInfo({ ...data })
-      }
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  // const loadUserInfo = async () => {
+  //   try {
+  //     const { status, data } = await axios.get(
+  //       'https://localhost:4000/user/info',
+  //       {
+  //         params: {
+  //           id: user_id,
+  //         },
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       }
+  //     )
+  //     if (status === 200) {
+  //       console.log('loadUserInfo : ', data)
+  //       setUserInfo({ ...data })
+  //     }
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
 
   const loadContent = async (tab: string) => {
     console.log('tab : ', tab)

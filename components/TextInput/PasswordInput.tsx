@@ -29,7 +29,7 @@ const PasswordInput = ({
   return (
     <InputContainer>
       {label && <label htmlFor={name}>{label}</label>}
-      <PasswordContainer>
+      <PasswordContainer className='pw-container'>
         <Input
           type={viewPassword ? 'text' : 'password'}
           id={name}
