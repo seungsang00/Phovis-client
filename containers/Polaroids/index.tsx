@@ -59,12 +59,6 @@ const Polaroids = ({ locationinfo, photocards, contentId, type }: IProps) => {
           <div className='photocardUploadTitle'>
             <h2>이런 사진을 찍을 수 있어요 !</h2>
             <div className='upload-btn' onClick={handleModalOpen}></div>
-            {/* <Image
-              layout='fixed'
-              src='/src/iconmonstr-photo-camera-4.svg'
-              width={24}
-              height={24}
-            /> */}
           </div>
         )}
         {modalIsOpen && (
