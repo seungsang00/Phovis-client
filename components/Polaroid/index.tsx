@@ -3,7 +3,7 @@ import { IPhotoCard } from '@interfaces'
 // import { LikeBtn } from '@components/Buttons'
 
 interface Props {
-  handleModify: () => void
+  handleModify?: () => void
 }
 
 const Polaroid = ({

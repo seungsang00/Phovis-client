@@ -40,7 +40,7 @@ const ContentPage = () => {
   }, [content_id])
 
   const { contentData } = useSelector((state: RootReducer) => state.content)
-  const { id } = useSelector((state: RootReducer) => state.user)
+  // const { id } = useSelector((state: RootReducer) => state.user)
   const {
     title,
     mainimageUrl,
@@ -69,7 +69,8 @@ const ContentPage = () => {
 
   let userId
   if (user) {
-    userId = user.id
+    const { id } = user
+    userId = id ? id : null
   }
   // const handlemodify = (id: string): void => {
 
@@ -100,7 +101,7 @@ const ContentPage = () => {
           images={images || sampleContent.images}
           tags={tag || sampleContent.tag}
           related={relatedContentList || sampleContents}
-          photocards={samplePhotoCardData}
+          photocards={photocardList || samplePhotoCardData}
         />
       </CommonLayout>
     </>

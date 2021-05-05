@@ -13,13 +13,13 @@ const PhotoCardGallery = ({ photocards }: props) => {
       {photocards &&
         photocards.length > 0 &&
         photocards.map((card: IPhotoCard) => {
-          const { url, userName } = card
+          const { imageurl, userName } = card
           return (
             <>
               <Polaroid
                 photocardId={card.photocardId}
                 key={card.photocardId}
-                url={url}
+                imageurl={imageurl}
                 userName={userName}
               />
               {/* <PhotoCardPreview

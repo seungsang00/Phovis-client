@@ -22,7 +22,6 @@ import {
   TabMenu,
   LocationInfo,
 } from '@components/index'
-import { PhotoCardInput } from '@containers/index'
 import {
   sampleUserData,
   samplePhotoData,
@@ -134,7 +133,6 @@ const ComponentSamplePage = () => {
       <LocationInfo locationInfo={locationData} />
       <hr />
       <LikeBtn like={23} isChecked={true} />
-      <PhotoCardInput location={locationData} />
       <UserInfoHor userName={'jeong'} />
       <UserInfoVer userName={'jeong'} />
       <PhotoCardPreview
@@ -144,8 +142,6 @@ const ComponentSamplePage = () => {
         profileImage={''}
         like={24}
       />
-      <hr />
-      <PhotoCardInput location={locationData} />
       <hr />
       <UserInfoHor userName={'jeong'} />
       <hr />

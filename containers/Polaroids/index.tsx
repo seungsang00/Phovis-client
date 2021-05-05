@@ -1,6 +1,7 @@
+import { RootReducer } from '@actions/reducer'
 import { Modal, Polaroid } from '@components/index'
 import PhotoCardInput from '@containers/PhotoCardInput'
-import { IPhotoCard, LocationType } from '@interfaces'
+import { IPhotoCard, IUser, LocationType } from '@interfaces'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -16,12 +17,14 @@ const Polaroids = ({ locationinfo, photocards, contentId }: IProps) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
   const [isModify, setModify] = useState<boolean>(false)
   const [targetModifyPhotocardId, settargetModify] = useState<string>('')
-  const { id } = useSelector((state: RootReducer) => state.user)
+  const { user } = useSelector((state: RootReducer) => state.user)
+  const { id } = user as IUser
 
   const handleModalOpen = () => {
     setModify(false)
     setModalIsOpen(true)
   }
+
   const handleModify = (photocadid: string, userid: string) => {
     if (userid === id) {
       setModify(true)
