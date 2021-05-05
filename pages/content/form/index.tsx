@@ -14,7 +14,6 @@ import { DivWithBgImg } from '@styles/common'
 import { useRouter } from 'next/router'
 import axios, { AxiosResponse } from 'axios'
 import { FormLayout } from '@containers/Layout/PageLayout'
-import { Main } from './contentform.style'
 
 const ContentForm = () => {
   // ! 유저 정보 받아오기
@@ -178,6 +177,12 @@ const ContentForm = () => {
       tags: [...content.tags, ...tags],
     })
   }
+  const setTags = (tags: Tag[]) => {
+    setContent({
+      ...content,
+      tags: [...tags],
+    })
+  }
 
   // ! 위치 정보
   const setLocation = (value: LocationType) => {
@@ -291,26 +296,25 @@ const ContentForm = () => {
     <CommonLayout
       header={<MainHeader isLogin={isLogin} userId={userId as string} />}>
       <FormLayout>
-        <Main>
-          <section className='banner'>
-            <DivWithBgImg
-              bgUrl={
-                content.mainImage.url ||
-                (content.images[0] && content.images[0].url)
-              }
-              p={'24px'}>
-              <input
-                className='title'
-                name='title'
-                type='text'
-                placeholder='Content Title Here'
-                value={content.title}
-                onChange={inputChangeHandler}
-                autoFocus
-              />
-            </DivWithBgImg>
-          </section>
-
+        <section className='banner'>
+          <DivWithBgImg
+            bgUrl={
+              content.mainImage.url ||
+              (content.images[0] && content.images[0].url)
+            }
+            p={'24px'}>
+            <input
+              className='title'
+              name='title'
+              type='text'
+              placeholder='Content Title Here'
+              value={content.title}
+              onChange={inputChangeHandler}
+              autoFocus
+            />
+          </DivWithBgImg>
+        </section>
+        <div className='main-area'>
           <section className='textarea'>
             <textarea
               name='description'
@@ -324,6 +328,7 @@ const ContentForm = () => {
               locationTag={content.location.keyword}
               tagList={content.tags}
               setTagList={handleTags}
+              deleteTag={setTags}
             />
           </section>
 
@@ -333,7 +338,7 @@ const ContentForm = () => {
               onClick={handleModalOpen}
             />
             {modalIsOpen && (
-              <Modal w='800px' h='800px' handleModalClose={handleModalClose}>
+              <Modal w='500px' h='700px' handleModalClose={handleModalClose}>
                 <MapContainer
                   locationInfo={content.location}
                   tags={content.tags}
@@ -346,7 +351,7 @@ const ContentForm = () => {
           </section>
 
           <section className='form'>
-            <div className='container'>
+            <div className='images-container'>
               {content.images.map(
                 ({ url, data, name, description }: any, idx: number) => (
                   <ImagePreview>
@@ -363,7 +368,9 @@ const ContentForm = () => {
                       type='text'
                       value={description}
                       onChange={(e) => onChange(e, addDescription)}
-                      placeholder={description || '설명을 추가해주세요'}
+                      placeholder={
+                        description || '사진에 대한 설명을 추가해주세요'
+                      }
                     />
                   </ImagePreview>
                 )
@@ -379,7 +386,7 @@ const ContentForm = () => {
           <section className='buttons'>
             <DefaultBtn onClick={handleSubmit}>등록하기</DefaultBtn>
           </section>
-        </Main>
+        </div>
       </FormLayout>
     </CommonLayout>
   )

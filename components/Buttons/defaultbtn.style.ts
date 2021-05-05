@@ -3,6 +3,7 @@ import styled from '@styles/themed-components'
 // TODO: withProps를 이용해 테마를 받아와서 적용하기
 
 export const Button = styled.button`
+  width: 10rem;
   padding: 10px 18px;
   margin-left: 10px;
   border-radius: 999px;

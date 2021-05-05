@@ -7,10 +7,10 @@ export const Input = styled.input`
   font-weight: 500;
   cursor: pointer;
   padding-left: 0.8rem;
-  color: white;
+  color: ${({ theme }) => theme.color.white};
 
-  &:hover {
-    background-color: lightcyan;
+  &:hover::placeholder {
+    color: ${({ theme }) => theme.color.secondary};
   }
 `
 

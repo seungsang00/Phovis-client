@@ -10,7 +10,9 @@ const MultiForm = ({ handleFile }: any) => {
         onChange={handleFile}
         style={{ display: 'none' }}
       />
-      <label htmlFor='fileInput'>+🖼</label>
+      <label htmlFor='fileInput'>
+        <div title='클릭해서 사진을 추가할 수 있어요'></div>
+      </label>
     </StyledForm>
   )
 }
