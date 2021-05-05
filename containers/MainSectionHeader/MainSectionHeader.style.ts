@@ -19,7 +19,10 @@ export const Title = styled.div`
 
   transform:translate(80%, -100%);
 
+  color:${({theme})=> theme.color.secondary};
+
   & h1{
+    font-family:'Girassol',cursive;
     font-size:56px;
   }
 

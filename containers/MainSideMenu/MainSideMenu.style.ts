@@ -10,7 +10,7 @@ export const SideMenu = styled.aside`
   top:0;
   z-index: 8000;
 
-  width:auto;
+  width:10vw;
   height:100vh;
   padding: 0 1rem;
   background-color: ${ ({ theme }) => theme.color.primary };
