@@ -19,7 +19,6 @@ const Polaroids = ({ locationinfo, photocards, contentId }: IProps) => {
   const [isModify, setModify] = useState<boolean>(false)
   const [targetModifyPhotocardId, settargetModify] = useState<string>('')
   const { user } = useSelector((state: RootReducer) => state.user)
-  const { id } = user as IUser
 
   const handleModalOpen = () => {
     setModify(false)
@@ -27,12 +26,15 @@ const Polaroids = ({ locationinfo, photocards, contentId }: IProps) => {
   }
 
   const handleModify = (photocadid: string, userid: string) => {
-    if (userid === id) {
-      setModify(true)
-      settargetModify(photocadid)
-      setModalIsOpen(true)
-    } else {
-      alert('자신의 게시물만 수정할 수 있습니다')
+    if (user) {
+      const { id } = user as IUser
+      if (userid === id) {
+        setModify(true)
+        settargetModify(photocadid)
+        setModalIsOpen(true)
+      } else {
+        alert('자신의 게시물만 수정할 수 있습니다')
+      }
     }
   }
 
@@ -60,8 +62,8 @@ const Polaroids = ({ locationinfo, photocards, contentId }: IProps) => {
             <PhotoCardInput
               isModify={isModify}
               photocardId={targetModifyPhotocardId}
-              location={locationinfo as LocationType}
-              contentId={contentId as string}
+              location={locationinfo}
+              contentId={contentId}
               handleModalClose={() => setModalIsOpen(false)}
             />
           </Modal>

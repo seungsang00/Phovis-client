@@ -8,9 +8,9 @@ import { RootReducer } from '@actions/reducer'
 import { IPhotoCard, LocationType } from '@interfaces'
 
 interface props {
-  contentId: string
+  contentId?: string
   handleModalClose: () => void
-  location: LocationType
+  location?: LocationType
   isModify?: boolean
   photocardId: string
 }
@@ -117,7 +117,7 @@ const PhotoCardInput = ({
       </label>
       <div className='titlecontainer'>
         <label htmlFor='messagebox'>사진 이야기</label>
-        <LocationInfo locationInfo={location} />
+        <LocationInfo locationInfo={location as LocationType} />
       </div>
       <textarea
         onChange={handleChange}
