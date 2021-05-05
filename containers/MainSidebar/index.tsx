@@ -1,8 +1,9 @@
 import React from 'react'
 import { TagBig } from '@components/index'
+import { ITag } from 'interfaces'
 
 interface IProps {
-  tags: string[]
+  tags: ITag[]
   onTagClickHandler: (tag: string) => void
 }
 
@@ -14,13 +15,16 @@ const MainSidebar = ({ tags, onTagClickHandler }: IProps) => (
     <h3>🏄‍♂️ 관심 카테고리</h3>
     <div>
       {tags.length > 0 &&
-        tags.map((tag) => (
-          <TagBig
-            key={tag}
-            tagname={tag}
-            onClick={() => onTagClickHandler(tag)}
-          />
-        ))}
+        tags.map((tag) => {
+          const { tag: tagname } = tag
+          return (
+            <TagBig
+              key={tagname}
+              tagname={tagname as string}
+              onClick={() => onTagClickHandler(tagname as string)}
+            />
+          )
+        })}
       {/* <div>Make a new content</div> */}
     </div>
   </aside>

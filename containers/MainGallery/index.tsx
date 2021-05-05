@@ -35,7 +35,7 @@ const MainGallery = ({ photoCards, onScrollEnd }: IProps) => {
       </Title>
       {photoCards.length > 0 && (
         <ContentContainer>
-          <Polaroids photocards={photoCards} />
+          <Polaroids type={'main'} photocards={photoCards} />
         </ContentContainer>
       )}
       {photoCards.length > 0 && <div ref={setTarget}></div>}

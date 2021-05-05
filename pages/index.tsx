@@ -40,9 +40,8 @@ import {
 } from '@containers/index'
 
 // NOTE : Test data
-import { sampleContents, samplePhotoCardData } from '@utils/index'
-const sampleTag = ['야경', '서울', '밤바다', '등산', '여름']
-//
+import { sampleContents } from '@utils/index'
+import { MainGridContainer } from '@containers/Layout/PageLayout'
 
 const MainPage = () => {
   const [input, setInput] = useState({
@@ -82,13 +81,7 @@ const MainPage = () => {
     console.log('recommendContentList : ', recommendContentList)
     console.log('trendTagList : ', trendTagList)
     console.log('photocardList : ', photocardList)
-  }, [
-    error,
-    bannerContentList,
-    recommendContentList,
-    trendTagList,
-    photocardList,
-  ])
+  }, [photocardList])
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const {
@@ -142,15 +135,15 @@ const MainPage = () => {
           </section>
           <section id='section-recommend'>
             <MainRecommend
-              contentList={sampleContents}
-              photoCards={samplePhotoCardData}
-              tags={sampleTag}
+              contentList={recommendContentList}
+              photoCards={photocardList}
+              tags={trendTagList}
               onTagClickHandler={onTagClickHandler}
             />
           </section>
           <section id='section-photo-card'>
             <MainGallery
-              photoCards={samplePhotoCardData}
+              photoCards={photocardList}
               onScrollEnd={onScrollEnd}
             />
           </section>

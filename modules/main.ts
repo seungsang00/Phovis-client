@@ -1,11 +1,11 @@
 import axios, { AxiosResponse } from 'axios'
 import { ContentAction } from './actionTypes'
-import { IContent, IPhotoCard } from '@interfaces'
+import { IContent, IPhotoCard, ITag } from '@interfaces'
 
 type mainContentsState = {
   bannerContentList: IContent[]
   recommendContentList: IContent[]
-  trendTagList: string[]
+  trendTagList: ITag[]
   photocardList: IPhotoCard[]
   error: null | string | AxiosResponse<any>
 }
@@ -156,8 +156,7 @@ function main(
       const {
         data: { data: getBannerList },
       } = action.payload
-      const getBanner = [...state.bannerContentList, ...getBannerList]
-      return { ...state, bannerContentList: getBanner }
+      return { ...state, bannerContentList: [...getBannerList] }
 
     case ContentAction.GET_BANNER_ERROR:
       return { ...state, error: action.payload }
@@ -166,19 +165,14 @@ function main(
       const {
         data: { data: getRecommendContent },
       } = action.payload
-      const getRecommend = [
-        ...state.recommendContentList,
-        ...getRecommendContent,
-      ]
-      return { ...state, recommendContentList: getRecommend }
+      return { ...state, recommendContentList: [...getRecommendContent] }
 
     case ContentAction.GET_RECOMMEND_ERROR:
       return { ...state, error: action.payload }
 
     case ContentAction.GET_TAG_LIST_SUCCESS:
       const { data: getTagList } = action.payload
-      const getTag = [...state.trendTagList, ...getTagList]
-      return { ...state, trendTagList: getTag }
+      return { ...state, trendTagList: [...getTagList] }
 
     case ContentAction.GET_TAG_LIST_ERROR:
       return { ...state, error: action.payload }
@@ -187,8 +181,7 @@ function main(
       const {
         data: { data: getPhotoCardList },
       } = action.payload
-      const getPhotoCard = [...state.photocardList, ...getPhotoCardList]
-      return { ...state, photocardList: getPhotoCard }
+      return { ...state, photocardList: [...getPhotoCardList] }
 
     case ContentAction.GET_PHOTO_CARD_LIST_ERROR:
       return { ...state, error: action.payload }
