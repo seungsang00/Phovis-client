@@ -152,7 +152,7 @@ function content(
     case ContentAction.ADD_PHOTO_CARD_LIST_SUCCESS:
       return {
         ...state,
-        relatedContentList: [action.payload, ...state.relatedContentList],
+        photocardList: [action.payload, ...state.photocardList],
       }
     default:
       return state
