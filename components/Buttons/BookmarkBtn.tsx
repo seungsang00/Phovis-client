@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { BookmarkContainer } from './button-bookmark.style'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '@actions/reducer'
@@ -15,8 +15,9 @@ const BookmarkBtn = ({ id, isChecked = false }: Props) => {
     (state: RootReducer) => state.user
   )
 
-  const handleClick = async () => {
+  const handleClick = async (e: React.MouseEvent<HTMLLabelElement>) => {
     // 로그인한 사용자가 아니면 북마크를 할 수 없다.
+    e.preventDefault()
     if (!isLogin) return
     const { status, data } = await axios.put(
       'https://localhost:4000/user/bookmark',
