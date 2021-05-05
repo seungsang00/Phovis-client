@@ -6,9 +6,9 @@ export type IPhotoCard = {
   description?: string
   location?: LocationType
   tags?: string[]
-  userName?: string
+  userName: string
   profileImage?: string
   like?: number
-  imageurl?: string
+  imageurl: string
   userId?: string
 }

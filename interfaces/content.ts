@@ -22,6 +22,7 @@ export interface IContentBanner {
   mainImgUrl: string | null
   username?: string | null
   userProfileUrl?: string
+  userId?: string
   likesCount: number
   isLike?: boolean
   isBookMark?: boolean

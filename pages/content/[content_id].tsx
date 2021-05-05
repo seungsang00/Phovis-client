@@ -40,7 +40,7 @@ const ContentPage = () => {
   }, [content_id])
 
   const { contentData } = useSelector((state: RootReducer) => state.content)
-
+  const { id } = useSelector((state: RootReducer) => state.user)
   const {
     title,
     mainimageUrl,
@@ -71,7 +71,9 @@ const ContentPage = () => {
   if (user) {
     userId = user.id
   }
+  // const handlemodify = (id: string): void => {
 
+  // }
   return (
     <>
       <Head>
@@ -83,6 +85,7 @@ const ContentPage = () => {
         header={<MainHeader isLogin={isLogin} userId={userId as string} />}
         banner={
           <ContentBanner
+            // handlemodify={handlemodify}
             title={title || sampleContent.title}
             mainImgUrl={mainimageUrl || sampleContent.mainimageUrl}
             username={creator.userName || sampleContent.user.userName}
