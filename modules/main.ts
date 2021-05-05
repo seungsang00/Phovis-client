@@ -27,13 +27,16 @@ const disfetchGetData = (action: string, data: any) => ({
 export const getBannderContentList = () => {
   return async (dispatch: Function) => {
     try {
-      const result = await axios.get('https://localhost:4000/content', {
-        params: {
-          maxnum: 3,
-          tag: '새벽,야경,서울',
-        },
-        withCredentials: true,
-      })
+      const result = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content`,
+        {
+          params: {
+            maxnum: 3,
+            tag: '새벽,야경,서울',
+          },
+          withCredentials: true,
+        }
+      )
 
       if (result.status === 200) {
         dispatch(disfetchGetData(ContentAction.GET_BANNER_SUCCESS, result))
@@ -55,13 +58,16 @@ export const getBannderContentList = () => {
 export const getRecommendContentList = () => {
   return async (dispatch: Function) => {
     try {
-      const result = await axios.get('https://localhost:4000/content', {
-        params: {
-          maxnum: 6,
-          tag: '서울,야경,새벽',
-        },
-        withCredentials: true,
-      })
+      const result = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content`,
+        {
+          params: {
+            maxnum: 6,
+            tag: '서울,야경,새벽',
+          },
+          withCredentials: true,
+        }
+      )
 
       if (result.status === 200) {
         dispatch(disfetchGetData(ContentAction.GET_RECOMMEND_SUCCESS, result))
@@ -87,12 +93,15 @@ export const getRecommendContentList = () => {
 export const getTrendTagList = () => {
   return async (dispatch: Function) => {
     try {
-      const result = await axios.get('https://localhost:4000/tag', {
-        params: {
-          maxnum: 6,
-        },
-        withCredentials: true,
-      })
+      const result = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/tag`,
+        {
+          params: {
+            maxnum: 6,
+          },
+          withCredentials: true,
+        }
+      )
 
       if (result.status === 200) {
         dispatch(disfetchGetData(ContentAction.GET_TAG_LIST_SUCCESS, result))
@@ -115,12 +124,15 @@ export const getTrendTagList = () => {
 export const getPhotoCardList = () => {
   return async (dispatch: Function) => {
     try {
-      const result = await axios.get('https://localhost:4000/photocard', {
-        params: {
-          random: 1,
-        },
-        withCredentials: true,
-      })
+      const result = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/photocard`,
+        {
+          params: {
+            random: 1,
+          },
+          withCredentials: true,
+        }
+      )
 
       if (result.status === 200) {
         dispatch(

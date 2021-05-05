@@ -109,7 +109,7 @@ export const signin = ({ email, password }: Signin) => {
   return async (dispatch: Function) => {
     try {
       const data = await axios.post(
-        'https://localhost:4000/user',
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user`,
         { email, password }
         // { withCredentials: true }
       )
@@ -125,7 +125,7 @@ export const login = ({ email, password }: Login) => {
   return async (dispatch: Function) => {
     try {
       const result = await axios.post(
-        'https://localhost:4000/auth/login',
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/login`,
         { email, password }
         // { withCredentials: true }
       )
@@ -152,12 +152,15 @@ export const getUserInfo = (stateAccessToken?: String) => {
         return dispatch(errorGetUserInfo('fail get user info'))
       }
 
-      const result = await axios.get(`https://localhost:4000/user/info`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        // withCredentials: true,
-      })
+      const result = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/info`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          // withCredentials: true,
+        }
+      )
 
       if (result.status === 200) {
         if (!stateAccessToken) {
@@ -178,7 +181,7 @@ export const loginWithGoogle = (token: string) => {
   return async (dispatch: Function) => {
     try {
       const result = await axios.post(
-        `https://localhost:4000/auth/google`,
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/google`,
         { token },
         { withCredentials: true }
       )
@@ -198,9 +201,12 @@ export const loginWithKakao = (code: string) => {
   return async (dispatch: Function) => {
     try {
       // console.log('kakao Code : ',code)
-      const result = await axios.post(`https://localhost:4000/auth/kakao`, {
-        kakaoCode: code,
-      })
+      const result = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/kakao`,
+        {
+          kakaoCode: code,
+        }
+      )
 
       if (result.status === 201) {
         dispatch(successLoginWithKakao(result))
