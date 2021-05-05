@@ -34,3 +34,7 @@ export const Wrapper = styled.div`
     }
   }
 `
+
+export const EditButton = styled.button`
+
+`

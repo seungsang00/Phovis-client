@@ -1,4 +1,4 @@
-import { Wrapper } from './polaroid.style'
+import { Wrapper, EditButton } from './polaroid.style'
 import { IPhotoCard } from '@interfaces'
 
 interface Props {
@@ -15,7 +15,7 @@ const Polaroid = ({
 }: IPhotoCard & Props) => {
   return (
     <Wrapper>
-      {type === 'content' && <button onClick={handleModify}>수정하기</button>}
+      {type === 'content' && <EditButton onClick={handleModify}></EditButton>}
       <div className='polaroid'>
         <img src={imageurl} />
         <div className='caption'>
