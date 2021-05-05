@@ -30,8 +30,8 @@ export const sampleUserData: IUser[] = [
 
 export const samplePhotoCardData: IPhotoCard[] = [
   {
-    photocardId: '1qwerasdf',
-    url:
+    photocardId: 'db60a925-3b6d-437d-80ea-0d944a7574f2',
+    imageurl:
       'https://cdn.pixabay.com/photo/2019/03/25/20/17/kaohsiung-4081256_960_720.jpg',
     description: '멋진 풍경이였어요',
     userName: 'seungsang00',
@@ -40,7 +40,7 @@ export const samplePhotoCardData: IPhotoCard[] = [
   },
   {
     photocardId: '2qwerasdf',
-    url:
+    imageurl:
       'https://cdn.pixabay.com/photo/2020/11/07/23/22/beach-5722568__340.jpg',
     description: '멋진 풍경이였어요',
     userName: 'seungsang00',
@@ -49,7 +49,7 @@ export const samplePhotoCardData: IPhotoCard[] = [
   },
   {
     photocardId: '3qwerasdf',
-    url:
+    imageurl:
       'https://cdn.pixabay.com/photo/2020/10/27/20/17/lake-5691800_960_720.jpg',
     description: '멋진 풍경이였어요',
     userName: 'seungsang00',
@@ -58,7 +58,7 @@ export const samplePhotoCardData: IPhotoCard[] = [
   },
   {
     photocardId: '4qwerasdf',
-    url:
+    imageurl:
       'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg',
     description: '멋진 풍경이였어요',
     userName: 'seungsang00',
@@ -67,7 +67,7 @@ export const samplePhotoCardData: IPhotoCard[] = [
   },
   {
     photocardId: '5qwerasdf',
-    url:
+    imageurl:
       'https://cdn.pixabay.com/photo/2021/01/08/17/56/river-5900547__340.jpg',
     description: '멋진 풍경이였어요',
     userName: 'seungsang00',

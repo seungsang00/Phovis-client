@@ -47,6 +47,8 @@ const color = {
   white: '#fafafa',
   black: '#24272a',
   inActive: '#c3c3c3',
+  yellow: '#ffd600',
+  // blue: '#0067a3',
 }
 
 const display = {

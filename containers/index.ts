@@ -1,4 +1,4 @@
-export { default as PhotoCardInput } from './PhotoCardInput/PhotoCardInput'
+export { default as PhotoCardInput } from './PhotoCardInput'
 export { default as PhotoCardGallery } from './PhotoCardGallery/PhotoCardGallery'
 export { default as AddLocationSection } from './AddLocationSection'
 export { default as MapContainer } from './Map'

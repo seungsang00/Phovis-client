@@ -96,7 +96,7 @@ const MainPage = () => {
   }
 
   const onScrollEnd = () => {
-    _getPhotoCardList()
+    // _getPhotoCardList()
   }
 
   let userId

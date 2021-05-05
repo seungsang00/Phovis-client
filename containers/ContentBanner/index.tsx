@@ -2,6 +2,10 @@ import { BookmarkBtn, LikeBtn, UserInfoHor } from '@components/index'
 import { IContentBanner } from '@interfaces'
 import { DivWithBgImg } from '@styles/index'
 
+// interface props {
+//   handlemodify?: (id: string) => void
+// }
+
 const ContentBanner = ({
   id,
   title,

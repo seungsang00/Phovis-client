@@ -97,12 +97,12 @@ export const getRelatedContentList = (tags: string) => {
   }
 }
 
-export const getRelatedPhotocardList = (tags: string) => {
+export const getRelatedPhotocardList = (contentId: string) => {
   return async (dispatch: Function) => {
     try {
       // TODO: 연관 포토카드 요청
       const res = await axios.get(
-        `https://localhost:4000/photocard?tag=${tags}&maxnum=10`
+        `https://localhost:4000/photocard?contentId=${contentId}&maxnum=10`
       )
       console.log(res)
       if (res.status === 200) {

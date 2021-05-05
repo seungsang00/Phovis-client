@@ -22,12 +22,14 @@ export interface IContentBanner {
   mainImgUrl: string | null
   username?: string | null
   userProfileUrl?: string
+  userId?: string
   likesCount: number
   isLike?: boolean
   isBookmark?: boolean
 }
 
 export interface IContentMain {
+  contentId: string
   id?: string
   description: string | null
   location: LocationType

@@ -12,8 +12,16 @@ export const TagS = styled.button`
   margin-right: 0.75rem;
   border-radius: 999px;
   color: #fff;
-  background-color: ${({ theme }) => theme.color.blue};
   cursor: pointer;
+  &:nth-child(n) {
+    background-color: ${({ theme }) => theme.color.secondary};
+  }
+  &:nth-child(2n) {
+    background-color: ${({ theme }) => theme.color.secondaryLight};
+  }
+  &:nth-child(3n) {
+    background-color: ${({ theme }) => theme.color.secondaryDark};
+  }
 `
 
 export const TagB = styled.button`
@@ -25,6 +33,14 @@ export const TagB = styled.button`
   padding: 7px 14px;
   border-radius: 7px;
   color: #fff;
-  background-color: ${({ theme }) => theme.color.blue};
+  &:nth-child(n) {
+    background-color: ${({ theme }) => theme.color.secondary};
+  }
+  &:nth-child(2n) {
+    background-color: ${({ theme }) => theme.color.secondaryLight};
+  }
+  &:nth-child(3n) {
+    background-color: ${({ theme }) => theme.color.secondaryDark};
+  }
   cursor: pointer;
 `
