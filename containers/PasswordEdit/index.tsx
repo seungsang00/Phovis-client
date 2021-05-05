@@ -39,7 +39,7 @@ export const PasswordConfirm = ({ handleModalClose }: IProps) => {
   const confirmPassword = async () => {
     try {
       const res = await axios.post(
-        `https://localhost:4000/auth/password`,
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/password`,
         {
           password: input.current_pw,
         },
@@ -60,7 +60,7 @@ export const PasswordConfirm = ({ handleModalClose }: IProps) => {
   const changePw = async () => {
     try {
       const res = await axios.put(
-        `https://localhost:4000/auth/password`,
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/password`,
         {
           key: sessionToken,
           newPassword: input.new_pw,

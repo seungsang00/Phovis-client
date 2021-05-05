@@ -35,7 +35,7 @@ const Signup = () => {
     const { userName, email, password } = input
 
     const { status, data } = await axios.post(
-      'https://localhost:4000/auth/signup',
+      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/signup`,
       {
         userName,
         email,

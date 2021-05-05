@@ -25,7 +25,7 @@ const Like = ({ id, like, isChecked = false }: props) => {
     if (!isLogin) return
 
     const { status, data } = await axios.put(
-      'https://localhost:4000/user/like',
+      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/like`,
       {
         id,
       },

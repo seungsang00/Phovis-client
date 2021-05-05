@@ -20,7 +20,7 @@ const BookmarkBtn = ({ id, isChecked = false }: Props) => {
     e.preventDefault()
     if (!isLogin) return
     const { status, data } = await axios.put(
-      'https://localhost:4000/user/bookmark',
+      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/bookmark`,
       {
         id,
       },

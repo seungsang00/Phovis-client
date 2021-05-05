@@ -63,7 +63,7 @@ const SearchPage = () => {
     const {
       status,
       data: { data },
-    } = await axios.get('https://localhost:4000/content', {
+    } = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/content`, {
       params: {
         maxnum: 15,
         tag: keyword,
