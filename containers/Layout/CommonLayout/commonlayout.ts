@@ -25,7 +25,17 @@ export const HeaderInner = styled.div`
 
   div {
     display: flex;
+    align-items:center;
   }
+
+  .sub-menu{
+    margin-right:1rem;
+
+    & .search-bar{
+    margin-right:2rem;
+    }
+  }
+
   .main-logo {
     cursor: pointer;
   }

@@ -124,7 +124,11 @@ const MainPage = () => {
           onClickItem={onClickMainBannerItem}
         />
 
-        <MainRecommend photoCards={samplePhotoCardData} />
+        <MainRecommend
+          tags={sampleTag}
+          onTagClickHandler={onTagClickHandler}
+          photoCards={samplePhotoCardData}
+        />
 
         <MainSidebar
           tags={trendTagList}

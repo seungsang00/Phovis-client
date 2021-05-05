@@ -48,7 +48,6 @@ const Polaroids = ({ locationinfo, photocards, contentId, type }: IProps) => {
 
   return (
     <>
-      <h2 className='section-title'>📸 이런 사진을 찍을 수 있어요</h2>
       <Container className='thumbnails'>
         <div className='photocardUploadBtn' onClick={handleModalOpen}>
           <Image
