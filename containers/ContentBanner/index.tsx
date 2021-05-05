@@ -10,12 +10,12 @@ const ContentBanner = ({
   userProfileUrl,
   likesCount,
   isLike = false,
-  isBookMark = false,
+  isBookmark = false,
 }: IContentBanner) => {
   return (
     <DivWithBgImg bgUrl={mainImgUrl}>
       <div className='top-right'>
-        <BookmarkBtn id={id} isChecked={isBookMark} />
+        <BookmarkBtn id={id} isChecked={isBookmark} />
       </div>
       <div className='main-title'>{title}</div>
       <div className='bottom-left'>

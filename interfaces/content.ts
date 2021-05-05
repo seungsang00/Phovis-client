@@ -13,7 +13,7 @@ export interface IContent {
   images: IImage[]
   title: string | null
   isLike?: boolean
-  isBookMark?: boolean
+  isBookmark?: boolean
 }
 
 export interface IContentBanner {
@@ -24,7 +24,7 @@ export interface IContentBanner {
   userProfileUrl?: string
   likesCount: number
   isLike?: boolean
-  isBookMark?: boolean
+  isBookmark?: boolean
 }
 
 export interface IContentMain {
