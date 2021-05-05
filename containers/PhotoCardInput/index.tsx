@@ -3,9 +3,11 @@ import { PhotoCardInputContainer, ImageInputbtn } from './photocard-input'
 import LocationInfo from '../../components/LocationInfo/LocationInfo'
 import { Button } from '@styles/index'
 import axios, { AxiosResponse } from 'axios'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '@actions/reducer'
 import { IPhotoCard, LocationType } from '@interfaces'
+import { useRouter } from 'next/router'
+import { addRelatedPhotocardList } from '@actions/content'
 
 interface props {
   contentId?: string
@@ -22,6 +24,8 @@ const PhotoCardInput = ({
   photocardId,
   handleModalClose,
 }: props) => {
+  const router = useRouter()
+  const dispatch = useDispatch()
   const [message, setMessage] = useState<string>('')
   const [fileSelected, setFileSelected] = useState<File>()
   const { accessToken } = useSelector((state: RootReducer) => state.user)
@@ -98,8 +102,10 @@ const PhotoCardInput = ({
           },
         })
       }
-      if (res.status === 201) {
+      if (res.status === 200) {
+        dispatch(addRelatedPhotocardList(res.data))
         handleModalClose()
+        router.push(`/content/[content_id]`, `/content/${contentId}`)
       }
     }
   }

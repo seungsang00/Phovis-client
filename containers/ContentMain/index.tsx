@@ -49,6 +49,7 @@ const ContentMain = ({
       </section>
       <section className='photocards'>
         <Polaroids
+          type={'content'}
           locationinfo={location}
           photocards={photocards}
           contentId={contentId}

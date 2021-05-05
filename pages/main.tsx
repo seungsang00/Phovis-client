@@ -23,7 +23,6 @@ import {
 
 // NOTE : Test data
 import { sampleContents, samplePhotoCardData } from '@utils/index'
-const sampleTag = ['야경', '서울', '밤바다', '등산', '여름']
 //
 
 const MainPage = () => {
@@ -127,7 +126,10 @@ const MainPage = () => {
 
         <MainRecommend photoCards={samplePhotoCardData} />
 
-        <MainSidebar tags={sampleTag} onTagClickHandler={onTagClickHandler} />
+        <MainSidebar
+          tags={trendTagList}
+          onTagClickHandler={onTagClickHandler}
+        />
 
         <LinkBanner link={isLogin ? '/content/form' : '/auth/login'} />
 

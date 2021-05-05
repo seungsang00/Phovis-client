@@ -30,7 +30,7 @@ const MainGallery = ({ photoCards, onScrollEnd }: IProps) => {
     <section>
       {photoCards.length > 0 && (
         <div className='flex'>
-          <Polaroids photocards={photoCards} />
+          <Polaroids type={'main'} photocards={photoCards} />
         </div>
       )}
       {photoCards.length > 0 && <div ref={setTarget}>Content Loder</div>}
