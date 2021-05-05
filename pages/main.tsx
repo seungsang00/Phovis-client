@@ -125,7 +125,7 @@ const MainPage = () => {
         />
 
         <MainRecommend
-          tags={sampleTag}
+          tags={trendTagList}
           onTagClickHandler={onTagClickHandler}
           photoCards={samplePhotoCardData}
         />
