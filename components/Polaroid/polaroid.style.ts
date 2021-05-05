@@ -15,8 +15,8 @@ export const Wrapper = styled.div`
 
   .polaroid {
     background: #fff;
-    padding: 1rem;
-    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.2);
+    padding: 0.3rem;
+    box-shadow: 0 0.25rem 0.2rem rgba(0, 0, 0, 0.2);
 
     img {
       height: 300px;

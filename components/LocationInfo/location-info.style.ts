@@ -2,10 +2,12 @@ import styled from 'styled-components'
 
 export const LocContainer = styled.div`
   width: 100%;
-  max-height: 30px;
+  height: 100%;
+  min-height: 60px;
   ${({ theme }) => theme.display.flexCenterRow}
   padding: 10px;
   justify-content: start;
+  align-items: center;
 
   & span.location {
     font-weight: 600;
