@@ -12,13 +12,14 @@ interface IProps {
   contentId?: string
   locationinfo?: LocationType
   handleModify?: React.MouseEvent<HTMLButtonElement>
+  type: 'main' | 'content'
 }
-const Polaroids = ({ locationinfo, photocards, contentId }: IProps) => {
+const Polaroids = ({ locationinfo, photocards, contentId, type }: IProps) => {
   // ! Modal control
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
   const [isModify, setModify] = useState<boolean>(false)
   const [targetModifyPhotocardId, settargetModify] = useState<string>('')
-  const { user } = useSelector((state: RootReducer) => state.user)
+  const { user, isLogin } = useSelector((state: RootReducer) => state.user)
 
   const handleModalOpen = () => {
     setModify(false)
@@ -47,7 +48,6 @@ const Polaroids = ({ locationinfo, photocards, contentId }: IProps) => {
 
   return (
     <>
-      <h2 className='section-title'>📸 이런 사진을 찍을 수 있어요</h2>
       <Container className='thumbnails'>
         <div className='photocardUploadBtn' onClick={handleModalOpen}>
           <Image
@@ -57,17 +57,19 @@ const Polaroids = ({ locationinfo, photocards, contentId }: IProps) => {
             height={24}
           />
         </div>
-        {modalIsOpen && (
-          <Modal w='400px' h='500px' handleModalClose={handleModalClose}>
-            <PhotoCardInput
-              isModify={isModify}
-              photocardId={targetModifyPhotocardId}
-              location={locationinfo}
-              contentId={contentId}
-              handleModalClose={() => setModalIsOpen(false)}
-            />
-          </Modal>
-        )}
+        {isLogin
+          ? modalIsOpen && (
+              <Modal w='400px' h='500px' handleModalClose={handleModalClose}>
+                <PhotoCardInput
+                  isModify={isModify}
+                  photocardId={targetModifyPhotocardId}
+                  location={locationinfo}
+                  contentId={contentId}
+                  handleModalClose={() => setModalIsOpen(false)}
+                />
+              </Modal>
+            )
+          : alert('로그인이 필요합니다')}
         {photocards &&
           photocards.length > 0 &&
           photocards.map((photoCard) => {
@@ -81,6 +83,7 @@ const Polaroids = ({ locationinfo, photocards, contentId }: IProps) => {
             } = photoCard
             return (
               <Polaroid
+                type={type}
                 key={photocardId}
                 handleModify={() =>
                   handleModify(photocardId as string, userId as string)

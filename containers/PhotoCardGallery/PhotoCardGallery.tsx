@@ -9,7 +9,7 @@ type props = {
 const PhotoCardGallery = ({ photocards }: props) => {
   return (
     <div className='flex'>
-      <Polaroids photocards={photocards} />
+      <Polaroids type={'main'} photocards={photocards} />
     </div>
   )
 }

@@ -30,21 +30,18 @@ import {
 } from '@actions/main'
 import useAction from '../hooks/useAction'
 
-import { MainBanner, LinkBanner } from '@components/index'
-
 import {
   MainRecommend,
-  MainSidebar,
   MainGallery,
   MainHeader,
+  MainSideMenu,
+  MainSectionHeader,
   CommonLayout,
 } from '@containers/index'
 
 // NOTE : Test data
-import { sampleContents, samplePhotoCardData } from '@utils/index'
+import { sampleContents } from '@utils/index'
 import { MainGridContainer } from '@containers/Layout/PageLayout'
-const sampleTag = ['야경', '서울', '밤바다', '등산', '여름']
-//
 
 const MainPage = () => {
   const [input, setInput] = useState({
@@ -84,13 +81,7 @@ const MainPage = () => {
     console.log('recommendContentList : ', recommendContentList)
     console.log('trendTagList : ', trendTagList)
     console.log('photocardList : ', photocardList)
-  }, [
-    error,
-    bannerContentList,
-    recommendContentList,
-    trendTagList,
-    photocardList,
-  ])
+  }, [photocardList])
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const {
@@ -112,12 +103,8 @@ const MainPage = () => {
     router.push(`/search?keyword=${tag}`, `/search`)
   }
 
-  const onClickMainBannerItem = (contentId: String) => {
-    console.log(contentId)
-  }
-
   const onScrollEnd = () => {
-    _getPhotoCardList()
+    // _getPhotoCardList()
   }
 
   let userId
@@ -131,6 +118,7 @@ const MainPage = () => {
         <title>Phovis - Main</title>
       </Head>
       <CommonLayout
+        title='Phovis'
         header={
           <MainHeader
             isLogin={isLogin}
@@ -139,33 +127,27 @@ const MainPage = () => {
             onChangeInput={onChangeInput}
             onSearchKeywordSubmit={onSearchKeywordSubmit}
           />
-        }
-        banner={
-          <MainBanner
-            contents={sampleContents}
-            onClickItem={onClickMainBannerItem}
-          />
         }>
-        <MainGridContainer>
-          <div>
-            <MainSidebar
-              tags={sampleTag}
+        <main>
+          <MainSideMenu isLogin={isLogin} />
+          <section id='section-header' style={{ paddingTop: '60px' }}>
+            <MainSectionHeader />
+          </section>
+          <section id='section-recommend'>
+            <MainRecommend
+              contentList={recommendContentList}
+              photoCards={photocardList}
+              tags={trendTagList}
               onTagClickHandler={onTagClickHandler}
             />
-            <LinkBanner link={isLogin ? '/content/form' : '/auth/login'} />
-          </div>
-          <div>
-            <MainRecommend
-              contentList={sampleContents}
-              photoCards={samplePhotoCardData}
-            />
-
+          </section>
+          <section id='section-photo-card'>
             <MainGallery
-              photoCards={samplePhotoCardData}
+              photoCards={photocardList}
               onScrollEnd={onScrollEnd}
             />
-          </div>
-        </MainGridContainer>
+          </section>
+        </main>
       </CommonLayout>
     </>
   )
