@@ -100,7 +100,7 @@ export const ImageInputContainer = styled.div`
 
     &:hover {
       .button-edit {
-        background-color: ${({ theme }) => theme.color.blue};
+        background-color: ${({ theme }) => theme.color.secondary};
       }
     }
   }

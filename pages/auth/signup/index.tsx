@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { LableTextInput, PasswordInput, SubmitButton } from '@components/index'
+import {
+  LableTextInput,
+  LoginButton,
+  PasswordInput,
+  SignButton,
+} from '@components/index'
 
 import axios from 'axios'
-import { CommonLayout } from '@containers/Layout'
+import { CommonLayout, SignPageLayout, SignSection } from '@containers/Layout'
 import MainHeader from '@containers/MainHeader'
 
 const Signup = () => {
@@ -52,32 +57,51 @@ const Signup = () => {
 
   return (
     <>
-      <CommonLayout header={<MainHeader isLogin={false} userId={null} />}>
-        <section>
-          <article>
-            <h2>Sign up</h2>
-            <LableTextInput
-              name='userName'
-              label='User name'
-              onChange={inputChangeHandler}
-              value={input.userName}
-            />
-            <LableTextInput
-              name='email'
-              label='Email address'
-              onChange={inputChangeHandler}
-              value={input.email}
-            />
-            <PasswordInput
-              name='password'
-              label='Password'
-              onChange={inputChangeHandler}
-              value={input.password}
-            />
-            <SubmitButton text='Sign in' onSubmit={requestSignUp} />
-            <Link href='/auth/login'>Back to login</Link>
-          </article>
-        </section>
+      <CommonLayout
+        header={
+          <MainHeader isLogin={false} userId={null} hideLoginBtn={true} />
+        }>
+        <SignPageLayout className='sign-area'>
+          <SignSection className='sign-in'>
+            <article className='sign'>
+              <h2 className='title'>
+                Sign in <span className='main-logo'>Phovis</span>
+              </h2>
+              <p className='division'>sign in and find new Phovis</p>
+              <Link href='/auth/login'>
+                <SignButton>Sign in</SignButton>
+              </Link>
+              <section className='sign-aside sign-in'></section>
+            </article>
+          </SignSection>
+          <SignSection className='sign-up'>
+            <article>
+              <h2 className='title'>
+                Sign up <span className='main-logo'>Phovis</span>
+              </h2>
+              <LableTextInput
+                name='userName'
+                placeholder='Your Name'
+                onChange={inputChangeHandler}
+                autoFocus={true}
+                value={input.userName}
+              />
+              <LableTextInput
+                name='email'
+                placeholder='Email'
+                onChange={inputChangeHandler}
+                value={input.email}
+              />
+              <PasswordInput
+                name='password'
+                placeholder='Password'
+                onChange={inputChangeHandler}
+                value={input.password}
+              />
+              <LoginButton text='Sign up' onSubmit={requestSignUp} />
+            </article>
+          </SignSection>
+        </SignPageLayout>
       </CommonLayout>
     </>
   )

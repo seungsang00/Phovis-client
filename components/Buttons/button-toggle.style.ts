@@ -37,7 +37,7 @@ export const Toggle = styled.input`
   transition: all 0.2s ease-in-out;
 
   &:checked {
-    background: ${({ theme }) => theme.color.blue};
+    background: ${({ theme }) => theme.color.secondary};
   }
 
   &:after {
