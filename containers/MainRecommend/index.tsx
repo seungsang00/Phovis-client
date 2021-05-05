@@ -22,7 +22,7 @@ const MainRecommend = ({ contentList }: IProps) => (
         ))}
       {/* {photoCards.length > 0 &&
         photoCards.map((data) => {
-          const { photocardId, profileImage, userName, url } = data
+          const { photocardId, profileImage, userName, imageurl } = data
           return (
             <>
               <ThumbnailSquare
