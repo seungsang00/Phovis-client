@@ -29,7 +29,7 @@ const ContentBanner = ({
         />
       </div>
       <div className='bottom-right'>
-        <LikeBtn like={likesCount || 0} isChecked={isLike} />
+        <LikeBtn id={id} like={likesCount || 0} isChecked={isLike} />
       </div>
     </DivWithBgImg>
   )

@@ -22,6 +22,7 @@ import {
   getRelatedContentList,
   getRelatedPhotocardList,
 } from '@actions/content'
+// import { StringifyOptions } from 'node:querystring'
 
 const ContentPage = () => {
   const { isLogin, user } = useSelector((state: RootReducer) => state.user)
@@ -42,6 +43,7 @@ const ContentPage = () => {
   const { contentData } = useSelector((state: RootReducer) => state.content)
   // const { id } = useSelector((state: RootReducer) => state.user)
   const {
+    id,
     title,
     mainimageUrl,
     likecount,
@@ -86,10 +88,17 @@ const ContentPage = () => {
         header={<MainHeader isLogin={isLogin} userId={userId as string} />}
         banner={
           <ContentBanner
+<<<<<<< HEAD
             // handlemodify={handlemodify}
+=======
+            id={id as string}
+>>>>>>> 6b6fbf856669422ccf38ea1f62e1925b848f01a7
             title={title || sampleContent.title}
             mainImgUrl={mainimageUrl || sampleContent.mainimageUrl}
-            username={creator.userName || sampleContent.user.userName}
+            username={
+              (creator.userName as string) ||
+              (sampleContent.user.userName as string)
+            }
             userProfileUrl={creator.profileImg || sampleContent.user.profileImg}
             likesCount={likecount || sampleContent.likecount}
           />

@@ -21,7 +21,7 @@ const MainSidebar = ({ tags, onTagClickHandler }: IProps) => (
             onClick={() => onTagClickHandler(tag)}
           />
         ))}
-      <div>Make a new content</div>
+      {/* <div>Make a new content</div> */}
     </div>
   </aside>
 )

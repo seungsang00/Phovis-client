@@ -1,7 +1,6 @@
-import { PhotocardGalleryContainer } from './photocard-gallery'
+// import { PhotocardGalleryContainer } from './photocard-gallery'
 import { IPhotoCard } from '../../interfaces/index'
-// import PhotoCardPreview from '../../components/PhotoCardPreview/PhotoCardPreview'
-import Polaroid from '@components/Polaroid'
+import Polaroids from '@containers/Polaroids'
 
 type props = {
   photocards: IPhotoCard[]
@@ -9,31 +8,9 @@ type props = {
 
 const PhotoCardGallery = ({ photocards }: props) => {
   return (
-    <PhotocardGalleryContainer>
-      {photocards &&
-        photocards.length > 0 &&
-        photocards.map((card: IPhotoCard) => {
-          const { imageurl, userName } = card
-          return (
-            <>
-              <Polaroid
-                photocardId={card.photocardId}
-                key={card.photocardId}
-                imageurl={imageurl}
-                userName={userName}
-              />
-              {/* <PhotoCardPreview
-                key={card.photocardId}
-                description={description}
-                imageurl={url}
-                userName={userName}
-                profileImage={profileImage}
-                like={like}
-              /> */}
-            </>
-          )
-        })}
-    </PhotocardGalleryContainer>
+    <div className='flex'>
+      <Polaroids photocards={photocards} />
+    </div>
   )
 }
 

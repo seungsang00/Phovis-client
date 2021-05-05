@@ -5,11 +5,12 @@ import { IPhotoCard, IUser, LocationType } from '@interfaces'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Container } from './polaroids.style'
 
 interface IProps {
   photocards: IPhotoCard[]
-  contentId: string
-  locationinfo: LocationType
+  contentId?: string
+  locationinfo?: LocationType
   handleModify?: React.MouseEvent<HTMLButtonElement>
 }
 const Polaroids = ({ locationinfo, photocards, contentId }: IProps) => {
@@ -43,9 +44,9 @@ const Polaroids = ({ locationinfo, photocards, contentId }: IProps) => {
   }
 
   return (
-    <div>
-      <div className='h2container'>
-        <h2 className='section-title'>📸 이런 사진을 찍을 수 있어요</h2>
+    <>
+      <h2 className='section-title'>📸 이런 사진을 찍을 수 있어요</h2>
+      <Container className='thumbnails'>
         <div className='photocardUploadBtn' onClick={handleModalOpen}>
           <Image
             layout='fixed'
@@ -59,14 +60,12 @@ const Polaroids = ({ locationinfo, photocards, contentId }: IProps) => {
             <PhotoCardInput
               isModify={isModify}
               photocardId={targetModifyPhotocardId}
-              location={locationinfo}
-              contentId={contentId}
+              location={locationinfo as LocationType}
+              contentId={contentId as string}
               handleModalClose={() => setModalIsOpen(false)}
             />
           </Modal>
         )}
-      </div>
-      <div className='thumbnails'>
         {photocards &&
           photocards.length > 0 &&
           photocards.map((photoCard) => {
@@ -91,8 +90,8 @@ const Polaroids = ({ locationinfo, photocards, contentId }: IProps) => {
               />
             )
           })}
-      </div>
-    </div>
+      </Container>
+    </>
   )
 }
 export default Polaroids

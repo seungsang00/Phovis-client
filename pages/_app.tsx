@@ -17,6 +17,15 @@ export default class CustomApp extends NextApp {
       <>
         <Head>
           <title>Phovis</title>
+          <link
+            href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css'
+            rel='stylesheet'
+            type='text/css'></link>
+          <link rel='preconnect' href='https://fonts.gstatic.com' />
+          <link
+            href='https://fonts.googleapis.com/css2?family=Girassol&display=swap'
+            rel='stylesheet'
+          />
         </Head>
         <GlobalStyle />
         <ThemeProvider theme={theme}>

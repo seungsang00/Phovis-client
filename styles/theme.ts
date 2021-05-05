@@ -38,11 +38,14 @@ const media = {
 }
 
 const color = {
-  blue: '#2054ae',
-  pink: '#c43683',
+  primary: '#263238',
+  primaryLight: '#4f5b62',
+  primaryDark: '#000a12',
+  secondary: '#ff6e40',
+  secondaryLight: '#ffa06d',
+  secondaryDark: '#c53d13',
+  white: '#fafafa',
   black: '#24272a',
-  green: '#1ECD97',
-  yellow: '#ffc107',
   inActive: '#c3c3c3',
 }
 
@@ -62,6 +65,11 @@ const display = {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+  `,
+  flexStartRow: `
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
   `,
 }
 

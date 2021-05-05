@@ -93,11 +93,8 @@ export const ThumbnailWrap = styled.div`
   .thumbnail-bg {
     opacity: 0.5;
     position: absolute;
-    top: -20px;
-    left: -20px;
     width: 100%;
     height: 100%;
-    padding: 20px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
