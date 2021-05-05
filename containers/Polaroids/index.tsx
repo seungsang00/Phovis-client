@@ -55,16 +55,18 @@ const Polaroids = ({ locationinfo, photocards, contentId, type }: IProps) => {
   return (
     <>
       <Container className='thumbnails'>
-        <div className='photocardUploadBtn' onClick={handleModalOpen}>
-          {type === 'content' && (
-            <Image
+        {type === 'content' && (
+          <div className='photocardUploadTitle'>
+            <h2>이런 사진을 찍을 수 있어요 !</h2>
+            <div className='upload-btn' onClick={handleModalOpen}></div>
+            {/* <Image
               layout='fixed'
               src='/src/iconmonstr-photo-camera-4.svg'
               width={24}
               height={24}
-            />
-          )}
-        </div>
+            /> */}
+          </div>
+        )}
         {modalIsOpen && (
           <Modal w='400px' h='600px' handleModalClose={handleModalClose}>
             <PhotoCardInput
