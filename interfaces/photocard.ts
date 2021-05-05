@@ -1,13 +1,15 @@
 import { LocationType } from './contentform'
+import { ITag } from './tag'
 
 export type IPhotoCard = {
-  photocardId: string
+  photocardId?: string
   imageId?: number
-  url: string
   description?: string
   location?: LocationType
-  tags?: string[]
+  tags?: ITag[]
   userName: string
   profileImage?: string
   like?: number
+  imageurl: string
+  userId?: string
 }

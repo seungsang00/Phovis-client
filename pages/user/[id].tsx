@@ -13,10 +13,11 @@ import axios from 'axios'
 import { TabContainer } from '@containers/Layout/PageLayout'
 
 const UserPage = () => {
-  const tabList = ['Content', 'Likes', 'Bookmark', 'Setting']
   const router = useRouter()
   const user_id = router.query.id
 
+  const [userInfo, setUserInfo] = useState<IUser | null>(null)
+  const [tabList, setTabList] = useState(['Content', 'Likes', 'Bookmark'])
   const [selectedTab, setSelectedTab] = useState('Content')
   const [userContents, setUserContents] = useState<IContent[]>([])
   const [userLikesContents, setUserLikesContents] = useState<IContent[]>([])
@@ -38,16 +39,16 @@ const UserPage = () => {
     if (user_id) {
       loadContent(selectedTab)
     }
+  }, [user_id])
 
-    if (user_id && user && String(user.id) === user_id) {
+  useEffect(() => {
+    if (userInfo && user && String(user.id) === userInfo.id) {
+      console.log(`user id query parameter : `, user_id)
       console.log('login user id : ', user.id)
       console.log('Set my page')
-    } else {
-      console.log(`user id query parameter : `, user_id)
-      console.log('user state :', user)
-      console.log('Set user page')
+      setTabList(['Content', 'Likes', 'Bookmark', 'Setting'])
     }
-  }, [user, user_id])
+  }, [user, userInfo])
 
   const onClickTabHandler = (tab: string) => {
     setSelectedTab(tab)
@@ -117,6 +118,28 @@ const UserPage = () => {
     }
   }
 
+  const loadUserInfo = async () => {
+    try {
+      const { status, data } = await axios.get(
+        'https://localhost:4000/user/info',
+        {
+          params: {
+            id: user_id,
+          },
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      if (status === 200) {
+        console.log('loadUserInfo : ', data)
+        setUserInfo({ ...data })
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const loadContent = async (tab: string) => {
     console.log('tab : ', tab)
 
@@ -127,7 +150,8 @@ const UserPage = () => {
     } else if (tab === 'Bookmark') {
       loadUserBookmarkContents()
     } else if (tab === 'Setting') {
-      _getUserInfo(accessToken)
+      // _getUserInfo(accessToken)
+      loadUserInfo()
     }
   }
 
@@ -149,7 +173,6 @@ const UserPage = () => {
             onClick={onClickTabHandler}
             selectedTab={selectedTab}
           />
-          {/* 여기에 탭 메뉴에 해당하는 내용을 넣어주세요. 동적 라우트로 처리하는게 좋을까요? */}
           {selectedTab === 'Content' && (
             <UserContentsTab userContents={userContents} />
           )}

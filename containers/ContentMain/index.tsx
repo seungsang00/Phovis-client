@@ -11,6 +11,7 @@ import { MainContainer } from './contentmain.style'
  */
 
 const ContentMain = ({
+  contentId,
   description,
   location,
   images,
@@ -21,6 +22,7 @@ const ContentMain = ({
   const handleTagClick = () => {
     console.log(`태그 검색 결과로 이동`)
   }
+
   return (
     <MainContainer>
       <section className='description'>{description}</section>
@@ -46,7 +48,12 @@ const ContentMain = ({
         <RelatedContents related={related} />
       </section>
       <section className='photocards'>
-        <Polaroids photocards={photocards} />
+        <Polaroids
+          type={'content'}
+          locationinfo={location}
+          photocards={photocards}
+          contentId={contentId}
+        />
       </section>
     </MainContainer>
   )

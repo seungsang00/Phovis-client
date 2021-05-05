@@ -97,12 +97,12 @@ export const getRelatedContentList = (tags: string) => {
   }
 }
 
-export const getRelatedPhotocardList = (tags: string) => {
+export const getRelatedPhotocardList = (contentId: string) => {
   return async (dispatch: Function) => {
     try {
       // TODO: 연관 포토카드 요청
       const res = await axios.get(
-        `https://localhost:4000/photocard?tag=${tags}&maxnum=10`
+        `https://localhost:4000/photocard?contentId=${contentId}&maxnum=10`
       )
       console.log(res)
       if (res.status === 200) {
@@ -126,6 +126,11 @@ export const getRelatedPhotocardList = (tags: string) => {
   }
 }
 
+export const addRelatedPhotocardList = (data: IPhotoCard) => ({
+  type: ContentAction.ADD_PHOTO_CARD_LIST_SUCCESS,
+  payload: data,
+})
+
 type contentAction = ReturnType<typeof dispatchGetData>
 
 function content(
@@ -135,19 +140,20 @@ function content(
   switch (action.type) {
     case ContentAction.GET_CONTENT_DATA_SUCCESS:
       const { result: getContentData } = action.payload.data
-      const getContent = { ...state.contentData, ...getContentData }
-      return { ...state, contentData: getContent }
+      return { ...state, contentData: { ...getContentData } }
 
     case ContentAction.GET_RELATED_CONTENT_LIST_SUCCESS:
       const { data: getRelatedContents } = action.payload.data
-      const getRelated = [...state.relatedContentList, ...getRelatedContents]
-      return { ...state, relatedContentList: getRelated }
+      return { ...state, relatedContentList: [...getRelatedContents] }
 
     case ContentAction.GET_PHOTO_CARD_LIST_SUCCESS:
-      const { data: getPhotoCardList } = action.payload
-      const getPhotoCards = [...state.photocardList, ...getPhotoCardList]
-      return { ...state, photocardList: getPhotoCards }
-
+      const { data: getPhotoCardList } = action.payload.data
+      return { ...state, photocardList: [...getPhotoCardList] }
+    case ContentAction.ADD_PHOTO_CARD_LIST_SUCCESS:
+      return {
+        ...state,
+        photocardList: [action.payload, ...state.photocardList],
+      }
     default:
       return state
   }

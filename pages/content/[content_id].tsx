@@ -35,12 +35,16 @@ const ContentPage = () => {
 
   useEffect(() => {
     // TODO: get content data from redux store
+
     if (content_id) {
       _getContentData(content_id as string)
     }
   }, [content_id])
 
   const { contentData } = useSelector((state: RootReducer) => state.content)
+  const { relatedContentList, photocardList } = useSelector(
+    (state: RootReducer) => state.content
+  )
 
   const {
     id,
@@ -59,20 +63,22 @@ const ContentPage = () => {
     console.log(tags)
     if (tags) {
       _getRelatedContentList(tags as string)
-      _getRelatedPhotoCardList(tags as string)
+      _getRelatedPhotoCardList(content_id as string)
     }
   }, [tag])
 
-  const { relatedContentList, photocardList } = useSelector(
-    (state: RootReducer) => state.content
-  )
   console.log(relatedContentList)
+  console.log('다시불러오니?', photocardList)
 
-  let userId
+  let userId = ''
   if (user) {
-    userId = user.id
+    userId = user.id as string
   }
-
+  const handlemodify = (id: string): void => {
+    if (creator.id === userId) {
+      router.push(`/content/form?isModify=${true}&contentId=${id}`)
+    }
+  }
   return (
     <>
       <Head>
@@ -84,6 +90,9 @@ const ContentPage = () => {
         header={<MainHeader isLogin={isLogin} userId={userId as string} />}
         banner={
           <ContentBanner
+            handlemodify={() => handlemodify(id as string)}
+            owner={creator.id as string}
+            userId={userId as string}
             id={id as string}
             title={title || sampleContent.title}
             mainImgUrl={mainimageUrl || sampleContent.mainimageUrl}
@@ -96,6 +105,7 @@ const ContentPage = () => {
           />
         }>
         <ContentMain
+          contentId={(content_id as string) || (sampleContent.id as string)}
           description={description || sampleContent.description}
           location={location || sampleContent.location}
           images={images || sampleContent.images}

@@ -25,7 +25,25 @@ export const HeaderInner = styled.div`
 
   div {
     display: flex;
+    align-items:center;
   }
+
+  .sub-menu{
+    margin-right:1rem;
+
+    & .search-bar{
+    margin-right:2rem;
+    }
+
+    & .link-text{
+      cursor:pointer;
+    }
+
+    & .link-text:hover{
+      color: ${ ({theme}) => theme.color.secondaryLight }
+    }
+  }
+
   .main-logo {
     cursor: pointer;
   }

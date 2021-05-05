@@ -8,6 +8,7 @@ import BookmarkBtn from '../Buttons/BookmarkBtn'
 import { LikeBtn } from '@components/Buttons'
 import UserInfoHor from '@components/UserInfo/UserInfo-hor'
 import { useRouter } from 'next/router'
+import React from 'react'
 
 interface IRect {
   id: string
@@ -15,7 +16,7 @@ interface IRect {
   username: string
   bgImage: string
   likeCount: number
-  isBookMark?: boolean
+  isBookmark?: boolean
   isLike?: boolean
 }
 
@@ -27,13 +28,13 @@ export const ThumbnailRect = ({
   username,
   bgImage,
   likeCount,
-  isBookMark = false,
+  isBookmark = false,
   isLike = false,
 }: IRect) => (
   <ThumbnailContainer_rect>
     <DivWithBgImg bgUrl={bgImage} p={'24px'}>
       <span className='bookmark'>
-        <BookmarkBtn id={id} isChecked={isBookMark} />
+        <BookmarkBtn id={id} isChecked={isBookmark} />
       </span>
       <UserInfoHor userName={username} profileImage={profileImage} />
       <span className='like'>
@@ -76,9 +77,10 @@ export const ContentThumbnail = ({
 }: IProps) => {
   const router = useRouter()
 
-  const handleThumbnailClick = () => {
+  const handleThumbnailClick = (e: React.MouseEvent<HTMLDivElement>) => {
     // console.log(`content/${contentid} 로 이동`)
-    router.push(`content/${contentid}`)
+    e.preventDefault()
+    router.push(`/content/[content_id]`, `/content/${contentid}`)
   }
   return (
     <ThumbnailWrap className='thumbnail-wrap' onClick={handleThumbnailClick}>

@@ -39,9 +39,13 @@ const MainHeader = ({
       {!hideLoginBtn && (
         <div>
           {isLogin && userId ? (
-            <Link href={`/user/${userId}`}>마이 페이지</Link>
+            <Link href={`/user/${userId}`}>
+              <span className='link-text'>마이 페이지</span>
+            </Link>
           ) : (
-            <Link href='/auth/login'>로그인</Link>
+            <Link href='/auth/login'>
+              <span className='link-text'>로그인</span>
+            </Link>
           )}
           {/* {!isLogin && <Link href='/auth/login'>로그인</Link>} */}
         </div>

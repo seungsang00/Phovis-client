@@ -23,7 +23,6 @@ import {
 
 // NOTE : Test data
 import { sampleContents, samplePhotoCardData } from '@utils/index'
-const sampleTag = ['야경', '서울', '밤바다', '등산', '여름']
 //
 
 const MainPage = () => {
@@ -96,7 +95,7 @@ const MainPage = () => {
   }
 
   const onScrollEnd = () => {
-    _getPhotoCardList()
+    // _getPhotoCardList()
   }
 
   let userId
@@ -125,9 +124,16 @@ const MainPage = () => {
           onClickItem={onClickMainBannerItem}
         />
 
-        <MainRecommend photoCards={samplePhotoCardData} />
+        <MainRecommend
+          tags={trendTagList}
+          onTagClickHandler={onTagClickHandler}
+          photoCards={samplePhotoCardData}
+        />
 
-        <MainSidebar tags={sampleTag} onTagClickHandler={onTagClickHandler} />
+        <MainSidebar
+          tags={trendTagList}
+          onTagClickHandler={onTagClickHandler}
+        />
 
         <LinkBanner link={isLogin ? '/content/form' : '/auth/login'} />
 
