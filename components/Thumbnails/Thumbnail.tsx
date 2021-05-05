@@ -8,6 +8,7 @@ import BookmarkBtn from '../Buttons/BookmarkBtn'
 import { LikeBtn } from '@components/Buttons'
 import UserInfoHor from '@components/UserInfo/UserInfo-hor'
 import { useRouter } from 'next/router'
+import React from 'react'
 
 interface IRect {
   id: string
@@ -76,9 +77,10 @@ export const ContentThumbnail = ({
 }: IProps) => {
   const router = useRouter()
 
-  const handleThumbnailClick = () => {
+  const handleThumbnailClick = (e: React.MouseEvent<HTMLDivElement>) => {
     // console.log(`content/${contentid} 로 이동`)
-    router.push(`content/${contentid}`)
+    e.preventDefault()
+    router.push(`/content/[content_id]`, `/content/${contentid}`)
   }
   return (
     <ThumbnailWrap className='thumbnail-wrap' onClick={handleThumbnailClick}>

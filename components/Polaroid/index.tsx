@@ -3,6 +3,7 @@ import { IPhotoCard } from '@interfaces'
 
 interface Props {
   handleModify?: () => void
+  type: 'main' | 'content'
 }
 
 const Polaroid = ({
@@ -10,10 +11,11 @@ const Polaroid = ({
   imageurl,
   userName,
   description,
+  type,
 }: IPhotoCard & Props) => {
   return (
     <Wrapper>
-      <button onClick={handleModify}>수정하기</button>
+      {type === 'content' && <button onClick={handleModify}>수정하기</button>}
       <div className='polaroid'>
         <img src={imageurl} />
         <div className='caption'>
