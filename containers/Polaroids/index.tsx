@@ -22,12 +22,16 @@ const Polaroids = ({ locationinfo, photocards, contentId, type }: IProps) => {
   const { user, isLogin } = useSelector((state: RootReducer) => state.user)
 
   const handleModalOpen = () => {
-    setModify(false)
-    setModalIsOpen(true)
+    if (isLogin) {
+      setModify(false)
+      setModalIsOpen(true)
+    } else {
+      alert('로그인이 필요합니다')
+    }
   }
 
   const handleModify = (photocadid: string, userid: string) => {
-    if (user) {
+    if (user && isLogin) {
       const { id } = user as IUser
       if (userid === id) {
         setModify(true)
@@ -36,6 +40,8 @@ const Polaroids = ({ locationinfo, photocards, contentId, type }: IProps) => {
       } else {
         alert('자신의 게시물만 수정할 수 있습니다')
       }
+    } else {
+      alert('로그인이 필요합니다')
     }
   }
 
@@ -51,26 +57,26 @@ const Polaroids = ({ locationinfo, photocards, contentId, type }: IProps) => {
       <h2 className='section-title'>📸 이런 사진을 찍을 수 있어요</h2>
       <Container className='thumbnails'>
         <div className='photocardUploadBtn' onClick={handleModalOpen}>
-          <Image
-            layout='fixed'
-            src='/src/iconmonstr-photo-camera-4.svg'
-            width={24}
-            height={24}
-          />
+          {type === 'content' && (
+            <Image
+              layout='fixed'
+              src='/src/iconmonstr-photo-camera-4.svg'
+              width={24}
+              height={24}
+            />
+          )}
         </div>
-        {isLogin
-          ? modalIsOpen && (
-              <Modal w='400px' h='500px' handleModalClose={handleModalClose}>
-                <PhotoCardInput
-                  isModify={isModify}
-                  photocardId={targetModifyPhotocardId}
-                  location={locationinfo}
-                  contentId={contentId}
-                  handleModalClose={() => setModalIsOpen(false)}
-                />
-              </Modal>
-            )
-          : alert('로그인이 필요합니다')}
+        {modalIsOpen && (
+          <Modal w='400px' h='500px' handleModalClose={handleModalClose}>
+            <PhotoCardInput
+              isModify={isModify}
+              photocardId={targetModifyPhotocardId}
+              location={locationinfo}
+              contentId={contentId}
+              handleModalClose={(e: boolean) => setModalIsOpen(e)}
+            />
+          </Modal>
+        )}
         {photocards &&
           photocards.length > 0 &&
           photocards.map((photoCard) => {
