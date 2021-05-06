@@ -148,6 +148,7 @@ const MapContainer = ({
     // setTagList([location_tag])
 
     if (myLocation) {
+      console.log(myLocation)
       console.log(`키워드>>`, keyword)
       // const location_tag = {
       //   id: keyword,
