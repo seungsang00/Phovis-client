@@ -88,13 +88,19 @@ const Polaroids = ({ locationinfo, photocards, contentId, type }: IProps) => {
                 like,
                 userId,
               } = photoCard
+              let isOwner: boolean = false
+              if (user) {
+                isOwner = userId === user.id
+              }
               return (
                 <Polaroid
                   type={type}
+                  isOwner={isOwner}
                   key={photocardId}
-                  handleModify={() =>
+                  handleModify={(e) => {
+                    e.stopPropagation()
                     handleModify(photocardId as string, userId as string)
-                  }
+                  }}
                   imageurl={imageurl}
                   description={description}
                   userName={userName}
