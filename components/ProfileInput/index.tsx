@@ -46,10 +46,6 @@ export const ProfileInput = ({ label, currentValue, authType }: IProps) => {
 interface IProfileImage {
   profileImgUrl: string
 }
-interface Avatar {
-  url: string
-  file: File | null
-}
 
 export const ProfileImageInput = ({ profileImgUrl }: IProfileImage) => {
   // const [avatar, setAvatar] = useState<Avatar>({

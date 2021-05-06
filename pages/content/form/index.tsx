@@ -384,51 +384,44 @@ const ContentForm = () => {
                 encType='multipart/form-data'
                 handleFile={handleFile}
               />
-            </Modal>
-          )}
-        </section>
+            </div>
+          </section>
 
-        <section className='form'>
-          <div className='container'>
-            {content.images.map(
-              ({ url, data, name, description }: any, idx: number) => (
-                <ImagePreview>
-                  <img
-                    src={url}
-                    key={name}
-                    alt='preview'
-                    title='클릭해서 배너이미지로 지정할 수 있습니다'
-                    onClick={() => selectBannerImg(url, data)}
-                  />
-                  <input
-                    id={'' + idx}
-                    key={idx}
-                    type='text'
-                    value={description}
-                    onChange={(e) => onChange(e, addDescription)}
-                    placeholder={description || '설명을 추가해주세요'}
-                  />
-                </ImagePreview>
-              )
-            )}
-            <MultiForm
-              method='post'
-              encType='multipart/form-data'
-              handleFile={handleFile}
-            />
-          </div>
-        </section>
+          <section className='form'>
+            <div className='container'>
+              {content.images.map(
+                ({ url, data, name, description }: any, idx: number) => (
+                  <ImagePreview>
+                    <img
+                      src={url}
+                      key={name}
+                      alt='preview'
+                      title='클릭해서 배너이미지로 지정할 수 있습니다'
+                      onClick={() => selectBannerImg(url, data)}
+                    />
+                    <input
+                      id={'' + idx}
+                      key={idx}
+                      type='text'
+                      value={description}
+                      onChange={(e) => onChange(e, addDescription)}
+                      placeholder={description || '설명을 추가해주세요'}
+                    />
+                  </ImagePreview>
+                )
+              )}
+              <MultiForm
+                method='post'
+                encType='multipart/form-data'
+                handleFile={handleFile}
+              />
+            </div>
+          </section>
 
-<<<<<<< HEAD
           <section className='buttons'>
             <DefaultBtn onClick={handleSubmit}>등록하기</DefaultBtn>
           </section>
         </div>
-=======
-        <section className='buttons'>
-          <DefaultBtn onClick={handleSubmit}>등록하기</DefaultBtn>
-        </section>
->>>>>>> 6b34121fa7c8173244947e5991092f5f13fd5448
       </FormLayout>
     </CommonLayout>
   )
