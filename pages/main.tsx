@@ -4,12 +4,7 @@ import { useSelector } from 'react-redux'
 import Head from 'next/head'
 import { RootReducer } from '@actions/reducer'
 import { getUserInfo } from '@actions/users'
-import {
-  getBannderContentList,
-  getRecommendContentList,
-  getTrendTagList,
-  getPhotoCardList,
-} from '@actions/main'
+import { getTrendTagList, getPhotoCardList } from '@actions/main'
 import useAction from '../hooks/useAction'
 
 import { MainBanner, LinkBanner } from '@components/index'
@@ -33,8 +28,6 @@ const MainPage = () => {
   const router = useRouter()
 
   const _getUserInfo = useAction(getUserInfo)
-  const _getBannderContentList = useAction(getBannderContentList)
-  const _getRecommendContentList = useAction(getRecommendContentList)
   const _getTrendTagList = useAction(getTrendTagList)
   const _getPhotoCardList = useAction(getPhotoCardList)
 
@@ -51,8 +44,6 @@ const MainPage = () => {
 
   useEffect(() => {
     _getUserInfo(accessToken)
-    _getBannderContentList()
-    _getRecommendContentList()
     _getTrendTagList()
     _getPhotoCardList()
   }, [])

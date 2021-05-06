@@ -9,7 +9,7 @@ export interface IContent {
   description: string | null
   location: LocationType
   user: IUser
-  likecount: number
+  like: number
   images: IImage[]
   title: string | null
   isLike?: boolean
@@ -23,12 +23,15 @@ export interface IContentBanner {
   username?: string | null
   userProfileUrl?: string
   userId?: string
-  likesCount: number
+  like: number
   isLike?: boolean
   isBookmark?: boolean
 }
 
 export interface IContentMain {
+  owner: string
+  userId?: string
+  handlemodify: () => void
   contentId: string
   id?: string
   description: string | null

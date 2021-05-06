@@ -27,7 +27,7 @@ const initialState: ContentState = {
       userName: null,
       profileImg: undefined,
     },
-    likecount: 0,
+    like: 0,
     images: [],
     title: null,
   },
@@ -153,6 +153,11 @@ function content(
       return {
         ...state,
         photocardList: [action.payload, ...state.photocardList],
+      }
+    case ContentAction.GET_PHOTO_CARD_LIST_ERROR:
+      return {
+        ...state,
+        photocardList: [],
       }
     default:
       return state

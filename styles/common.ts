@@ -23,25 +23,31 @@ export const DivWithBgImg = withProps<IBg, HTMLDivElement>(styled.div)`
     font-size: 3rem;
     font-weight: 700;
     position: absolute;
-    left: 40px;
+    left: 10rem;
     bottom: 80px;
   }
   div.top-right {
     position: absolute;
-    right: 30px;
+    right: 10rem;
     top: 81px;
     z-index: 1;
   }
   div.bottom-left {
     position: absolute;
-    left: 30px;
+    left: 10rem;
     bottom: 10px;
     z-index: 1;
   }
   div.bottom-right {
     position: absolute;
-    right: 30px;
+    right: 12rem;
     bottom: 10px;
+    z-index: 1;
+  }
+  div.bookmark.content-banner {
+    position: absolute;
+    right: 9rem;
+    bottom: 9px;
     z-index: 1;
   }
 `
