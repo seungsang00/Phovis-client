@@ -49,7 +49,6 @@ export const ImageInputContainer = styled.div`
 `
 
 export const PhotoCardInputContainer = styled.div`
-  width: 30vw;
   height: 100%;
   ${({ theme }) => theme.display.flexCenterCol}
   display: flex;

@@ -37,10 +37,10 @@ const UserPage = () => {
   }, [])
 
   useEffect(() => {
-    if (user_id) {
+    if (isLoginedUser) {
       loadContent(selectedTab)
     }
-  }, [user_id])
+  }, [isLoginedUser])
 
   useEffect(() => {
     if (user && String(user.id) === user_id) {
@@ -49,6 +49,10 @@ const UserPage = () => {
       console.log('Set my page')
       setTabList(['Content', 'Likes', 'Bookmark', 'Setting'])
       setIsLoginedUser(true)
+    } else if (user && String(user.id) !== user_id) {
+      console.log('Set user page')
+      setIsLoginedUser(false)
+      loadContent(selectedTab)
     }
   }, [user, user_id])
 
@@ -204,13 +208,22 @@ const UserPage = () => {
             selectedTab={selectedTab}
           />
           {selectedTab === 'Content' && (
-            <UserContentsTab userContents={userContents} />
+            <UserContentsTab
+              nullText='작성한 컨텐츠가 없습니다.'
+              userContents={userContents}
+            />
           )}
           {selectedTab === 'Likes' && (
-            <UserContentsTab userContents={userLikesContents} />
+            <UserContentsTab
+              nullText='좋아요한 컨텐츠가 없습니다.'
+              userContents={userLikesContents}
+            />
           )}
           {selectedTab === 'Bookmark' && (
-            <UserContentsTab userContents={userBookmarkContents} />
+            <UserContentsTab
+              nullText='북마크한 컨텐츠가 없습니다.'
+              userContents={userBookmarkContents}
+            />
           )}
           {selectedTab === 'Setting' && <ProfileSetting user={user as IUser} />}
         </TabContainer>

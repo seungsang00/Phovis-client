@@ -8,7 +8,7 @@ const ContentBanner = ({
   mainImgUrl,
   username,
   userProfileUrl,
-  likesCount,
+  like,
   isLike = false,
   isBookmark = false,
 }: IContentBanner) => {
@@ -25,7 +25,7 @@ const ContentBanner = ({
         />
       </div>
       <div className='bottom-right content-banner'>
-        <LikeBtn id={id} like={likesCount || 0} isChecked={isLike} />
+        <LikeBtn id={id} like={like || 0} isChecked={isLike} />
       </div>
     </DivWithBgImg>
   )
