@@ -58,7 +58,7 @@ const UserPage = () => {
   const loadUserContents = async () => {
     try {
       const { status, data } = await axios.get(
-        'https://localhost:4000/content',
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content`,
         {
           params: {
             maxnum: 15,
@@ -79,7 +79,7 @@ const UserPage = () => {
   const loadUserLikeContents = async () => {
     try {
       const { status, data } = await axios.get(
-        'https://localhost:4000/content',
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content`,
         {
           params: {
             maxnum: 15,
@@ -100,7 +100,7 @@ const UserPage = () => {
   const loadUserBookmarkContents = async () => {
     try {
       const { status, data } = await axios.get(
-        'https://localhost:4000/content',
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content`,
         {
           params: {
             maxnum: 15,
@@ -121,7 +121,7 @@ const UserPage = () => {
   // const loadUserInfo = async () => {
   //   try {
   //     const { status, data } = await axios.get(
-  //       'https://localhost:4000/user/info',
+  //       `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/info`,
   //       {
   //         params: {
   //           id: user_id,

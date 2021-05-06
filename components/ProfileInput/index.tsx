@@ -76,11 +76,15 @@ export const ProfileImageInput = ({ profileImgUrl }: IProfileImage) => {
   }
 
   const putUserAvatar = async (data: FormData, token: string) => {
-    const res = await axios.put(`https://localhost:4000/user/info`, data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    const res = await axios.put(
+      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/info`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
     console.log(`제발 와라`, res)
     if (res.status === 200) {
       setAvatar({ ...avatar, url: res.data.profileImg })
