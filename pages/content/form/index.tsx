@@ -345,6 +345,7 @@ const ContentForm = () => {
               <Modal w='500px' h='700px' handleModalClose={handleModalClose}>
                 <MapContainer
                   locationInfo={content.location}
+                  prekeyword={content.location.keyword}
                   tags={content.tags}
                   handleLocation={setLocation}
                   setLocationTag={handleTags}
