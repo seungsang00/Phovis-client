@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import { ContentAction } from './actionTypes'
-import { IContent, IPhotoCard, ITag, Tag } from '@interfaces'
+import { IContent, IPhotoCard, ITag } from '@interfaces'
 
 type mainContentsState = {
   bannerContentList: IContent[]

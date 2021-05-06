@@ -61,7 +61,6 @@ const ContentPage = () => {
   useEffect(() => {
     const tags = tag?.join(',')
     if (tags) {
-      console.log(contentData)
       _getRelatedContentList(tags as string)
       _getRelatedPhotoCardList(content_id as string)
     }
