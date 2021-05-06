@@ -44,27 +44,27 @@ const dispatchGetData = (action: string, data: any) => ({
 })
 
 interface IgetContentData{
-  conetntId:string
+  contentId:string
   accessToken?:string
 }
 
 interface IputLikeRequest{
-  conetntId:string
+  contentId:string
   accessToken?:string
 }
 
 interface IputBookmarkRequest{
-  conetntId:string
+  contentId:string
   accessToken?:string
 }
 
-export const getContentData = ({conetntId, accessToken}:IgetContentData) => {
+export const getContentData = ({contentId, accessToken}:IgetContentData) => {
   return async (dispatch: Function) => {
     try {
 
       const sendData = {
         params:{
-          id:conetntId
+          id:contentId
         },
         headers: accessToken ? {Authorization: `Bearer ${accessToken}`} : {}
       }
@@ -156,11 +156,9 @@ export const addRelatedPhotocardList = (data: IPhotoCard) => ({
   payload: data,
 })
 
-export const putLikeRequest = ({conetntId, accessToken}:IputLikeRequest) =>{
+export const putLikeRequest = ({contentId, accessToken}:IputLikeRequest) =>{
   return async (dispatch: Function) => {
 
-    console.log('conetntId :', conetntId)
-    console.log('accessToken :', accessToken)
     if(!accessToken){
       dispatch(
         dispatchGetData(ContentAction.PUT_LIKE_ERROR, 'Error Like update')
@@ -172,7 +170,7 @@ export const putLikeRequest = ({conetntId, accessToken}:IputLikeRequest) =>{
       const result = await axios.put(
         `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/like`,
         {
-          id:conetntId,
+          id:contentId,
         },
         {
           headers: {
@@ -201,7 +199,7 @@ export const putLikeRequest = ({conetntId, accessToken}:IputLikeRequest) =>{
   }
 }
 
-export const putBookmarkRequest = ({conetntId, accessToken}:IputBookmarkRequest) =>{
+export const putBookmarkRequest = ({contentId, accessToken}:IputBookmarkRequest) =>{
   return async (dispatch: Function) => {
 
     if(!accessToken){
@@ -215,7 +213,7 @@ export const putBookmarkRequest = ({conetntId, accessToken}:IputBookmarkRequest)
       const result = await axios.put(
         `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/bookmark`,
         {
-          id:conetntId,
+          id:contentId,
         },
         {
           headers: {

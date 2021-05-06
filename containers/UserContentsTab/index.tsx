@@ -7,9 +7,16 @@ import { TabContentSection } from '@containers/Layout'
 interface IProps {
   nullText: string
   userContents: IContent[]
+  onClickBookmark: (contentId: string) => void
+  onClickLike: (cotentId: string) => void
 }
 
-const UserContentsTab = ({ nullText, userContents }: IProps) => {
+const UserContentsTab = ({
+  nullText,
+  userContents,
+  onClickBookmark,
+  onClickLike,
+}: IProps) => {
   const router = useRouter()
   const onClickContentHandle = (conetntId: string) => {
     router.push(`/content/${conetntId}`)
@@ -31,6 +38,8 @@ const UserContentsTab = ({ nullText, userContents }: IProps) => {
               isLike={isLike}
               isBookmark={isBookmark}
               onClickContents={onClickContentHandle}
+              onClickBookmark={onClickBookmark}
+              onClickLike={onClickLike}
             />
           )
         })

@@ -48,7 +48,7 @@ const ContentPage = () => {
     if (content_id) {
       console.log('accessToken : ', accessToken)
       _getContentData({
-        conetntId: content_id as string,
+        contentId: content_id as string,
         accessToken,
       })
     }
@@ -74,12 +74,12 @@ const ContentPage = () => {
     }
   }
 
-  const onClickLike = (conetntId: string) => {
-    _putLikeRequest({ conetntId, accessToken })
+  const onClickLike = (contentId: string) => {
+    _putLikeRequest({ contentId, accessToken })
   }
 
-  const onClickBookmark = (conetntId: string) => {
-    _putBookmarkRequest({ conetntId, accessToken })
+  const onClickBookmark = (contentId: string) => {
+    _putBookmarkRequest({ contentId, accessToken })
   }
 
   const {
