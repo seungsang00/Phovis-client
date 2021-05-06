@@ -204,13 +204,22 @@ const UserPage = () => {
             selectedTab={selectedTab}
           />
           {selectedTab === 'Content' && (
-            <UserContentsTab userContents={userContents} />
+            <UserContentsTab
+              nullText='작성한 컨텐츠가 없습니다.'
+              userContents={userContents}
+            />
           )}
           {selectedTab === 'Likes' && (
-            <UserContentsTab userContents={userLikesContents} />
+            <UserContentsTab
+              nullText='좋아요한 컨텐츠가 없습니다.'
+              userContents={userLikesContents}
+            />
           )}
           {selectedTab === 'Bookmark' && (
-            <UserContentsTab userContents={userBookmarkContents} />
+            <UserContentsTab
+              nullText='북마크한 컨텐츠가 없습니다.'
+              userContents={userBookmarkContents}
+            />
           )}
           {selectedTab === 'Setting' && <ProfileSetting user={user as IUser} />}
         </TabContainer>

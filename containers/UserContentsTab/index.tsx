@@ -5,10 +5,11 @@ import { ThumbnailRect } from '@components/index'
 import { TabContentSection } from '@containers/Layout'
 
 interface IProps {
+  nullText: string
   userContents: IContent[]
 }
 
-const UserContentsTab = ({ userContents }: IProps) => {
+const UserContentsTab = ({ nullText, userContents }: IProps) => {
   const router = useRouter()
   const onClickContentHandle = (conetntId: string) => {
     router.push(`/content/${conetntId}`)
@@ -16,7 +17,7 @@ const UserContentsTab = ({ userContents }: IProps) => {
 
   return (
     <TabContentSection>
-      {userContents.length > 0 &&
+      {userContents.length > 0 ? (
         userContents.map((content) => {
           const {
             id,
@@ -39,7 +40,10 @@ const UserContentsTab = ({ userContents }: IProps) => {
               onClickContents={onClickContentHandle}
             />
           )
-        })}
+        })
+      ) : (
+        <div>{nullText}</div>
+      )}
     </TabContentSection>
   )
 }
