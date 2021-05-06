@@ -50,7 +50,6 @@ const MainPage = () => {
   )
   const {
     error,
-    bannerContentList,
     recommendContentList,
     trendTagList,
     photocardList,
@@ -66,7 +65,6 @@ const MainPage = () => {
 
   useEffect(() => {
     console.log('error : ', error)
-    console.log('bannerContentList : ', bannerContentList)
     console.log('recommendContentList : ', recommendContentList)
     console.log('trendTagList : ', trendTagList)
     console.log('photocardList : ', photocardList)
