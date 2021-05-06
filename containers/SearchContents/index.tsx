@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useInfinteScroll } from '@hooks/useInfinteScroll'
 import { ContentThumbnail } from '@components/index'
 import { IContent } from '@interfaces'
+import { SearchResultSection } from './searchcontent.style'
 
 interface IProps {
   isLoading: boolean
@@ -27,39 +28,45 @@ const SearchContents = ({ isLoading, searchResult, onLoadData }: IProps) => {
   })
 
   return (
-    <section>
+    <SearchResultSection>
       {isLoading && <div>Loading...</div>}
 
       {!isLoading && searchResult.length === 0 && (
         <article>
-          <h1>검색 결과가 없습니다.</h1>
-          <Link href='/content/form'>새 출장글 등록하러 가기</Link>
+          <h1>검색결과가 없습니다.</h1>
+          <Link href='/content/form'>
+            <div className='link-to-write'>
+              <span>내가 1등🥇</span>으로 추천하러 가기
+            </div>
+          </Link>
         </article>
       )}
 
       {!isLoading && searchResult.length > 0 && (
         <article>
-          {searchResult.map((result) => {
-            const {
-              id,
-              mainimageUrl,
-              user: { userName },
-              title,
-            } = result
-            return (
-              <ContentThumbnail
-                key={id}
-                title={title as string}
-                contentid={id as string}
-                username={userName as string}
-                imageurl={mainimageUrl as string}
-              />
-            )
-          })}
-          <div ref={setTarget}>this is last item</div>
+          <div>
+            {searchResult.map((result) => {
+              const {
+                id,
+                mainimageUrl,
+                user: { userName },
+                title,
+              } = result
+              return (
+                <ContentThumbnail
+                  key={id}
+                  title={title as string}
+                  contentid={id as string}
+                  username={userName as string}
+                  imageurl={mainimageUrl as string}
+                />
+              )
+            })}
+          </div>
+          <div ref={setTarget}></div>
         </article>
       )}
-    </section>
+    </SearchResultSection>
   )
 }
 
