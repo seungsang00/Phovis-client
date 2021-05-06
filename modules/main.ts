@@ -19,12 +19,20 @@ const initialState: mainContentsState = {
   photocardList: [],
 }
 
+const tagsToString = (tags: ITag[]): string => {
+  const result: string = tags
+    .reduce((acc, cur) => {
+      return acc + cur['tag'] + ','
+    }, '')
+    .slice(0, -1)
+  return result
+}
 const disfetchGetData = (action: string, data: any) => ({
   type: action,
   payload: data,
 })
 
-export const getBannderContentList = () => {
+export const getBannderContentList = (tag: string) => {
   return async (dispatch: Function) => {
     try {
       const result = await axios.get(
@@ -32,7 +40,7 @@ export const getBannderContentList = () => {
         {
           params: {
             maxnum: 3,
-            tag: '새벽,야경,서울',
+            tag,
           },
           withCredentials: true,
         }
@@ -55,7 +63,7 @@ export const getBannderContentList = () => {
     }
   }
 }
-export const getRecommendContentList = () => {
+export const getRecommendContentList = (tag: string) => {
   return async (dispatch: Function) => {
     try {
       const result = await axios.get(
@@ -63,7 +71,7 @@ export const getRecommendContentList = () => {
         {
           params: {
             maxnum: 6,
-            tag: '서울,야경,새벽',
+            tag,
           },
           withCredentials: true,
         }
@@ -93,7 +101,7 @@ export const getRecommendContentList = () => {
 export const getTrendTagList = () => {
   return async (dispatch: Function) => {
     try {
-      const result = await axios.get(
+      const result = await axios.get<ITag[]>(
         `${process.env.NEXT_PUBLIC_API_ENDPOINT}/tag`,
         {
           params: {
@@ -104,6 +112,9 @@ export const getTrendTagList = () => {
       )
 
       if (result.status === 200) {
+        const tag = tagsToString(result.data)
+        dispatch(getRecommendContentList(tag))
+        dispatch(getBannderContentList(tag))
         dispatch(disfetchGetData(ContentAction.GET_TAG_LIST_SUCCESS, result))
       } else {
         dispatch(

@@ -154,6 +154,11 @@ function content(
         ...state,
         photocardList: [action.payload, ...state.photocardList],
       }
+    case ContentAction.GET_PHOTO_CARD_LIST_ERROR:
+      return {
+        ...state,
+        photocardList: [],
+      }
     default:
       return state
   }
