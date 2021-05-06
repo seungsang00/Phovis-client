@@ -1,5 +1,6 @@
 import React from 'react'
 import { SearchBarBig } from '@components/index'
+import { SearchHeaderSection } from './searchheader.style'
 
 interface IProps {
   search: string
@@ -14,7 +15,7 @@ const SearchHeader = ({
   onChange,
   onSubmit,
 }: IProps) => (
-  <section>
+  <SearchHeaderSection>
     <SearchBarBig
       name='keyword'
       value={search}
@@ -22,7 +23,7 @@ const SearchHeader = ({
       onChange={onChange}
       onSubmit={onSubmit}
     />
-  </section>
+  </SearchHeaderSection>
 )
 
 export default SearchHeader

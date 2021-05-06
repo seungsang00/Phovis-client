@@ -34,11 +34,15 @@ export const MainContainer = styled.div`
     justify-content: center;
   }
 
-  section.location,
-  section.tags {
-    /* text-align: left;
+  section.photocards {
     display: flex;
-    justify-content: flex-start; */
+    flex-wrap: wrap;
+
+    .photocard-container {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
   }
 
   @media ${({ theme }) => theme.size.desktop} {
