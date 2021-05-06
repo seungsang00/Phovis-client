@@ -6,6 +6,7 @@ import { Wrapper } from './map.style'
 interface IProps {
   locationInfo: LocationType
   tags: Tag[]
+  prekeyword: string | undefined
   handleLocation: (value: LocationType) => void
   setLocationTag: (tag: Tag[]) => void
   handleModalClose: () => void
@@ -13,12 +14,14 @@ interface IProps {
 
 const MapContainer = ({
   locationInfo,
+  prekeyword,
   handleLocation,
   handleModalClose,
   setLocationTag,
 }: IProps) => {
   const { location } = locationInfo
-  const [keyword, setKeyword] = useState<string>(location || '')
+  const [myLocation, setMyLocation] = useState<string>(location || '')
+  const [keyword, setKeyword] = useState<string>(prekeyword || '')
   const [coord, setCoord] = useState({ lat: undefined, lng: undefined })
 
   useEffect(() => {
@@ -106,9 +109,8 @@ const MapContainer = ({
             if (status === kakao.maps.services.Status.OK) {
               let location_name: string = result[0].address.address_name
 
-              const myLocation = document.querySelector('#my_location')
-              if (myLocation) {
-                myLocation.textContent = location_name
+              if (location_name) {
+                setMyLocation(location_name)
               }
 
               // const detailAddr = '<div>지번 주소 : ' + location_name + '</div>'
@@ -145,8 +147,6 @@ const MapContainer = ({
   }, [keyword])
 
   const handleSubmit = () => {
-    const myLocation = document.querySelector('#my_location')?.textContent
-
     if (myLocation) {
       if (keyword) {
         setLocationTag([{ id: keyword, name: keyword }])
@@ -171,7 +171,9 @@ const MapContainer = ({
         </p>
         <p className='main-info'>
           나의 추천장소 👉{'  '}
-          <span id='my_location'>지도에 좌표를 콕! 찍어주세요</span>
+          <span id='my_location'>
+            {myLocation || '지도에 좌표를 콕! 찍어주세요'}
+          </span>
         </p>
       </div>
       <SubmitButton onSubmit={handleSubmit} />

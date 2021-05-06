@@ -38,7 +38,7 @@ const PhotoCardInput = ({
   const getPhotocardData = async () => {
     const result = await axios.get<IPhotoCard>(
       `${process.env.NEXT_PUBLIC_API_ENDPOINT}/photocard?photocardId=${photocardId}`,
-      { headers: { aouthorization: `bearer ${accessToken}` } }
+      { headers: { Authorization: `bearer ${accessToken}` } }
     )
 
     const { description: message, imageurl } = result.data as any
