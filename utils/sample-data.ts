@@ -141,6 +141,8 @@ export const sampleContent: IContent = {
       type: 'content',
     },
   ],
+  isLike: false,
+  isBookmark:false
 }
 export const sampleContents: IContent[] = [
   {
@@ -184,6 +186,8 @@ export const sampleContents: IContent[] = [
         type: 'content',
       },
     ],
+    isLike: false,
+    isBookmark:false
   },
   {
     id: '2asdfzxcv',
@@ -226,6 +230,8 @@ export const sampleContents: IContent[] = [
         type: 'content',
       },
     ],
+    isLike: true,
+    isBookmark:true
   },
   {
     id: '3asdfzxcv',
@@ -267,5 +273,7 @@ export const sampleContents: IContent[] = [
         type: 'content',
       },
     ],
+    isLike: true,
+    isBookmark:false
   },
 ]

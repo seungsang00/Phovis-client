@@ -30,6 +30,8 @@ const initialState: ContentState = {
     like: 0,
     images: [],
     title: null,
+    isLike: false,
+    isBookmark : false,
   },
   relatedContentList: [],
   photocardList: [],
@@ -41,11 +43,34 @@ const dispatchGetData = (action: string, data: any) => ({
   payload: data,
 })
 
-export const getContentData = (contentid: string) => {
+interface IgetContentData{
+  contentId:string
+  accessToken?:string
+}
+
+interface IputLikeRequest{
+  contentId:string
+  accessToken?:string
+}
+
+interface IputBookmarkRequest{
+  contentId:string
+  accessToken?:string
+}
+
+export const getContentData = ({contentId, accessToken}:IgetContentData) => {
   return async (dispatch: Function) => {
     try {
+
+      const sendData = {
+        params:{
+          id:contentId
+        },
+        headers: accessToken ? {Authorization: `Bearer ${accessToken}`} : {}
+      }
+
       const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content?id=${contentid}`
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content`,sendData
       )
       if (res.status === 200) {
         dispatch(dispatchGetData(ContentAction.GET_CONTENT_DATA_SUCCESS, res))
@@ -131,6 +156,92 @@ export const addRelatedPhotocardList = (data: IPhotoCard) => ({
   payload: data,
 })
 
+export const putLikeRequest = ({contentId, accessToken}:IputLikeRequest) =>{
+  return async (dispatch: Function) => {
+
+    if(!accessToken){
+      dispatch(
+        dispatchGetData(ContentAction.PUT_LIKE_ERROR, 'Error Like update')
+      )
+      return
+    }
+
+    try{
+      const result = await axios.put(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/like`,
+        {
+          id:contentId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          withCredentials: true,
+        }
+      )
+  
+      if (result.status === 201) {
+        dispatch(
+          dispatchGetData(ContentAction.PUT_LIKE_SUCEESS, result)
+        )
+      }
+      else{
+        dispatch(
+          dispatchGetData(ContentAction.PUT_LIKE_ERROR, 'Error Like update')
+        )
+      }
+    }
+    catch(err){
+      dispatch(
+        dispatchGetData(ContentAction.PUT_LIKE_ERROR, 'Error Like update')
+      )
+    }
+  }
+}
+
+export const putBookmarkRequest = ({contentId, accessToken}:IputBookmarkRequest) =>{
+  return async (dispatch: Function) => {
+
+    if(!accessToken){
+      dispatch(
+        dispatchGetData(ContentAction.PUT_BOOKMARK_ERROR, 'Error Bookmark update')
+      )
+      return
+    }
+
+    try{
+      const result = await axios.put(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/bookmark`,
+        {
+          id:contentId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          withCredentials: true,
+        }
+      )
+  
+      if (result.status === 201) {
+        dispatch(
+          dispatchGetData(ContentAction.PUT_BOOKMARK_SUCCESS, result)
+        )
+      }
+      else{
+        dispatch(
+          dispatchGetData(ContentAction.PUT_BOOKMARK_ERROR, 'Error Bookmark update')
+        )
+      }
+    }
+    catch(err){
+      dispatch(
+        dispatchGetData(ContentAction.PUT_BOOKMARK_ERROR, 'Error Bookmark update')
+      )
+    }
+  }
+}
+
 type contentAction = ReturnType<typeof dispatchGetData>
 
 function content(
@@ -154,11 +265,30 @@ function content(
         ...state,
         photocardList: [action.payload, ...state.photocardList],
       }
+
+    case ContentAction.PUT_LIKE_SUCEESS: 
+      let { like, isLike } = state.contentData
+      const { data:{isLike:setLike} } = action.payload;
+      if(setLike){
+        like+= 1
+        isLike = true
+      }
+      else{
+        like-= 1
+        isLike = false
+      }
+    return { ...state, contentData:{...state.contentData, like, isLike}}
+
+    case ContentAction.PUT_BOOKMARK_SUCCESS:
+      const { data:{isBookmark} } = action.payload;
+      return {...state, contentData:{...state.contentData, isBookmark}}
+
     case ContentAction.GET_PHOTO_CARD_LIST_ERROR:
       return {
         ...state,
         photocardList: [],
       }
+
     default:
       return state
   }

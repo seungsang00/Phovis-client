@@ -19,6 +19,8 @@ interface IRect {
   isBookmark?: boolean
   isLike?: boolean
   onClickContents: (contentId: string) => void
+  onClickBookmark: (contentId: string) => void
+  onClickLike: (cotentId: string) => void
 }
 
 // NOTE : ThumbnailRect, ThumbnailSquare 컴포넌트 하단에 태그를 노출 시키면 좋을것 같아요
@@ -32,6 +34,8 @@ export const ThumbnailRect = ({
   isBookmark = false,
   isLike = false,
   onClickContents,
+  onClickBookmark,
+  onClickLike,
 }: IRect) => {
   const onClickHandler = (e: React.MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLElement
@@ -49,11 +53,20 @@ export const ThumbnailRect = ({
         p={'24px'}
         onClick={onClickHandler}>
         <span className='bookmark'>
-          <BookmarkBtn id={id} isChecked={isBookmark} />
+          <BookmarkBtn
+            id={id}
+            isChecked={isBookmark}
+            onClick={onClickBookmark}
+          />
         </span>
         <UserInfoHor userName={username} profileImage={profileImage} />
         <span className='like'>
-          <LikeBtn id={id} like={like || 0} isChecked={isLike} />
+          <LikeBtn
+            id={id}
+            like={like}
+            isChecked={isLike}
+            onClick={onClickLike}
+          />
         </span>
       </DivWithBgImg>
     </ThumbnailContainer_rect>

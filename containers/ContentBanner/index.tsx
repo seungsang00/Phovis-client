@@ -2,6 +2,11 @@ import { BookmarkBtn, LikeBtn, UserInfoHor } from '@components/index'
 import { IContentBanner } from '@interfaces'
 import { DivWithBgImg } from '@styles/index'
 
+interface Iprops extends IContentBanner {
+  onClickBookmark: (contentId: string) => void
+  onClickLike: (cotentId: string) => void
+}
+
 const ContentBanner = ({
   id,
   title,
@@ -9,13 +14,15 @@ const ContentBanner = ({
   username,
   userProfileUrl,
   like,
-  isLike = false,
-  isBookmark = false,
-}: IContentBanner) => {
+  isLike,
+  isBookmark,
+  onClickBookmark,
+  onClickLike,
+}: Iprops) => {
   return (
     <DivWithBgImg bgUrl={mainImgUrl}>
       <div className='content-banner bookmark'>
-        <BookmarkBtn id={id} isChecked={isBookmark} />
+        <BookmarkBtn id={id} isChecked={isBookmark} onClick={onClickBookmark} />
       </div>
       <div className='main-title content-banner'>{title}</div>
       <div className='bottom-left content-banner'>
@@ -25,7 +32,7 @@ const ContentBanner = ({
         />
       </div>
       <div className='bottom-right content-banner'>
-        <LikeBtn id={id} like={like || 0} isChecked={isLike} />
+        <LikeBtn id={id} like={like} isChecked={isLike} onClick={onClickLike} />
       </div>
     </DivWithBgImg>
   )
