@@ -19,9 +19,7 @@ interface IProps {
 
 const MainRecommend = ({ contentList, tags, onTagClickHandler }: IProps) => (
   <Container>
-    <Title>
-      <h1>여기는 어때요?</h1>
-    </Title>
+    <Title>여기는 어때요?</Title>
     <ContentTagContainer>
       <ContentGrid>
         {contentList &&

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { KakaoMapContainer, SearchInput, SubmitButton } from '@components/index'
 import { LocationType, Tag } from '@interfaces'
+import { Wrapper } from './map.style'
 
 interface IProps {
   locationInfo: LocationType
@@ -14,6 +15,7 @@ const MapContainer = ({
   locationInfo,
   handleLocation,
   handleModalClose,
+  setLocationTag,
 }: IProps) => {
   const { location } = locationInfo
   const [keyword, setKeyword] = useState<string>(location || '')
@@ -109,12 +111,12 @@ const MapContainer = ({
                 myLocation.textContent = location_name
               }
 
-              const detailAddr = '<div>지번 주소 : ' + location_name + '</div>'
+              // const detailAddr = '<div>지번 주소 : ' + location_name + '</div>'
 
               const content =
                 '<div class="bAddr">' +
-                '<span class="title">내가 추천하는 장소는 여기!</span>' +
-                detailAddr +
+                '<span class="title map-tooltip">내가 추천하는 장소는 여기!</span>' +
+                // detailAddr +
                 '</div>'
 
               // 마커를 클릭한 위치에 표시합니다
@@ -144,17 +146,11 @@ const MapContainer = ({
 
   const handleSubmit = () => {
     const myLocation = document.querySelector('#my_location')?.textContent
-    // console.log(location_tag)
-    // setTagList([location_tag])
 
     if (myLocation) {
-      console.log(myLocation)
-      console.log(`키워드>>`, keyword)
-      // const location_tag = {
-      //   id: keyword,
-      //   name: keyword,
-      // }
-      // setLocationTag([location_tag])
+      if (keyword) {
+        setLocationTag([{ id: keyword, name: keyword }])
+      }
       handleLocation({
         keyword: keyword,
         location: myLocation,
@@ -166,17 +162,20 @@ const MapContainer = ({
   }
 
   return (
-    <>
+    <Wrapper>
       <SearchInput value={keyword} onSubmit={setKeyword} />
       <KakaoMapContainer />
-      <h3>
-        여기를 보고 있어요 🔍 <span id='location_info'></span>
-      </h3>
-      <h3>
-        나의 추천장소 👉 <span id='my_location'></span>
-      </h3>
+      <div className='location-info'>
+        <p className='map-info'>
+          <span id='location_info'></span>
+        </p>
+        <p className='main-info'>
+          나의 추천장소 👉{'  '}
+          <span id='my_location'>지도에 좌표를 콕! 찍어주세요</span>
+        </p>
+      </div>
       <SubmitButton onSubmit={handleSubmit} />
-    </>
+    </Wrapper>
   )
 }
 

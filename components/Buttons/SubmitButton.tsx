@@ -9,7 +9,7 @@ type Props = {
 // TODO : 버튼에 아이콘 추가 해야 됨
 
 const SubmitButton = ({ text, onSubmit }: Props) => (
-  <Button w={100} h={50} onClick={onSubmit}>
+  <Button w={'100%'} h={50} onClick={onSubmit}>
     {text || 'Submit'}
   </Button>
 )
