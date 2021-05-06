@@ -1,5 +1,5 @@
 import { LocContainer } from './location-info.style'
-import Image from 'next/image'
+import { LocationBtn } from '@components/Buttons'
 
 type props = {
   children: any
@@ -9,13 +9,7 @@ const LocationInput = ({ children }: props) => {
   return (
     <div>
       <LocContainer>
-        <Image
-          layout='fixed'
-          src='/src/iconmonstr-location-1-240.png'
-          alt='location pin'
-          width={24}
-          height={24}
-        />
+        <LocationBtn />
         {children}
       </LocContainer>
     </div>

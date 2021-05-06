@@ -14,6 +14,7 @@ export const Container = styled.article`
 export const Title = styled.div`
   margin-bottom: 2rem;
   padding: 0 1rem;
+  font-size: 2rem;
 `
 
 export const ContentGrid = styled.div`
@@ -37,27 +38,29 @@ export const ContentGrid = styled.div`
 export const ContentTagContainer = styled.div`
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
 `
 
 export const TagList = styled.div`
-  width: 100%;
+  width: 300px;
+  padding: 0 2rem;
   height: 100%;
   display: flex;
   flex-direction: column;
+  ${({ theme }) => theme.display.flexStartCol}
 
   & h3 {
     margin-bottom: 1.5rem;
     font-size: 24px;
     text-align: center;
+    font-weight: 500;
   }
 
   & .tags {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    ${({ theme }) => theme.display.flexStartRow}
 
-    & button:not(:last-child) {
-      margin-bottom: 1.25rem;
+    & button {
+      margin: 0 0.5rem 1.25rem;
     }
   }
 

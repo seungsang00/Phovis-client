@@ -21,11 +21,12 @@ export const SearchInput = ({ value, onSubmit }: IProps) => {
 
   return (
     <Input
+      className='keyword-input'
       type='text'
       value={newQuery}
       onChange={onChange}
       onKeyDown={handleKeydown}
-      placeholder=' 🔍 추천할 장소의 키워드를 검색해주세요!'
+      placeholder='추천할 장소의 키워드를 검색해주세요!'
       autoFocus
     />
   )

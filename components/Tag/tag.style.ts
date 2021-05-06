@@ -31,7 +31,7 @@ export const TagB = styled.button`
   line-height: 26px;
   text-align: center;
   padding: 7px 14px;
-  border-radius: 7px;
+  border-radius: 999px;
   color: #fff;
   &:nth-child(n) {
     background-color: ${({ theme }) => theme.color.secondary};
