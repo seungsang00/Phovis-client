@@ -1,7 +1,7 @@
 import { Modal } from '@components/Modal'
 import { DivWithBgImg } from '@styles/common'
 import { PhotoWrap, PhotoModal } from './photo.style'
-import {, useState } from 'react'
+import { useState } from 'react'
 import { IImage } from '@interfaces'
 
 // TODO: 사진을 클릭하면 원래의 크기로 보여주는 기능을 추가해야 합니다.

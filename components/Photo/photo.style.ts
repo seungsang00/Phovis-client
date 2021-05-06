@@ -1,3 +1,4 @@
+import theme from '@styles/theme'
 import styled from '@styles/themed-components'
 
 export const PhotoWrap = styled.div`
@@ -82,7 +83,24 @@ export const PhotoModal = styled.div`
   transform: scale(0.5);
   object-fit: contain;
 
+  font-size: 3rem;
+  font-weight: 500;
+  color: ${theme.color.primaryLight};
   .active {
     box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+  }
+  & p {
+    margin-left: 2.5rem;
+    :hover {
+      color: ${theme.color.secondary};
+    }
+  }
+  & span {
+    margin-left: 3rem;
+    font-size: 2.4rem;
+    font-weight: 300;
+    :hover {
+      color: ${theme.color.secondary};
+    }
   }
 `
