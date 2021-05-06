@@ -6,6 +6,13 @@ export const MainContainer = styled.div`
   align-items: center;
   padding: 36px 10rem;
 
+  div.edit-button-area {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    cursor: pointer;
+  }
+
   .section-title {
     margin-bottom: 1rem;
     font-weight: 500 !important;

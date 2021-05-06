@@ -11,7 +11,7 @@ export const TagS = styled.button`
   margin: 0.5rem 0;
   margin-right: 0.75rem;
   border-radius: 999px;
-  color: #fff;
+  color: ${({ theme }) => theme.color.white};
   cursor: pointer;
   &:nth-child(n) {
     background-color: ${({ theme }) => theme.color.secondary};
@@ -27,12 +27,13 @@ export const TagS = styled.button`
 export const TagB = styled.button`
   width: fit-content;
   height: fit-content;
-  font-size: 24px;
-  line-height: 26px;
+  font-size: 1.1rem;
+  line-height: 1.7rem;
   text-align: center;
   padding: 7px 14px;
   border-radius: 999px;
-  color: #fff;
+  color: ${({ theme }) => theme.color.white};
+
   &:nth-child(n) {
     background-color: ${({ theme }) => theme.color.secondary};
   }

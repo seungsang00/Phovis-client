@@ -29,6 +29,9 @@ export interface IContentBanner {
 }
 
 export interface IContentMain {
+  owner: string
+  userId?: string
+  handlemodify: () => void
   contentId: string
   id?: string
   description: string | null

@@ -14,6 +14,7 @@ export const SideMenu = styled.aside`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
 
   position: fixed;
   left: 0;
@@ -22,7 +23,7 @@ export const SideMenu = styled.aside`
 
   width: 10vw;
   height: 100vh;
-  padding: 0 1rem;
+  padding: 0 3rem;
   background-color: ${({ theme }) => theme.color.primary};
   color: ${({ theme }) => theme.color.white};
 `
