@@ -16,7 +16,8 @@ const UserPage = () => {
   const router = useRouter()
   const user_id = router.query.id
 
-  const [userInfo, setUserInfo] = useState<IUser | null>(null)
+  // const [userInfo, setUserInfo] = useState<IUser | null>(null)
+  const [isLoginedUser, setIsLoginedUser] = useState(false)
   const [tabList, setTabList] = useState(['Content', 'Likes', 'Bookmark'])
   const [selectedTab, setSelectedTab] = useState('Content')
   const [userContents, setUserContents] = useState<IContent[]>([])
@@ -42,13 +43,14 @@ const UserPage = () => {
   }, [user_id])
 
   useEffect(() => {
-    if (userInfo && user && String(user.id) === userInfo.id) {
+    if (user && String(user.id) === user_id) {
       console.log(`user id query parameter : `, user_id)
       console.log('login user id : ', user.id)
       console.log('Set my page')
       setTabList(['Content', 'Likes', 'Bookmark', 'Setting'])
+      setIsLoginedUser(true)
     }
-  }, [user, userInfo])
+  }, [user, user_id])
 
   const onClickTabHandler = (tab: string) => {
     setSelectedTab(tab)
@@ -57,14 +59,23 @@ const UserPage = () => {
 
   const loadUserContents = async () => {
     try {
-      const { status, data } = await axios.get(
-        'https://localhost:4000/content',
-        {
-          params: {
-            maxnum: 15,
-            userId: user_id,
-          },
+      const sendData = {
+        params: {
+          maxnum: 15,
+          userId: user_id,
+        },
+        headers: {},
+      }
+
+      if (isLoginedUser) {
+        sendData.headers = {
+          Authorization: `Bearer ${accessToken}`,
         }
+      }
+
+      const { status, data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content`,
+        sendData
       )
 
       if (status === 200) {
@@ -78,16 +89,26 @@ const UserPage = () => {
 
   const loadUserLikeContents = async () => {
     try {
-      const { status, data } = await axios.get(
-        'https://localhost:4000/content',
-        {
-          params: {
-            maxnum: 15,
-            userId: user_id,
-            filter: 'like',
-          },
+      const sendData = {
+        params: {
+          maxnum: 15,
+          userId: user_id,
+          filter: 'like',
+        },
+        headers: {},
+      }
+
+      if (isLoginedUser) {
+        sendData.headers = {
+          Authorization: `Bearer ${accessToken}`,
         }
+      }
+
+      const { status, data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content`,
+        sendData
       )
+
       if (status === 200) {
         console.log('loadUserLikeContents : ', data)
         setUserLikesContents([...data])
@@ -99,15 +120,24 @@ const UserPage = () => {
 
   const loadUserBookmarkContents = async () => {
     try {
-      const { status, data } = await axios.get(
-        'https://localhost:4000/content',
-        {
-          params: {
-            maxnum: 15,
-            userId: user_id,
-            filter: 'bookmark',
-          },
+      const sendData = {
+        params: {
+          maxnum: 15,
+          userId: user_id,
+          filter: 'bookmark',
+        },
+        headers: {},
+      }
+
+      if (isLoginedUser) {
+        sendData.headers = {
+          Authorization: `Bearer ${accessToken}`,
         }
+      }
+
+      const { status, data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content`,
+        sendData
       )
       if (status === 200) {
         console.log('loadUserBookmarkContents : ', data)
@@ -118,27 +148,27 @@ const UserPage = () => {
     }
   }
 
-  const loadUserInfo = async () => {
-    try {
-      const { status, data } = await axios.get(
-        'https://localhost:4000/user/info',
-        {
-          params: {
-            id: user_id,
-          },
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
-      if (status === 200) {
-        console.log('loadUserInfo : ', data)
-        setUserInfo({ ...data })
-      }
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  // const loadUserInfo = async () => {
+  //   try {
+  //     const { status, data } = await axios.get(
+  //       `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/info`,
+  //       {
+  //         params: {
+  //           id: user_id,
+  //         },
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       }
+  //     )
+  //     if (status === 200) {
+  //       console.log('loadUserInfo : ', data)
+  //       setUserInfo({ ...data })
+  //     }
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
 
   const loadContent = async (tab: string) => {
     console.log('tab : ', tab)
@@ -151,7 +181,7 @@ const UserPage = () => {
       loadUserBookmarkContents()
     } else if (tab === 'Setting') {
       // _getUserInfo(accessToken)
-      loadUserInfo()
+      // loadUserInfo()
     }
   }
 

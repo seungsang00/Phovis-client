@@ -6,6 +6,10 @@ const MainSectionHeader = () => (
     <Title>
       <h1>Phovis</h1>
       <h2>오늘 멋진 사진은 내일보면 또 다르다</h2>
+      <p>
+        나만의 출사장소(<span>P</span>hot<span>O VI</span>sit <span>S</span>
+        ite)를 추천해주세요
+      </p>
     </Title>
     <PhtoCards>
       <div className='polaroid-wraper'>

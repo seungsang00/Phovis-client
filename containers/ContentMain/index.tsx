@@ -1,4 +1,4 @@
-import { LocationInfo, Photo, TagSmall } from '@components/index'
+import { EditButton, LocationInfo, Photo, TagSmall } from '@components/index'
 import Polaroids from '@containers/Polaroids'
 import RelatedContents from '@containers/RelatedContents'
 import { IContentMain } from '@interfaces'
@@ -11,6 +11,9 @@ import { MainContainer } from './contentmain.style'
  */
 
 const ContentMain = ({
+  owner,
+  userId,
+  handlemodify,
   contentId,
   description,
   location,
@@ -25,10 +28,16 @@ const ContentMain = ({
 
   return (
     <MainContainer>
+      {owner === userId && (
+        <div className='edit-button-area'>
+          <EditButton owner={owner as string} handlemodify={handlemodify} />
+        </div>
+      )}
       <section className='description'>{description}</section>
       <section className='photo'>
         {images.map((el) => (
           <Photo
+            key={el.id}
             id={el.id}
             imageurl={el.imageurl}
             description={el.description}
@@ -41,7 +50,7 @@ const ContentMain = ({
       </section>
       <section className='tags'>
         {tags?.map((el) => (
-          <TagSmall tagname={el} onClick={handleTagClick} />
+          <TagSmall key={el} tagname={el} onClick={handleTagClick} />
         ))}
       </section>
       <section className='related-contents'>

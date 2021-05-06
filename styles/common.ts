@@ -17,30 +17,37 @@ export const DivWithBgImg = withProps<IBg, HTMLDivElement>(styled.div)`
   justify-content: flex-end;
   padding: ${(props) => props.p};
   overflow: hidden;
+  position: relative;
 
   div.main-title {
     font-size: 3rem;
     font-weight: 700;
     position: absolute;
-    left: 40px;
-    bottom: 50vh;
+    left: 10rem;
+    bottom: 80px;
   }
   div.top-right {
     position: absolute;
-    right: 30px;
+    right: 10rem;
     top: 81px;
     z-index: 1;
   }
   div.bottom-left {
     position: absolute;
-    left: 30px;
-    bottom: 41vh;
+    left: 10rem;
+    bottom: 10px;
     z-index: 1;
   }
   div.bottom-right {
     position: absolute;
-    right: 30px;
-    bottom: 41vh;
+    right: 12rem;
+    bottom: 10px;
+    z-index: 1;
+  }
+  div.bookmark.content-banner {
+    position: absolute;
+    right: 9rem;
+    bottom: 9px;
     z-index: 1;
   }
 `
@@ -64,25 +71,27 @@ export const AvatarWithProps = withProps<IAvartar, HTMLDivElement>(styled.div)`
 
 // Submit Button
 interface ISize {
-  w?: number
-  h?: number
+  w?: number | string
+  h?: number | string
 }
 
 export const Button = withProps<ISize, HTMLButtonElement>(styled.button)`
-  width: ${(props) => props.w || 100}px;
-  height: ${(props) => props.h || 50}px;
-  border-radius: 10px;
+  width: ${(props) => props.w || '100%'};
+  height: ${(props) => props.h || '3rem'};
+  border-radius: 999px;
   text-align: center;
   line-height: ${(props) => props.h - 5}px;
-  color: ${({ theme }) => theme.color.green};
-  border: 3px solid ${({ theme }) => theme.color.green};
-  background-color: transparent;
+  color: ${({ theme }) => theme.color.white};
+  font-weight: 600;
+  border: 2px solid ${({ theme }) => theme.color.secondaryLight};
+  background-color: ${({ theme }) => theme.color.secondaryLight};
   font-size: ${(props) => props.fsize || 1}rem;
   padding: 0 12px;
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme.color.inActive};
+    background-color: ${({ theme }) => theme.color.secondary};
+    border: 2px solid ${({ theme }) => theme.color.secondary};
     color: #fff;
   }
 `

@@ -10,6 +10,7 @@ export const TagSection = styled.section`
 
   & > input {
     font-size: 1.2rem;
+    color: ${({ theme }) => theme.color.white};
   }
 `
 export const TagTooltip = styled.div`

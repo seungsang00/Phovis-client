@@ -1,3 +1,4 @@
+import theme from '@styles/theme'
 import styled from '@styles/themed-components'
 
 export const PhotoWrap = styled.div`
@@ -52,11 +53,8 @@ export const PhotoWrap = styled.div`
   .photo-bg {
     opacity: 0.5;
     position: absolute;
-    top: -20px;
-    left: -20px;
     width: 100%;
     height: 100%;
-    padding: 20px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -76,6 +74,33 @@ export const PhotoWrap = styled.div`
       opacity: 0;
       text-shadow: rgba(black, 1) 0 2px 3px;
       transition: 0s 0.61s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+  }
+`
+
+export const PhotoModal = styled.div`
+  transition: all 0.3s;
+  transform: scale(0.5);
+  object-fit: contain;
+
+  font-size: 3rem;
+  font-weight: 500;
+  color: ${theme.color.primaryLight};
+  .active {
+    box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+  }
+  & p {
+    margin-left: 2.5rem;
+    :hover {
+      color: ${theme.color.secondary};
+    }
+  }
+  & span {
+    margin-left: 3rem;
+    font-size: 2.4rem;
+    font-weight: 300;
+    :hover {
+      color: ${theme.color.secondary};
     }
   }
 `

@@ -1,11 +1,13 @@
 import styled from '@styles/themed-components'
+import { search_active, search_inactive } from '@styles/icons'
 
 export const SearchForm = styled.form`
   width: fit-content;
-  padding: 0 2rem;
+  padding: 0 1rem;
   color: #fff;
-  background-color: ${({ theme }) => theme.color.primaryLight};
   border-radius: 4px;
+  ${({ theme }) => theme.display.flexCenterRow}
+  ${({ theme }) => theme.concept.glassmorphism}
 `
 
 export const SearchInput = styled.input`
@@ -18,6 +20,15 @@ export const SearchInput = styled.input`
 export const SearchButton = styled.button`
   cursor: pointer;
   color: #fff;
+  min-width: 20px;
+  width: 20px;
+  height: 20px;
+  min-height: 20px;
+  ${search_inactive}
+
+  &:hover {
+    ${search_active}
+  }
 `
 
 export const SearchFormBig = styled.form`

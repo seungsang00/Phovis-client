@@ -22,11 +22,14 @@ export const ThumbnailContainer_rect = styled.div`
     & > div {
       grid-area: user;
     }
+    border-radius: 6px;
   }
 
   /* 크기 설정 */
   width: 400px;
-  height: calc(400px * 60%);
+  height: calc(400px * 70%);
+  margin-right: 1rem;
+  cursor: pointer;
 
   & div.user-info {
     ${({ theme }) => theme.display.flexCenterRow}

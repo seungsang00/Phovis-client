@@ -18,6 +18,7 @@ interface IRect {
   likeCount: number
   isBookmark?: boolean
   isLike?: boolean
+  onClickContents: (contentId: string) => void
 }
 
 // NOTE : ThumbnailRect, ThumbnailSquare 컴포넌트 하단에 태그를 노출 시키면 좋을것 같아요
@@ -30,19 +31,34 @@ export const ThumbnailRect = ({
   likeCount,
   isBookmark = false,
   isLike = false,
-}: IRect) => (
-  <ThumbnailContainer_rect>
-    <DivWithBgImg bgUrl={bgImage} p={'24px'}>
-      <span className='bookmark'>
-        <BookmarkBtn id={id} isChecked={isBookmark} />
-      </span>
-      <UserInfoHor userName={username} profileImage={profileImage} />
-      <span className='like'>
-        <LikeBtn id={id} like={likeCount || 0} isChecked={isLike} />
-      </span>
-    </DivWithBgImg>
-  </ThumbnailContainer_rect>
-)
+  onClickContents,
+}: IRect) => {
+  const onClickHandler = (e: React.MouseEvent<HTMLElement>) => {
+    const target = e.target as HTMLElement
+    if (target.className && target.className.includes('ThumbnailRect')) {
+      // console.log('conetnt ID : ', id)
+      onClickContents(id)
+    }
+  }
+
+  return (
+    <ThumbnailContainer_rect>
+      <DivWithBgImg
+        className='ThumbnailRect'
+        bgUrl={bgImage}
+        p={'24px'}
+        onClick={onClickHandler}>
+        <span className='bookmark'>
+          <BookmarkBtn id={id} isChecked={isBookmark} />
+        </span>
+        <UserInfoHor userName={username} profileImage={profileImage} />
+        <span className='like'>
+          <LikeBtn id={id} like={likeCount || 0} isChecked={isLike} />
+        </span>
+      </DivWithBgImg>
+    </ThumbnailContainer_rect>
+  )
+}
 
 interface ISquare {
   profileImage?: string

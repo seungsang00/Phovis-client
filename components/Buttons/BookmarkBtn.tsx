@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { BookmarkContainer } from './button-bookmark.style'
+import { useState } from 'react'
+import { BookmarkContainer, BookmarkButton } from './button-bookmark.style'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '@actions/reducer'
 import axios from 'axios'
@@ -20,7 +20,7 @@ const BookmarkBtn = ({ id, isChecked = false }: Props) => {
     e.preventDefault()
     if (!isLogin) return
     const { status, data } = await axios.put(
-      'https://localhost:4000/user/bookmark',
+      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user/bookmark`,
       {
         id,
       },
@@ -43,17 +43,11 @@ const BookmarkBtn = ({ id, isChecked = false }: Props) => {
 
   return (
     <BookmarkContainer>
-      <input
-        type='checkbox'
+      <BookmarkButton
         id={`star_${id}`}
-        className='hide-checkbox'
-        checked={isBookmarked}
-        readOnly={true}
-      />
-      <label
+        isBookmarked={isBookmarked}
         onClick={handleClick}
-        htmlFor={`star_${id}`}
-        className='star-checkbox'></label>
+      />
     </BookmarkContainer>
   )
 }

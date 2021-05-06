@@ -7,12 +7,14 @@ interface IProps {
   locationTag: string | undefined
   tagList: Tag[]
   setTagList: (tags: Tag[]) => void
+  deleteTag: (tags: Tag[]) => void
 }
 
 export const AddTagsSection = ({
   locationTag,
   tagList,
   setTagList,
+  deleteTag,
 }: IProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [value, setValue] = useState<string>('')
@@ -37,9 +39,8 @@ export const AddTagsSection = ({
   }
 
   const handleClick = (key: string) => {
-    const filteredTags = tagList.filter((tag: any) => tag.id !== key)
-    console.log(filteredTags)
-    setTagList(filteredTags)
+    const filteredTags = tagList.filter((tag: any) => tag.name !== key)
+    deleteTag(filteredTags)
   }
 
   return (
@@ -49,9 +50,9 @@ export const AddTagsSection = ({
           tagList[0].id &&
           tagList.map((tag: any) => (
             <TagSmall
-              key={tag.id}
+              key={tag.name}
               tagname={tag.name}
-              onClick={() => handleClick(tag.id)}
+              onClick={() => handleClick(tag.name)}
             />
           ))}
         {locationTag && (

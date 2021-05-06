@@ -8,7 +8,7 @@ export const ModalOverlay = styled.div`
   height: 100vh;
   ${({ theme }) => theme.concept.glassmorphism};
   ${({ theme }) => theme.display.flexCenterCol};
-  z-index: 99;
+  z-index: 8999;
 `
 
 interface ModalSize {
@@ -19,7 +19,8 @@ export const ModalContent = withProps<ModalSize, HTMLDivElement>(styled.div)`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   ${({ theme }) => theme.display.flexCenterCol};
-  background-color: lightcyan;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 6px;
-  z-index: 999;
+  z-index: 9999;
 `

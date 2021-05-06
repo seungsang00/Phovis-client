@@ -1,7 +1,7 @@
 import styled from '@styles/themed-components'
 
 export const Container = styled.article`
-  width:100vw;
+  width: 100vw;
   height: 100%;
   padding: 10vh 10vw;
   background-color: ${({ theme }) => theme.color.primary};
@@ -14,9 +14,11 @@ export const Container = styled.article`
 export const Title = styled.div`
   margin-bottom: 2rem;
   padding: 0 1rem;
+  font-size: 2rem;
 `
 
 export const ContentGrid = styled.div`
+  width: 70%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 
@@ -28,40 +30,41 @@ export const ContentGrid = styled.div`
     grid-template-columns: repeat(3, 1fr);
   }
   @media ${({ theme }) => theme.size.tabletS} {
-    width:100%;
+    width: 100%;
     grid-template-columns: repeat(2, 1fr);
   }
 `
 
 export const ContentTagContainer = styled.div`
   display: flex;
-  align-items:flex-start;
+  align-items: flex-start;
+  justify-content: space-between;
 `
 
 export const TagList = styled.div`
-  width: 100%;
-  height:100%;
+  width: 300px;
+  padding: 0 2rem;
+  height: 100%;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
+  ${({ theme }) => theme.display.flexStartCol}
 
-  & h3{
-    margin-bottom:1.5rem;
-    font-size:24px;
-    text-align:center;
+  & h3 {
+    margin-bottom: 1.5rem;
+    font-size: 24px;
+    text-align: center;
+    font-weight: 500;
   }
 
-  & .tags{
-    display: flex;
-    flex-direction:column;
-    align-items: center;
+  & .tags {
+    ${({ theme }) => theme.display.flexStartRow}
 
-    & button:not(:last-child){
-      margin-bottom:1.25rem;
+    & button {
+      margin: 0 0.5rem 1.25rem;
     }
   }
 
   @media ${({ theme }) => theme.size.tabletM} {
     display: none;
   }
-
 `

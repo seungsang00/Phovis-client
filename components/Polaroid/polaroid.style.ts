@@ -15,8 +15,8 @@ export const Wrapper = styled.div`
 
   .polaroid {
     background: #fff;
-    padding: 1rem;
-    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.2);
+    padding: 0.3rem;
+    box-shadow: 0 0.25rem 0.2rem rgba(0, 0, 0, 0.2);
 
     img {
       height: 300px;
@@ -32,5 +32,26 @@ export const Wrapper = styled.div`
       font-style: italic;
       color: grey;
     }
+  }
+`
+
+export const EditButton = styled.button`
+  ${({ theme }) => theme.display.flexCenterRow};
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background-color: ${({ theme }) => theme.color.black};
+  position: absolute;
+  right: 10px;
+  bottom: 1px;
+  text-align: center;
+
+  img {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.secondary};
   }
 `

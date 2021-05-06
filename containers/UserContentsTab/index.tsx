@@ -1,14 +1,21 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import { IContent } from '@interfaces'
 import { ThumbnailRect } from '@components/index'
+import { TabContentSection } from '@containers/Layout'
 
 interface IProps {
   userContents: IContent[]
 }
 
 const UserContentsTab = ({ userContents }: IProps) => {
+  const router = useRouter()
+  const onClickContentHandle = (conetntId: string) => {
+    router.push(`/content/${conetntId}`)
+  }
+
   return (
-    <section>
+    <TabContentSection>
       {userContents.length > 0 &&
         userContents.map((content) => {
           const {
@@ -29,10 +36,11 @@ const UserContentsTab = ({ userContents }: IProps) => {
               likeCount={likecount}
               isLike={isLike}
               isBookmark={isBookmark}
+              onClickContents={onClickContentHandle}
             />
           )
         })}
-    </section>
+    </TabContentSection>
   )
 }
 

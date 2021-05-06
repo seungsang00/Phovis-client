@@ -45,7 +45,7 @@ export const getContentData = (contentid: string) => {
   return async (dispatch: Function) => {
     try {
       const res = await axios.get(
-        `https://localhost:4000/content?id=${contentid}`
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content?id=${contentid}`
       )
       if (res.status === 200) {
         dispatch(dispatchGetData(ContentAction.GET_CONTENT_DATA_SUCCESS, res))
@@ -73,7 +73,7 @@ export const getRelatedContentList = (tags: string) => {
     try {
       // todo: tag 기반 연관 컨텐츠 요청. 최대 10개
       const res = await axios.get(
-        `https://localhost:4000/content?tag=${tags}&maxnum=10`
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content?tag=${tags}&maxnum=10`
       )
       // console.log(res)
       if (res.status === 200) {
@@ -102,7 +102,7 @@ export const getRelatedPhotocardList = (contentId: string) => {
     try {
       // TODO: 연관 포토카드 요청
       const res = await axios.get(
-        `https://localhost:4000/photocard?contentId=${contentId}&maxnum=10`
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/photocard?contentId=${contentId}&maxnum=10`
       )
       console.log(res)
       if (res.status === 200) {

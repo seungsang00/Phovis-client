@@ -4,10 +4,18 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 36px 0;
+  padding: 36px 10rem;
+
+  div.edit-button-area {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    cursor: pointer;
+  }
 
   .section-title {
     margin-bottom: 1rem;
+    font-weight: 500 !important;
   }
 
   section {
@@ -31,5 +39,15 @@ export const MainContainer = styled.div`
     /* text-align: left;
     display: flex;
     justify-content: flex-start; */
+  }
+
+  @media ${({ theme }) => theme.size.desktop} {
+    padding: 36px 10rem;
+  }
+  @media ${({ theme }) => theme.size.tabletM} {
+    padding: 36px 6rem;
+  }
+  @media ${({ theme }) => theme.size.tabletS} {
+    padding: 36px 4rem;
   }
 `

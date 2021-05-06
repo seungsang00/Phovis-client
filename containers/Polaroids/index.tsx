@@ -2,7 +2,6 @@ import { RootReducer } from '@actions/reducer'
 import { Modal, Polaroid } from '@components/index'
 import PhotoCardInput from '@containers/PhotoCardInput'
 import { IPhotoCard, IUser, LocationType } from '@interfaces'
-import Image from 'next/image'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Container } from './polaroids.style'
@@ -55,18 +54,19 @@ const Polaroids = ({ locationinfo, photocards, contentId, type }: IProps) => {
   return (
     <>
       <Container className='thumbnails'>
-        <div className='photocardUploadBtn' onClick={handleModalOpen}>
-          {type === 'content' && (
-            <Image
-              layout='fixed'
-              src='/src/iconmonstr-photo-camera-4.svg'
-              width={24}
-              height={24}
-            />
-          )}
-        </div>
+        {type === 'content' && (
+          <div className='photocardUploadTitle'>
+            <h2>이런 사진을 찍을 수 있어요 !</h2>
+            <div
+              className='photocard-upload-btn-area'
+              onClick={handleModalOpen}>
+              <span>내가 찍은 사진도 자랑하러가기</span>
+              <div className='upload-btn'></div>
+            </div>
+          </div>
+        )}
         {modalIsOpen && (
-          <Modal w='400px' h='500px' handleModalClose={handleModalClose}>
+          <Modal w='400px' h='600px' handleModalClose={handleModalClose}>
             <PhotoCardInput
               isModify={isModify}
               photocardId={targetModifyPhotocardId}
