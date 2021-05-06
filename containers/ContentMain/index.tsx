@@ -2,6 +2,7 @@ import { EditButton, LocationInfo, Photo, TagSmall } from '@components/index'
 import Polaroids from '@containers/Polaroids'
 import RelatedContents from '@containers/RelatedContents'
 import { IContentMain } from '@interfaces'
+import { useRouter } from 'next/router'
 import { MainContainer } from './contentmain.style'
 
 /**
@@ -22,8 +23,9 @@ const ContentMain = ({
   related,
   photocards,
 }: IContentMain) => {
-  const handleTagClick = () => {
-    console.log(`태그 검색 결과로 이동`)
+  const router = useRouter()
+  const handleTagClick = (tagName: string) => {
+    router.push(`/search?keyword=${tagName}`, `/search`)
   }
 
   return (
@@ -50,7 +52,7 @@ const ContentMain = ({
       </section>
       <section className='tags'>
         {tags?.map((el) => (
-          <TagSmall key={el} tagname={el} onClick={handleTagClick} />
+          <TagSmall key={el} tagname={el} onClick={() => handleTagClick(el)} />
         ))}
       </section>
       <section className='related-contents'>
