@@ -102,7 +102,7 @@ const PhotoCardInput = ({
         )
       } else {
         res = await axios.post(
-          '${process.env.NEXT_PUBLIC_API_ENDPOINT}/photocard',
+          `${process.env.NEXT_PUBLIC_API_ENDPOINT}/photocard`,
           formData,
           {
             headers: {
