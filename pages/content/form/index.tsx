@@ -14,7 +14,6 @@ import { DivWithBgImg } from '@styles/common'
 import { useRouter } from 'next/router'
 import axios, { AxiosResponse } from 'axios'
 import { FormLayout } from '@containers/Layout/PageLayout'
-import { Main } from './contentform.style'
 
 const ContentForm = () => {
   // ! 유저 정보 받아오기
@@ -291,7 +290,7 @@ const ContentForm = () => {
     <CommonLayout
       header={<MainHeader isLogin={isLogin} userId={userId as string} />}>
       <FormLayout>
-        <Main>
+        <main>
           <section className='banner'>
             <DivWithBgImg
               bgUrl={
@@ -379,7 +378,7 @@ const ContentForm = () => {
           <section className='buttons'>
             <DefaultBtn onClick={handleSubmit}>등록하기</DefaultBtn>
           </section>
-        </Main>
+        </main>
       </FormLayout>
     </CommonLayout>
   )
