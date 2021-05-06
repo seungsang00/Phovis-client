@@ -15,6 +15,7 @@ const MapContainer = ({
   locationInfo,
   handleLocation,
   handleModalClose,
+  setLocationTag,
 }: IProps) => {
   const { location } = locationInfo
   const [keyword, setKeyword] = useState<string>(location || '')
@@ -147,6 +148,9 @@ const MapContainer = ({
     const myLocation = document.querySelector('#my_location')?.textContent
 
     if (myLocation) {
+      if (keyword) {
+        setLocationTag([{ id: keyword, name: keyword }])
+      }
       handleLocation({
         keyword: keyword,
         location: myLocation,

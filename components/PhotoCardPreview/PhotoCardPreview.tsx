@@ -13,8 +13,9 @@ type Props = {
   description?: string
   userName: string
   profileImage?: string
-  like?: number
-  isLike?: boolean
+  like: number
+  isLike: boolean
+  onClickLike: (cotentId: string) => void
 }
 
 const PhotoCardPreview = ({
@@ -24,7 +25,8 @@ const PhotoCardPreview = ({
   userName,
   profileImage,
   like,
-  isLike = false,
+  isLike,
+  onClickLike,
 }: Props) => {
   return (
     <PhotoCardPreviewContainer>
@@ -39,7 +41,12 @@ const PhotoCardPreview = ({
             userName={userName}
             profileImage={profileImage || '/src/tmpProfileImg.webp'}
           />
-          <LikeBtn id={id} like={like || 0} isChecked={isLike} />
+          <LikeBtn
+            onClick={onClickLike}
+            id={id}
+            like={like}
+            isChecked={isLike}
+          />
         </div>
       </PhotoContainer>
       <DscriptionContainer>

@@ -265,7 +265,7 @@ function content(
         ...state,
         photocardList: [action.payload, ...state.photocardList],
       }
-    
+
     case ContentAction.PUT_LIKE_SUCEESS: 
       let { like, isLike } = state.contentData
       const { data:{isLike:setLike} } = action.payload;
@@ -282,6 +282,12 @@ function content(
     case ContentAction.PUT_BOOKMARK_SUCCESS:
       const { data:{isBookmark} } = action.payload;
       return {...state, contentData:{...state.contentData, isBookmark}}
+
+    case ContentAction.GET_PHOTO_CARD_LIST_ERROR:
+      return {
+        ...state,
+        photocardList: [],
+      }
 
     default:
       return state

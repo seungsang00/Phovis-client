@@ -89,7 +89,7 @@ const Login = () => {
     // TODO : Redirect URL 을 개발환경에 따라 다르게 줄 수 있도록 설정
     const baseUrl = 'https://kauth.kakao.com/oauth/authorize'
     const clientId = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID
-    const redirectUrl = 'http://localhost:3000/auth/kakao'
+    const redirectUrl = `${process.env.NEXT_PUBLIC_DOMAIN}/auth/kakao`
     window.open(
       `${baseUrl}?response_type=code&client_id=${clientId}&redirect_uri=${redirectUrl}`,
       '_blank'
