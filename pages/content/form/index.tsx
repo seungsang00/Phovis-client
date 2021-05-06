@@ -168,9 +168,11 @@ const ContentForm = () => {
         const content_id = res.data.id
         router.push(`/content/[content_id]`, `/content/${content_id}`)
         // router.push(`/main`) // 임시로 main 페이지로 이동
+      } else {
+        alert('길이 너무 길거나, 이미지가 없습니다.')
       }
     } catch (e) {
-      throw e
+      alert('길이 너무 길거나, 이미지가 없습니다.')
     }
   }
 

@@ -120,7 +120,7 @@ const MainPage = () => {
           <section id='section-header' style={{ paddingTop: '60px' }}>
             <MainSectionHeader />
           </section>
-          <section id='section-recommend'>
+          <section id='section-recommend' style={{ width: '100%' }}>
             <MainRecommend
               contentList={recommendContentList}
               photoCards={photocardList}

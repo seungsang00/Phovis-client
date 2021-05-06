@@ -15,17 +15,21 @@ export const Wrapper = styled.div`
 
   .polaroid {
     background: #fff;
-    padding: 0.3rem;
+    padding: 0.5rem;
     box-shadow: 0 0.25rem 0.2rem rgba(0, 0, 0, 0.2);
 
     img {
-      height: 300px;
+      max-height: 300px;
     }
   }
   .caption {
     font-size: 1rem;
     text-align: left;
     line-height: 2em;
+    .description {
+      padding-top: 5px;
+      color: ${({ theme }) => theme.color.primaryDark};
+    }
 
     .user-info {
       font-size: 0.85rem;

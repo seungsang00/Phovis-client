@@ -47,15 +47,15 @@ const Polaroid = ({
       </Wrapper>
       {modalIsOpen && (
         <Modal w={'0px'} h={'0px'} handleModalClose={handleModalClose}>
-          <PhotoModal>
-            <div className='polaroid'>
+          <Wrapper>
+            <div className='polaroid' onClick={handleModalOpen}>
               <img src={imageurl} />
               <div className='caption'>
                 <p className='description'>{description}</p>
                 <span className='user-info'>@ {userName}</span>
               </div>
             </div>
-          </PhotoModal>
+          </Wrapper>
         </Modal>
       )}
     </>

@@ -18,7 +18,6 @@ export const Title = styled.div`
 `
 
 export const ContentGrid = styled.div`
-  width: 70%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 
