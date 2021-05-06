@@ -31,7 +31,7 @@
 
 
 ## Flow Chart
-
+![Phovis - Flow Chart](https://images.velog.io/images/seungsang00/post/8008961f-7f4a-42a8-8133-c4573880668a/Phovis%20-%20Doc%20-%20Frame%201.jpg)
 
 
 ## Phovis Page Views
