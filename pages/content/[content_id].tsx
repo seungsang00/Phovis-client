@@ -50,7 +50,7 @@ const ContentPage = () => {
     id,
     title,
     mainimageUrl,
-    likecount,
+    like,
     description,
     location,
     images,
@@ -99,7 +99,7 @@ const ContentPage = () => {
               (sampleContent.user.userName as string)
             }
             userProfileUrl={creator.profileImg || sampleContent.user.profileImg}
-            likesCount={likecount || sampleContent.likecount}
+            like={like || sampleContent.like}
           />
         }>
         <ContentMain
