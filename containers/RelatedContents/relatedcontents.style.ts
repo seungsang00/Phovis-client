@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
     font-weight: 600;
   }
   .thumbnails {
-    ${({ theme }) => theme.display.flexCenterRow};
+    ${({ theme }) => theme.display.flexStartRow};
     flex-wrap: wrap;
   }
 `
