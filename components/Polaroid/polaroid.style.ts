@@ -36,5 +36,22 @@ export const Wrapper = styled.div`
 `
 
 export const EditButton = styled.button`
+  ${({ theme }) => theme.display.flexCenterRow};
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background-color: ${({ theme }) => theme.color.black};
+  position: absolute;
+  right: 10px;
+  bottom: 1px;
+  text-align: center;
 
+  img {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.secondary};
+  }
 `

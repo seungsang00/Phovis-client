@@ -5,19 +5,23 @@ export const Container = styled.article`
   height: 100vh;
   background-color: ${({ theme }) => theme.color.primary};
   position: relative;
+  display: flex;
+  ${({ theme }) => theme.display.flexCenterRow}
+  justify-content: space-between;
+  padding-left: 11vw;
 `
 
 export const Title = styled.div`
-  position: absolute;
+  /* position: absolute;
   top: 50%;
-  left: 0px;
-  z-index: 100;
+  left: 0px; */
+  z-index: 900;
 
   display: flex;
   flex-direction: column;
   color: ${({ theme }) => theme.color.white};
 
-  transform: translate(80%, -100%);
+  transform: translate(10%, -40%);
 
   & h1 {
     font-family: 'Girassol', cursive;

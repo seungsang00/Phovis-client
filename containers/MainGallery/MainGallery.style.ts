@@ -1,7 +1,7 @@
 import styled from '@styles/themed-components'
 
 export const Container = styled.article`
-  width:100vw;
+  width: 100vw;
   height: 100vh;
   padding: 10vh 10vw;
   background-color: ${({ theme }) => theme.color.primary};
@@ -14,10 +14,11 @@ export const Container = styled.article`
 export const Title = styled.div`
   margin-bottom: 2rem;
   padding: 0 1rem;
+  font-size: 2rem;
 `
 
 export const ContentContainer = styled.div`
-  width:100%;
+  width: 100%;
   display: flex;
   justify-content: center;
 `

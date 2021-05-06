@@ -37,7 +37,7 @@ const PhotoCardInput = ({
 
   const getPhotocardData = async () => {
     const result = await axios.get<IPhotoCard>(
-      `https://localhost:4000/photocard?photocardId=${photocardId}`,
+      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/photocard?photocardId=${photocardId}`,
       { headers: { aouthorization: `bearer ${accessToken}` } }
     )
 
@@ -87,24 +87,32 @@ const PhotoCardInput = ({
       //to-do 여기에 서버 통신을 보내면 됨 formData에 Blob이 담겨있음
       let res = {} as AxiosResponse
       if (isModify) {
-        res = await axios.put('https://localhost:4000/photocard', formData, {
-          headers: {
-            authorization: `Bearer ${accessToken}`,
-          },
-          params: {
-            contentId,
-            photocardId,
-          },
-        })
+        res = await axios.put(
+          `${process.env.NEXT_PUBLIC_API_ENDPOINT}/photocard`,
+          formData,
+          {
+            headers: {
+              authorization: `Bearer ${accessToken}`,
+            },
+            params: {
+              contentId,
+              photocardId,
+            },
+          }
+        )
       } else {
-        res = await axios.post('https://localhost:4000/photocard', formData, {
-          headers: {
-            authorization: `Bearer ${accessToken}`,
-          },
-          params: {
-            contentId,
-          },
-        })
+        res = await axios.post(
+          '${process.env.NEXT_PUBLIC_API_ENDPOINT}/photocard',
+          formData,
+          {
+            headers: {
+              authorization: `Bearer ${accessToken}`,
+            },
+            params: {
+              contentId,
+            },
+          }
+        )
       }
       if (res.status === 200 || res.status === 201) {
         dispatch(addRelatedPhotocardList(res.data))

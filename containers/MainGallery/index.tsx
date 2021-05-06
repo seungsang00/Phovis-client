@@ -30,9 +30,7 @@ const MainGallery = ({ photoCards, onScrollEnd }: IProps) => {
 
   return (
     <Container>
-      <Title>
-        <h1 className='section-title'>📸 이런 사진을 찍을 수 있어요</h1>
-      </Title>
+      <Title>이런 사진을 찍을 수 있어요</Title>
       {photoCards.length > 0 && (
         <ContentContainer>
           <Polaroids type={'main'} photocards={photoCards} />
