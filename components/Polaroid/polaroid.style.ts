@@ -4,7 +4,6 @@ export const Wrapper = styled.div`
   display: inline-block;
   margin: 1rem;
   filter: grayscale(100%);
-
   &:hover {
     filter: none;
     transform: scale(1, 1) rotate(0deg) !important;
