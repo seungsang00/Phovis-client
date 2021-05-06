@@ -6,6 +6,7 @@ export const UserContainer = styled.div`
   padding: 10px;
   display: flex;
   align-items: center;
+
   & div.horizontal {
     display: flex;
     justify-content: start;

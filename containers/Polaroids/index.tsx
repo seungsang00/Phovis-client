@@ -76,31 +76,33 @@ const Polaroids = ({ locationinfo, photocards, contentId, type }: IProps) => {
             />
           </Modal>
         )}
-        {photocards &&
-          photocards.length > 0 &&
-          photocards.map((photoCard) => {
-            const {
-              photocardId,
-              imageurl,
-              description,
-              userName,
-              like,
-              userId,
-            } = photoCard
-            return (
-              <Polaroid
-                type={type}
-                key={photocardId}
-                handleModify={() =>
-                  handleModify(photocardId as string, userId as string)
-                }
-                imageurl={imageurl}
-                description={description}
-                userName={userName}
-                like={like}
-              />
-            )
-          })}
+        <div className='photocard-container'>
+          {photocards &&
+            photocards.length > 0 &&
+            photocards.map((photoCard) => {
+              const {
+                photocardId,
+                imageurl,
+                description,
+                userName,
+                like,
+                userId,
+              } = photoCard
+              return (
+                <Polaroid
+                  type={type}
+                  key={photocardId}
+                  handleModify={() =>
+                    handleModify(photocardId as string, userId as string)
+                  }
+                  imageurl={imageurl}
+                  description={description}
+                  userName={userName}
+                  like={like}
+                />
+              )
+            })}
+        </div>
       </Container>
     </>
   )
