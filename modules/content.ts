@@ -27,7 +27,7 @@ const initialState: ContentState = {
       userName: null,
       profileImg: undefined,
     },
-    likecount: 0,
+    like: 0,
     images: [],
     title: null,
   },

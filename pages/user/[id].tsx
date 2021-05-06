@@ -17,6 +17,7 @@ const UserPage = () => {
   const user_id = router.query.id
 
   // const [userInfo, setUserInfo] = useState<IUser | null>(null)
+  const [isLoginedUser, setIsLoginedUser] = useState(false)
   const [tabList, setTabList] = useState(['Content', 'Likes', 'Bookmark'])
   const [selectedTab, setSelectedTab] = useState('Content')
   const [userContents, setUserContents] = useState<IContent[]>([])
@@ -36,10 +37,10 @@ const UserPage = () => {
   }, [])
 
   useEffect(() => {
-    if (user_id) {
+    if (isLoginedUser) {
       loadContent(selectedTab)
     }
-  }, [user_id])
+  }, [isLoginedUser])
 
   useEffect(() => {
     if (user && String(user.id) === user_id) {
@@ -47,6 +48,11 @@ const UserPage = () => {
       console.log('login user id : ', user.id)
       console.log('Set my page')
       setTabList(['Content', 'Likes', 'Bookmark', 'Setting'])
+      setIsLoginedUser(true)
+    } else if (user && String(user.id) !== user_id) {
+      console.log('Set user page')
+      setIsLoginedUser(false)
+      loadContent(selectedTab)
     }
   }, [user, user_id])
 
@@ -57,14 +63,23 @@ const UserPage = () => {
 
   const loadUserContents = async () => {
     try {
+      const sendData = {
+        params: {
+          maxnum: 15,
+          userId: user_id,
+        },
+        headers: {},
+      }
+
+      if (isLoginedUser) {
+        sendData.headers = {
+          Authorization: `Bearer ${accessToken}`,
+        }
+      }
+
       const { status, data } = await axios.get(
         `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content`,
-        {
-          params: {
-            maxnum: 15,
-            userId: user_id,
-          },
-        }
+        sendData
       )
 
       if (status === 200) {
@@ -78,16 +93,26 @@ const UserPage = () => {
 
   const loadUserLikeContents = async () => {
     try {
+      const sendData = {
+        params: {
+          maxnum: 15,
+          userId: user_id,
+          filter: 'like',
+        },
+        headers: {},
+      }
+
+      if (isLoginedUser) {
+        sendData.headers = {
+          Authorization: `Bearer ${accessToken}`,
+        }
+      }
+
       const { status, data } = await axios.get(
         `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content`,
-        {
-          params: {
-            maxnum: 15,
-            userId: user_id,
-            filter: 'like',
-          },
-        }
+        sendData
       )
+
       if (status === 200) {
         console.log('loadUserLikeContents : ', data)
         setUserLikesContents([...data])
@@ -99,15 +124,24 @@ const UserPage = () => {
 
   const loadUserBookmarkContents = async () => {
     try {
+      const sendData = {
+        params: {
+          maxnum: 15,
+          userId: user_id,
+          filter: 'bookmark',
+        },
+        headers: {},
+      }
+
+      if (isLoginedUser) {
+        sendData.headers = {
+          Authorization: `Bearer ${accessToken}`,
+        }
+      }
+
       const { status, data } = await axios.get(
         `${process.env.NEXT_PUBLIC_API_ENDPOINT}/content`,
-        {
-          params: {
-            maxnum: 15,
-            userId: user_id,
-            filter: 'bookmark',
-          },
-        }
+        sendData
       )
       if (status === 200) {
         console.log('loadUserBookmarkContents : ', data)

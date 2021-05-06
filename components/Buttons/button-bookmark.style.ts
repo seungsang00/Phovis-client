@@ -9,10 +9,10 @@ export const BookmarkButton = withProps<IBookmark, HTMLButtonElement>(
   styled.button
 )`
   ${(props) => (props.isBookmarked ? bookmark_active : bookmark_inactive)};
-  width: 27px;
-  height: 27px;
-  min-width: 27px !important;
-  min-height: 27px !important;
+  width: 25px;
+  height: 25px;
+  min-width: 25px !important;
+  min-height: 25px !important;
   cursor: pointer;
 `
 export const BookmarkContainer = styled.div`

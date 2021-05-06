@@ -57,7 +57,12 @@ const Polaroids = ({ locationinfo, photocards, contentId, type }: IProps) => {
         {type === 'content' && (
           <div className='photocardUploadTitle'>
             <h2>이런 사진을 찍을 수 있어요 !</h2>
-            <div className='upload-btn' onClick={handleModalOpen}></div>
+            <div
+              className='photocard-upload-btn-area'
+              onClick={handleModalOpen}>
+              <span>내가 찍은 사진도 자랑하러가기</span>
+              <div className='upload-btn'></div>
+            </div>
           </div>
         )}
         {modalIsOpen && (

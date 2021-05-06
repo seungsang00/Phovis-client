@@ -98,7 +98,7 @@ export const sampleContent: IContent = {
     lat: 37.48866631979767,
     lng: 126.8351346522557,
   },
-  likecount: 1,
+  like: 1,
   mainimageUrl:
     'https://file.mk.co.kr/meet/neds/2013/05/image_readtop_2013_394957_1369187780924820.jpg',
   images: [
@@ -157,7 +157,7 @@ export const sampleContents: IContent[] = [
       userName: 'sim',
       profileImg: 'https://bit.ly/3gV8yqZ',
     },
-    likecount: 42,
+    like: 42,
     images: [
       {
         id: 24,
@@ -199,7 +199,7 @@ export const sampleContents: IContent[] = [
       id: '5700',
       userName: 'one',
     },
-    likecount: 42,
+    like: 42,
     images: [
       {
         id: 24,
@@ -240,7 +240,7 @@ export const sampleContents: IContent[] = [
       id: '5',
       userName: 'jeong',
     },
-    likecount: 42,
+    like: 42,
     images: [
       {
         id: 24,

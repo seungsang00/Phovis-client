@@ -306,7 +306,7 @@ const ContentForm = () => {
               content.mainImage.url ||
               (content.images[0] && content.images[0].url)
             }
-            p={'24px'}>
+            p={'24px 10rem'}>
             <input
               className='title'
               name='title'
@@ -387,7 +387,7 @@ const ContentForm = () => {
             </div>
           </section>
 
-          <section className='form'>
+          {/* <section className='form'>
             <div className='container'>
               {content.images.map(
                 ({ url, data, name, description }: any, idx: number) => (
@@ -416,7 +416,7 @@ const ContentForm = () => {
                 handleFile={handleFile}
               />
             </div>
-          </section>
+          </section> */}
 
           <section className='buttons'>
             <DefaultBtn onClick={handleSubmit}>등록하기</DefaultBtn>

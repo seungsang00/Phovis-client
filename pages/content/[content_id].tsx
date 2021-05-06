@@ -50,7 +50,7 @@ const ContentPage = () => {
     id,
     title,
     mainimageUrl,
-    likecount,
+    like,
     description,
     location,
     images,
@@ -90,8 +90,6 @@ const ContentPage = () => {
         header={<MainHeader isLogin={isLogin} userId={userId as string} />}
         banner={
           <ContentBanner
-            handlemodify={() => handlemodify(id as string)}
-            owner={creator.id as string}
             userId={userId as string}
             id={id as string}
             title={title || sampleContent.title}
@@ -101,10 +99,13 @@ const ContentPage = () => {
               (sampleContent.user.userName as string)
             }
             userProfileUrl={creator.profileImg || sampleContent.user.profileImg}
-            likesCount={likecount || sampleContent.likecount}
+            like={like || sampleContent.like}
           />
         }>
         <ContentMain
+          owner={creator.id as string}
+          userId={userId as string}
+          handlemodify={() => handlemodify(id as string)}
           contentId={(content_id as string) || (sampleContent.id as string)}
           description={description || sampleContent.description}
           location={location || sampleContent.location}

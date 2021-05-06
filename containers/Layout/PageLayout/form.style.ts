@@ -26,12 +26,12 @@ export const FormLayout = styled.div`
       min-height: 4rem;
       width: 90%;
       color: ${({ theme }) => theme.color.white};
-      margin-left: 3rem;
+      margin-left: 1rem;
     }
   }
 
   div.main-area {
-    padding: 0 3rem 3rem;
+    padding: 0 10rem 3rem;
   }
 
   section.form {
