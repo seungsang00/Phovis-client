@@ -23,16 +23,16 @@
 ```
 - 어디를 가야할 지 너무 막막하시다구요? **인기 태그 목록**에서 **출사장소를 검색**해보세요!
 
----
+
 
 ## Stack Architecture
 ![Phovis Stack Architecture](https://images.velog.io/images/seungsang00/post/be70f354-f05e-46ba-825d-13d8b082d08e/%EC%B6%9C%EC%9E%A5(%EC%B6%9C%EC%82%AC%EC%9E%A5%EC%86%8C%20%EC%B6%94%EC%B2%9C)%20-%20Stack%20Architecture%20(1).jpg)
 
----
+
 
 ## Flow Chart
 
----
+
 
 ## Phovis Page Views
 
@@ -51,3 +51,11 @@
 - Phovis 회원 정보 수정(프로필 이미지 변경 / 비밀번호 변경)
 
 
+
+## Member Information
+|Name |	Position |	github |
+|:--|:--|:--|
+|최정훈|Back-end, Team Leader|[jeonghun-project](https://github.com/jeonghun-project)|
+|최재원|Back-end, DevOps| [Reone1](https://github.com/Reone1)|
+|유승연|Front-end, Main Designer|  [seungsang00](https://github.com/seungsang00) |
+|심언조|Front-end, Technician| [sim0417](https://github.com/sim0417)|
