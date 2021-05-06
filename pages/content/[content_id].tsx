@@ -52,7 +52,7 @@ const ContentPage = () => {
         accessToken,
       })
     }
-  }, [content_id])
+  }, [content_id, accessToken])
 
   useEffect(() => {
     const tags = contentData.tag?.join(',')
