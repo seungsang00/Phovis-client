@@ -68,13 +68,9 @@ const UserPage = () => {
           maxnum: 15,
           userId: user_id,
         },
-        headers: {},
-      }
-
-      if (isLoginedUser) {
-        sendData.headers = {
-          Authorization: `Bearer ${accessToken}`,
-        }
+        headers: isLoginedUser
+          ? { Authorization: `Bearer ${accessToken}` }
+          : {},
       }
 
       const { status, data } = await axios.get(
@@ -99,13 +95,9 @@ const UserPage = () => {
           userId: user_id,
           filter: 'like',
         },
-        headers: {},
-      }
-
-      if (isLoginedUser) {
-        sendData.headers = {
-          Authorization: `Bearer ${accessToken}`,
-        }
+        headers: isLoginedUser
+          ? { Authorization: `Bearer ${accessToken}` }
+          : {},
       }
 
       const { status, data } = await axios.get(
@@ -130,13 +122,9 @@ const UserPage = () => {
           userId: user_id,
           filter: 'bookmark',
         },
-        headers: {},
-      }
-
-      if (isLoginedUser) {
-        sendData.headers = {
-          Authorization: `Bearer ${accessToken}`,
-        }
+        headers: isLoginedUser
+          ? { Authorization: `Bearer ${accessToken}` }
+          : {},
       }
 
       const { status, data } = await axios.get(
