@@ -37,10 +37,8 @@ const UserPage = () => {
   }, [])
 
   useEffect(() => {
-    if (user_id) {
-      loadContent(selectedTab)
-    }
-  }, [user_id])
+    loadContent(selectedTab)
+  }, [isLoginedUser])
 
   useEffect(() => {
     if (user && String(user.id) === user_id) {
@@ -49,6 +47,9 @@ const UserPage = () => {
       console.log('Set my page')
       setTabList(['Content', 'Likes', 'Bookmark', 'Setting'])
       setIsLoginedUser(true)
+    } else if (user && String(user.id) !== user_id) {
+      console.log('Set user page')
+      setIsLoginedUser(false)
     }
   }, [user, user_id])
 
