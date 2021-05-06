@@ -27,8 +27,10 @@ export const ThumbnailContainer_rect = styled.div`
 
   /* 크기 설정 */
   width: 400px;
-  height: calc(400px * 70%);
+  min-width: 400px;
+  height: 270px;
   margin-right: 1rem;
+  margin-bottom: 1rem;
   cursor: pointer;
 
   & div.user-info {

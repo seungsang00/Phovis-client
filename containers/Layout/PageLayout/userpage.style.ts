@@ -9,4 +9,11 @@ export const TabContentSection = styled.section`
   padding: 8rem 8rem 8rem 12vw;
   display: flex;
   justify-content: flex-start;
+
+  & > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-top: 3rem;
+  }
 `
