@@ -48,7 +48,7 @@ const Polaroid = ({
       {modalIsOpen && (
         <Modal w={'0px'} h={'0px'} handleModalClose={handleModalClose}>
           <Wrapper>
-            <div className='polaroid' onClick={handleModalOpen}>
+            <div className='polaroid'>
               <img src={imageurl} />
               <div className='caption'>
                 <p className='description'>{description}</p>
