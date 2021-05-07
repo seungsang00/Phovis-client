@@ -36,7 +36,7 @@ export const ProfileInput = ({ label, currentValue, authType }: IProps) => {
           value={value}
           placeholder='이름을 입력해주세요'
           onChange={onChange}
-          disabled={label === '이메일' ? true : false}
+          disabled={true}
         />
       </Input>
     </InputContainer>

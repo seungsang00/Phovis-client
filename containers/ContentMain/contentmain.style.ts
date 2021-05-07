@@ -31,7 +31,7 @@ export const MainContainer = styled.div`
   section.photo {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    /* justify-content: center; */
   }
 
   section.photocards {

@@ -9,42 +9,78 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '@actions/reducer'
+import { getUserInfo } from '@actions/users'
 
-// ! sample data
-import {
-  sampleContent,
-  sampleContents,
-  samplePhotoCardData,
-} from '@utils/index'
 import useAction from '@hooks/useAction'
 import {
   getContentData,
   getRelatedContentList,
   getRelatedPhotocardList,
+  putLikeRequest,
+  putBookmarkRequest,
 } from '@actions/content'
 // import { StringifyOptions } from 'node:querystring'
 
 const ContentPage = () => {
-  const { isLogin, user } = useSelector((state: RootReducer) => state.user)
   const router = useRouter()
   const { content_id } = router.query
+  const { isLogin, user, accessToken } = useSelector(
+    (state: RootReducer) => state.user
+  )
+  const _getUserInfo = useAction(getUserInfo)
+
+  const { contentData, relatedContentList, photocardList } = useSelector(
+    (state: RootReducer) => state.content
+  )
 
   const _getContentData = useAction(getContentData)
   const _getRelatedContentList = useAction(getRelatedContentList)
   const _getRelatedPhotoCardList = useAction(getRelatedPhotocardList)
 
+  const _putLikeRequest = useAction(putLikeRequest)
+  const _putBookmarkRequest = useAction(putBookmarkRequest)
+
   useEffect(() => {
-    // TODO: get content data from redux store
+    _getUserInfo(accessToken)
+  }, [])
 
+  useEffect(() => {
     if (content_id) {
-      _getContentData(content_id as string)
+      console.log('accessToken : ', accessToken)
+      _getContentData({
+        contentId: content_id as string,
+        accessToken,
+      })
     }
-  }, [content_id])
+  }, [content_id, accessToken])
 
-  const { contentData } = useSelector((state: RootReducer) => state.content)
-  const { relatedContentList, photocardList } = useSelector(
-    (state: RootReducer) => state.content
-  )
+  useEffect(() => {
+    const tags = contentData.tag?.join(',')
+    // console.log('tags : ', tags)
+    // console.log(contentData)
+    if (tags) {
+      _getRelatedContentList(tags as string)
+      _getRelatedPhotoCardList(content_id as string)
+    }
+  }, [contentData])
+
+  let userId = ''
+  if (user) {
+    userId = user.id as string
+  }
+  const handlemodify = (id: string): void => {
+    if (contentData.user.id === userId) {
+      router.push(`/content/form?isModify=${true}&contentId=${id}`)
+    }
+  }
+
+  const onClickLike = (contentId: string) => {
+    _putLikeRequest({ contentId, accessToken })
+  }
+
+  const onClickBookmark = (contentId: string) => {
+    _putBookmarkRequest({ contentId, accessToken })
+  }
 
   const {
     id,
@@ -55,29 +91,11 @@ const ContentPage = () => {
     location,
     images,
     tag,
+    isLike,
+    isBookmark,
+    user: creator,
   } = contentData
-  const creator = contentData.user
 
-  useEffect(() => {
-    const tags = tag?.join(',')
-    if (tags) {
-      _getRelatedContentList(tags as string)
-      _getRelatedPhotoCardList(content_id as string)
-    }
-  }, [tag])
-
-  // console.log(relatedContentList)
-  // console.log('다시불러오니?', photocardList)
-
-  let userId = ''
-  if (user) {
-    userId = user.id as string
-  }
-  const handlemodify = (id: string): void => {
-    if (creator.id === userId) {
-      router.push(`/content/form?isModify=${true}&contentId=${id}`)
-    }
-  }
   return (
     <>
       <Head>
@@ -91,27 +109,28 @@ const ContentPage = () => {
           <ContentBanner
             userId={userId as string}
             id={id as string}
-            title={title || sampleContent.title}
-            mainImgUrl={mainimageUrl || sampleContent.mainimageUrl}
-            username={
-              (creator.userName as string) ||
-              (sampleContent.user.userName as string)
-            }
-            userProfileUrl={creator.profileImg || sampleContent.user.profileImg}
-            like={like || sampleContent.like}
+            title={title}
+            mainImgUrl={mainimageUrl}
+            username={creator.userName as string}
+            userProfileUrl={creator.profileImg}
+            like={like}
+            isLike={isLike}
+            isBookmark={isBookmark}
+            onClickLike={onClickLike}
+            onClickBookmark={onClickBookmark}
           />
         }>
         <ContentMain
           owner={creator.id as string}
           userId={userId as string}
           handlemodify={() => handlemodify(id as string)}
-          contentId={(content_id as string) || (sampleContent.id as string)}
-          description={description || sampleContent.description}
-          location={location || sampleContent.location}
-          images={images || sampleContent.images}
-          tags={tag || sampleContent.tag}
-          related={relatedContentList || sampleContents}
-          photocards={photocardList || samplePhotoCardData}
+          contentId={content_id as string}
+          description={description}
+          location={location}
+          images={images}
+          tags={tag}
+          related={relatedContentList}
+          photocards={photocardList}
         />
       </CommonLayout>
     </>

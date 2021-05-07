@@ -8,6 +8,7 @@ export const ModalOverlay = styled.div`
   height: 100vh;
   ${({ theme }) => theme.concept.glassmorphism};
   ${({ theme }) => theme.display.flexCenterCol};
+  background: rgba(0, 0, 0, 0.3);
   z-index: 8999;
 `
 

@@ -1,41 +1,61 @@
-# TypeScript Next.js example
+# Phovis 📸
 
-This is a really simple project that shows the usage of Next.js with TypeScript.
+![Phovis Logo](https://images.velog.io/images/seungsang00/post/87b13dc2-3bf0-4e6d-8a21-1225708f149f/logo-banner.png)
 
-## Deploy your own
+## 오늘은 멋진 사진을 찍고 싶은 그런 날! 그런데, 어디로 가지? 🤔 
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+### _출사 장소 고르기 어려우셨죠? 이제 고민하지말고 **Phovis**에서 찾아보세요!_
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript&project-name=with-typescript&repository-name=with-typescript)
+- 내가 아는 출사장소를 **추천하는 글**과 함께 내 **추천장소에서 찍은 사진을 공유**할 수 있어요!
 
-## How to use it?
+- 멋진 출사장소를 발견하셨나요? 작성자에게 **좋아요**🧡를 날려주는 센스!
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+- 나도 찍었다! **같은 장소에서 찍은** 멋진 사진을 가지고 계신가요? **포토카드를 등록**해주세요!🖼
 
-```bash
-npx create-next-app --example with-typescript with-typescript-app
-# or
-yarn create next-app --example with-typescript with-typescript-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
-
-## Notes
-
-This example shows how to integrate the TypeScript type system into Next.js. Since TypeScript is supported out of the box with Next.js, all we have to do is to install TypeScript.
+- 여기는 꼭 가봐야지!🧐 기억하고 싶은 장소는 **북마크**⭐로 저장해둘 수 있어요!
 
 ```
-npm install --save-dev typescript
+> 🙍‍♀️: 오늘 출사 어디로 갈까? 
+
+> 🧑: 아무데나?? 
+
+> 🙍‍♀️: .... 
 ```
+- 어디를 가야할 지 너무 막막하시다구요? **인기 태그 목록**에서 **출사장소를 검색**해보세요!
 
-To enable TypeScript's features, we install the type declarations for React and Node.
 
-```
-npm install --save-dev @types/react @types/react-dom @types/node
-```
 
-When we run `next dev` the next time, Next.js will start looking for any `.ts` or `.tsx` files in our project and builds it. It even automatically creates a `tsconfig.json` file for our project with the recommended settings.
+## Stack Architecture
+![Phovis Stack Architecture](https://images.velog.io/images/seungsang00/post/be70f354-f05e-46ba-825d-13d8b082d08e/%EC%B6%9C%EC%9E%A5(%EC%B6%9C%EC%82%AC%EC%9E%A5%EC%86%8C%20%EC%B6%94%EC%B2%9C)%20-%20Stack%20Architecture%20(1).jpg)
 
-Next.js has built-in TypeScript declarations, so we'll get autocompletion for Next.js' modules straight away.
 
-A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this, for example, in your `test` scripts.
+
+## Flow Chart
+![Phovis - Flow Chart](https://images.velog.io/images/seungsang00/post/8008961f-7f4a-42a8-8133-c4573880668a/Phovis%20-%20Doc%20-%20Frame%201.jpg)
+
+
+## Phovis Page Views
+
+- Phovis 메인 화면
+
+- Phovis 로그인 / 회원가입 화면
+
+- Phovis 출사장소 추천 컨텐츠 작성 플로우
+
+- Phovis 키워드 검색 플로우
+
+- Phovis 컨텐츠 화면
+
+- Phovis 마이페이지
+
+- Phovis 회원 정보 수정(프로필 이미지 변경 / 비밀번호 변경)
+
+
+
+## Member Information
+|Name |	Position |	github |
+|:--|:--|:--|
+|최정훈|Back-end, Team Leader|[jeonghun-project](https://github.com/jeonghun-project)|
+|최재원|Back-end, DevOps| [Reone1](https://github.com/Reone1)|
+|유승연|Front-end, Main Designer|  [seungsang00](https://github.com/seungsang00) |
+|심언조|Front-end, Technician| [sim0417](https://github.com/sim0417)|

@@ -87,7 +87,11 @@ export const PhotoModal = styled.div`
   font-weight: 500;
   color: ${theme.color.primaryLight};
   .active {
-    box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+    & img {
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+      max-width: 150vw;
+      max-height: 150vh;
+    }
   }
   & p {
     margin-left: 2.5rem;

@@ -2,9 +2,9 @@ import styled from '@styles/themed-components'
 
 export const Wrapper = styled.div`
   display: inline-block;
+  position: relative;
   margin: 1rem;
   filter: grayscale(100%);
-
   &:hover {
     filter: none;
     transform: scale(1, 1) rotate(0deg) !important;
@@ -15,17 +15,23 @@ export const Wrapper = styled.div`
 
   .polaroid {
     background: #fff;
-    padding: 0.3rem;
+    padding: 0.5rem;
+    position: relative;
     box-shadow: 0 0.25rem 0.2rem rgba(0, 0, 0, 0.2);
 
     img {
-      height: 300px;
+      max-height: 300px;
     }
   }
   .caption {
     font-size: 1rem;
     text-align: left;
     line-height: 2em;
+
+    .description {
+      padding-top: 5px;
+      color: ${({ theme }) => theme.color.primaryDark};
+    }
 
     .user-info {
       font-size: 0.85rem;
@@ -42,8 +48,8 @@ export const EditButton = styled.button`
   border-radius: 999px;
   background-color: ${({ theme }) => theme.color.black};
   position: absolute;
-  right: 10px;
-  bottom: 1px;
+  right: 0.5rem;
+  bottom: 0.5rem;
   text-align: center;
 
   img {

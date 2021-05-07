@@ -12,8 +12,8 @@ export interface IContent {
   like: number
   images: IImage[]
   title: string | null
-  isLike?: boolean
-  isBookmark?: boolean
+  isLike: boolean
+  isBookmark: boolean
 }
 
 export interface IContentBanner {
@@ -24,8 +24,8 @@ export interface IContentBanner {
   userProfileUrl?: string
   userId?: string
   like: number
-  isLike?: boolean
-  isBookmark?: boolean
+  isLike: boolean
+  isBookmark: boolean
 }
 
 export interface IContentMain {
